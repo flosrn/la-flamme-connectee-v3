@@ -1,18 +1,18 @@
 import React, { useContext, useState } from 'react';
 import axioswal from 'axioswal';
-import { UserContext } from '../../components/UserContext';
+import { UserContext } from 'src/contexts/UserContext';
 import Layout from '../../components/layout';
 
-const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch }) => {
-  const [name, setName] = useState(initialName);
-  const [bio, setBio] = useState(initialBio);
+const ProfileSection = ({ user: { firstName: initialFirstName, lastName: initialLastName }, dispatch }) => {
+  const [firstName, setFirstName] = useState(initialFirstName);
+  const [lastName, setLastName] = useState(initialLastName);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     axioswal
       .patch(
         '/api/user',
-        { name, bio },
+        { firstName, lastName },
       )
       .then(() => {
         dispatch({ type: 'fetch' });
@@ -48,27 +48,29 @@ const ProfileSection = ({ user: { name: initialName, bio: initialBio }, dispatch
       <section>
         <h2>Edit Profile</h2>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="name">
-            Name
+          <label htmlFor="firstName">
+            firstName
             <input
               required
               id="name"
               type="text"
-              placeholder="Your name"
-              value={name}
-              onChange={e => setName(e.target.value)}
+              placeholder="Your first name"
+              value={firstName}
+              onChange={e => setFirstName(e.target.value)}
             />
           </label>
-          <label htmlFor="bio">
-            Bio
-            <textarea
-              id="bio"
+          <label htmlFor="lastName">
+            lastName
+            <input
+              required
+              id="lastName"
               type="text"
-              placeholder="Bio"
-              value={bio}
-              onChange={e => setBio(e.target.value)}
+              placeholder="Your last name"
+              value={lastName}
+              onChange={e => setLastame(e.target.value)}
             />
           </label>
+
           <button type="submit">
             Save
           </button>

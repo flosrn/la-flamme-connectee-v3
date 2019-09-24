@@ -1,0 +1,26 @@
+/*!
+
+ =======================================================================================
+ * La Flamme Connectée - v1.0.0 based on React - v16.8.6 and Material-ui - v4.2.0
+ =======================================================================================
+
+ * Author: Florian SÉRAN 
+ * Description: A Badass Modern React Material-UI website for La Flamme Connectée society
+ * Copyright 2019 La Flamme Connectée (https://www.laflammeconnectee.fr)
+
+ =======================================================================================
+
+ */
+
+@import "core/variables";
+@import "core/mixins";
+
+// Core Components
+@import "core/misc";
+
+// Core Plugins
+
+// @import "plugins/plugin-datetime-picker";
+@import "plugins/plugin-nouislider";
+@import "plugins/plugin-react-datetime";
+@import "plugins/plugin-react-slick";

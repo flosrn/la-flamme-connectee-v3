@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import axioswal from 'axioswal';
-import { UserContext } from './UserContext';
+import { UserContext } from 'src/contexts/UserContext';
 
 export default ({ children }) => {
   const { state: { isLoggedIn }, dispatch } = useContext(UserContext);
@@ -97,36 +97,36 @@ export default ({ children }) => {
             <Link href="/signup"><a>Sign up</a></Link>
           </div>
         ) : (
-          <div>
-            <Link href="/profile"><a>Profile</a></Link>
-            {/* eslint-disable-next-line */}
-            <a role="button" onClick={handleLogout}>Logout</a>
-          </div>
-        ))}
+            <div>
+              <Link href="/profile"><a>Profile</a></Link>
+              {/* eslint-disable-next-line */}
+              <a role="button" onClick={handleLogout}>Logout</a>
+            </div>
+          ))}
       </nav>
 
 
       <main>
-        { children }
+        {children}
       </main>
       <footer>
         <p>
-        Made with
+          Made with
           {' '}
           <span role="img" aria-label="Love">❤️</span>
-        ,
+          ,
           {' '}
           <span role="img" aria-label="Fire">🔥</span>
-        , and a keyboard by
+          , and a keyboard by
           {' '}
           <a href="https://www.hoangvvo.com/">Hoang Vo</a>
-        .
+          .
         </p>
         <p>
-        Source code is on
+          Source code is on
           {' '}
           <a href="https://github.com/hoangvvo/nextjs-mongodb-app">Github</a>
-        .
+          .
         </p>
       </footer>
     </>

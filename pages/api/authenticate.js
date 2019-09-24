@@ -1,33 +1,35 @@
-import bcrypt from 'bcryptjs';
-import useMiddleware from '../../middlewares/useMiddleware';
+import bcrypt from "bcryptjs";
+import useMiddleware from "../../middlewares/useMiddleware";
 
 const handler = (req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     const { email, password } = req.body;
 
     return req.db
-      .collection('users')
+      .collection("users")
       .findOne({ email })
-      .then((user) => {
+      .then(user => {
         if (user) {
-          return bcrypt.compare(password, user.password).then((result) => {
+          return bcrypt.compare(password, user.password).then(result => {
             if (result) return Promise.resolve(user);
-            return Promise.reject(Error('The password you entered is incorrect'));
+            return Promise.reject(Error("Le mot de passe que vous avez entré est incorrect"));
           });
         }
-        return Promise.reject(Error('The email does not exist'));
+        return Promise.reject(Error("Cette adresse email n'existe pas"));
       })
-      .then((user) => {
+      .then(user => {
         req.session.userId = user._id;
         return res.send({
-          status: 'ok',
-          message: `Welcome back, ${user.name}!`,
+          status: "ok",
+          message: `Bienvenue, ${user.firstName} !`
         });
       })
-      .catch(error => res.send({
-        status: 'error',
-        message: error.toString(),
-      }));
+      .catch(error =>
+        res.send({
+          status: "error",
+          message: error.toString()
+        })
+      );
   }
   return res.status(405).end();
 };

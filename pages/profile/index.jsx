@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
-import { UserContext } from '../../components/UserContext';
+import { UserContext } from 'src/contexts/UserContext';
 import Layout from '../../components/layout';
 
 const ProfilePage = () => {
   const {
     state: {
       isLoggedIn, user: {
-        name, email, bio, profilePicture,
+        firstName, lastName, email, profilePicture,
       },
     },
   } = useContext(UserContext);
@@ -26,21 +26,21 @@ const ProfilePage = () => {
       </style>
       <h1>Profile</h1>
       <div>
-        <img src={profilePicture} width="256" height="256" alt={name} />
+        <img src={profilePicture} width="256" height="256" alt={firstName} />
         <p>
-          Name:
+          First name:
           {' '}
-          { name }
+          {firstName}
         </p>
         <p>
-          Bio:
+          Last name:
           {' '}
-          { bio }
+          {lastName}
         </p>
         <p>
           Email:
           {' '}
-          { email }
+          {email}
         </p>
       </div>
       <Link href="/profile/settings"><button type="button">Edit</button></Link>

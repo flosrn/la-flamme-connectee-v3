@@ -12,7 +12,7 @@ const useDatabase = handler => (req, res) => {
         return handler(req, res);
       })
       .catch(err => {
-        console.log(`DB Connection Error: ${err.message} 🚫`);
+        console.log(`Error: ${err.message} 🚫`);
       });
   }
   req.db = client.db("laflammeconnectee");

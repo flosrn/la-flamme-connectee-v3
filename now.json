@@ -5,7 +5,16 @@
   "build": {
     "env": {
       "MONGODB_URI": "@mongodb-uri",
-      "CLOUDINARY_URL": "@cloudinary-url"
+      "CLOUDINARY_URL": "@cloudinary-url",
+
+      "EMAIL_USERNAME": "@email-username",
+      "EMAIL_PASSWORD": "@email-password",
+      "EMAIL_FROM": "@email-from",
+      "EMAIL_HOST": "@email-host",
+      "EMAIL_PORT": "@email-port",
+
+      "SENDGRID_USERNAME": "@sendgrid-username",
+      "SENDGRID_PASSWORD": "@sendgrid-password"
     }
   }
 }
