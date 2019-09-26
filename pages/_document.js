@@ -13,13 +13,14 @@ class MyDocument extends Document {
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          {/*Fonts*/}
+          {/* Fonts */}
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Courgette|Economica&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Arima+Madurai&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Montserrat&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700&display=swap" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         </Head>
         <body>
           <Main />

@@ -80,7 +80,7 @@ function ProfileDetails({ profile, isLoading }) {
             </Typography>
 
             <Typography color="textSecondary" variant="body1">
-              {profile.email}
+              {profile.emailToClient}
             </Typography>
           </div>
         )}

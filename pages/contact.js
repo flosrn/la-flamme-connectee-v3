@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 // @material-ui/core components
 import { withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/styles";
 import { Typography, Avatar } from "@material-ui/core";
 // @material-ui/icons
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
@@ -44,74 +45,30 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Favorite } from "@material-ui/icons";
 
-function HomePage({ ...props }) {
-  const { classes } = props;
+const useStyles = makeStyles(theme => ({
+  main: {
+    marginTop: "70px"
+  }
+}));
+
+function ContactPage({ ...props }) {
+  // const { classes } = props;
+  const classes = useStyles();
   let innerWidth;
 
   return (
     <div className={classes.root}>
-      <Header
-        color="transparent"
-        brand="La Flamme Connectée"
-        links={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 650,
-          color: "white",
-          navColor: "black"
-        }}
-      />
-      <Parallax filter="dark" image={backgroundImage}>
-        <div className={classes.container}>
-          <img alt="Lepine" src={lepine} className={classes.lepine} />
-          <div className={classes.titleContainer}>
-            <GridItem xs={12} sm={12} md={12} className={classes.gridItem} id="title">
-              <Typography variant="h3" align="center" className={classes.title}>
-                La Flamme Connectée
-              </Typography>
-              <Avatar alt="Logo" src={logo} className={classes.logo} />
-              <Typography variant="h5" align="center" className={classes.subtitle}>
-                Allumez votre poêle ou insert à distance
-                <br />
-                Ne rentrez plus dans une maison froide
-              </Typography>
-            </GridItem>
-          </div>
-          <GridContainer className={classes.gridContainer}>
-            <GridItem xs={12} sm={12} md={10} className={classNames(classes.gridItem, classes.scrollToBottom)}>
-              <Typography variant="h5" align="center" className={classes.bottomText}>
-                <i>En partenariat avec Contura, leader suédois des produits de chauffage au bois.</i>
-              </Typography>
-            </GridItem>
-          </GridContainer>
-        </div>
-      </Parallax>
-
+      <Header color="dark" brand="La Flamme Connectée" links={<HeaderLinks />} fixed />
       <div className={classNames(classes.main, classes.mainRaised)} id="main-panel">
         <div className={classes.container}>
-          <ProductSection />
+          <ContactSection />
         </div>
-        {/* <div className={classNames(classes.container, classes.containerFull)}> */}
-        {/*  <HowWorks /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <ConnectSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <TopDownSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <DownloadSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <ProjectSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <TeamSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <ContactSection /> */}
-        {/* </div> */}
+        <div className={classes.container}>
+          <TeamSection />
+        </div>
+        <div className={classes.container}>
+          <ProjectSection />
+        </div>
       </div>
       <Footer
         content={
@@ -125,7 +82,12 @@ function HomePage({ ...props }) {
                     placement={innerWidth > 959 ? "top" : "left"}
                     classes={{ tooltip: classes.tooltip }}
                   >
-                    <Button color="transparent" className={classes.navLink}>
+                    <Button
+                      href="https://twitter.com/CreativeTim?ref=creativetim"
+                      target="_blank"
+                      color="transparent"
+                      className={classes.navLink}
+                    >
                       <i className={`${classes.socialIcons} fab fa-twitter`} />
                     </Button>
                   </Tooltip>
@@ -137,7 +99,12 @@ function HomePage({ ...props }) {
                     placement={innerWidth > 959 ? "top" : "left"}
                     classes={{ tooltip: classes.tooltip }}
                   >
-                    <Button color="transparent" className={classes.navLink}>
+                    <Button
+                      color="transparent"
+                      href="https://www.facebook.com/CreativeTim?ref=creativetim"
+                      target="_blank"
+                      className={classes.navLink}
+                    >
                       <i className={`${classes.socialIcons} fab fa-facebook`} />
                     </Button>
                   </Tooltip>
@@ -149,7 +116,12 @@ function HomePage({ ...props }) {
                     placement={innerWidth > 959 ? "top" : "left"}
                     classes={{ tooltip: classes.tooltip }}
                   >
-                    <Button color="transparent" className={classes.navLink}>
+                    <Button
+                      color="transparent"
+                      href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
+                      target="_blank"
+                      className={classes.navLink}
+                    >
                       <i className={`${classes.socialIcons} fab fa-instagram`} />
                     </Button>
                   </Tooltip>
@@ -158,8 +130,8 @@ function HomePage({ ...props }) {
             </div>
             <div className={classes.right}>
               <strong>La Flamme Connectée </strong>
-              &copy; {1900 + new Date().getYear()}, made with <Favorite className={classes.icon} /> by
-              <a href="https://www.linkedin.com/in/florian-seran" target="_blank" style={{ paddingLeft: "2px" }}>
+              &copy; {1900 + new Date().getYear()}, made with <Favorite className={classes.icon} /> by{" "}
+              <a href="https://www.creative-tim.com?ref=mkr-footer" target="_blank">
                 Florian SÉRAN
               </a>
             </div>
@@ -170,4 +142,4 @@ function HomePage({ ...props }) {
   );
 }
 
-export default withStyles(homePageStyle)(HomePage);
+export default withStyles(homePageStyle)(ContactPage);

@@ -8,13 +8,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 
 // @material-ui/icons
 import EmailIcon from "@material-ui/icons/Email";
-import Lock from "@material-ui/icons/LockOutlined";
-import CustomSnackBar from "components/Snackbar/CustomSnackBar";
-import Typography from "@material-ui/core/Typography";
-
-import { UserContext } from "src/contexts/UserContext";
-import axioswal from "axioswal";
-import redirectTo from "lib/redirectTo";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -52,61 +45,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LoginForgotPasswordForm({ className, clickHandler, ...rest }) {
-  const { dispatch } = useContext(UserContext);
-  const [values, setValues] = useState({});
-  const [isError, setError] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [isLoading, setLoading] = useState(false);
-  const [msg, setMsg] = useState("");
-
-  const handleChange = e => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    setError(false);
-    setOpen(false);
-    setLoading(true);
-    // console.log(values);
-    // forgotPassword(values)
-    //   .then(res => {
-    //     setError(false);
-    //     setOpen(true);
-    //     setLoading(false);
-    //     setMsg("mail envoyeé");
-    //     setTimeout(() => {
-    //       window.location.href = "/";
-    //       // Router.replace("/");
-    //     }, 2500);
-    //   })
-    //   .catch(err => {
-    //     const error = (err.response && err.response.data) || err.message;
-    //     console.log(error);
-    //     setMsg(error);
-    //     setError(true);
-    //     setOpen(true);
-    //     setLoading(false);
-    //   });
-    axioswal.post("/api/forgotPassword", { email: values.email }).then(data => {
-      if (data.status === "ok") {
-        redirectTo("/");
-      }
-    });
-  };
-
+function LoginForgotPasswordForm({ className, email, changeHandler, submitHandler, isLoading, clickHandler, ...rest }) {
   const classes = useStyles();
   return (
-    <form {...rest} className={clsx(classes.root, className)} onSubmit={handleSubmit}>
+    <form {...rest} className={clsx(classes.root, className)} onSubmit={submitHandler("forgotPassword")}>
       <div className={classes.text}>Un mot de passe de réccupération vous sera envoyé par mail</div>
       <div className={classes.fields}>
         <TextField
           fullWidth
           label="Adresse mail"
           name="email"
-          onChange={handleChange}
-          value={values.email || ""}
+          onChange={changeHandler("email")}
+          value={email || ""}
           variant="outlined"
           InputProps={{
             endAdornment: (
@@ -132,13 +82,8 @@ function LoginForgotPasswordForm({ className, clickHandler, ...rest }) {
           Retour
         </Button>
       </div>
-      <CustomSnackBar handleClose={() => setOpen(!open)} duration={6000} message={msg} open={open} error={isError} />
     </form>
   );
 }
-
-LoginForgotPasswordForm.propTypes = {
-  className: PropTypes.string
-};
 
 export default LoginForgotPasswordForm;

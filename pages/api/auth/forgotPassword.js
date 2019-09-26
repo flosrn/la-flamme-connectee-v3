@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import Email from "utils/email";
+import EmailToClient from "utils/emailToClient";
 import useMiddleware from "middlewares/useMiddleware";
 
 const handler = (req, res) => {
@@ -22,11 +22,13 @@ const handler = (req, res) => {
         const resetURL = `http://localhost:3000/resetPassword/${token}`;
 
         req.db.collection("users").findOneAndUpdate({ email }, { $set: { resetPasswordToken, resetPasswordExpire } });
-        return new Email(user, resetURL)
+        return new EmailToClient(user, resetURL)
           .sendPasswordReset()
           .then(() => {
             return res.send({
-              message: "Email envoyé avec succès."
+              status: "success",
+              message: "Email envoyé avec succès.",
+              text: "Cliquez sur le lien dans le mail que vous allez recevoir afin de changer de mot de passe"
             });
           })
           .catch(() => {

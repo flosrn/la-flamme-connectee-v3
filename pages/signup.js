@@ -11,7 +11,6 @@ import Card from "../components/Card/Card";
 import CardBody from "../components/Card/CardBody";
 import gradients from "utils/gradients";
 
-
 import stove from "static/img/stoves/stove2.jpg";
 
 const useStyles = makeStyles(theme => ({

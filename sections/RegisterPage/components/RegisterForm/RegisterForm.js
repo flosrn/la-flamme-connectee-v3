@@ -72,7 +72,7 @@ function RegisterForm({ className, ...rest }) {
       .post("/api/auth/register", {
         firstName: values.firstName,
         lastName: values.lastName,
-        email: values.email,
+        email: values.emailToClient,
         password: values.password
       })
       .then(response => {
@@ -128,13 +128,13 @@ function RegisterForm({ className, ...rest }) {
           }}
         />
         <TextField
-          error={hasError("email")}
-          helperText={hasError("email") ? errors.email[0] : null}
+          error={hasError("emailToClient.js")}
+          helperText={hasError("emailToClient.js") ? errors.emailToClient[0] : null}
           fullWidth
           label="Adresse mail"
           name="email"
           onChange={handleChange}
-          value={values.email || ""}
+          value={values.emailToClient || ""}
           variant="outlined"
           InputProps={{
             endAdornment: (

@@ -1,7 +1,7 @@
 {
   "name": "la-flamme-connectee",
   "version": "1.0.0",
-  "description": "E-commerce app made with Next.JS and MongoDB",
+  "description": "Next.js MongoDB React Material-UI website for La Flamme Connectée society",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -46,6 +46,7 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
+    "react-image-gallery": "^0.9.1",
     "sweetalert2": "^8.17.6",
     "validate.js": "^0.13.1",
     "validator": "^11.1.0"

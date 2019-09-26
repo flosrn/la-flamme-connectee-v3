@@ -18,6 +18,7 @@ import Home from "@material-ui/icons/Home";
 import Description from "@material-ui/icons/Description";
 import Mail from "@material-ui/icons/Mail";
 import ExitToApp from "@material-ui/icons/ExitToApp";
+import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ViewDay from "@material-ui/icons/ViewDay";
@@ -132,8 +133,13 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/docs" className={classes.navLink} color="transparent">
+        <Button component={ButtonLink} href="/documentation" className={classes.navLink} color="transparent">
           <Description className={classes.icons} /> Documentation
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button component={ButtonLink} href="/product" className={classes.navLink} color="transparent">
+          <LocalGroceryStoreIcon className={classes.icons} /> Produit
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>

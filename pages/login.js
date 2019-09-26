@@ -17,6 +17,10 @@ import GridContainer from "components/Grid/GridContainer";
 import Card from "components/Card/Card";
 import GridItem from "components/Grid/GridItem";
 import LoginForgotPasswordForm from "sections/LoginPage/components/LoginForm/LoginForgotPasswordForm";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { UserContext } from "src/contexts/UserContext";
+import redirectTo from "../lib/redirectTo";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,8 +68,36 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Login() {
-  const [isForgot, setForgot] = useState(false);
   const classes = useStyles();
+  const { dispatch } = useContext(UserContext);
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(false);
+  const [isForgot, setForgot] = useState(false);
+
+  const handleChange = value => event => {
+    value === "email" && setEmail(event.target.value);
+    value === "password" && setPassword(event.target.value);
+  };
+
+  const handleSubmit = type => event => {
+    event.preventDefault();
+    setLoading(true);
+    axios.post(`/api/auth/${type}`, { email, password }).then(response => {
+      Swal.fire({
+        type: response.data.status,
+        title: response.data.message,
+        text: response.data.text,
+        confirmButtonColor: "#ff7961"
+      }).then(result => {
+        if (response.data.status === "success" && result.value) {
+          redirectTo("/");
+        }
+      });
+      dispatch({ type: "fetch" });
+      setLoading(false);
+    });
+  };
 
   return (
     <GridContainer className={classes.root}>
@@ -79,7 +111,15 @@ function Login() {
                   Connexion
                 </Typography>
                 <Typography variant="subtitle2">Connectez vous au site La Flamme Connectée</Typography>
-                <LoginForm className={classes.loginForm} clickHandler={() => setForgot(!isForgot)} />
+                <LoginForm
+                  className={classes.loginForm}
+                  email={email}
+                  password={password}
+                  changeHandler={handleChange}
+                  submitHandler={handleSubmit}
+                  isLoading={isLoading}
+                  clickHandler={() => setForgot(!isForgot)}
+                />
               </>
             ) : (
               <>
@@ -87,7 +127,14 @@ function Login() {
                   Mot de passe oublié
                 </Typography>
                 <Typography variant="subtitle2">Recevez un nouveau mot de passe</Typography>
-                <LoginForgotPasswordForm className={classes.loginForm} clickHandler={() => setForgot(!isForgot)} />
+                <LoginForgotPasswordForm
+                  className={classes.loginForm}
+                  email={email}
+                  changeHandler={handleChange}
+                  submitHandler={handleSubmit}
+                  isLoading={isLoading}
+                  clickHandler={() => setForgot(!isForgot)}
+                />
               </>
             )}
             <Divider className={classes.divider} />

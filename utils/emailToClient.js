@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 const pug = require("pug");
 const htmlToText = require("html-to-text");
 
-module.exports = class Email {
+module.exports = class EmailToCLient {
   constructor(user, url) {
     this.to = user.email;
     this.firstName = user.firstName;
@@ -40,7 +40,7 @@ module.exports = class Email {
     };
 
     // 3) Create a transport and send email
-    await Email.newTransport().sendMail(mailOptions);
+    await EmailToCLient.newTransport().sendMail(mailOptions);
   }
 
   async sendWelcome() {

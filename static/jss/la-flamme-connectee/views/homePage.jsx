@@ -84,9 +84,6 @@ const homePageStyle = theme => ({
     position: "absolute",
     bottom: 80
   },
-  icon: {
-    color: "#fff"
-  },
   lepine: {
     position: "absolute",
     left: 0,
@@ -214,6 +211,15 @@ const homePageStyle = theme => ({
     "& > li": {
       padding: 0
     }
+  },
+  right: {
+    display: "flex",
+    alignItems: "center"
+  },
+  icon: {
+    color: "red",
+    padding: "2px",
+    margin: "2px"
   }
 });
 

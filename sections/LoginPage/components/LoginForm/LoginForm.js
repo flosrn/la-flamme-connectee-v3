@@ -8,10 +8,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
-import { UserContext } from "src/contexts/UserContext";
-import axios from "axios";
-import Swal from "sweetalert2";
-import redirectTo from "lib/redirectTo";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -46,39 +42,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LoginForm({ className, clickHandler, ...rest }) {
-  const { dispatch } = useContext(UserContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setLoading] = useState(false);
-
-  async function handleSubmit(event) {
-    event.preventDefault();
-    setLoading(true);
-    axios.post("/api/auth/authenticate", { email, password }).then(response => {
-      Swal.fire({
-        type: response.data.status,
-        title: response.data.message,
-        confirmButtonColor: "#ff7961"
-      }).then(result => {
-        if (response.data.status === "success" && result.value) {
-          redirectTo("/");
-        }
-      });
-      dispatch({ type: "fetch" });
-      setLoading(false);
-    });
-  }
-
+function LoginForm({ className, email, password, changeHandler, submitHandler, isLoading, clickHandler, ...rest }) {
   const classes = useStyles();
   return (
-    <form {...rest} className={clsx(classes.root, className)} onSubmit={handleSubmit}>
+    <form {...rest} className={clsx(classes.root, className)} onSubmit={submitHandler("authenticate")}>
       <div className={classes.fields}>
         <TextField
           fullWidth
           label="Adresse mail"
           name="email"
-          onChange={e => setEmail(e.target.value)}
+          onChange={changeHandler("email")}
           value={email || ""}
           variant="outlined"
           InputProps={{
@@ -93,7 +66,7 @@ function LoginForm({ className, clickHandler, ...rest }) {
           fullWidth
           label="Mot de passe"
           name="password"
-          onChange={e => setPassword(e.target.value)}
+          onChange={changeHandler("password")}
           type="password"
           value={password || ""}
           variant="outlined"

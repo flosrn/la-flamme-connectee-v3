@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 
-import styles from "static/jss/la-flamme-connectee/components/infoStyle.js";
+import styles from "static/jss/la-flamme-connectee/components/infoStyle";
 
 const useStyles = makeStyles(styles);
 

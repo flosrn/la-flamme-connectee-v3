@@ -14,7 +14,7 @@ import Clear from "@material-ui/icons/Clear";
 import Check from "@material-ui/icons/Check";
 // core components
 
-import styles from "static/jss/la-flamme-connectee/components/customInputStyle.js";
+import styles from "static/jss/la-flamme-connectee/components/customInputStyle";
 
 const useStyles = makeStyles(styles);
 
@@ -33,8 +33,8 @@ export default function CustomInput(props) {
   } = props;
   const classes = useStyles();
   const labelClasses = classNames({
-    [" " + classes.labelRootError]: error,
-    [" " + classes.labelRootSuccess]: success && !error
+    [` ${classes.labelRootError}`]: error,
+    [` ${classes.labelRootSuccess}`]: success && !error
   });
   const underlineClasses = classNames({
     [classes.underlineError]: error,
@@ -49,7 +49,7 @@ export default function CustomInput(props) {
     [classes.input]: true,
     [classes.whiteInput]: white
   });
-  var formControlClasses;
+  let formControlClasses;
   if (formControlProps !== undefined) {
     formControlClasses = classNames(formControlProps.className, classes.formControl);
   } else {
@@ -58,7 +58,7 @@ export default function CustomInput(props) {
   return (
     <FormControl {...formControlProps} className={formControlClasses}>
       {labelText !== undefined ? (
-        <InputLabel className={classes.labelRoot + " " + labelClasses} htmlFor={id} {...labelProps}>
+        <InputLabel className={`${classes.labelRoot} ${labelClasses}`} htmlFor={id} {...labelProps}>
           {labelText}
         </InputLabel>
       ) : null}
@@ -74,9 +74,9 @@ export default function CustomInput(props) {
         {...inputProps}
       />
       {error ? (
-        <Clear className={classes.feedback + " " + classes.labelRootError} />
+        <Clear className={`${classes.feedback} ${classes.labelRootError}`} />
       ) : success ? (
-        <Check className={classes.feedback + " " + classes.labelRootSuccess} />
+        <Check className={`${classes.feedback} ${classes.labelRootSuccess}`} />
       ) : null}
     </FormControl>
   );
