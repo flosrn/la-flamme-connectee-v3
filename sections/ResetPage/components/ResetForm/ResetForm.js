@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import Link from "next/link";
 import clsx from "clsx";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Box, Button, TextField } from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -21,12 +20,12 @@ const useStyles = makeStyles(theme => ({
     flexWrap: "wrap",
     "& > *": {
       flexGrow: 1,
-      margin: theme.spacing(1)
-    }
+      margin: theme.spacing(1),
+    },
   },
   submitButton: {
     marginTop: theme.spacing(2),
-    width: "100%"
+    width: "100%",
   },
   link: {
     color: theme.palette.text.secondary,
@@ -34,9 +33,9 @@ const useStyles = makeStyles(theme => ({
     textTransform: "none",
     "&:hover": {
       color: theme.palette.text.secondary,
-      backgroundColor: "transparent"
-    }
-  }
+      backgroundColor: "transparent",
+    },
+  },
 }));
 
 function ResetForm({ token, className, ...rest }) {
@@ -74,9 +73,9 @@ function ResetForm({ token, className, ...rest }) {
     //     setOpen(true);
     //     setLoading(false);
     //   });
-    axioswal.patch("/api/resetPassword", { password: values.password, token }).then(response => {
+    axioswal.patch("/api/auth/resetPassword", { password: values.password, token }).then(response => {
       if (response.status === "ok") {
-        redirectTo("/");
+        // redirectTo("/");
       }
     });
   };
@@ -105,7 +104,7 @@ function ResetForm({ token, className, ...rest }) {
               <InputAdornment position="end">
                 <Lock className={classes.inputIconsColor} />
               </InputAdornment>
-            )
+            ),
           }}
         />
         <TextField
@@ -121,7 +120,7 @@ function ResetForm({ token, className, ...rest }) {
               <InputAdornment position="end">
                 <Lock className={classes.inputIconsColor} />
               </InputAdornment>
-            )
+            ),
           }}
         />
       </div>
@@ -139,9 +138,5 @@ function ResetForm({ token, className, ...rest }) {
     </form>
   );
 }
-
-ResetForm.propTypes = {
-  className: PropTypes.string
-};
 
 export default ResetForm;

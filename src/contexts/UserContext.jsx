@@ -1,16 +1,16 @@
-import React, { createContext, useReducer, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useReducer, useEffect } from "react";
+import axios from "axios";
 
 const UserContext = createContext();
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'set':
+    case "set":
       return action.data;
-    case 'clear':
+    case "clear":
       return {
         isLoggedIn: false,
-        user: {},
+        user: {}
       };
     default:
       throw new Error();
@@ -18,19 +18,26 @@ const reducer = (state, action) => {
 };
 
 const UserContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, { isLoggedIn: false, user: {} });
-  const dispatchProxy = (action) => {
+  const [state, dispatch] = useReducer(reducer, {
+    isLoggedIn: false,
+    user: {}
+  });
+  const dispatchProxy = action => {
     switch (action.type) {
-      case 'fetch':
-        return axios.get('/api/session')
+      case "fetch":
+        return axios
+          .get("/api/auth/session")
           .then(res => ({
             isLoggedIn: res.data.data.isLoggedIn,
-            user: res.data.data.user,
+            user: res.data.data.user
           }))
           .then(({ isLoggedIn, user }) => {
             dispatch({
-              type: 'set',
-              data: { isLoggedIn, user },
+              type: "set",
+              data: {
+                isLoggedIn,
+                user
+              }
             });
           });
       default:
@@ -38,13 +45,9 @@ const UserContextProvider = ({ children }) => {
     }
   };
   useEffect(() => {
-    dispatchProxy({ type: 'fetch' });
+    dispatchProxy({ type: "fetch" });
   }, []);
-  return (
-    <UserContext.Provider value={{ state, dispatch: dispatchProxy }}>
-      { children }
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={{ state, dispatch: dispatchProxy }}>{children}</UserContext.Provider>;
 };
 
 const UserContextConsumer = UserContext.Consumer;

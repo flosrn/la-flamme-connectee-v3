@@ -1,22 +1,24 @@
 import React, { useState, useEffect, useContext } from "react";
-import Router from "next/router";
 import { useRouter } from "next/router";
+
 import { makeStyles } from "@material-ui/styles";
 import { Tabs, Tab, Divider, colors } from "@material-ui/core";
 
-import Headers from "components/Header/Header.js";
+import Headers from "components/Header/Header";
 import { Header, Profile, Address, Security, Options } from "sections/SettingsPage";
-import HeaderLinks from "../components/Header/HeaderLinks";
-import GridContainer from "../components/Grid/GridContainer";
-import GridItem from "../components/Grid/GridItem";
-import Card from "../components/Card/Card";
+import GridContainer from "components/Grid/GridContainer";
+import GridItem from "components/Grid/GridItem";
+import Card from "components/Card/Card";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import clsx from "clsx";
-import CustomSnackBar from "../components/Snackbar/CustomSnackBar";
+import CustomSnackBar from "components/Snackbar/CustomSnackBar";
 import validate from "validate.js";
-import { schema } from "sections/SettingsPage/Address/components/AddressForm/AddressFormSchema.js";
+import { schema } from "sections/SettingsPage/Address/components/AddressForm/AddressFormSchema";
 import { UserContext } from "src/contexts/UserContext";
 import axioswal from "axioswal";
+import axios from "axios";
+import Swal from "sweetalert2";
+import HeaderLinks from "components/Header/HeaderLinks";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -34,46 +36,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Settings({}) {
+function Settings() {
   const {
-    state: { isLoggedIn, user },
+    state: { user },
     dispatch
   } = useContext(UserContext);
-  const [profile, setProfile] = useState({});
   const [values, setValues] = useState({});
   const [isEditMode, setEditMode] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [isError, setError] = useState(false);
-  const [open, setOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
-  const [msg, setMsg] = useState("");
   const [tabTitle, setTabTitle] = useState("");
   const classes = useStyles();
-  console.log(user);
 
   // ========== DATA FETCHING ========== //
 
   useEffect(() => {
-    let mounted = true;
-    // setLoading(true);
-    // setProfile(currentUser);
     setValues(user);
-    console.log(values);
   }, [user]);
-
-  // const fetchProfile = () => {
-  //   getUserProfile(currentUser._id)
-  //     .then(response => {
-  //       console.log("response : ", response);
-  //       setProfile(response);
-  //       setValues(response);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  //   setLoading(false);
-  // };
 
   // ========== CHANGE HANDLERS ========== //
 
@@ -122,41 +102,21 @@ function Settings({}) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    axioswal.patch("/api/user", values).then(() => {
+    setLoading(true);
+    axios.patch("/api/user/updateProfileData", values).then(response => {
+      Swal.fire({
+        type: response.data.status,
+        title: response.data.message,
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000
+      });
       dispatch({ type: "fetch" });
+      setEditMode(false);
+      setLoading(false);
     });
   };
-
-  // const handleSubmit = event => {
-  //   event.preventDefault();
-  //   setError(false);
-  //   setOpen(false);
-  //   updateMe(values)
-  //     .then(res => {
-  //       if (!isLoading) {
-  //         setLoading(true);
-  //         setTimeout(() => {
-  //           setLoading(false);
-  //           setOpen(true);
-  //           setError(false);
-  //           setEditMode(false);
-  //           setMsg("Vos changements ont bien été pris en compte");
-  //           fetchProfile();
-  //           console.log(res);
-  //           setTimeout(() => {
-  //             window.location.reload();
-  //           }, 1500);
-  //         }, 2000);
-  //       }
-  //     })
-  //     .catch(err => {
-  //       const error = (err.response && err.response.data) || err.message;
-  //       setError(true);
-  //       setOpen(true);
-  //       setMsg(error);
-  //       console.log(error);
-  //     });
-  // };
 
   const handleCancel = () => {
     setEditMode(false);
@@ -181,21 +141,9 @@ function Settings({}) {
     { value: "options", label: "Options" }
   ];
 
-  const router = useRouter();
-  let pathname = router.asPath.split("=");
+  const Router = useRouter();
+  const pathname = Router.asPath.split("=");
   const tab = pathname[1];
-
-  useEffect(() => {
-    setTitle();
-  });
-
-  const handleTabsChange = (event, value) => {
-    Router.push({
-      pathname: "/settings",
-      query: { tab: value }
-    });
-    setTitle();
-  };
 
   function setTitle() {
     switch (tab) {
@@ -215,6 +163,14 @@ function Settings({}) {
         setTabTitle("Compte");
     }
   }
+
+  const handleTabsChange = (event, value) => {
+    Router.push({
+      pathname: "/settings",
+      query: { tab: value }
+    });
+    setTitle();
+  };
 
   return (
     <div className={classes.root}>
@@ -272,7 +228,6 @@ function Settings({}) {
             </div>
           </Card>
         </GridItem>
-        <CustomSnackBar open={open} message={msg} duration={4000} closeHandler={() => setOpen(false)} error={isError} />
       </GridContainer>
     </div>
   );

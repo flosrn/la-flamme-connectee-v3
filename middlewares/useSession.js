@@ -5,7 +5,7 @@ const MongoStore = connectMongo(session);
 
 const useSession = handler =>
   withSession(handler, {
-    store: new MongoStore({ url: process.env.MONGODB_URI })
+    store: new MongoStore({ url: process.env.MONGODB_URI }),
   });
 
 export default useSession;

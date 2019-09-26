@@ -1,22 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import Link from "next/link";
 import clsx from "clsx";
 import validate from "validate.js";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Button, TextField } from "@material-ui/core";
-import InputAdornment from '@material-ui/core/InputAdornment';
+import InputAdornment from "@material-ui/core/InputAdornment";
 import Slide from "@material-ui/core/Slide";
-import CustomSnackBar from "components/Snackbar/CustomSnackBar";
 
-import { schema } from "./RegisterFormSchema.js";
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
 import { Face, RecordVoiceOver } from "@material-ui/icons";
-// import { createSendToken } from "../../../../server/utils/auth";
-import axioswal from "axioswal";
-import redirectTo from "lib/redirectTo";
 import { UserContext } from "src/contexts/UserContext";
+import axios from "axios";
+import Swal from "sweetalert2";
+import redirectTo from "lib/redirectTo";
+import { schema } from "./RegisterFormSchema";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,12 +50,9 @@ const useStyles = makeStyles(theme => ({
 function RegisterForm({ className, ...rest }) {
   const { dispatch } = useContext(UserContext);
   const [values, setValues] = useState({});
-  const [msg, setMsg] = useState("");
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
-  const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -73,40 +67,26 @@ function RegisterForm({ className, ...rest }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    // setOpen(false);
-    // setError(false);
-    // setLoading(true);
-    // try {
-    //   const response = await register(values);
-    //   if (response.status === "success") {
-    //     setOpen(true);
-    //     setLoading(false);
-    //     setMsg("Votre compte a été créé avec succès !");
-    //     // await createSendToken(response.data.newUser);
-    //     setTimeout(() => {
-    //       // window.location.href = "/";
-    //       // Router.replace("/");
-    //     }, 2500);
-    //   }
-    // } catch (err) {
-    //   const error = (err.response && err.response.data) || err.message;
-    //   setMsg(error);
-    //   setOpen(true);
-    //   setError(true);
-    //   setLoading(false);
-    // }
-    axioswal
-      .post("/api/users", {
+    setLoading(true);
+    axios
+      .post("/api/auth/register", {
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
         password: values.password
       })
-      .then(data => {
-        if (data.status === "ok") {
-          dispatch({ type: "fetch" });
-          redirectTo("/");
-        }
+      .then(response => {
+        Swal.fire({
+          type: response.data.status,
+          title: response.data.message,
+          confirmButtonColor: "#ff7961"
+        }).then(result => {
+          if (response.data.status === "success" && result.value) {
+            redirectTo("/");
+          }
+        });
+        dispatch({ type: "fetch" });
+        setLoading(false);
       });
   }
 
@@ -211,13 +191,8 @@ function RegisterForm({ className, ...rest }) {
       >
         Créer un compte
       </Button>
-      <CustomSnackBar closeHandler={() => setOpen(false)} duration={6000} message={msg} open={open} error={isError} />
     </form>
   );
 }
-
-RegisterForm.propTypes = {
-  className: PropTypes.string
-};
 
 export default RegisterForm;

@@ -1,35 +1,41 @@
 {
-  "extends": "airbnb",
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["prettier"],
   "env": {
+    "es6": true,
     "browser": true,
     "node": true
   },
   "rules": {
-    "no-underscore-dangle": [
+    "prettier/prettier": [
       "error",
       {
-        "allow": [
-          "_id"
-        ]
+        "singleQuote": false
       }
     ],
-    "jsx-a11y/anchor-is-valid": [
-      "warn",
-      {
-        "components": [
-          "Link"
-        ],
-        "specialLink": [
-          "hrefLeft",
-          "hrefRight"
-        ],
-        "aspects": [
-          "invalidHref",
-          "preferButton"
-        ]
-      }
-    ],
+    "react/jsx-closing-bracket-location": "off",
+    "react/jsx-closing-tag-location": "off",
+    "react/jsx-curly-spacing": "off",
+    "react/jsx-equals-spacing": "off",
+    "react/jsx-first-prop-new-line": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-max-props-per-line": "off",
+    "react/jsx-tag-spacing": "off",
+    "react/jsx-wrap-multilines": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-multi-spaces": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/no-unescaped-entities": "off",
+    "jsx-a11y/anchor-is-valid": ["warn", {"components": ["Link"], "specialLink": ["hrefLeft", "hrefRight"], "aspects": ["invalidHref", "preferButton"]}],
     "jsx-a11y/click-events-have-key-events": "off",
-    "react/prop-types": "off"
+    "jsx-a11y/label-has-associated-control": [ "error", { "required": { "some": [ "nesting", "id"  ] }}],
+    "jsx-a11y/label-has-for": [ "error", {"required": {"some": [ "nesting", "id"  ] }}],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }],
+    "prefer-destructuring": ["error", { "object": true, "array": false }],
+    "no-underscore-dangle": ["error", {"allow": ["_id"]}],
+    "import/no-unresolved": "off",
+    "react/prop-types": "off",
+    "no-console": "off"
   }
 }

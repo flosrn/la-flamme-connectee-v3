@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import Link from "next/link";
 import clsx from "clsx";
-import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Box, Button, TextField } from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -9,9 +8,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
-import CustomSnackBar from "../../../../components/Snackbar/CustomSnackBar";
 import { UserContext } from "src/contexts/UserContext";
-import axioswal from "axioswal";
+import axios from "axios";
+import Swal from "sweetalert2";
 import redirectTo from "lib/redirectTo";
 
 const useStyles = makeStyles(theme => ({
@@ -51,54 +50,23 @@ function LoginForm({ className, clickHandler, ...rest }) {
   const { dispatch } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isError, setError] = useState(false);
-  const [open, setOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [msg, setMsg] = useState("");
-  const [button, setButton] = useState(null);
-
-
-  const handleChange = e => {
-    setValues({ ...values, [e.target.name]: e.target.value });
-  };
 
   async function handleSubmit(event) {
     event.preventDefault();
-    // setError(false);
-    // setOpen(false);
-    // setLoading(true);
-    // try {
-    //   const response = await login(values);
-    //   if (response.status === "ok") {
-    //     console.log(response);
-    //     setError(false);
-    //     setOpen(true);
-    //     setLoading(false);
-    //     setMsg("Connexion effectuée avec succès");
-    //     dispatch({ type: 'fetch' });
-    //     // await createSendToken(response.data.user);
-    //   }
-    // } catch (err) {
-    //   const error = (err.response && err.response.data) || err.message;
-    //   console.log(error);
-    //   setMsg(error);
-    //   setError(true);
-    //   setOpen(true);
-    //   setLoading(false);
-    // }
-    axioswal(
-      {
-        method: "post",
-        url: "/api/authenticate",
-        data: { email, password }
-      },
-      {}
-    ).then(data => {
-      if (data.status === "ok") {
-        // Fetch the user data for UserContext here
-        dispatch({ type: "fetch" });
-        // redirectTo("/");
-      }
+    setLoading(true);
+    axios.post("/api/auth/authenticate", { email, password }).then(response => {
+      Swal.fire({
+        type: response.data.status,
+        title: response.data.message,
+        confirmButtonColor: "#ff7961"
+      }).then(result => {
+        if (response.data.status === "success" && result.value) {
+          redirectTo("/");
+        }
+      });
+      dispatch({ type: "fetch" });
+      setLoading(false);
     });
   }
 
@@ -153,13 +121,8 @@ function LoginForm({ className, clickHandler, ...rest }) {
           Mot de passe oublié ?
         </Button>
       </div>
-      <CustomSnackBar closeHandler={() => setOpen(!open)} duration={6000} message={msg} open={open} error={isError} />
     </form>
   );
 }
-
-LoginForm.propTypes = {
-  className: PropTypes.string
-};
 
 export default LoginForm;

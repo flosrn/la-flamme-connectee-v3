@@ -44,7 +44,6 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Favorite } from "@material-ui/icons";
 
-
 function HomePage({ ...props }) {
   const { classes } = props;
   let innerWidth;

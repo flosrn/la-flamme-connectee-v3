@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useContext } from "react";
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
 // react components for routing our app without refresh
 import Link from "next/link";
 
@@ -52,6 +51,9 @@ import styles from "static/jss/la-flamme-connectee/components/headerLinksStyle";
 
 import { UserContext } from "src/contexts/UserContext";
 import axioswal from "axioswal";
+import axios from "axios";
+import Swal from "sweetalert2";
+import redirectTo from "lib/redirectTo";
 
 const useStyles = makeStyles(styles);
 
@@ -64,12 +66,20 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
     state: { isLoggedIn, user },
     dispatch
   } = useContext(UserContext);
+
   const handleLogout = event => {
     event.preventDefault();
-    axioswal.delete("/api/session").then(data => {
-      if (data.status === "ok") {
-        dispatch({ type: "clear" });
-      }
+    axios.delete("/api/auth/session").then(response => {
+      Swal.fire({
+        type: response.data.status,
+        title: response.data.message,
+        toast: true,
+        position: "bottom-end",
+        showConfirmButton: false,
+        timer: 3000
+      });
+      dispatch({ type: "clear" });
+      redirectTo("/");
     });
   };
 
@@ -177,8 +187,4 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
 
 HeaderLinks.defaultProps = {
   hoverColor: "primary"
-};
-
-HeaderLinks.propTypes = {
-  dropdownHoverColor: PropTypes.oneOf(["dark", "primary", "info", "success", "warning", "danger", "rose"])
 };

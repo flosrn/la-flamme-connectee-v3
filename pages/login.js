@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { makeStyles } from "@material-ui/styles";
 import { Typography, Divider, Avatar } from "@material-ui/core";
@@ -11,12 +11,12 @@ import Page from "components/Page";
 import gradients from "utils/gradients";
 import LoginForm from "sections/LoginPage/components/LoginForm";
 // import Card from "../components/Card/Card";
-import CardBody from "../components/Card/CardBody";
 import { blackColor, hexToRgb } from "static/jss/la-flamme-connectee";
-import GridContainer from "../components/Grid/GridContainer";
-import Card from "../components/Card/Card";
-import GridItem from "../components/Grid/GridItem";
-import LoginForgotPasswordForm from "../sections/LoginPage/components/LoginForm/LoginForgotPasswordForm";
+import CardBody from "components/Card/CardBody";
+import GridContainer from "components/Grid/GridContainer";
+import Card from "components/Card/Card";
+import GridItem from "components/Grid/GridItem";
+import LoginForgotPasswordForm from "sections/LoginPage/components/LoginForm/LoginForgotPasswordForm";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -82,14 +82,14 @@ function Login() {
                 <LoginForm className={classes.loginForm} clickHandler={() => setForgot(!isForgot)} />
               </>
             ) : (
-                <>
-                  <Typography gutterBottom variant="h3">
-                    Mot de passe oublié
+              <>
+                <Typography gutterBottom variant="h3">
+                  Mot de passe oublié
                 </Typography>
-                  <Typography variant="subtitle2">Recevez un nouveau mot de passe</Typography>
-                  <LoginForgotPasswordForm className={classes.loginForm} clickHandler={() => setForgot(!isForgot)} />
-                </>
-              )}
+                <Typography variant="subtitle2">Recevez un nouveau mot de passe</Typography>
+                <LoginForgotPasswordForm className={classes.loginForm} clickHandler={() => setForgot(!isForgot)} />
+              </>
+            )}
             <Divider className={classes.divider} />
             <Link href="/signup">
               <a className={classes.link}>Vous n'avez pas encore de compte ? Inscrivez vous</a>

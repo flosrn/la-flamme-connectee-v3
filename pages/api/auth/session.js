@@ -1,15 +1,14 @@
-import useMiddleware from "../../middlewares/useMiddleware";
+import useMiddleware from "middlewares/useMiddleware";
 
 const handler = (req, res) => {
   if (req.method === "GET") {
     if (req.user) {
-      const { _id, firstName, lastName, email, profilePicture, dateOfBirth, address } = req.user;
+      const { firstName, lastName, email, profilePicture, dateOfBirth, address } = req.user;
       return res.status(200).send({
-        status: "ok",
+        status: "success",
         data: {
           isLoggedIn: true,
           user: {
-            _id,
             firstName,
             lastName,
             email,
@@ -21,7 +20,7 @@ const handler = (req, res) => {
       });
     }
     return res.status(200).send({
-      status: "ok",
+      status: "error",
       data: {
         isLoggedIn: false,
         user: {}
@@ -31,8 +30,8 @@ const handler = (req, res) => {
   if (req.method === "DELETE") {
     delete req.session.userId;
     return res.status(200).send({
-      status: "ok",
-      message: "You have been logged out."
+      status: "success",
+      message: "Vous êtes déconnecté"
     });
   }
   return res.status(405).end();
