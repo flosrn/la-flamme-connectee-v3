@@ -18,6 +18,7 @@ import Home from "@material-ui/icons/Home";
 import Description from "@material-ui/icons/Description";
 import Mail from "@material-ui/icons/Mail";
 import ExitToApp from "@material-ui/icons/ExitToApp";
+import DownloadIcon from "@material-ui/icons/CloudDownload";
 import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import AccountCircle from "@material-ui/icons/AccountCircle";
@@ -54,7 +55,7 @@ import { UserContext } from "src/contexts/UserContext";
 import axioswal from "axioswal";
 import axios from "axios";
 import Swal from "sweetalert2";
-import redirectTo from "lib/redirectTo";
+import redirectTo from "src/lib/redirectTo";
 
 const useStyles = makeStyles(styles);
 
@@ -129,7 +130,7 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
     <List className={classes.list + " " + classes.mlAuto}>
       <ListItem className={classes.listItem}>
         <Button component={ButtonLink} href="/" className={classes.navLink} color="transparent">
-          <Home className={classes.icons} /> Acceuil
+          <Home className={classes.icons} /> Accueil
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -139,7 +140,12 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button component={ButtonLink} href="/product" className={classes.navLink} color="transparent">
-          <LocalGroceryStoreIcon className={classes.icons} /> Produit
+          <LocalGroceryStoreIcon className={classes.icons} /> Produits
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button component={ButtonLink} href="/download" className={classes.navLink} color="transparent">
+          <DownloadIcon className={classes.icons} /> Téléchargement
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -175,16 +181,16 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
         </>
       ) : (
         <>
-          <ListItem className={classes.listItem}>
-            <Button component={ButtonLink} href="/login" className={classes.navLink} color="transparent">
-              <AccountCircle className={classes.icons} /> Connexion
-            </Button>
-          </ListItem>
-          <ListItem className={classes.listItem}>
-            <Button component={ButtonLink} href="/signup" className={classes.navLink} color="transparent">
-              <Assignment className={classes.icons} /> Inscription
-            </Button>
-          </ListItem>
+          {/*<ListItem className={classes.listItem}>*/}
+          {/*  <Button component={ButtonLink} href="/login" className={classes.navLink} color="transparent">*/}
+          {/*    <AccountCircle className={classes.icons} /> Connexion*/}
+          {/*  </Button>*/}
+          {/*</ListItem>*/}
+          {/*<ListItem className={classes.listItem}>*/}
+          {/*  <Button component={ButtonLink} href="/signup" className={classes.navLink} color="transparent">*/}
+          {/*    <Assignment className={classes.icons} /> Inscription*/}
+          {/*  </Button>*/}
+          {/*</ListItem>*/}
         </>
       )}
     </List>

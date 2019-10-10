@@ -4,12 +4,7 @@ import classNames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
-import styles from "static/jss/la-flamme-connectee/components/badgeStyle.js";
-
-const useStyles = makeStyles(styles);
+import { useStyles } from "static/jss/la-flamme-connectee/components/badgeStyle";
 
 export default function Badge(props) {
   const { color, children, className } = props;
@@ -30,7 +25,7 @@ Badge.propTypes = {
   color: PropTypes.oneOf([
     "myPrimary4",
     "myPrimary5",
-    "myPrimary2",
+    "secondary",
     "primary",
     "warning",
     "danger",

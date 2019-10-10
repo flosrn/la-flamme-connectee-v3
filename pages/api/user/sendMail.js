@@ -1,5 +1,5 @@
 import EmailForUs from "utils/emailForUs";
-import useMiddleware from "middlewares/useMiddleware";
+import useMiddleware from "src/middlewares/useMiddleware";
 
 const handler = (req, res) => {
   if (req.method === "POST") {
@@ -16,10 +16,11 @@ const handler = (req, res) => {
           message: "Email envoyé avec succès."
         });
       })
-      .catch(() => {
+      .catch(error => {
+        console.log("error : ", error);
         res.send({
           status: "error",
-          message: "Une erreur est survenue lors de l'envoie du mail, veuillez réessayer ultérieurement."
+          message: error.toString()
         });
       });
   }

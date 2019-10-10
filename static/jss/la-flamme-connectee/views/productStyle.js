@@ -1,3 +1,5 @@
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
 import {
   container,
   mlAuto,
@@ -14,7 +16,7 @@ import tooltipsStyle from "static/jss/la-flamme-connectee/tooltipsStyle";
 import imagesStyles from "static/jss/la-flamme-connectee/imagesStyles";
 import customSelectStyle from "static/jss/la-flamme-connectee/customSelectStyle";
 
-const productStyle = {
+export const useStyles = makeStyles(theme => ({
   mlAuto,
   main,
   ...imagesStyles,
@@ -25,11 +27,11 @@ const productStyle = {
     zIndex: 2
   },
   mainRaised: {
-    ...mainRaised
+    ...mainRaised,
+    marginTop: "-30px"
   },
   section: {
-    ...section,
-    padding: "70px 0px"
+    ...section
   },
   title: {
     ...title,
@@ -50,7 +52,7 @@ const productStyle = {
   productPage: {
     backgroundColor: grayColor[2],
     "& $mainRaised": {
-      margin: "-40vh 0 0",
+      // margin: "-40vh 0 0",
       padding: "40px"
     },
     "& .image-gallery-slide img": {
@@ -186,7 +188,37 @@ const productStyle = {
     width: "18px",
     height: "18px",
     position: "relative"
+  },
+  carouselContainer: {
+    marginTop: "60px"
+  },
+  parallax: {
+    [theme.breakpoints.down("sm")]: {
+      backgroundPosition: "15%"
+    }
+  },
+  scrollDownContainer: {
+    width: "100%",
+    position: "absolute",
+    left: 0,
+    top: -55,
+    display: "flex",
+    justifyContent: "center"
+  },
+  scrollDownButton: {
+    color: "#fff"
+  },
+  containerBackground: {
+    ...container,
+    zIndex: "2",
+    position: "relative",
+    marginTop: theme.spacing(14),
+    [theme.breakpoints.up("xl")]: {
+      marginTop: theme.spacing(15)
+    }
+  },
+  parallaxTitle: {
+    ...title,
+    color: "#fff !important"
   }
-};
-
-export default productStyle;
+}));

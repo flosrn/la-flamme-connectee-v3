@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import styles from "static/jss/la-flamme-connectee/components/parallaxStyle.js";
+import styles from "static/jss/la-flamme-connectee/components/parallaxStyle";
 
 const useStyles = makeStyles(styles);
 
@@ -19,6 +19,11 @@ export default function Parallax(props) {
   //   windowScrollTop = 0;
   // }
   const [transform, setTransform] = React.useState("");
+
+  const resetTransform = () => {
+    const windowScrollTop = window.pageYOffset / 3;
+    setTransform(`translate3d(0,${windowScrollTop}px,0)`);
+  };
   React.useEffect(() => {
     if (window.innerWidth >= 768) {
       windowScrollTop = window.pageYOffset / 3;
@@ -35,15 +40,12 @@ export default function Parallax(props) {
       }
     };
   });
-  const resetTransform = () => {
-    var windowScrollTop = window.pageYOffset / 3;
-    setTransform("translate3d(0," + windowScrollTop + "px,0)");
-  };
+
   const { filter, className, children, style, image, small } = props;
   const classes = useStyles();
   const parallaxClasses = classNames({
     [classes.parallax]: true,
-    [classes[filter + "Color"]]: filter !== undefined,
+    [classes[`${filter}Color`]]: filter !== undefined,
     [classes.small]: small,
     [className]: className !== undefined
   });
@@ -52,8 +54,8 @@ export default function Parallax(props) {
       className={parallaxClasses}
       style={{
         ...style,
-        backgroundImage: "url(" + image + ")",
-        transform: transform
+        backgroundImage: `url(${image})`,
+        transform
       }}
     >
       {children}

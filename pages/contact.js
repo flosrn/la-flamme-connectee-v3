@@ -21,14 +21,9 @@ import VerticalNavBar from "components/NavBar/VerticalNavBar";
 // style for this page
 import homePageStyle from "static/jss/la-flamme-connectee/views/homePage";
 // sections for this page
-import ProductSection from "sections/HomePage/ProductSection";
-import HowWorks from "sections/HomePage/HowWorks";
-import DownloadSection from "sections/HomePage/DownloadSection";
-import TopDownSection from "sections/HomePage/TopDownSection";
-import ConnectSection from "sections/HomePage/ConnectSection";
-import ProjectSection from "sections/HomePage/ProjectSection";
-import TeamSection from "sections/HomePage/TeamSection";
-import ContactSection from "sections/HomePage/ContactSection";
+import ProjectSection from "src/sections/HomePage/ProjectSection";
+import TeamSection from "src/sections/HomePage/TeamSection";
+import ContactSection from "src/sections/HomePage/ContactSection";
 // contexts
 // import { ScrollContext } from "src/contexts/scroll.context.js";
 // effetcs
@@ -36,110 +31,68 @@ import ContactSection from "sections/HomePage/ContactSection";
 // import { animationsSection } from "src/effects/animationsSection";
 // import ScrollMagic from "scrollmagic";
 // static img import
-import backgroundImage from "static/img/stoves/stove1.png";
-import logo from "static/img/laflammeco.png";
-import lepine from "static/img/lepine.png";
+// import backgroundImage from "static/img/stoves/stove1.png";
+import logo from "static/img/logo/laflammeco.png";
+import lepine from "static/img/logo/lepine.png";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Favorite } from "@material-ui/icons";
-
-const useStyles = makeStyles(theme => ({
-  main: {
-    marginTop: "70px"
-  }
-}));
+import ShoppingCart from "@material-ui/core/SvgIcon/SvgIcon";
+import { useStyles } from "static/jss/la-flamme-connectee/views/productStyle";
+import imageBackground from "static/img/contura/contura.jpg";
+import svg3 from "static/img/svg/undraw_status_update_jjgk.svg";
+import FooterCustom from "../components/Footer/FooterCustom";
+import MediaSvg from "../components/Media/MediaSvg";
+import svg1 from "../static/img/svg/undraw_contact_us_15o2.svg";
+import svg2 from "../static/img/svg/undraw_status_update_jjgk.svg";
+import svg from "../static/img/svg/undraw_Data_points_ubvs.svg";
 
 function ContactPage({ ...props }) {
-  // const { classes } = props;
   const classes = useStyles();
-  let innerWidth;
 
   return (
     <div className={classes.root}>
-      <Header color="dark" brand="La Flamme Connectée" links={<HeaderLinks />} fixed />
-      <div className={classNames(classes.main, classes.mainRaised)} id="main-panel">
+      <Header
+        color="transparent"
+        brand="La Flamme Connectée"
+        links={<HeaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 150,
+          color: "white",
+          navColor: "dark"
+        }}
+      />
+      <Parallax image={imageBackground} filter="dark" className={classes.pageHeader}>
         <div className={classes.container}>
-          <ContactSection />
+          <GridContainer className={classes.titleRow}>
+            <GridItem md={4} className={classes.mlAuto} />
+          </GridContainer>
         </div>
+      </Parallax>
+      <div className={classNames(classes.section, classes.sectionGray)}>
         <div className={classes.container}>
-          <TeamSection />
-        </div>
-        <div className={classes.container}>
-          <ProjectSection />
-        </div>
-      </div>
-      <Footer
-        content={
-          <div>
-            <div className={classes.left}>
-              <List className={classes.list}>
-                <ListItem className={classes.inlineBlock}>
-                  <Tooltip
-                    id="instagram-twitter"
-                    title="Suivez nous sur twitter"
-                    placement={innerWidth > 959 ? "top" : "left"}
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button
-                      href="https://twitter.com/CreativeTim?ref=creativetim"
-                      target="_blank"
-                      color="transparent"
-                      className={classes.navLink}
-                    >
-                      <i className={`${classes.socialIcons} fab fa-twitter`} />
-                    </Button>
-                  </Tooltip>
-                </ListItem>
-                <ListItem className={classes.inlineBlock}>
-                  <Tooltip
-                    id="instagram-facebook"
-                    title="Suivez nous sur facebook"
-                    placement={innerWidth > 959 ? "top" : "left"}
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button
-                      color="transparent"
-                      href="https://www.facebook.com/CreativeTim?ref=creativetim"
-                      target="_blank"
-                      className={classes.navLink}
-                    >
-                      <i className={`${classes.socialIcons} fab fa-facebook`} />
-                    </Button>
-                  </Tooltip>
-                </ListItem>
-                <ListItem className={classes.inlineBlock}>
-                  <Tooltip
-                    id="instagram-tooltip"
-                    title="Suivez nous sur instagram"
-                    placement={innerWidth > 959 ? "top" : "left"}
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button
-                      color="transparent"
-                      href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
-                      target="_blank"
-                      className={classes.navLink}
-                    >
-                      <i className={`${classes.socialIcons} fab fa-instagram`} />
-                    </Button>
-                  </Tooltip>
-                </ListItem>
-              </List>
+          <div className={classNames(classes.main, classes.mainRaised)}>
+            <MediaSvg src={svg1} alt="contact-us" size="medium" mt={30} />
+            <div className={classes.container}>
+              <ContactSection />
             </div>
-            <div className={classes.right}>
-              <strong>La Flamme Connectée </strong>
-              &copy; {1900 + new Date().getYear()}, made with <Favorite className={classes.icon} /> by{" "}
-              <a href="https://www.creative-tim.com?ref=mkr-footer" target="_blank">
-                Florian SÉRAN
-              </a>
+            <MediaSvg src={svg2} alt="about-us" size="medium" mt={90} />
+            <div className={classes.container}>
+              <TeamSection />
+            </div>
+            <MediaSvg src={svg3} alt="idea" size="medium" mt={90} />
+            <div className={classes.container}>
+              <ProjectSection />
             </div>
           </div>
-        }
-      />
+          <FooterCustom />
+        </div>
+      </div>
     </div>
   );
 }
 
-export default withStyles(homePageStyle)(ContactPage);
+export default ContactPage;

@@ -4,12 +4,9 @@ import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import Icon from "@material-ui/core/Icon";
 
-import styles from "static/jss/la-flamme-connectee/components/infoStyle";
-
-const useStyles = makeStyles(styles);
+import { useStyles } from "static/jss/la-flamme-connectee/components/infoStyle";
 
 export default function InfoArea(props) {
   const { title, description, iconColor, vertical, className } = props;
@@ -61,6 +58,7 @@ InfoArea.propTypes = {
     "myPrimary4",
     "myPrimary5",
     "primary",
+    "secondary",
     "warning",
     "danger",
     "success",

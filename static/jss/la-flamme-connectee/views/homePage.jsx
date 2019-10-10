@@ -1,22 +1,47 @@
-import { container, title } from "static/jss/la-flamme-connectee.js";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import {
+  container,
+  main,
+  mainRaised,
+  title,
+  whiteColor,
+  grayColor,
+  section,
+  hexToRgb
+} from "static/jss/la-flamme-connectee";
 
-const homePageStyle = theme => ({
-  root: {
-    overflow: "hidden"
+export const useStyles = makeStyles(theme => ({
+  main: {
+    ...main
   },
-  container: {
-    zIndex: "12",
-    color: "#FFFFFF",
-    ...container
+  mainRaised: {
+    ...mainRaised,
+    margin: "-20px 120px 0px"
   },
-  containerFull: {
-    maxWidth: "100% !important",
-    padding: "0 !important"
+  parallax: {
+    overflow: "hidden",
+    backgroundPosition: "bottom",
+    alignItems: "flex-start"
+  },
+  containerBackground: {
+    ...container,
+    zIndex: "2",
+    position: "relative",
+    marginTop: theme.spacing(14),
+    [theme.breakpoints.up("xl")]: {
+      marginTop: theme.spacing(15)
+    }
   },
   gridContainer: {
     display: "flex",
-    justifyContent: "center"
-    // paddingBottom: "50px"
+    justifyContent: "center",
+    color: "#fff",
+    position: " absolute",
+    bottom: "100px",
+    left: "50%",
+    transform: "translate(-50%)",
+    zIndex: "1",
+    width: "100%"
   },
   gridItem: {
     display: "flex",
@@ -43,7 +68,10 @@ const homePageStyle = theme => ({
     color: "#FFFFFF",
     textDecoration: "none",
     letterSpacing: "3px",
-    fontFamily: "Courgette"
+    fontFamily: "Courgette",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "35px"
+    }
   },
   subtitle: {
     maxWidth: "500px",
@@ -51,32 +79,26 @@ const homePageStyle = theme => ({
     lineHeight: "40px",
     letterSpacing: "3px",
     fontFamily: "Economica",
-    color: "#fff"
+    color: "#fff",
+    [theme.breakpoints.down("xs")]: {
+      fontSize: "20px"
+    }
   },
   bottomText: {
     fontFamily: "Quicksand",
     fontSize: "14px",
     [theme.breakpoints.up("sm")]: {
-      fontSize: "20px"
+      fontSize: "20px",
+      letterSpacing: "2px"
     }
   },
   logo: {
     width: 100,
-    height: 100
-  },
-  main: {
-    background: "#FFFFFF",
-    width: "95%",
-    margin: "-60px 0px 0px",
-    position: "relative",
-    zIndex: "3"
-    // marginTop: "8000px !important",
-  },
-  mainRaised: {
-    margin: "-60px 30px 0px",
-    borderRadius: "6px"
-    // boxShadow:
-    //   "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
+    height: 100,
+    [theme.breakpoints.down("xs")]: {
+      width: 85,
+      height: 85
+    }
   },
   scrollToBottom: {
     display: "flex",
@@ -85,6 +107,7 @@ const homePageStyle = theme => ({
     bottom: 80
   },
   lepine: {
+    zIndex: 2,
     position: "absolute",
     left: 0,
     top: 0,
@@ -126,7 +149,6 @@ const homePageStyle = theme => ({
   sectionOverview: {
     backgroundColor: "#33ccff",
     width: "100%",
-    // height: "100vh",
     position: "relative",
     bottom: "0",
     display: "flex",
@@ -142,85 +164,43 @@ const homePageStyle = theme => ({
     alignItems: "center",
     flexDirection: "column"
   },
-
-  flammeConnect: {
-    width: "450px",
-    position: "absolute",
-    // top: "50%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    bottom: "-100px"
-  },
-  phone: {
-    width: "500px",
-    position: "fixed",
-    left: "50%",
-    transform: "translateX(-50%)",
-    bottom: "-500px"
-  },
-  textContainer: {
-    backgroundColor: "yellow",
-    width: "30%",
-    height: "300px"
-  },
-  fakePanel: {
-    backgroundColor: "#fff",
-    width: "95%",
-    position: "fixed",
-    bottom: 0,
-    height: "70px",
-    margin: "-60px 0px 0px",
-    boxShadow:
-      "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)",
-    borderRadius: "6px 6px 0 0",
-    zIndex: 1,
-    left: "50%",
-    transform: "translateX(-50%)"
-  },
-  testContainer: {
-    width: "100%",
-    height: "100vh",
-    backgroundColor: "blue",
+  block: {
+    color: "inherit",
+    padding: "0.9375rem",
+    fontWeight: "500",
+    fontSize: "12px",
+    textTransform: "uppercase",
+    borderRadius: "3px",
+    textDecoration: "none",
     position: "relative",
-    marginTop: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
+    display: "block"
   },
-  test: {
-    backgroundColor: "red",
-    width: "100px",
-    height: "100px"
-    // position: "absolute",
-    // bottom: "0px",
-    // left: "50%",
-    // transform: "translateX(-50%)"
-  },
-  trigger: {
-    position: "absolute",
-    bottom: 0,
-    height: "10px",
-    width: "100%",
-    backgroundColor: "red",
-    zIndex: 2
+  inlineBlock: {
+    display: "inline-block",
+    padding: "0px",
+    width: "auto"
   },
   list: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    "& > li": {
-      padding: 0
-    }
+    marginBottom: "0",
+    padding: "0",
+    marginTop: "0"
   },
-  right: {
-    display: "flex",
-    alignItems: "center"
+  buttonPlay: {
+    marginTop: theme.spacing(5)
   },
-  icon: {
-    color: "red",
-    padding: "2px",
-    margin: "2px"
+  scrollDownContainer: {
+    width: "100%",
+    position: "absolute",
+    left: 0,
+    top: -55,
+    display: "flex",
+    justifyContent: "center"
+  },
+  scrollDownButton: {
+    color: "#fff"
+  },
+  bottom: {
+    padding: theme.spacing(5, 0, 10)
   }
-});
+}));
 
-export default homePageStyle;

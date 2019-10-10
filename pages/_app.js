@@ -2,9 +2,9 @@ import React from "react";
 import App from "next/app";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "theme";
-import { UserContextProvider } from "../src/contexts/UserContext";
+import { UserContextProvider } from "src/contexts/UserContext";
 import "static/scss/la-flamme-connectee.scss";
+import theme from "theme";
 
 class MyApp extends App {
   componentDidMount() {

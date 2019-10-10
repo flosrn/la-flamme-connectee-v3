@@ -1,24 +1,24 @@
 export function smoothScroll(target) {
   if (target) {
-    var targetScroll = document.getElementById(target);
+    const targetScroll = document.getElementById(target);
     scrollTo(document.documentElement, targetScroll.offsetTop, 900);
   }
 }
 
 function scrollTo(element, to, duration) {
-  var start = element.scrollTop,
-    change = to - start + document.getElementById("main-panel").offsetTop,
-    currentTime = 0,
-    increment = 20;
+  const start = element.scrollTop;
+  const change = to - start + document.getElementById("main-panel").offsetTop;
+  let currentTime = 0;
+  const increment = 20;
 
   var animateScroll = function() {
     currentTime += increment;
-    var val = easeInOutQuad(currentTime, start, change, duration);
+    const val = easeInOutQuad(currentTime, start, change, duration);
     element.scrollTop = val;
     if (currentTime < duration) {
       setTimeout(animateScroll, increment);
     }
-  }.bind(this);
+  };
   animateScroll();
 }
 

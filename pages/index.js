@@ -1,58 +1,66 @@
-import React, { useState, useEffect, useContext } from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
+import React from "react";
+import Link from "next/link";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-// @material-ui/core components
-import { withStyles } from "@material-ui/core/styles";
-import { Typography, Avatar } from "@material-ui/core";
+// @material-ui/core
+import { Typography, Avatar, IconButton } from "@material-ui/core";
 // @material-ui/icons
-import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // core components
 import Header from "components/Header/Header";
-import Footer from "components/Footer/Footer";
-import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Button from "components/CustomButtons/Button";
 import HeaderLinks from "components/Header/HeaderLinks";
 import Parallax from "components/Parallax/Parallax";
-import VerticalNavBar from "components/NavBar/VerticalNavBar";
 // style for this page
-import homePageStyle from "static/jss/la-flamme-connectee/views/homePage";
-// sections for this page
-import ProductSection from "sections/HomePage/ProductSection";
-import HowWorks from "sections/HomePage/HowWorks";
-import DownloadSection from "sections/HomePage/DownloadSection";
-import TopDownSection from "sections/HomePage/TopDownSection";
-import ConnectSection from "sections/HomePage/ConnectSection";
-import ProjectSection from "sections/HomePage/ProjectSection";
-import TeamSection from "sections/HomePage/TeamSection";
-import ContactSection from "sections/HomePage/ContactSection";
-// contexts
-// import { ScrollContext } from "src/contexts/scroll.context.js";
-// effetcs
-// import { smoothScroll } from "src/effects/scrollToSection";
-// import { animationsSection } from "src/effects/animationsSection";
-// import ScrollMagic from "scrollmagic";
-// static img import
-import backgroundImage from "static/img/stoves/stove1.png";
-import logo from "static/img/laflammeco.png";
-import lepine from "static/img/lepine.png";
+import { useStyles } from "static/jss/la-flamme-connectee/views/homePage";
 
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import Tooltip from "@material-ui/core/Tooltip";
-import { Favorite } from "@material-ui/icons";
+import backgroundImage from "static/img/flamco/flamco-main-dark.jpg";
+import logo from "static/img/logo/laflammeco.png";
+import lepine from "static/img/logo/lepine.png";
+import svg from "static/img/svg/undraw_smart_home_28oy.svg";
+import PresentationSection from "../src/sections/HomePage/PresentationSection";
+import CarouselSection from "../src/sections/HomePage/CarouselSection";
+import FooterCustom from "../components/Footer/FooterCustom";
+import GridContainer from "../components/Grid/GridContainer";
+import MediaSvg from "../components/Media/MediaSvg";
 
-function HomePage({ ...props }) {
-  const { classes } = props;
-  let innerWidth;
+function HomePage() {
+  const classes = useStyles();
+
+  const easeInOutQuad = (t, b, c, d) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
+  const scrollTo = (element, to, duration) => {
+    const start = element.scrollTop;
+    const change = to - start + document.getElementById("main-panel").offsetTop;
+    let currentTime = 0;
+    const increment = 20;
+
+    const animateScroll = () => {
+      currentTime += increment;
+      const val = easeInOutQuad(currentTime, start, change, duration);
+      element.scrollTop = val;
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    };
+    animateScroll();
+  };
+
+  const smoothScroll = target => {
+    const targetScroll = document.getElementById(target);
+    scrollTo(document.documentElement, targetScroll.offsetTop, 900);
+  };
 
   return (
     <div className={classes.root}>
       <Header
         color="transparent"
-        brand="La Flamme Connectée"
         links={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -61,9 +69,9 @@ function HomePage({ ...props }) {
           navColor: "black"
         }}
       />
-      <Parallax filter="dark" image={backgroundImage}>
-        <div className={classes.container}>
-          <img alt="Lepine" src={lepine} className={classes.lepine} />
+      <Parallax filter="dark" image={backgroundImage} className={classes.parallax}>
+        <img alt="Lepine" src={lepine} className={classes.lepine} />
+        <div className={classes.containerBackground}>
           <div className={classes.titleContainer}>
             <GridItem xs={12} sm={12} md={12} className={classes.gridItem} id="title">
               <Typography variant="h3" align="center" className={classes.title}>
@@ -72,102 +80,48 @@ function HomePage({ ...props }) {
               <Avatar alt="Logo" src={logo} className={classes.logo} />
               <Typography variant="h5" align="center" className={classes.subtitle}>
                 Allumez votre poêle ou insert à distance
-                <br />
-                Ne rentrez plus dans une maison froide
               </Typography>
+              <Button color="danger" href="https://youtu.be/Eb7Q10YWH_o" target="_blank" className={classes.buttonPlay}>
+                <i className="fas fa-play" />
+                Découvrir en vidéo
+              </Button>
             </GridItem>
           </div>
-          <GridContainer className={classes.gridContainer}>
-            <GridItem xs={12} sm={12} md={10} className={classNames(classes.gridItem, classes.scrollToBottom)}>
-              <Typography variant="h5" align="center" className={classes.bottomText}>
-                <i>En partenariat avec Contura, leader suédois des produits de chauffage au bois.</i>
+        </div>
+      </Parallax>
+      <div className={classNames(classes.main, classes.mainRaised)} id="main-panel">
+        <div className={classes.scrollDownContainer}>
+          <IconButton className={classes.scrollDownButton} onClick={() => smoothScroll("presentation")}>
+            <ExpandMoreIcon fontSize="large" />
+          </IconButton>
+        </div>
+        <div className={classes.container}>
+          <PresentationSection />
+          <CarouselSection />
+          <GridContainer justify="center">
+            <GridItem center>
+              <MediaSvg src={svg} alt="smart-home" size="medium" />
+            </GridItem>
+          </GridContainer>
+          <GridContainer justify="center" className={classes.bottom}>
+            <GridItem center>
+              <Typography variant="subtitle2" align="center">
+                Pour en savoir plus, consultez nos pages{" "}
+                <Link href="/documentation">
+                  <a>Documentation</a>
+                </Link>{" "}
+                et{" "}
+                <Link href="/product">
+                  <a>Produits</a>
+                </Link>
               </Typography>
             </GridItem>
           </GridContainer>
         </div>
-      </Parallax>
-
-      <div className={classNames(classes.main, classes.mainRaised)} id="main-panel">
-        <div className={classes.container}>
-          <ProductSection />
-        </div>
-        {/* <div className={classNames(classes.container, classes.containerFull)}> */}
-        {/*  <HowWorks /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <ConnectSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <TopDownSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <DownloadSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <ProjectSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <TeamSection /> */}
-        {/* </div> */}
-        {/* <div className={classes.container}> */}
-        {/*  <ContactSection /> */}
-        {/* </div> */}
       </div>
-      <Footer
-        content={
-          <div>
-            <div className={classes.left}>
-              <List className={classes.list}>
-                <ListItem className={classes.inlineBlock}>
-                  <Tooltip
-                    id="instagram-twitter"
-                    title="Suivez nous sur twitter"
-                    placement={innerWidth > 959 ? "top" : "left"}
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="transparent" className={classes.navLink}>
-                      <i className={`${classes.socialIcons} fab fa-twitter`} />
-                    </Button>
-                  </Tooltip>
-                </ListItem>
-                <ListItem className={classes.inlineBlock}>
-                  <Tooltip
-                    id="instagram-facebook"
-                    title="Suivez nous sur facebook"
-                    placement={innerWidth > 959 ? "top" : "left"}
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="transparent" className={classes.navLink}>
-                      <i className={`${classes.socialIcons} fab fa-facebook`} />
-                    </Button>
-                  </Tooltip>
-                </ListItem>
-                <ListItem className={classes.inlineBlock}>
-                  <Tooltip
-                    id="instagram-tooltip"
-                    title="Suivez nous sur instagram"
-                    placement={innerWidth > 959 ? "top" : "left"}
-                    classes={{ tooltip: classes.tooltip }}
-                  >
-                    <Button color="transparent" className={classes.navLink}>
-                      <i className={`${classes.socialIcons} fab fa-instagram`} />
-                    </Button>
-                  </Tooltip>
-                </ListItem>
-              </List>
-            </div>
-            <div className={classes.right}>
-              <strong>La Flamme Connectée </strong>
-              &copy; {1900 + new Date().getYear()}, made with <Favorite className={classes.icon} /> by
-              <a href="https://www.linkedin.com/in/florian-seran" target="_blank" style={{ paddingLeft: "2px" }}>
-                Florian SÉRAN
-              </a>
-            </div>
-          </div>
-        }
-      />
+      <FooterCustom />
     </div>
   );
 }
 
-export default withStyles(homePageStyle)(HomePage);
+export default HomePage;

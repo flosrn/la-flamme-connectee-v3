@@ -7,7 +7,7 @@ import {
   warningColor,
   dangerColor,
   hexToRgb
-} from "static/jss/la-flamme-connectee.js";
+} from "static/jss/la-flamme-connectee";
 
 const parallaxStyle = {
   parallax: {
@@ -15,22 +15,19 @@ const parallaxStyle = {
     maxHeight: "1600px",
     overflow: "hidden",
     position: "relative",
-    backgroundPosition: "50%",
+    // backgroundPosition: "50%",
     backgroundSize: "cover",
     margin: "0",
     padding: "0",
-    border: "0",
-    display: "flex",
-    alignItems: "center"
+    border: "0"
   },
   filter: {},
   primaryColor: {
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: `rgba(${hexToRgb(blackColor)}, 0.5)`
     },
     "&:after": {
-      background:
-        "linear-gradient(60deg,rgba(" + hexToRgb(primaryColor[4]) + ",.56),rgba(" + hexToRgb(primaryColor[5]) + ",.95))"
+      background: `linear-gradient(60deg,rgba(${hexToRgb(primaryColor[4])},.56),rgba(${hexToRgb(primaryColor[5])},.95))`
     },
     "&:after,&:before": {
       position: "absolute",
@@ -45,11 +42,10 @@ const parallaxStyle = {
   },
   roseColor: {
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: `rgba(${hexToRgb(blackColor)}, 0.5)`
     },
     "&:after": {
-      background:
-        "linear-gradient(60deg,rgba(" + hexToRgb(roseColor[3]) + ",.56),rgba(" + hexToRgb(roseColor[4]) + ",.95))"
+      background: `linear-gradient(60deg,rgba(${hexToRgb(roseColor[3])},.56),rgba(${hexToRgb(roseColor[4])},.95))`
     },
     "&:after,&:before": {
       position: "absolute",
@@ -64,7 +60,7 @@ const parallaxStyle = {
   },
   darkColor: {
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: `rgba(${hexToRgb(blackColor)}, 0.2)`
     },
     "&:after,&:before": {
       position: "absolute",
@@ -79,11 +75,10 @@ const parallaxStyle = {
   },
   infoColor: {
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: `rgba(${hexToRgb(blackColor)}, 0.5)`
     },
     "&:after": {
-      background:
-        "linear-gradient(60deg,rgba(" + hexToRgb(infoColor[6]) + ",.56),rgba(" + hexToRgb(infoColor[7]) + ",.95))"
+      background: `linear-gradient(60deg,rgba(${hexToRgb(infoColor[6])},.56),rgba(${hexToRgb(infoColor[7])},.95))`
     },
     "&:after,&:before": {
       position: "absolute",
@@ -98,11 +93,10 @@ const parallaxStyle = {
   },
   successColor: {
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: `rgba(${hexToRgb(blackColor)}, 0.5)`
     },
     "&:after": {
-      background:
-        "linear-gradient(60deg,rgba(" + hexToRgb(successColor[6]) + ",.56),rgba(" + hexToRgb(successColor[7]) + ",.95))"
+      background: `linear-gradient(60deg,rgba(${hexToRgb(successColor[6])},.56),rgba(${hexToRgb(successColor[7])},.95))`
     },
     "&:after,&:before": {
       position: "absolute",
@@ -117,11 +111,10 @@ const parallaxStyle = {
   },
   warningColor: {
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: `rgba(${hexToRgb(blackColor)}, 0.5)`
     },
     "&:after": {
-      background:
-        "linear-gradient(60deg,rgba(" + hexToRgb(warningColor[6]) + ",.56),rgba(" + hexToRgb(warningColor[7]) + ",.95))"
+      background: `linear-gradient(60deg,rgba(${hexToRgb(warningColor[6])},.56),rgba(${hexToRgb(warningColor[7])},.95))`
     },
     "&:after,&:before": {
       position: "absolute",
@@ -136,11 +129,10 @@ const parallaxStyle = {
   },
   dangerColor: {
     "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+      background: `rgba(${hexToRgb(blackColor)}, 0.5)`
     },
     "&:after": {
-      background:
-        "linear-gradient(60deg,rgba(" + hexToRgb(dangerColor[6]) + ",.56),rgba(" + hexToRgb(dangerColor[7]) + ",.95))"
+      background: `linear-gradient(60deg,rgba(${hexToRgb(dangerColor[6])},.56),rgba(${hexToRgb(dangerColor[7])},.95))`
     },
     "&:after,&:before": {
       position: "absolute",

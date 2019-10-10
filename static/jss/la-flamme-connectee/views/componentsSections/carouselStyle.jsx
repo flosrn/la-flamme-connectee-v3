@@ -1,8 +1,8 @@
-import { container } from "static/jss/material-kit-react.jsx";
+import { container } from "static/jss/la-flamme-connectee";
 
 const carouselStyle = {
   section: {
-    padding: "70px 0"
+    // padding: "70px 0"
   },
   container,
   marginAuto: {

@@ -122,6 +122,10 @@ const containerFluid = {
 };
 const container = {
   ...containerFluid,
+  "@media (max-width: 576px)": {
+    paddingLeft: 0,
+    paddingRight: 0
+  },
   "@media (min-width: 576px)": {
     maxWidth: "540px"
   },
@@ -300,11 +304,12 @@ const main = {
 
 const mainRaised = {
   "@media (max-width: 576px)": {
-    marginTop: "-30px"
+    // marginTop: "-30px"
   },
   "@media (max-width: 830px)": {
     marginLeft: "10px",
-    marginRight: "10px"
+    marginRight: "10px",
+    padding: "0 15px"
   },
   margin: "-60px 30px 0px",
   borderRadius: "6px",

@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { Tabs, Tab, Divider, colors } from "@material-ui/core";
 
 import Headers from "components/Header/Header";
-import { Header, Profile, Address, Security, Options } from "sections/SettingsPage";
+import { Header, Profile, Address, Security, Options } from "src/sections/SettingsPage";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Card from "components/Card/Card";
@@ -13,7 +13,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import clsx from "clsx";
 import CustomSnackBar from "components/Snackbar/CustomSnackBar";
 import validate from "validate.js";
-import { schema } from "sections/SettingsPage/Address/components/AddressForm/AddressFormSchema";
+import { schema } from "src/sections/SettingsPage/Address/components/AddressForm/AddressFormSchema";
 import { UserContext } from "src/contexts/UserContext";
 import axioswal from "axioswal";
 import axios from "axios";
@@ -110,7 +110,7 @@ function Settings() {
         toast: true,
         position: "bottom-end",
         showConfirmButton: false,
-        timer: 3000
+        timer: 5000
       });
       dispatch({ type: "fetch" });
       setEditMode(false);

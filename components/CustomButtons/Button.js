@@ -5,12 +5,9 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-import styles from "static/jss/la-flamme-connectee/components/buttonStyle.js";
-
-const useStyles = makeStyles(styles);
+import { useStyles } from "static/jss/la-flamme-connectee/components/buttonStyle";
 
 const RegularButton = React.forwardRef((props, ref) => {
   const {

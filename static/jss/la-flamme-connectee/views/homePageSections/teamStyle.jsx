@@ -1,9 +1,10 @@
-import { cardTitle, title, smallTitle } from "static/jss/la-flamme-connectee.js";
-import imagesStyle from "static/jss/la-flamme-connectee/imagesStyles.js";
+import { cardTitle, title, smallTitle } from "static/jss/la-flamme-connectee";
+import imagesStyle from "static/jss/la-flamme-connectee/imagesStyles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const teamStyle = {
+export const useStyles = makeStyles(theme => ({
   section: {
-    padding: "70px 0",
+    // padding: "70px 0",
     textAlign: "center"
   },
   title: {
@@ -20,7 +21,7 @@ const teamStyle = {
   },
   cardTitle,
   smallTitle: {
-    ...smallTitle,
+    ...smallTitle
   },
   description: {
     color: "#999",
@@ -43,6 +44,4 @@ const teamStyle = {
   margin5: {
     margin: "5px"
   }
-};
-
-export default teamStyle;
+}));

@@ -1,23 +1,38 @@
-import { title } from "static/jss/la-flamme-connectee.js";
+import { title } from "static/jss/la-flamme-connectee";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const topDownStyle = {
+export const useStyles = makeStyles(theme => ({
   section: {
-    padding: "70px 0",
-    textAlign: "center",
+    textAlign: "center"
   },
   title: {
     ...title,
     marginBottom: "1rem",
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none",
+    textDecoration: "none"
   },
   description: {
     color: "#999",
     marginLeft: "50px",
     marginRight: "50px",
-    textAlign: "justify"
+    textAlign: "justify",
+    [theme.breakpoints.down("xs")]: {
+      marginLeft: "15px",
+      marginRight: "15px"
+    }
   },
-};
-
-export default topDownStyle;
+  gridImg: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  topDownImg: {
+    width: "95%",
+    [theme.breakpoints.up("lg")]: {
+      width: "85%"
+    }
+  },
+  gridItemBottom: {
+    marginBottom: "80px"
+  }
+}));

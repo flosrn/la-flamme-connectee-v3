@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import useMiddleware from "middlewares/useMiddleware";
+import useMiddleware from "src/middlewares/useMiddleware";
 
 const handler = (req, res) => {
   if (req.method === "POST") {
@@ -14,7 +14,7 @@ const handler = (req, res) => {
             if (result) return Promise.resolve(user);
             return res.send({
               status: "error",
-              message: "Mot de passe invalide",
+              message: "Mot de passe invalide"
             });
           });
         }
@@ -24,14 +24,14 @@ const handler = (req, res) => {
         req.session.userId = user._id;
         return res.send({
           status: "success",
-          message: `Bienvenue, ${user.firstName} !`,
+          message: `Bienvenue, ${user.firstName} !`
         });
       })
       .catch(error =>
         res.send({
           status: "error",
-          message: error.toString(),
-        }),
+          message: error.toString()
+        })
       );
   }
   return res.status(405).end();

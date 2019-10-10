@@ -37,7 +37,7 @@ const footerStyle = {
     }
   },
   footer: {
-    padding: "0.9375rem 0",
+    padding: "0.3rem 0",
     textAlign: "center",
     display: "flex",
     zIndex: "2",
@@ -68,7 +68,7 @@ const footerStyle = {
     backgroundColor: "transparent"
   },
   dark: {
-    background: "radial-gradient(ellipse at center," + grayColor[4] + " 0," + grayColor[5] + " 100%)",
+    background: `radial-gradient(ellipse at center,${grayColor[4]} 0,${grayColor[5]} 100%)`,
     backgroundSize: "550% 450%",
     color: whiteColor,
     "& p": {
@@ -88,7 +88,7 @@ const footerStyle = {
       }
     },
     "& hr": {
-      borderColor: "rgba(" + hexToRgb(whiteColor) + ",0.2)"
+      borderColor: `rgba(${hexToRgb(whiteColor)},0.2)`
     },
     "& $btnTwitter, & $btnDribbble, & $btnInstagram": {
       color: whiteColor

@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import EmailToClient from "utils/emailToClient";
-import useMiddleware from "middlewares/useMiddleware";
+import useMiddleware from "src/middlewares/useMiddleware";
 
 const handler = (req, res) => {
   if (req.method === "POST") {

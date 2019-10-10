@@ -1,6 +1,6 @@
 import formidable from "formidable";
 import { v2 as cloudinary } from "cloudinary";
-import useMiddleware from "../../../middlewares/useMiddleware";
+import useMiddleware from "../../../src/middlewares/useMiddleware";
 
 const handler = (req, res) => {
   if (req.method === "PUT") {

@@ -1,3 +1,4 @@
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import {
   primaryColor,
   warningColor,
@@ -7,9 +8,9 @@ import {
   roseColor,
   whiteColor,
   grayColor
-} from "static/jss/la-flamme-connectee.js";
+} from "static/jss/la-flamme-connectee";
 
-const badgeStyle = {
+export const useStyles = makeStyles(theme => ({
   badge: {
     marginRight: "3px",
     borderRadius: "12px",
@@ -25,7 +26,10 @@ const badgeStyle = {
     display: "inline-block"
   },
   primary: {
-    backgroundColor: primaryColor[0]
+    backgroundColor: theme.palette.primary.main
+  },
+  secondary: {
+    backgroundColor: theme.palette.secondary.main
   },
   warning: {
     backgroundColor: warningColor[0]
@@ -45,6 +49,4 @@ const badgeStyle = {
   gray: {
     backgroundColor: grayColor[7]
   }
-};
-
-export default badgeStyle;
+}));

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 // core components
-import Badge from "components/Badge/Badge.js";
+import Badge from "components/Badge/Badge";
 // colors
 import {
   infoColor,
@@ -19,71 +19,14 @@ import {
   blackColor,
   grayColor,
   hexToRgb
-} from "static/jss/la-flamme-connectee.js";
-
-function Timeline({ ...props }) {
-  const { stories, simple } = props;
-  const classes = useStyles();
-
-  const timelineClass =
-    classes.timeline +
-    " " +
-    cx({
-      [classes.timelineSimple]: simple
-    });
-  return (
-    <ul className={timelineClass}>
-      {stories.map((prop, key) => {
-        const panelClasses =
-          classes.timelinePanel +
-          " " +
-          cx({
-            [classes.timelinePanelInverted]: prop.inverted || simple,
-            [classes.timelineSimplePanel]: simple
-          });
-        const timelineBadgeClasses =
-          classes.timelineBadge +
-          " " +
-          classes[prop.badgeColor] +
-          " " +
-          cx({
-            [classes.timelineSimpleBadge]: simple
-          });
-        return (
-          <li className={classes.item} key={key}>
-            {prop.badgeIcon ? (
-              <div className={timelineBadgeClasses}>
-                <prop.badgeIcon className={classes.badgeIcon} />
-              </div>
-            ) : null}
-            <div className={panelClasses}>
-              {prop.title ? (
-                <div className={classes.timelineHeading}>
-                  <Badge color={prop.titleColor} variant="body1">{prop.title}</Badge>
-                </div>
-              ) : null}
-              <div variant="body2" className={classes.timelineBody}>{prop.body}</div>
-              {prop.footerTitle ? (
-                <div className={classes.footerTitle}>{prop.footerTitle}</div>
-              ) : null}
-              {prop.footer ? <hr className={classes.footerLine} /> : null}
-              {prop.footer ? (
-                <div className={classes.timelineFooter}>{prop.footer}</div>
-              ) : null}
-            </div>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
+} from "static/jss/la-flamme-connectee";
 
 const useStyles = makeStyles(theme => ({
   timeline: {
     width: "90%",
     [theme.breakpoints.up("sm")]: {
       "&:before": {
-        width: "100%",
+        width: "100%"
       }
     },
     [theme.breakpoints.down("sm")]: {
@@ -184,25 +127,25 @@ const useStyles = makeStyles(theme => ({
       ", 0.4)"
   },
   primary: {
-    backgroundColor: primaryColor[0],
+    backgroundColor: theme.palette.primary.main,
     boxShadow:
       "0 4px 20px 0px rgba(" +
       hexToRgb(blackColor) +
       ", 0.14), 0 7px 10px -5px rgba(" +
-      hexToRgb(primaryColor[0]) +
+      hexToRgb(theme.palette.primary.main) +
       ", 0.4)"
   },
-  myPrimary2: {
-    backgroundColor: myPrimaryColor[1],
+  secondary: {
+    backgroundColor: theme.palette.secondary.main,
     boxShadow:
       "0 4px 20px 0px rgba(" +
       hexToRgb(blackColor) +
       ", 0.14), 0 7px 10px -5px rgba(" +
-      hexToRgb(myPrimaryColor[1]) +
+      hexToRgb(theme.palette.secondary.main) +
       ", 0.4)"
   },
   myPrimary3: {
-    backgroundColor: myPrimaryColor[2],
+    backgroundColor: theme.palette.primary.light,
     boxShadow:
       "0 4px 20px 0px rgba(" +
       hexToRgb(blackColor) +
@@ -318,10 +261,16 @@ const useStyles = makeStyles(theme => ({
     fontSize: "14px",
     lineHeight: "21px",
     textAlign: "justify",
+    [theme.breakpoints.down("sm")]: {
+      textAlign: "center"
+    },
+    "& > div > p": {
+      fontFamily: "quicksand"
+    }
   },
   timelineFooter: {
     zIndex: "1000",
-    position: "relative",
+    position: "relative"
     // float: "left"
   },
   footerTitle: {
@@ -334,6 +283,63 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "5px"
   }
 }));
+
+function Timeline({ ...props }) {
+  const { stories, simple } = props;
+  const classes = useStyles();
+
+  const timelineClass =
+    classes.timeline +
+    " " +
+    cx({
+      [classes.timelineSimple]: simple
+    });
+  return (
+    <ul className={timelineClass}>
+      {stories.map((prop, key) => {
+        const panelClasses =
+          classes.timelinePanel +
+          " " +
+          cx({
+            [classes.timelinePanelInverted]: prop.inverted || simple,
+            [classes.timelineSimplePanel]: simple
+          });
+        const timelineBadgeClasses =
+          classes.timelineBadge +
+          " " +
+          classes[prop.badgeColor] +
+          " " +
+          cx({
+            [classes.timelineSimpleBadge]: simple
+          });
+        return (
+          <li className={classes.item} key={key}>
+            {prop.badgeIcon ? (
+              <div className={timelineBadgeClasses}>
+                <prop.badgeIcon className={classes.badgeIcon} />
+              </div>
+            ) : null}
+            <div className={panelClasses}>
+              {prop.title ? (
+                <div className={classes.timelineHeading}>
+                  <Badge color={prop.titleColor} variant="body1">
+                    {prop.title}
+                  </Badge>
+                </div>
+              ) : null}
+              <div variant="body2" className={classes.timelineBody}>
+                {prop.body}
+              </div>
+              {prop.footerTitle ? <div className={classes.footerTitle}>{prop.footerTitle}</div> : null}
+              {prop.footer ? <hr className={classes.footerLine} /> : null}
+              {prop.footer ? <div className={classes.timelineFooter}>{prop.footer}</div> : null}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 Timeline.propTypes = {
   // classes: PropTypes.object.isRequired,

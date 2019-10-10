@@ -1,3 +1,5 @@
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
 import {
   primaryColor,
   secondaryColor,
@@ -7,9 +9,9 @@ import {
   infoColor,
   roseColor,
   grayColor
-} from "static/jss/la-flamme-connectee.js";
+} from "static/jss/la-flamme-connectee";
 
-const accordionStyle = theme => ({
+export const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
     marginBottom: "20px"
@@ -26,7 +28,7 @@ const accordionStyle = theme => ({
   expansionPanelSummary: {
     minHeight: "auto !important",
     backgroundColor: "transparent",
-    borderBottom: "1px solid " + grayColor[6],
+    borderBottom: `1px solid ${grayColor[6]}`,
     padding: "25px 10px 5px 0px",
     borderTopLeftRadius: "3px",
     borderTopRightRadius: "3px",
@@ -34,12 +36,12 @@ const accordionStyle = theme => ({
   },
   primaryExpansionPanelSummary: {
     "&:hover": {
-      color: primaryColor[0]
+      color: theme.palette.primary.main
     }
   },
   secondaryExpansionPanelSummary: {
     "&:hover": {
-      color: secondaryColor[0]
+      color: theme.palette.secondary.main
     }
   },
   warningExpansionPanelSummary: {
@@ -84,10 +86,10 @@ const accordionStyle = theme => ({
     }
   },
   primaryExpansionPanelSummaryExpaned: {
-    color: primaryColor[0]
+    color: theme.palette.primary.main
   },
   secondaryExpansionPanelSummaryExpaned: {
-    color: secondaryColor[0]
+    color: theme.palette.secondary.main
   },
   warningExpansionPanelSummaryExpaned: {
     color: warningColor[0]
@@ -136,6 +138,4 @@ const accordionStyle = theme => ({
     padding: "15px 0px 5px",
     fontSize: ".875rem"
   }
-});
-
-export default accordionStyle;
+}));

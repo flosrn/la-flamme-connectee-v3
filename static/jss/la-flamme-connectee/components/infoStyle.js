@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/core";
 import {
   primaryColor,
   warningColor,
@@ -7,13 +8,13 @@ import {
   roseColor,
   grayColor,
   title
-} from "static/jss/la-flamme-connectee.js";
+} from "static/jss/la-flamme-connectee";
 
-const infoStyle = {
+export const useStyles = makeStyles(theme => ({
   infoArea: {
     maxWidth: "360px",
     margin: "0 auto",
-    padding: "70px 0 30px"
+    padding: "0 0 30px"
   },
   iconWrapper: {
     float: "left",
@@ -21,7 +22,10 @@ const infoStyle = {
     marginRight: "10px"
   },
   primary: {
-    color: primaryColor[0]
+    color: theme.palette.primary.main
+  },
+  secondary: {
+    color: theme.palette.secondary.main
   },
   warning: {
     color: warningColor[0]
@@ -59,10 +63,8 @@ const infoStyle = {
     color: grayColor[0],
     overflow: "hidden",
     marginTop: "0px",
-    "& p": {
-      color: grayColor[0],
-      fontSize: "14px"
-    }
+    fontFamily: "quicksand",
+    fontSize: "16px"
   },
   iconWrapperVertical: {
     float: "none"
@@ -71,6 +73,4 @@ const infoStyle = {
     width: "61px",
     height: "61px"
   }
-};
-
-export default infoStyle;
+}));

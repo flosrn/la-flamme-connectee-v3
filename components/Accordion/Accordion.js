@@ -10,13 +10,11 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 // @material-ui/icons
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
-import styles from "static/jss/la-flamme-connectee/components/accordionStyle.js";
-
-const useStyles = makeStyles(styles);
+import { useStyles } from "static/jss/la-flamme-connectee/components/accordionStyle";
 
 export default function Accordion(props) {
   const [active, setActive] = React.useState(props.active.length === undefined ? [props.active] : props.active);
-  const [single] = React.useState(props.active.length === undefined ? true : false);
+  const [single] = React.useState(props.active.length === undefined);
   const handleChange = panel => () => {
     let newArray;
 
@@ -26,13 +24,11 @@ export default function Accordion(props) {
       } else {
         newArray = [panel];
       }
+    } else if (active.indexOf(panel) === -1) {
+      newArray = [...active, panel];
     } else {
-      if (active.indexOf(panel) === -1) {
-        newArray = [...active, panel];
-      } else {
-        newArray = [...active];
-        newArray.splice(active.indexOf(panel), 1);
-      }
+      newArray = [...active];
+      newArray.splice(active.indexOf(panel), 1);
     }
     setActive(newArray);
   };
@@ -54,9 +50,9 @@ export default function Accordion(props) {
             <ExpansionPanelSummary
               expandIcon={<ExpandMore />}
               classes={{
-                root: `${classes.expansionPanelSummary} ${classes[activeColor + "ExpansionPanelSummary"]}`,
+                root: `${classes.expansionPanelSummary} ${classes[`${activeColor}ExpansionPanelSummary`]}`,
                 expanded: `${classes.expansionPanelSummaryExpaned} ${
-                  classes[activeColor + "ExpansionPanelSummaryExpaned"]
+                  classes[`${activeColor}ExpansionPanelSummaryExpaned`]
                 }`,
                 content: classes.expansionPanelSummaryContent,
                 expandIcon: classes.expansionPanelSummaryExpandIcon
