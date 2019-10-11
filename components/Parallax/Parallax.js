@@ -12,34 +12,34 @@ import styles from "static/jss/la-flamme-connectee/components/parallaxStyle";
 const useStyles = makeStyles(styles);
 
 export default function Parallax(props) {
-  let windowScrollTop;
-  // if (window.innerWidth >= 768) {
-  //   windowScrollTop = window.pageYOffset / 3;
-  // } else {
-  //   windowScrollTop = 0;
-  // }
-  const [transform, setTransform] = React.useState("");
-
-  const resetTransform = () => {
-    const windowScrollTop = window.pageYOffset / 3;
-    setTransform(`translate3d(0,${windowScrollTop}px,0)`);
-  };
-  React.useEffect(() => {
-    if (window.innerWidth >= 768) {
-      windowScrollTop = window.pageYOffset / 3;
-    } else {
-      windowScrollTop = 0;
-    }
-    if (window.innerWidth >= 768) {
-      window.addEventListener("scroll", resetTransform);
-    }
-    // setTransform("translate3d(0," + windowScrollTop + "px,0)");
-    return function cleanup() {
-      if (window.innerWidth >= 768) {
-        window.removeEventListener("scroll", resetTransform);
-      }
-    };
-  });
+  // let windowScrollTop;
+  // // if (window.innerWidth >= 768) {
+  // //   windowScrollTop = window.pageYOffset / 3;
+  // // } else {
+  // //   windowScrollTop = 0;
+  // // }
+  // const [transform, setTransform] = React.useState("");
+  //
+  // const resetTransform = () => {
+  //   const windowScrollTop = window.pageYOffset / 3;
+  //   setTransform(`translate3d(0,${windowScrollTop}px,0)`);
+  // };
+  // React.useEffect(() => {
+  //   if (window.innerWidth >= 768) {
+  //     windowScrollTop = window.pageYOffset / 3;
+  //   } else {
+  //     windowScrollTop = 0;
+  //   }
+  //   if (window.innerWidth >= 768) {
+  //     window.addEventListener("scroll", resetTransform);
+  //   }
+  //   // setTransform("translate3d(0," + windowScrollTop + "px,0)");
+  //   return function cleanup() {
+  //     if (window.innerWidth >= 768) {
+  //       window.removeEventListener("scroll", resetTransform);
+  //     }
+  //   };
+  // });
 
   const { filter, className, children, style, image, small } = props;
   const classes = useStyles();
@@ -54,8 +54,8 @@ export default function Parallax(props) {
       className={parallaxClasses}
       style={{
         ...style,
-        backgroundImage: `url(${image})`,
-        transform
+        backgroundImage: `url(${image})`
+        // transform
       }}
     >
       {children}

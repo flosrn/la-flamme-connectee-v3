@@ -24,11 +24,12 @@ export const useStyles = makeStyles(theme => ({
   ...tooltipsStyle,
   container: {
     ...container,
-    zIndex: 2
+    zIndex: 2,
+    paddingBottom: 0
   },
   mainRaised: {
     ...mainRaised,
-    marginTop: "-20px"
+    marginTop: "-15px"
   },
   section: {
     ...section
@@ -52,7 +53,7 @@ export const useStyles = makeStyles(theme => ({
   productPage: {
     backgroundColor: grayColor[2],
     "& $mainRaised": {
-      // margin: "-40vh 0 0",
+      margin: "-40vh 0 0",
       padding: "40px"
     },
     "& .image-gallery-slide img": {
@@ -101,7 +102,7 @@ export const useStyles = makeStyles(theme => ({
     minHeight: "60vh",
     maxHeight: "600px",
     height: "auto",
-    backgroundPosition: "100% 90%"
+    backgroundPosition: "50% 100%"
   },
   relatedProducts: {
     marginTop: "50px",
@@ -189,14 +190,6 @@ export const useStyles = makeStyles(theme => ({
     height: "18px",
     position: "relative"
   },
-  carouselContainer: {
-    marginTop: "60px"
-  },
-  parallax: {
-    [theme.breakpoints.down("sm")]: {
-      backgroundPosition: "15%"
-    }
-  },
   scrollDownContainer: {
     width: "100%",
     position: "absolute",
@@ -207,18 +200,5 @@ export const useStyles = makeStyles(theme => ({
   },
   scrollDownButton: {
     color: "#fff"
-  },
-  containerBackground: {
-    ...container,
-    zIndex: "2",
-    position: "relative",
-    marginTop: theme.spacing(14),
-    [theme.breakpoints.up("xl")]: {
-      marginTop: theme.spacing(15)
-    }
-  },
-  parallaxTitle: {
-    ...title,
-    color: "#fff !important"
   }
 }));

@@ -29,7 +29,7 @@ export const useStyles = makeStyles(theme => ({
   },
   mainRaised: {
     ...mainRaised,
-    marginTop: "-80vh"
+    marginTop: "-15px"
   },
   section: {
     ...section
@@ -102,7 +102,7 @@ export const useStyles = makeStyles(theme => ({
     minHeight: "60vh",
     maxHeight: "600px",
     height: "auto",
-    backgroundPosition: "top bottom"
+    backgroundPosition: "0% 100%"
   },
   relatedProducts: {
     marginTop: "50px",
@@ -189,5 +189,16 @@ export const useStyles = makeStyles(theme => ({
     width: "18px",
     height: "18px",
     position: "relative"
+  },
+  scrollDownContainer: {
+    width: "100%",
+    position: "absolute",
+    left: 0,
+    top: -55,
+    display: "flex",
+    justifyContent: "center"
+  },
+  scrollDownButton: {
+    color: "#fff"
   }
 }));

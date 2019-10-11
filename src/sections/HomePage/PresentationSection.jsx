@@ -72,7 +72,7 @@ function PresentationSection() {
               <GridItem md={4} sm={4}>
                 <InfoArea
                   title="Économique"
-                  description="En allumant votre foyer bois à l'avance avec Flamme Connect vous économiserez le coût de votre autre source de chaleur (électricité, fioul, gaz...)."
+                  description="En allumant votre foyer bois à l'avance avec Flam'connect vous économiserez le coût de votre autre source de chaleur (électricité, fioul, gaz...)."
                   icon={EuroIcon}
                   iconColor="secondary"
                   vertical

@@ -91,7 +91,7 @@ function ProjectSection({ ...props }) {
               décide donc d’essayer de mettre au point un système me permettant d’allumer mon poêle à bois à distance.
             </h5>
             <h5 className={classes.description}>
-              <strong>2014 naissance du premier « Flamme Connect » :</strong>
+              <strong>2014 naissance du premier « Flam'connect » :</strong>
             </h5>
             <h5 className={classes.description}>
               Persuadé d’avoir inventé un produit déjà existant, je fais des recherches qui s’avèrent infructueuses.
@@ -105,7 +105,7 @@ function ProjectSection({ ...props }) {
               » qui me réalise une recherche d’antériorité mondiale, qui confirme que le système n’existe pas.
             </h5>
             <h5 className={classes.description}>
-              <strong>2015</strong> je me sers régulièrement du « Flamme Connect » et je supprime ma chaudière fioul.
+              <strong>2015</strong> je me sers régulièrement du « Flam'connect » et je supprime ma chaudière fioul.
             </h5>
             <h5 className={classes.description}>
               <strong>C'est en 2018</strong> que mon fils Florian m'incite à acheter une imprimante 3D, ce qui m'a

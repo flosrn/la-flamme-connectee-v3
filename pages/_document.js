@@ -24,7 +24,6 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          {/* <script dangerouslySetInnerHTML={{ __html: getUserScript(currentUser) }} /> */}
           <NextScript />
         </body>
       </html>

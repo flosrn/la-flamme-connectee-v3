@@ -21,7 +21,7 @@ const useStyles = makeStyles(carouselStyle);
 export default function CarouselSection() {
   const classes = useStyles();
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 2000,
     autoplaySpeed: 6000,

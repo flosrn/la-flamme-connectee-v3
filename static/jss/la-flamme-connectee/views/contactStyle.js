@@ -101,7 +101,7 @@ export const useStyles = makeStyles(theme => ({
     minHeight: "60vh",
     maxHeight: "600px",
     height: "auto",
-    backgroundPosition: "100% 90%"
+    backgroundPosition: "10% 85%"
   },
   relatedProducts: {
     marginTop: "50px",
@@ -197,17 +197,6 @@ export const useStyles = makeStyles(theme => ({
       backgroundPosition: "15%"
     }
   },
-  scrollDownContainer: {
-    width: "100%",
-    position: "absolute",
-    left: 0,
-    top: -55,
-    display: "flex",
-    justifyContent: "center"
-  },
-  scrollDownButton: {
-    color: "#fff"
-  },
   containerBackground: {
     ...container,
     zIndex: "2",
@@ -220,5 +209,16 @@ export const useStyles = makeStyles(theme => ({
   parallaxTitle: {
     ...title,
     color: "#fff !important"
+  },
+  scrollDownContainer: {
+    width: "100%",
+    position: "absolute",
+    left: 0,
+    top: -55,
+    display: "flex",
+    justifyContent: "center"
+  },
+  scrollDownButton: {
+    color: "#fff"
   }
 }));

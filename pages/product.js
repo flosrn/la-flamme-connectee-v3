@@ -37,7 +37,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import Tooltip from "@material-ui/core/Tooltip";
 
 import { useStyles } from "static/jss/la-flamme-connectee/views/productStyle";
-import imageBackground from "static/img/contura/background-contura.jpg";
+import imageBackground from "static/img/contura/background-contura2.jpg";
 
 // images
 import product1 from "static/img/objects/detourage/volcano-flam_front-2.png";
@@ -137,13 +137,13 @@ export default function ProductPage() {
           color: "white"
         }}
       />
-      <Parallax image={imageBackground} filter="dark" className={classes.parallax}>
+      <Parallax image={imageBackground} filter="dark" className={classes.pageHeader}>
         <div className={classes.containerBackground}>
           <div className={classes.titleContainer}>
             <GridItem xs={12} sm={12} md={12} center id="title">
-              <Typography variant="h3" align="center" className={classes.parallaxTitle}>
-                Les produits
-              </Typography>
+              {/*<Typography variant="h3" align="center" className={classes.parallaxTitle}>*/}
+              {/*  Les produits*/}
+              {/*</Typography>*/}
             </GridItem>
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function ProductPage() {
                           <li>Électronique conçue et réalisée par nos soins</li>
                           <li>Livré dans un carton contenant 10 Volcano'connect</li>
                           <li>Satisfait ou remboursé</li>
-                          <li>Frais de ports gratuits</li>
+                          <li>Frais de port gratuits</li>
                         </ul>
                       )
                     }
@@ -299,7 +299,7 @@ export default function ProductPage() {
                           <li>Durée de combustion 10 min</li>
                           <li>Hauteur de flamme 30 à 45 cm</li>
                           <li>Livré dans un carton contenant 24 Volcano'connect</li>
-                          <li>Frais de ports gratuits</li>
+                          <li>Frais de port gratuits</li>
                         </ul>
                       )
                     }

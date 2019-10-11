@@ -56,7 +56,7 @@ function HowWorks() {
       inverted: true,
       badgeColor: "primary",
       badgeIcon: Wifi,
-      title: "Je connecte la box Flam'connect au wifi",
+      title: "Je connecte le boitier Flam'connect au wifi",
       titleColor: "primary",
       body: (
         <p>
@@ -101,7 +101,7 @@ function HowWorks() {
       inverted: true,
       badgeColor: "gray",
       badgeIcon: PhonelinkRing,
-      title: "Avec mon smartphone je choisi l'heure d'allumage",
+      title: "Je choisi l'heure d'allumage",
       titleColor: "gray",
       body: (
         <div>

@@ -21,7 +21,8 @@ export const useStyles = makeStyles(theme => ({
   parallax: {
     overflow: "hidden",
     backgroundPosition: "bottom",
-    alignItems: "flex-start"
+    alignItems: "flex-start",
+    height: "95vh"
   },
   containerBackground: {
     ...container,

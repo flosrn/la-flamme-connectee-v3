@@ -6,7 +6,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { withStyles } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/styles";
-import { Typography, Avatar } from "@material-ui/core";
+import { Typography, Avatar, IconButton } from "@material-ui/core";
 // @material-ui/icons
 import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 // core components
@@ -40,9 +40,10 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Favorite } from "@material-ui/icons";
 import ShoppingCart from "@material-ui/core/SvgIcon/SvgIcon";
-import { useStyles } from "static/jss/la-flamme-connectee/views/productStyle";
-import imageBackground from "static/img/contura/contura.jpg";
+import { useStyles } from "static/jss/la-flamme-connectee/views/contactStyle";
+import imageBackground from "static/img/contura/background-contura3.jpg";
 import svg3 from "static/img/svg/undraw_status_update_jjgk.svg";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import FooterCustom from "../components/Footer/FooterCustom";
 import MediaSvg from "../components/Media/MediaSvg";
 import svg1 from "../static/img/svg/undraw_contact_us_15o2.svg";
@@ -51,6 +52,35 @@ import svg from "../static/img/svg/undraw_Data_points_ubvs.svg";
 
 function ContactPage({ ...props }) {
   const classes = useStyles();
+
+  const easeInOutQuad = (t, b, c, d) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
+  const scrollTo = (element, to, duration) => {
+    const start = element.scrollTop;
+    const change = to - start + document.getElementById("main-panel").offsetTop;
+    let currentTime = 0;
+    const increment = 20;
+
+    const animateScroll = () => {
+      currentTime += increment;
+      const val = easeInOutQuad(currentTime, start, change, duration);
+      element.scrollTop = val;
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    };
+    animateScroll();
+  };
+
+  const smoothScroll = target => {
+    const targetScroll = document.getElementById(target);
+    scrollTo(document.documentElement, targetScroll.offsetTop, 900);
+  };
 
   return (
     <div className={classes.root}>
@@ -74,7 +104,12 @@ function ContactPage({ ...props }) {
       </Parallax>
       <div className={classNames(classes.section, classes.sectionGray)}>
         <div className={classes.container}>
-          <div className={classNames(classes.main, classes.mainRaised)}>
+          <div className={classNames(classes.main, classes.mainRaised)} id="main-panel">
+            <div className={classes.scrollDownContainer}>
+              <IconButton className={classes.scrollDownButton} onClick={() => smoothScroll("contact")}>
+                <ExpandMoreIcon fontSize="large" />
+              </IconButton>
+            </div>
             <MediaSvg src={svg1} alt="contact-us" size="medium" mt={30} />
             <div className={classes.container}>
               <ContactSection />

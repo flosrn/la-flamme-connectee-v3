@@ -28,9 +28,9 @@ function TopDownSection() {
             C’est une technique d’allumage de votre poêle ou insert à bois préconisée par l’
             <a href="https://www.ademe.fr/" target="_blank">
               ADEME
-            </a>{" "}
-            moins polluante, qui permet également une combustion plus progressive. Le principe est simple et similaire à
-            l’allumage d’une bougie : le feu est allumé en haut de la pyramide de bûches et il brûle vers le bas.
+            </a>
+            , moins polluante, qui permet également une combustion plus progressive. Le principe est simple et similaire
+            à l’allumage d’une bougie : le feu est allumé en haut de la pyramide de bûches et il brûle vers le bas.
           </h5>
         </GridItem>
       </GridContainer>
@@ -47,7 +47,7 @@ function TopDownSection() {
             // vertical
           />
           <InfoArea
-            title="Brûler davantage de gaz de combustion"
+            title="Brûler davantage de gaz de combûstion"
             description="Avec un allumage inversé, les gaz générés par la combustion se retrouvent pris dans les flammes et servent de combustibles à leur tour (moins de dégagement de particules fines)."
             icon={Whatshot}
             iconColor="myPrimary2"
