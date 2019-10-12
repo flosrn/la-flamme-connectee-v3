@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import { makeStyles } from "@material-ui/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -53,6 +54,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("lg")]: {
       // display: "block"
     }
+  },
+  sousTextFooter2: {
+    paddingLeft: "3px"
   }
 }));
 
@@ -108,10 +112,9 @@ function FooterCustom() {
               <GridItem center xs={12} sm={8} md={7} className={classes.right}>
                 <div className={classes.sousTextFooter}>
                   <strong>La Flamme Connectée</strong>
-                  &copy; {1900 + new Date().getYear()},{" "}
+                  &copy; {1900 + new Date().getYear()},
                 </div>
-                <div className={classes.sousTextFooter}>
-                  {" "}
+                <div className={classNames(classes.sousTextFooter, classes.sousTextFooter2)}>
                   made with <Favorite style={{ color: "red", padding: "2px", margin: "2px" }} /> by
                   <a href="https://www.linkedin.com/in/florian-seran" target="_blank" style={{ paddingLeft: "2px" }}>
                     Florian SÉRAN

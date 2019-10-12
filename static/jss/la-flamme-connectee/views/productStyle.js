@@ -1,44 +1,11 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-import {
-  container,
-  mlAuto,
-  section,
-  main,
-  mainRaised,
-  title,
-  cardTitle,
-  grayColor,
-  roseColor
-} from "static/jss/la-flamme-connectee";
-
-import tooltipsStyle from "static/jss/la-flamme-connectee/tooltipsStyle";
-import imagesStyles from "static/jss/la-flamme-connectee/imagesStyles";
-import customSelectStyle from "static/jss/la-flamme-connectee/customSelectStyle";
+import { title, grayColor } from "static/jss/la-flamme-connectee";
 
 export const useStyles = makeStyles(theme => ({
-  mlAuto,
-  main,
-  ...imagesStyles,
-  ...customSelectStyle,
-  ...tooltipsStyle,
-  container: {
-    ...container,
-    zIndex: 2
-  },
-  mainRaised: {
-    ...mainRaised,
-    marginTop: "-20px"
-  },
-  section: {
-    ...section
-  },
   title: {
     ...title,
     marginBottom: 0
-  },
-  sectionGray: {
-    background: grayColor[14]
   },
   mainPrice: {
     margin: "10px 0px 25px"
@@ -50,11 +17,7 @@ export const useStyles = makeStyles(theme => ({
     paddingTop: "30px"
   },
   productPage: {
-    backgroundColor: grayColor[2],
-    "& $mainRaised": {
-      // margin: "-40vh 0 0",
-      padding: "40px"
-    },
+    padding: "40px",
     "& .image-gallery-slide img": {
       borderRadius: "3px",
       maxWidth: "300px",
@@ -91,18 +54,6 @@ export const useStyles = makeStyles(theme => ({
       }
     }
   },
-  titleRow: {
-    marginTop: "-8vh"
-  },
-  floatRight: {
-    float: "right!important"
-  },
-  pageHeader: {
-    minHeight: "60vh",
-    maxHeight: "600px",
-    height: "auto",
-    backgroundPosition: "100% 90%"
-  },
   relatedProducts: {
     marginTop: "50px",
     "& $title": {
@@ -112,113 +63,8 @@ export const useStyles = makeStyles(theme => ({
   pickSize: {
     marginTop: "50px"
   },
-  pullRight: {
-    float: "right"
-  },
-  cardCategory: {
-    textAlign: "center",
-    marginTop: "10px"
-  },
-  cardTitle: {
-    ...cardTitle,
-    textAlign: "center"
-  },
-  cardDescription: {
-    textAlign: "center",
-    color: grayColor[0]
-  },
-  textRose: {
-    color: roseColor[0]
-  },
-  justifyContentBetween: {
-    justifyContent: "space-between!important"
-  },
-  socialFeed: {
-    "& p": {
-      display: "table-cell",
-      verticalAlign: "top",
-      overflow: "hidden",
-      paddingBottom: "10px",
-      maxWidth: 300
-    },
-    "& i": {
-      fontSize: "20px",
-      display: "table-cell",
-      paddingRight: "10px"
-    }
-  },
-  img: {
-    width: "20%",
-    marginRight: "5%",
-    marginBottom: "5%",
-    float: "left"
-  },
-  block: {
-    color: "inherit",
-    padding: "0.9375rem",
-    fontWeight: "500",
-    fontSize: "12px",
-    textTransform: "uppercase",
-    borderRadius: "3px",
-    textDecoration: "none",
-    position: "relative",
-    display: "block"
-  },
-  inlineBlock: {
-    display: "inline-block",
-    padding: "0px",
-    width: "auto"
-  },
-  list: {
-    marginBottom: "0",
-    padding: "0",
-    marginTop: "0"
-  },
-  left: {
-    float: "left!important",
-    display: "block"
-  },
-  right: {
-    padding: "15px 0",
-    margin: "0",
-    float: "right"
-  },
-  icon: {
-    top: "3px",
-    width: "18px",
-    height: "18px",
-    position: "relative"
-  },
-  carouselContainer: {
-    marginTop: "60px"
-  },
-  parallax: {
-    [theme.breakpoints.down("sm")]: {
-      backgroundPosition: "15%"
-    }
-  },
-  scrollDownContainer: {
-    width: "100%",
-    position: "absolute",
-    left: 0,
-    top: -55,
-    display: "flex",
-    justifyContent: "center"
-  },
-  scrollDownButton: {
-    color: "#fff"
-  },
-  containerBackground: {
-    ...container,
-    zIndex: "2",
-    position: "relative",
-    marginTop: theme.spacing(14),
-    [theme.breakpoints.up("xl")]: {
-      marginTop: theme.spacing(15)
-    }
-  },
-  parallaxTitle: {
-    ...title,
-    color: "#fff !important"
+  subtitle: {
+    fontSize: "14px",
+    fontStyle: "italic"
   }
 }));

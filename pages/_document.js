@@ -13,6 +13,8 @@ class MyDocument extends Document {
           <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
+          {/* Favicon */}
+          <link rel="shortcut icon" type="image/x-icon" href="/static/img/logo/laflammeco.png" />
           {/* Fonts */}
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet" />
