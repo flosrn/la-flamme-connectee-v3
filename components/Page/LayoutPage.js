@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
   parallax: {
     minHeight: "60vh",
     maxHeight: "600px",
-    height: "auto"
+    height: "auto",
+    backgroundSize: "cover"
   },
   title: {
     ...title,
@@ -42,12 +43,24 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     position: "absolute",
     left: 0,
-    top: -55,
+    top: "-60px",
     display: "flex",
     justifyContent: "center"
   },
   scrollDownButton: {
-    color: "#fff"
+    color: "#fff",
+    animationName: "$bounce",
+    animationDuration: "1.5s",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "ease"
+  },
+  arrowButton: {
+    fontSize: "40px"
+  },
+  "@keyframes bounce": {
+    "0%": { top: "0px" },
+    "50%": { top: "-20px" },
+    "100%": { top: "0px" }
   }
 }));
 
@@ -102,7 +115,7 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition }
           <div className={classNames(classes.main, classes.mainRaised)}>
             <div className={classes.scrollDownContainer}>
               <IconButton className={classes.scrollDownButton} onClick={() => smoothScroll(sectionId)}>
-                <ExpandMoreIcon fontSize="large" />
+                <ExpandMoreIcon fontSize="large" className={classes.arrowButton} />
               </IconButton>
             </div>
             {children}

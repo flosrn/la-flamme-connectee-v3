@@ -13,7 +13,7 @@ import svg2 from "static/img/svg/undraw_signal_searching_bhpc.svg";
 function DownloadPage() {
   return (
     <LayoutPage backgroundImage={backgroundImage} sectionId="download" backgroundPosition="50% 100%">
-      <MediaSvg src={svg1} alt="questions" size="medium" />
+      <MediaSvg src={svg1} alt="questions" size="medium" mt={30} />
       <DownloadSection />
       <MediaSvg src={svg2} alt="questions" size="small" />
       <ConnectSection />

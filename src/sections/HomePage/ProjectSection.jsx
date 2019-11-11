@@ -22,8 +22,7 @@ import MediaSvg from "../../../components/Media/MediaSvg";
 
 // styles for this page
 const useStyles = makeStyles(theme => ({
-  section: {
-  },
+  section: {},
   title: {
     ...title,
     marginBottom: "50px",
@@ -63,65 +62,75 @@ function ProjectSection({ ...props }) {
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8}>
           <Typography variant="h3" className={classes.title}>
-            Le projet
+            Notre histoire
           </Typography>
         </GridItem>
         <GridItem xs={10} sm={10} md={8}>
           <div className={classes.projectText}>
             <h5 className={classes.description}>
-              <strong>En 2012</strong> je décide avec mon épouse d’investir dans un poêle à bois Scandinave de la marque{" "}
+              Nous sommes propriétaire depuis 2000 d'une maison de 160 m² en banlieu toulousaine et nous consommions
+              1400 L/an de fioul pour avoir une température d'environ 17 degrès.<br /><br />
+            </h5>
+            <h5 className={classes.description}>
+              <strong>En 2013</strong> nous investissons dans un poêle à bois Scandinave de la marque{" "}
               <a href="https://www.contura.eu/fr/france/" target="_blank">
-                Contura
+                Contura,{" "}
               </a>
-              ,{" "}
+              modèle{" "}
               <a
                 href="https://www.contura.eu/fr/france/poeles/poeles-a-bois/pole-bois-contura-610-style/"
                 target="_blank"
               >
-                modèle 660T
+                660T
               </a>
-              , pour chauffer notre maison.
+              , que nous utilisons comme énergie d'appoint.
             </h5>
             <h5 className={classes.description}>
-              Pleinement satisfait des performances du poêle, il reste cependant un point noir, le retour du travail, de
-              week-end ou de vacances dans une maison froide. Ce qui oblige l’utilisation d’une énergie alternative.
+              La dépense énergétique de notre foyer passe alors à 700 L/an de fioul pour avoir 17 °+ 3 stères de bois/an pour monter
+              à une température de 20°-21°<br />
+              Il reste cependant 2 points noirs :
+              <ul>
+                <li>la consommation de fioul</li>
+                <li>le retour dans une maison à 17°</li>
+              </ul>
             </h5>
             <h5 className={classes.description}>
-              Etant depuis toujours passionné par les innovations, les inventions et les nouvelles technologies, je
-              décide donc d’essayer de mettre au point un système me permettant d’allumer mon poêle à bois à distance.
+              Étant depuis toujours passionné par les innovations, les inventions et les nouvelles technologies, je
+              me fixe comme objectif de mettre au point un système me permettant d’allumer mon poêle à bois à distance.
+              <br />
+              <br />
             </h5>
             <h5 className={classes.description}>
-              <strong>2014 naissance du premier « Flam'connect » :</strong>
+              <strong>2014 naissance du premier prototype :</strong>
             </h5>
             <h5 className={classes.description}>
-              Persuadé d’avoir inventé un produit déjà existant, je fais des recherches qui s’avèrent infructueuses.
+              Nous décidons de nous rendre au Concours Lépine de Paris avec mon épouse, en tant que visiteur, et
+              nous mandatons une société qui réalise une recherche d’antériorité mondiale, qui confirme que le
+              système n’existe pas.<br /><br />
             </h5>
             <h5 className={classes.description}>
-              Je décide alors de me rendre au Concours Lépine de Paris avec mon épouse, en tant que visiteur, et je
-              mandate une société «{" "}
-              <a href="https://www.innovate-design.fr/" target="_blank">
-                Innovate Product Design
-              </a>{" "}
-              » qui me réalise une recherche d’antériorité mondiale, qui confirme que le système n’existe pas.
-            </h5>
-            <h5 className={classes.description}>
-              <strong>2015</strong> je me sers régulièrement du « Flam'connect » et je supprime ma chaudière fioul.
+              <strong>2015,</strong> nous allumons régulièrement notre poêle grace à mon invention et décidons de
+              supprimer notre chaudière. <br />
+              Nous nous chauffons désormais 100% bois et consommons 7 stères de bois.<br />
+              Objectifs atteints :
+              <ul>
+                <li>plus besoin du fioul</li>
+                <li>le retour dans une maison à 20°-21°</li>
+              </ul>
             </h5>
             <h5 className={classes.description}>
               <strong>C'est en 2018</strong> que mon fils Florian m'incite à acheter une imprimante 3D, ce qui m'a
-              offert des possibilitées nouvelles dans la réalisation d'objets divers.
+              offert des possibilitées nouvelles.<br /><br />
             </h5>
             <h5 className={classes.description}>
               <strong>Avril 2019</strong>, je dépose un Brevet et je décide de présenter mon invention au Concours
-              Lépine de Paris.
-            </h5>
-            <h5 className={classes.description}>
+              Lépine de Paris en tant qu'inventeur.
               Ayant remporté une Médaille d’Argent et un franc succès auprès du public et des professionnels du
               chauffage au bois, je décide de retravailler mon produit pour le rendre plus léger, plus design et plus
-              convivial, afin de le produire personnellement et le commercialiser au grand public.
+              convivial, afin de le produire personnellement et le commercialiser<br /><br />
             </h5>
             <h5 className={classes.description}>
-              <strong>Juin 2019</strong>, après de longues recherches, je commence la production à plus grande échelle
+              <strong>Juin 2019</strong>, après de longues recherches, nous commencons la production à plus grande échelle
               en aquérant une 2ème imprimante 3D.
             </h5>
             <h5 className={classes.description}>
@@ -129,12 +138,15 @@ function ProjectSection({ ...props }) {
               d'origine végétale, utilisant de l'amidon de maïs comme matière première.
             </h5>
             <h5 className={classes.description}>
-              Pour les allumes feux j'ai choisi de m'associer avec{" "}
+              Pour les allumes feux nous avons choisi de nous associer avec{" "}
               <a href="https://www.energiemarie.fr/" target="_blank">
                 la Société Energie Marie
               </a>{" "}
-              basée dans la banlieue Nantaise. Ces allumes feux écologiques ont la particularité d'être fabriqués à base
-              de composants végétaux et ils émanent une odeur naturelle agréable.
+              basée dans la banlieue Nantaise qui produit des allume-feu écologiques qui ont une combustion longue durée (10 minutes).<br /><br />
+            </h5>
+            <h5 className={classes.description}>
+              <strong>Octobre 2019</strong>, nous participons au Concours Lépine de Montpellier avec mon nouveau produit et remporte une deuxième
+              Médaille d'Argent.
             </h5>
           </div>
         </GridItem>

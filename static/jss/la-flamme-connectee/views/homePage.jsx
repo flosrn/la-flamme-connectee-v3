@@ -193,15 +193,26 @@ export const useStyles = makeStyles(theme => ({
     width: "100%",
     position: "absolute",
     left: 0,
-    top: -55,
+    top: "-85px",
     display: "flex",
     justifyContent: "center"
   },
   scrollDownButton: {
-    color: "#fff"
+    color: "#fff",
+    animationName: "$bounce",
+    animationDuration: "1.5s",
+    animationIterationCount: "infinite",
+    animationTimingFunction: "ease"
   },
   bottom: {
-    padding: theme.spacing(5, 0, 10)
+    padding: theme.spacing(5, 0, 5)
+  },
+  arrowButton: {
+    fontSize: "80px"
+  },
+  "@keyframes bounce": {
+    "0%": { top: "0px" },
+    "50%": { top: "-20px" },
+    "100%": { top: "0px" }
   }
 }));
-

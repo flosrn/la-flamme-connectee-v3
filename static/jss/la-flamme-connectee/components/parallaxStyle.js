@@ -16,7 +16,8 @@ const parallaxStyle = {
     overflow: "hidden",
     position: "relative",
     // backgroundPosition: "50%",
-    backgroundSize: "cover",
+    backgroundSize: "cover !important",
+    webkitBackgroundSize: "cover",
     margin: "0",
     padding: "0",
     border: "0"

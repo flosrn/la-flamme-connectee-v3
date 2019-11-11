@@ -16,7 +16,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 import Close from "@material-ui/icons/Close";
 // core components
-import styles from "static/jss/la-flamme-connectee/components/headerStyle.js";
+import styles from "static/jss/la-flamme-connectee/components/headerStyle";
 
 const useStyles = makeStyles(styles);
 
@@ -68,14 +68,14 @@ export default function Header(props) {
         </Hidden>
         <Hidden mdUp>
           <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
-            <Menu />
+            <Menu className={classes.menuIcon} />
           </IconButton>
         </Hidden>
       </Toolbar>
       <Hidden mdUp implementation="js">
         <Drawer
           variant="temporary"
-          anchor={"right"}
+          anchor="right"
           open={mobileOpen}
           classes={{
             paper: classes.drawerPaper

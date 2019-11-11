@@ -12,20 +12,26 @@ import GridItem from "components/Grid/GridItem";
 import Button from "components/CustomButtons/Button";
 import HeaderLinks from "components/Header/HeaderLinks";
 import Parallax from "components/Parallax/Parallax";
-// style for this page
-import { useStyles } from "static/jss/la-flamme-connectee/views/homePage";
-
+import FooterCustom from "components/Footer/FooterCustom";
+import GridContainer from "components/Grid/GridContainer";
+import MediaSvg from "components/Media/MediaSvg";
+// sections
+import PresentationSection from "src/sections/HomePage/PresentationSection";
+import CarouselSection from "src/sections/HomePage/CarouselSection";
+// images
 import backgroundImage from "static/img/flamco/flamco-main-dark.jpg";
 import logo from "static/img/logo/laflammeco.png";
-import lepine from "static/img/logo/lepine.png";
+import lepine from "static/img/logo/lepine-double.png";
 import svg from "static/img/svg/undraw_smart_home_28oy.svg";
-import PresentationSection from "../src/sections/HomePage/PresentationSection";
-import CarouselSection from "../src/sections/HomePage/CarouselSection";
-import FooterCustom from "../components/Footer/FooterCustom";
-import GridContainer from "../components/Grid/GridContainer";
-import MediaSvg from "../components/Media/MediaSvg";
+// style for this page
+import { useStyles } from "static/jss/la-flamme-connectee/views/homePage";
+import svg3 from "static/img/svg/undraw_team_page_pgpr.svg";
+import ProjectSection from "../src/sections/HomePage/ProjectSection";
+import TeamSection from "../src/sections/HomePage/TeamSection";
+import AlertDialogSlide from "../components/Alert/AlertDialogSlide";
 
 function HomePage() {
+  const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
   const easeInOutQuad = (t, b, c, d) => {
@@ -56,6 +62,7 @@ function HomePage() {
     const targetScroll = document.getElementById(target);
     scrollTo(document.documentElement, targetScroll.offsetTop, 900);
   };
+  // href="https://youtu.be/JNxbjR0GbjU" target="_blank"
 
   return (
     <div className={classes.root}>
@@ -81,10 +88,11 @@ function HomePage() {
               <Typography variant="h5" align="center" className={classes.subtitle}>
                 Allumez votre poêle ou insert à distance
               </Typography>
-              <Button color="danger" href="https://youtu.be/Eb7Q10YWH_o" target="_blank" className={classes.buttonPlay}>
+              <Button color="danger" className={classes.buttonPlay} onClick={() => setOpen(true)}>
                 <i className="fas fa-play" />
                 Découvrir en vidéo
               </Button>
+              <AlertDialogSlide open={open} closeHandler={() => setOpen(false)} />
             </GridItem>
           </div>
         </div>
@@ -92,11 +100,22 @@ function HomePage() {
       <div className={classNames(classes.main, classes.mainRaised)} id="main-panel">
         <div className={classes.scrollDownContainer}>
           <IconButton className={classes.scrollDownButton} onClick={() => smoothScroll("presentation")}>
-            <ExpandMoreIcon fontSize="large" />
+            <ExpandMoreIcon fontSize="large" className={classes.arrowButton} />
           </IconButton>
         </div>
         <div className={classes.container}>
           <PresentationSection />
+          <GridContainer justify="center">
+            <GridItem center>
+              <Typography variant="subtitle2" align="center">
+                En partenariat avec{" "}
+                <a href="https://www.contura.eu/fr/france/" target="_blank">
+                  Contura
+                </a>
+                , leader du chauffage au bois
+              </Typography>
+            </GridItem>
+          </GridContainer>
           <CarouselSection />
           <GridContainer justify="center">
             <GridItem center>
@@ -118,6 +137,9 @@ function HomePage() {
             </GridItem>
           </GridContainer>
         </div>
+        {/* <MediaSvg src={svg3} alt="about-us" size="medium" mb={0} /> */}
+        <TeamSection />
+        <ProjectSection />
       </div>
       <FooterCustom />
     </div>

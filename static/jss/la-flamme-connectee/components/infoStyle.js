@@ -13,8 +13,8 @@ import {
 export const useStyles = makeStyles(theme => ({
   infoArea: {
     maxWidth: "360px",
-    margin: "0 auto",
-    padding: "0 0 30px"
+    margin: "0 auto"
+    // padding: "0 0 30px"
   },
   iconWrapper: {
     float: "left",

@@ -66,7 +66,7 @@ export default function ProductSection() {
         <GridItem md={6} sm={6}>
           <h3 className={classes.title}>Flam'connect</h3>
           <p className={classes.subtitle}>Livré avec 10 Volcano'connect</p>
-          <h3 className={classes.mainPrice}>230 €</h3>
+          <h3 className={classes.mainPrice}>160 €</h3>
           <Accordion
             active={0}
             activeColor="secondary"

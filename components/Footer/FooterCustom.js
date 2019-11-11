@@ -73,24 +73,17 @@ function FooterCustom() {
                 <List className={classes.list}>
                   <ListItem className={classes.inlineBlock}>
                     <Tooltip
-                      id="instagram-twitter"
-                      title="Suivez nous sur twitter"
-                      placement={innerWidth > 959 ? "top" : "left"}
-                      classes={{ tooltip: classes.tooltip }}
-                    >
-                      <Button color="transparent" className={classes.navLink}>
-                        <i className={`${classes.socialIcons} fab fa-twitter`} />
-                      </Button>
-                    </Tooltip>
-                  </ListItem>
-                  <ListItem className={classes.inlineBlock}>
-                    <Tooltip
                       id="instagram-facebook"
                       title="Suivez nous sur facebook"
                       placement={innerWidth > 959 ? "top" : "left"}
                       classes={{ tooltip: classes.tooltip }}
                     >
-                      <Button color="transparent" className={classes.navLink}>
+                      <Button
+                        color="transparent"
+                        className={classes.navLink}
+                        href="https://www.facebook.com/laflammeconnectee/"
+                        target="_blank"
+                      >
                         <i className={`${classes.socialIcons} fab fa-facebook`} />
                       </Button>
                     </Tooltip>
@@ -102,8 +95,30 @@ function FooterCustom() {
                       placement={innerWidth > 959 ? "top" : "left"}
                       classes={{ tooltip: classes.tooltip }}
                     >
-                      <Button color="transparent" className={classes.navLink}>
+                      <Button
+                        color="transparent"
+                        className={classes.navLink}
+                        href="https://www.instagram.com/laflammeconnectee/"
+                        target="_blank"
+                      >
                         <i className={`${classes.socialIcons} fab fa-instagram`} />
+                      </Button>
+                    </Tooltip>
+                  </ListItem>
+                  <ListItem className={classes.inlineBlock}>
+                    <Tooltip
+                      id="instagram-youtube"
+                      title="Suivez nous sur youtube"
+                      placement={innerWidth > 959 ? "top" : "left"}
+                      classes={{ tooltip: classes.tooltip }}
+                    >
+                      <Button
+                        color="transparent"
+                        className={classes.navLink}
+                        href="https://www.youtube.com/channel/UC8no0n6Z_w6QG5s_2kMoV5A/"
+                        target="_blank"
+                      >
+                        <i className={`${classes.socialIcons} fab fa-youtube`} />
                       </Button>
                     </Tooltip>
                   </ListItem>

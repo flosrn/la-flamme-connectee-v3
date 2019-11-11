@@ -54,14 +54,14 @@ function TeamSection() {
                   Patrick n'a jamais cessé de chercher des solutions qui lui permettent de lui simplifier la vie.
                 </p>
               </CardBody>
-              <Box className={classes.justifyCenter}>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-facebook"} style={{ color: facebookColor }} />
-                </Button>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-linkedin"} style={{ color: linkedinColor }} />
-                </Button>
-              </Box>
+              {/*<Box className={classes.justifyCenter}>*/}
+              {/*  <Button justIcon color="transparent" className={classes.margin5}>*/}
+              {/*    <i className={classes.socials + " fab fa-facebook"} style={{ color: facebookColor }} />*/}
+              {/*  </Button>*/}
+              {/*  <Button justIcon color="transparent" className={classes.margin5}>*/}
+              {/*    <i className={classes.socials + " fab fa-linkedin"} style={{ color: linkedinColor }} />*/}
+              {/*  </Button>*/}
+              {/*</Box>*/}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -80,11 +80,11 @@ function TeamSection() {
                   ses projets. Consciencieuse et appliquée elle saura répondre à vos demandes.
                 </p>
               </CardBody>
-              <Box className={classes.justifyCenter}>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-facebook"} style={{ color: facebookColor }} />
-                </Button>
-              </Box>
+              {/*<Box className={classes.justifyCenter}>*/}
+              {/*  <Button justIcon color="transparent" className={classes.margin5}>*/}
+              {/*    <i className={classes.socials + " fab fa-facebook"} style={{ color: facebookColor }} />*/}
+              {/*  </Button>*/}
+              {/*</Box>*/}
             </Card>
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
@@ -104,20 +104,20 @@ function TeamSection() {
                   l'image de la marque au travers des réseaux sociaux.
                 </p>
               </CardBody>
-              <Box className={classes.justifyCenter}>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-facebook"} style={{ color: facebookColor }} />
-                </Button>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-twitter"} style={{ color: twitterColor }} />
-                </Button>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-instagram"} style={{ color: instagramColor }} />
-                </Button>
-                <Button justIcon color="transparent" className={classes.margin5}>
-                  <i className={classes.socials + " fab fa-linkedin"} style={{ color: linkedinColor }} />
-                </Button>
-              </Box>
+              {/*<Box className={classes.justifyCenter}>*/}
+              {/*  <Button justIcon color="transparent" className={classes.margin5}>*/}
+              {/*    <i className={classes.socials + " fab fa-facebook"} style={{ color: facebookColor }} />*/}
+              {/*  </Button>*/}
+              {/*  <Button justIcon color="transparent" className={classes.margin5}>*/}
+              {/*    <i className={classes.socials + " fab fa-twitter"} style={{ color: twitterColor }} />*/}
+              {/*  </Button>*/}
+              {/*  <Button justIcon color="transparent" className={classes.margin5}>*/}
+              {/*    <i className={classes.socials + " fab fa-instagram"} style={{ color: instagramColor }} />*/}
+              {/*  </Button>*/}
+              {/*  <Button justIcon color="transparent" className={classes.margin5}>*/}
+              {/*    <i className={classes.socials + " fab fa-linkedin"} style={{ color: linkedinColor }} />*/}
+              {/*  </Button>*/}
+              {/*</Box>*/}
             </Card>
           </GridItem>
         </GridContainer>
