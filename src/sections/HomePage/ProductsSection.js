@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ImageGallery from "react-image-gallery";
 // core components
 import Button from "components/CustomButtons/Button";
@@ -18,10 +18,18 @@ import product7 from "static/img/objects/detourage/volcano-pack_top.png";
 import Divider from "@material-ui/core/Divider";
 // styles
 import { useStyles } from "static/jss/la-flamme-connectee/views/productStyle";
+// contexts
+import { ShoppingCartContext } from "src/contexts/ShoppingCartContext";
+
+const fakeCart = [
+  { id: "prod_GB4kHqmbn25Bq3", name: "flam'connect" },
+  { id: "prod_GB5utpMXlpVFSL", name: "volcano'connect" }
+];
 
 export default function ProductSection() {
   const [colorSelect, setColorSelect] = React.useState("0");
   const [sizeSelect, setSizeSelect] = React.useState("0");
+  const { products, addItem } = useContext(ShoppingCartContext);
   const classes = useStyles();
   const imageCarousel1 = [
     {
@@ -62,6 +70,7 @@ export default function ProductSection() {
       <GridContainer justify="center">
         <h1 className={classes.title}>Les produits</h1>
       </GridContainer>
+
       <GridContainer className={classes.carouselContainer} id="products">
         <GridItem md={6} sm={6}>
           <ImageGallery showFullscreenButton={false} showPlayButton={false} startIndex={0} items={imageCarousel1} />
@@ -151,7 +160,7 @@ export default function ProductSection() {
             {/* </GridItem> */}
           </GridContainer>
           <GridContainer className={classes.pullRight}>
-            <Button round color="secondary">
+            <Button round color="secondary" onClick={() => addItem(fakeCart[0])}>
               Ajouter au panier &nbsp; <ShoppingCart />
             </Button>
           </GridContainer>
@@ -248,12 +257,54 @@ export default function ProductSection() {
             </GridItem>
           </GridContainer>
           <GridContainer className={classes.pullRight}>
-            {/* <Button round color="secondary"> */}
-            {/*  Ajouter au panier &nbsp; <ShoppingCart /> */}
-            {/* </Button> */}
+            <Button round color="secondary" onClick={() => addItem(fakeCart[1])}>
+              Ajouter au panier &nbsp; <ShoppingCart />
+            </Button>
           </GridContainer>
         </GridItem>
       </GridContainer>
     </div>
   );
 }
+
+// {products &&
+// products.map(item => (
+//   <GridContainer className={classes.carouselContainer} id="products">
+//     <GridItem md={6} sm={6}>
+//       <ImageGallery showFullscreenButton={false} showPlayButton={false} startIndex={0} items={imageCarousel1} />
+//     </GridItem>
+//     <GridItem md={6} sm={6}>
+//       <h3 className={classes.title}>{item.name}</h3>
+//       <p className={classes.subtitle}>{item.caption}</p>
+//       <h3 className={classes.mainPrice}>{item.price}</h3>
+//       <Accordion
+//         active={0}
+//         activeColor="secondary"
+//         collapses={[
+//           {
+//             title: "Description",
+//             content: item.description
+//           },
+//           {
+//             title: "Caractéristiques",
+//             content: (
+//               <ul>
+//                 <li>Imprimé par nos imprimantes 3D en région Toulousaine</li>
+//                 <li>Boîtier plastique recyclable (matière PLA)</li>
+//                 <li>Électronique conçue et réalisée par nos soins</li>
+//                 <li>Livré dans un carton contenant 10 Volcano'connect</li>
+//                 <li>Satisfait ou remboursé</li>
+//                 <li>Frais de port gratuits</li>
+//               </ul>
+//             )
+//           }
+//         ]}
+//       />
+//       <GridContainer className={classes.pullRight}>
+//         <Button round color="secondary" onClick={() => addItem(item.id)}>
+//           Ajouter au panier &nbsp; <ShoppingCart />
+//         </Button>
+//       </GridContainer>
+//     </GridItem>
+//   </GridContainer>
+// ))}

@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { UserContextProvider } from "src/contexts/UserContext";
 import "static/scss/la-flamme-connectee.scss";
 import theme from "theme";
+import { ShoppingCartProvider } from "src/contexts/ShoppingCartContext";
 
 class MyApp extends App {
   componentDidMount() {
@@ -19,10 +20,12 @@ class MyApp extends App {
     const { Component, pageProps } = this.props;
     return (
       <UserContextProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <ShoppingCartProvider>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </ShoppingCartProvider>
       </UserContextProvider>
     );
   }
