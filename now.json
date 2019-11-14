@@ -14,7 +14,10 @@
       "EMAIL_PORT": "@email-port",
 
       "SENDGRID_USERNAME": "@sendgrid-username",
-      "SENDGRID_PASSWORD": "@sendgrid-password"
+      "SENDGRID_PASSWORD": "@sendgrid-password",
+
+      "STRIPE_PUBLIC_KEY_TEST": "@stripe-public-key-test",
+      "STRIPE_SECRET_KEY_TEST": "@stripe-secret-key-test"
     }
   }
 }

@@ -1,9 +1,12 @@
 import React from "react";
 import ImageGallery from "react-image-gallery";
 // core components
+import Button from "components/CustomButtons/Button";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Accordion from "components/Accordion/Accordion";
+// icons
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
 // images
 import product1 from "static/img/objects/detourage/volcano-flam_front-2.png";
 import product2 from "static/img/objects/detourage/flam-connect-pack.png";
@@ -148,9 +151,9 @@ export default function ProductSection() {
             {/* </GridItem> */}
           </GridContainer>
           <GridContainer className={classes.pullRight}>
-            {/* <Button round color="secondary"> */}
-            {/*  Ajouter au panier &nbsp; <ShoppingCart /> */}
-            {/* </Button> */}
+            <Button round color="secondary">
+              Ajouter au panier &nbsp; <ShoppingCart />
+            </Button>
           </GridContainer>
         </GridItem>
       </GridContainer>

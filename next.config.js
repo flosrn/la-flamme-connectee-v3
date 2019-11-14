@@ -16,7 +16,10 @@ module.exports = withCSS(
         EMAIL_PORT: process.env.EMAIL_PORT,
 
         SENDGRID_USERNAME: process.env.SENDGRID_USERNAME,
-        SENDGRID_PASSWORD: process.env.SENDGRID_PASSWORD
+        SENDGRID_PASSWORD: process.env.SENDGRID_PASSWORD,
+
+        STRIPE_PUBLIC_KEY_TEST: process.env.STRIPE_PUBLIC_KEY_TEST,
+        STRIPE_SECRET_KEY_TEST: process.env.STRIPE_SECRET_KEY_TEST
       }
     })
   )

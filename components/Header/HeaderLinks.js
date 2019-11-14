@@ -139,7 +139,7 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/product" className={classes.navLink} color="transparent">
+        <Button component={ButtonLink} href="/products" className={classes.navLink} color="transparent">
           <LocalGroceryStoreIcon className={classes.icons} /> Produits
         </Button>
       </ListItem>
