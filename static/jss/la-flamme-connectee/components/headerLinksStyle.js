@@ -1,6 +1,6 @@
-import { grayColor, whiteColor, mlAuto, hexToRgb } from "static/jss/la-flamme-connectee.js";
+import { grayColor, whiteColor, mlAuto, hexToRgb } from "static/jss/la-flamme-connectee";
 
-import tooltip from "static/jss/la-flamme-connectee/tooltipsStyle.js";
+import tooltip from "static/jss/la-flamme-connectee/tooltipsStyle";
 
 const headerLinksStyle = theme => ({
   list: {
@@ -64,7 +64,7 @@ const headerLinksStyle = theme => ({
     margin: "0px",
     display: "inline-flex",
     "&:hover,&:focus": {
-      color: "inherit"
+      // color: "#ff7961"
     },
     "& .fab,& .far,& .fal,& .fas,& .material-icons": {
       position: "relative",
@@ -145,7 +145,7 @@ const headerLinksStyle = theme => ({
   navLinkActive: {
     "&, &:hover, &:focus,&:active ": {
       color: "inherit",
-      backgroundColor: "rgba(" + hexToRgb(whiteColor) + ", 0.1)"
+      backgroundColor: `rgba(${hexToRgb(whiteColor)}, 0.1)`
     }
   },
   icons: {

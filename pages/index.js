@@ -71,13 +71,13 @@ function HomePage() {
         links={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 650,
+          height: 100,
           color: "white",
           navColor: "black"
         }}
       />
       <Parallax filter="dark" image={backgroundImage} className={classes.parallax}>
-        <img alt="Lepine" src={lepine} className={classes.lepine} />
+        {/* <img alt="Lepine" src={lepine} className={classes.lepine} /> */}
         <div className={classes.containerBackground}>
           <div className={classes.titleContainer}>
             <GridItem xs={12} sm={12} md={12} className={classes.gridItem} id="title">

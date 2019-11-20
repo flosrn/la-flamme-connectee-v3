@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -15,14 +15,18 @@ import Drawer from "@material-ui/core/Drawer";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 import Close from "@material-ui/icons/Close";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 // core components
 import styles from "static/jss/la-flamme-connectee/components/headerStyle";
+import { Badge } from "@material-ui/core";
+import { ShoppingCartContext } from "../../src/contexts/ShoppingCartContext";
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
+  const { items } = useContext(ShoppingCartContext);
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener("scroll", headerColorChange);
@@ -58,24 +62,36 @@ export default function Header(props) {
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
-        <Button className={classes.title}>
-          <Link href="/">
-            <a>{brand}</a>
-          </Link>
-        </Button>
+        {/* <Button className={classes.title}> */}
+        {/*  <Link href="/"> */}
+        {/*    <a>{brand}</a> */}
+        {/*  </Link> */}
+        {/* </Button> */}
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
+          <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
+            <Badge badgeContent={items.length} color="secondary">
+              <ShoppingCartIcon className={classes.cartIcon} />
+            </Badge>
+          </IconButton>
         </Hidden>
         <Hidden mdUp>
-          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
-            <Menu className={classes.menuIcon} />
-          </IconButton>
+          <div>
+            <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
+              <Badge badgeContent={items.length} color="secondary">
+                <ShoppingCartIcon className={classes.cartIcon} />
+              </Badge>
+            </IconButton>
+            <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
+              <Menu className={classes.menuIcon} />
+            </IconButton>
+          </div>
         </Hidden>
       </Toolbar>
       <Hidden mdUp implementation="js">
         <Drawer
           variant="temporary"
-          anchor="right"
+          anchor="left"
           open={mobileOpen}
           classes={{
             paper: classes.drawerPaper

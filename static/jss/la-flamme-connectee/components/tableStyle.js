@@ -7,9 +7,10 @@ import {
   roseColor,
   grayColor,
   defaultFont
-} from "static/jss/la-flamme-connectee.js";
+} from "static/jss/la-flamme-connectee";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const tableStyle = {
+export const useStyles = makeStyles(theme => ({
   warning: {
     color: warningColor[0]
   },
@@ -57,7 +58,7 @@ const tableStyle = {
     verticalAlign: "middle",
     fontSize: "0.875rem",
     borderBottom: "none",
-    borderTop: "1px solid " + grayColor[6],
+    borderTop: `1px solid ${grayColor[6]}`,
     position: "relative",
     color: grayColor[1]
   },
@@ -72,13 +73,30 @@ const tableStyle = {
     fontWeight: "500",
     fontSize: "1.0625rem",
     paddingTop: "20px",
-    textAlign: "right"
+    textAlign: "left",
+    [theme.breakpoints.up("md")]: {
+      textAlign: "right"
+    }
   },
   tableCellAmount: {
     fontSize: "26px",
     fontWeight: "300",
     marginTop: "5px",
-    textAlign: "right"
+    textAlign: "left",
+    [theme.breakpoints.up("md")]: {
+      textAlign: "right"
+    }
+  },
+  tableCellEmpty: {
+    [theme.breakpoints.down("md")]: {
+      display: "none"
+    }
+  },
+  tableCellPurchase: {
+    textAlign: "right",
+    [theme.breakpoints.down("sm")]: {
+      display: "none"
+    }
   },
   tableResponsive: {
     minHeight: "0.1%",
@@ -116,6 +134,4 @@ const tableStyle = {
       backgroundColor: infoColor[5]
     }
   }
-};
-
-export default tableStyle;
+}));

@@ -115,10 +115,11 @@ export const useStyles = makeStyles(theme => ({
     transform: "rotate(-12deg)",
     width: 150,
     [theme.breakpoints.up("sm")]: {
-      width: 175
+      // width: 175
     },
     [theme.breakpoints.up("md")]: {
-      width: 200
+      width: 200,
+      top: 60
     },
     [theme.breakpoints.up("lg")]: {
       width: 215

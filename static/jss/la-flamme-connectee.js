@@ -127,10 +127,10 @@ const container = {
     paddingRight: 0
   },
   "@media (min-width: 576px)": {
-    maxWidth: "540px"
+    // maxWidth: "540px"
   },
   "@media (min-width: 768px)": {
-    maxWidth: "720px"
+    // maxWidth: "720px"
   },
   "@media (min-width: 992px)": {
     maxWidth: "960px"

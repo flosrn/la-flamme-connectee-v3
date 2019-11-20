@@ -14,7 +14,7 @@ import {
   whiteColor,
   grayColor,
   hexToRgb
-} from "static/jss/la-flamme-connectee.js";
+} from "static/jss/la-flamme-connectee";
 
 const headerStyle = theme => ({
   appBar: {
@@ -46,9 +46,11 @@ const headerStyle = theme => ({
     ...container,
     minHeight: "50px",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-end",
     display: "flex",
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
+    margin: "0 !important",
+    maxWidth: "100% !important"
   },
   title: {
     letterSpacing: "unset",
@@ -146,8 +148,8 @@ const headerStyle = theme => ({
     display: "block",
     top: "0",
     height: "100vh",
-    right: "0",
-    left: "auto",
+    right: "left",
+    left: "0",
     visibility: "visible",
     overflowY: "visible",
     borderTop: "none",
@@ -157,7 +159,10 @@ const headerStyle = theme => ({
     ...transition
   },
   hidden: {
-    width: "100%"
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      display: "flex"
+    }
   },
   collapse: {
     [theme.breakpoints.up("md")]: {
@@ -172,6 +177,9 @@ const headerStyle = theme => ({
     MsFlexAlign: "center",
     alignItems: "center"
   },
+  menuButton: {
+    color: "inherit !important"
+  },
   closeButtonDrawer: {
     position: "absolute",
     right: "8px",
@@ -180,6 +188,12 @@ const headerStyle = theme => ({
   },
   menuIcon: {
     fontSize: "40px"
+  },
+  cartIcon: {
+    fontSize: "31px",
+    "&:hover,&:focus": {
+      color: "inherit"
+    }
   }
 });
 

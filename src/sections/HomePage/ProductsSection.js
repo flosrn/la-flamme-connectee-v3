@@ -29,7 +29,7 @@ const fakeCart = [
 export default function ProductSection() {
   const [colorSelect, setColorSelect] = React.useState("0");
   const [sizeSelect, setSizeSelect] = React.useState("0");
-  const { products, addItem } = useContext(ShoppingCartContext);
+  const { items, addItem } = useContext(ShoppingCartContext);
   const classes = useStyles();
   const imageCarousel1 = [
     {

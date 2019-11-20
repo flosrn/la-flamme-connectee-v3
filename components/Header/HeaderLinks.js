@@ -20,6 +20,7 @@ import Mail from "@material-ui/icons/Mail";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import DownloadIcon from "@material-ui/icons/CloudDownload";
 import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
+import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import ViewDay from "@material-ui/icons/ViewDay";
@@ -127,11 +128,11 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
   const { dropdownHoverColor } = props;
   const classes = useStyles();
   return (
-    <List className={classes.list + " " + classes.mlAuto}>
+    <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/" className={classes.navLink} color="transparent">
-          <Home className={classes.icons} /> Accueil
-        </Button>
+        {/*<Button component={ButtonLink} href="/" className={classes.navLink} color="transparent">*/}
+        {/*  <Home className={classes.icons} /> Accueil*/}
+        {/*</Button>*/}
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button component={ButtonLink} href="/documentation" className={classes.navLink} color="transparent">
@@ -140,7 +141,7 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Button component={ButtonLink} href="/products" className={classes.navLink} color="transparent">
-          <LocalGroceryStoreIcon className={classes.icons} /> Produits
+          <ShoppingBasketIcon className={classes.icons} /> Produits
         </Button>
       </ListItem>
       <ListItem className={classes.listItem}>
@@ -181,11 +182,11 @@ export default function HeaderLinks({ isEditSuccess, ...props }) {
         </>
       ) : (
         <>
-          {/*<ListItem className={classes.listItem}>*/}
-          {/*  <Button component={ButtonLink} href="/login" className={classes.navLink} color="transparent">*/}
-          {/*    <AccountCircle className={classes.icons} /> Connexion*/}
-          {/*  </Button>*/}
-          {/*</ListItem>*/}
+          <ListItem className={classes.listItem}>
+            <Button component={ButtonLink} href="/login" className={classes.navLink} color="transparent">
+              <AccountCircle className={classes.icons} /> Se Connecter
+            </Button>
+          </ListItem>
           {/*<ListItem className={classes.listItem}>*/}
           {/*  <Button component={ButtonLink} href="/signup" className={classes.navLink} color="transparent">*/}
           {/*    <Assignment className={classes.icons} /> Inscription*/}

@@ -20,7 +20,6 @@ import LoginForgotPasswordForm from "src/sections/LoginPage/components/LoginForm
 import axios from "axios";
 import Swal from "sweetalert2";
 import { UserContext } from "src/contexts/UserContext";
-import FacebookLogin from "react-facebook-login";
 import redirectTo from "../src/lib/redirectTo";
 
 const useStyles = makeStyles(theme => ({
@@ -100,10 +99,6 @@ function Login() {
     });
   };
 
-  const responseFacebook = response => {
-    console.log(response);
-  };
-
   return (
     <GridContainer className={classes.root}>
       <GridItem sm={8} md={6} lg={4}>
@@ -124,13 +119,6 @@ function Login() {
                   submitHandler={handleSubmit}
                   isLoading={isLoading}
                   clickHandler={() => setForgot(!isForgot)}
-                />
-                <FacebookLogin
-                  appId="852976231763343"
-                  autoLoad
-                  fields="name,email,picture"
-                  // onClick={componentClicked}
-                  callback={responseFacebook}
                 />
               </>
             ) : (
