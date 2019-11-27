@@ -67,33 +67,33 @@ function RegisterForm({ className, ...rest }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setLoading(true);
-    axios
-      .post(`${getHost()}/auth/register`, {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        password: values.password,
-        passwordConfirm: values.passwordConfirm
-      })
-      .then(response => {
-        console.log("response : ", response);
-        Swal.fire({
-          type: response.data.status,
-          title: response.data.message,
-          confirmButtonColor: "#ff7961"
-        }).then(result => {
-          if (response.data.status === "success" && result.value) {
-            redirectTo("/");
-          }
-        });
-        if (response.data.status === "success") {
-          Cookies.set("token", response.data.data.token, {
-            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
-          });
-        }
-        setLoading(false);
-      });
+    // setLoading(true);
+    // axios
+    //   .post(`${getHost()}/auth/register`, {
+    //     firstName: values.firstName,
+    //     lastName: values.lastName,
+    //     email: values.email,
+    //     password: values.password,
+    //     passwordConfirm: values.passwordConfirm
+    //   })
+    //   .then(response => {
+    //     console.log("response : ", response);
+    //     Swal.fire({
+    //       type: response.data.status,
+    //       title: response.data.message,
+    //       confirmButtonColor: "#ff7961"
+    //     }).then(result => {
+    //       if (response.data.status === "success" && result.value) {
+    //         redirectTo("/");
+    //       }
+    //     });
+    //     if (response.data.status === "success") {
+    //       Cookies.set("token", response.data.data.token, {
+    //         expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
+    //       });
+    //     }
+    //     setLoading(false);
+    //   });
   }
 
   const hasError = field => !!(touched[field] && errors[field]);

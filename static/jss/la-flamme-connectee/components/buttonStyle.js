@@ -563,8 +563,5 @@ export const useStyles = makeStyles(theme => ({
         height: "17px"
       }
     }
-  },
-  fileButton: {
-    // display: "inline-block"
   }
 }));

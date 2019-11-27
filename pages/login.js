@@ -82,26 +82,26 @@ function Login() {
 
   const handleSubmit = type => event => {
     event.preventDefault();
-    setLoading(true);
-    axios.post(`${getHost()}/auth/${type}`, { email, password }).then(response => {
-      Swal.fire({
-        type: response.data.status,
-        title: response.data.message,
-        text: response.data.text,
-        confirmButtonColor: "#ff7961"
-      }).then(result => {
-        if (response.data.status === "success" && result.value) {
-          // redirectTo("/");
-          window.location.href = "/";
-        }
-      });
-      if (response.data.status === "success" && type !== "forgotPassword") {
-        Cookies.set("token", response.data.data.token, {
-          expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
-        });
-      }
-    });
-    setLoading(false);
+    // setLoading(true);
+    // axios.post(`${getHost()}/auth/${type}`, { email, password }).then(response => {
+    //   Swal.fire({
+    //     type: response.data.status,
+    //     title: response.data.message,
+    //     text: response.data.text,
+    //     confirmButtonColor: "#ff7961"
+    //   }).then(result => {
+    //     if (response.data.status === "success" && result.value) {
+    //       // redirectTo("/");
+    //       window.location.href = "/";
+    //     }
+    //   });
+    //   if (response.data.status === "success" && type !== "forgotPassword") {
+    //     Cookies.set("token", response.data.data.token, {
+    //       expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
+    //     });
+    //   }
+    // });
+    // setLoading(false);
   };
 
   return (

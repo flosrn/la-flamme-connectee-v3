@@ -192,7 +192,14 @@ const headerStyle = theme => ({
   cartIcon: {
     fontSize: "31px",
     "&:hover,&:focus": {
-      color: "inherit"
+      color: "inherit",
+      background: "transparent"
+    },
+    "& p": {
+      margin: 0,
+      fontSize: "12px",
+      paddingLeft: 4,
+      fontStyle: "italic"
     }
   }
 });

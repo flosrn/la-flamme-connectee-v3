@@ -71,10 +71,11 @@ function HomePage({ currentUser, isLoggedIn }) {
         color="transparent"
         links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
         fixed
+        user={currentUser}
+        isLoggedIn={isLoggedIn}
         changeColorOnScroll={{
           height: 100,
-          color: "white",
-          navColor: "black"
+          color: "white"
         }}
       />
       <Parallax filter="dark" image={backgroundImage} className={classes.parallax}>
@@ -89,7 +90,7 @@ function HomePage({ currentUser, isLoggedIn }) {
               <Typography variant="h5" align="center" className={classes.subtitle}>
                 Allumez votre poêle ou insert à distance
               </Typography>
-              <Button color="danger" className={classes.buttonPlay} onClick={() => setOpen(true)}>
+              <Button color="danger" onClick={() => setOpen(true)}>
                 <i className="fas fa-play" />
                 Découvrir en vidéo
               </Button>

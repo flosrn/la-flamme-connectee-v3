@@ -160,9 +160,9 @@ export default function ProductSection() {
             {/* </GridItem> */}
           </GridContainer>
           <GridContainer className={classes.pullRight}>
-            <Button round color="secondary" onClick={() => addItem(fakeCart[0])}>
-              Ajouter au panier &nbsp; <ShoppingCart />
-            </Button>
+            {/* <Button round color="secondary" onClick={() => addItem(fakeCart[0])}> */}
+            {/*  Ajouter au panier &nbsp; <ShoppingCart /> */}
+            {/* </Button> */}
           </GridContainer>
         </GridItem>
       </GridContainer>
@@ -257,9 +257,9 @@ export default function ProductSection() {
             </GridItem>
           </GridContainer>
           <GridContainer className={classes.pullRight}>
-            <Button round color="secondary" onClick={() => addItem(fakeCart[1])}>
-              Ajouter au panier &nbsp; <ShoppingCart />
-            </Button>
+            {/* <Button round color="secondary" onClick={() => addItem(fakeCart[1])}> */}
+            {/*  Ajouter au panier &nbsp; <ShoppingCart /> */}
+            {/* </Button> */}
           </GridContainer>
         </GridItem>
       </GridContainer>

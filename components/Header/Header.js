@@ -19,11 +19,17 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 // core components
 import styles from "static/jss/la-flamme-connectee/components/headerStyle";
 import { Badge } from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
+import ListItem from "@material-ui/core/ListItem";
+import Home from "@material-ui/core/SvgIcon/SvgIcon";
+import List from "@material-ui/core/List";
 import { ShoppingCartContext } from "../../src/contexts/ShoppingCartContext";
+import ButtonLink from "../CustomButtons/ButtonLink";
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+  const { isLoggedIn, user } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
   const { items } = useContext(ShoppingCartContext);
@@ -38,6 +44,9 @@ export default function Header(props) {
     };
   });
   const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  const handleDrawerLoginToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   const headerColorChange = () => {
@@ -69,19 +78,26 @@ export default function Header(props) {
         {/* </Button> */}
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
-          <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
-            <Badge badgeContent={items.length} color="secondary">
-              <ShoppingCartIcon className={classes.cartIcon} />
-            </Badge>
-          </IconButton>
+          {/* <IconButton color="inherit" onClick={handleDrawerLoginToggle} className={classes.cartIcon}> */}
+          {/*  <PersonIcon className={classes.cartIcon} /> */}
+          {/*  <p>{isLoggedIn && `${user.firstName} ${user.lastName}`}</p> */}
+          {/* </IconButton> */}
+          {/* <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}> */}
+          {/*  <Badge badgeContent={items.length} color="secondary"> */}
+          {/*    <ShoppingCartIcon className={classes.cartIcon} /> */}
+          {/*  </Badge> */}
+          {/* </IconButton> */}
         </Hidden>
         <Hidden mdUp>
           <div>
-            <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
-              <Badge badgeContent={items.length} color="secondary">
-                <ShoppingCartIcon className={classes.cartIcon} />
-              </Badge>
-            </IconButton>
+            {/* <IconButton color="inherit" onClick={handleDrawerLoginToggle} className={classes.cartIcon}> */}
+            {/*  <PersonIcon className={classes.cartIcon} /> */}
+            {/* </IconButton> */}
+            {/* <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}> */}
+            {/*  <Badge badgeContent={items.length} color="secondary"> */}
+            {/*    <ShoppingCartIcon className={classes.cartIcon} /> */}
+            {/*  </Badge> */}
+            {/* </IconButton> */}
             <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
               <Menu className={classes.menuIcon} />
             </IconButton>
@@ -109,6 +125,27 @@ export default function Header(props) {
           <div className={classes.appResponsive}>{links}</div>
         </Drawer>
       </Hidden>
+      {/* <> */}
+      {/*  <Drawer */}
+      {/*    variant="temporary" */}
+      {/*    anchor="left" */}
+      {/*    open={mobileOpen} */}
+      {/*    classes={{ */}
+      {/*      paper: classes.drawerPaper */}
+      {/*    }} */}
+      {/*    onClose={handleDrawerToggle} */}
+      {/*  > */}
+      {/*    <IconButton */}
+      {/*      color="inherit" */}
+      {/*      aria-label="open drawer" */}
+      {/*      onClick={handleDrawerToggle} */}
+      {/*      className={classes.closeButtonDrawer} */}
+      {/*    > */}
+      {/*      <Close /> */}
+      {/*    </IconButton> */}
+      {/*    <div className={classes.appResponsive}>{links}</div> */}
+      {/*  </Drawer> */}
+      {/* </> */}
     </AppBar>
   );
 }
