@@ -28,9 +28,11 @@ import { useStyles } from "static/jss/la-flamme-connectee/views/homePage";
 import svg3 from "static/img/svg/undraw_team_page_pgpr.svg";
 import ProjectSection from "../src/sections/HomePage/ProjectSection";
 import TeamSection from "../src/sections/HomePage/TeamSection";
-import AlertDialogSlide from "../components/Alert/AlertDialogSlide";
+import AlertDialogSlide from "../components/Alert/AlertDialogVideoSlide";
 
-function HomePage() {
+import { authInitialProps } from "../server/api/auth";
+
+function HomePage({ currentUser, isLoggedIn }) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
 
@@ -62,13 +64,12 @@ function HomePage() {
     const targetScroll = document.getElementById(target);
     scrollTo(document.documentElement, targetScroll.offsetTop, 900);
   };
-  // href="https://youtu.be/JNxbjR0GbjU" target="_blank"
 
   return (
     <div className={classes.root}>
       <Header
         color="transparent"
-        links={<HeaderLinks />}
+        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
         fixed
         changeColorOnScroll={{
           height: 100,
@@ -145,5 +146,11 @@ function HomePage() {
     </div>
   );
 }
+
+HomePage.getInitialProps = async ctx => {
+  const { currentUser } = await authInitialProps(ctx);
+  const isLoggedIn = Object.keys(currentUser).length !== 0;
+  return { currentUser, isLoggedIn };
+};
 
 export default HomePage;

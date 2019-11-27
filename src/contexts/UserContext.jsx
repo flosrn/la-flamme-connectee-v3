@@ -26,7 +26,7 @@ const UserContextProvider = ({ children }) => {
     switch (action.type) {
       case "fetch":
         return axios
-          .get("/api/auth/session")
+          .get("/auth/session")
           .then(res => ({
             isLoggedIn: res.data.data.isLoggedIn,
             user: res.data.data.user

@@ -19,6 +19,10 @@ import axioswal from "axioswal";
 import axios from "axios";
 import Swal from "sweetalert2";
 import HeaderLinks from "components/Header/HeaderLinks";
+import Cookies from "js-cookie";
+import { authInitialProps } from "../server/api/auth";
+import HomePage from "./index";
+import getHost from "../server/api/get-host";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -36,11 +40,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Settings() {
-  const {
-    state: { user },
-    dispatch
-  } = useContext(UserContext);
+function SettingsPage({ currentUser, isLoggedIn }) {
   const [values, setValues] = useState({});
   const [isEditMode, setEditMode] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -52,8 +52,8 @@ function Settings() {
   // ========== DATA FETCHING ========== //
 
   useEffect(() => {
-    setValues(user);
-  }, [user]);
+    setValues(currentUser);
+  }, [currentUser]);
 
   // ========== CHANGE HANDLERS ========== //
 
@@ -100,27 +100,32 @@ function Settings() {
 
   // ========== SUBMIT HANDLER ========== //
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     setLoading(true);
-    axios.patch("/api/user/updateProfileData", values).then(response => {
-      Swal.fire({
-        type: response.data.status,
-        title: response.data.message,
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 5000
+    axios
+      .patch(`${getHost()}/users/updateProfile`, {
+        values
+      })
+      .then(response => {
+        console.log("response : ", response);
+        setTimeout(() => {
+          Swal.fire({
+            type: response.data.status,
+            title: response.data.message,
+            confirmButtonColor: "#ff7961",
+            position: "bottom-right"
+          });
+          setEditMode(false);
+          setLoading(false);
+        }, 1500);
       });
-      dispatch({ type: "fetch" });
-      setEditMode(false);
-      setLoading(false);
-    });
   };
 
   const handleCancel = () => {
     setEditMode(false);
-    setValues(user);
+    setLoading(false);
+    setValues(currentUser);
   };
 
   // ========== FORM VALIDATION ========== //
@@ -145,31 +150,35 @@ function Settings() {
   const pathname = Router.asPath.split("=");
   const tab = pathname[1];
 
-  function setTitle() {
-    switch (tab) {
-      case "profile":
+  function setTitle(tabName) {
+    switch (true) {
+      case tabName === "profile":
         setTabTitle("Vérifiez ou modifiez les informations de votre compte");
         break;
-      case "address":
+      case tabName === "address":
         setTabTitle("Vérifiez ou renseignez votre adresse");
         break;
-      case "security":
+      case tabName === "security":
         setTabTitle("Modifiez le mot de passe de votre compte");
         break;
-      case "options":
+      case tabName === "options":
         setTabTitle("Gérez les options de votre compte");
         break;
       default:
-        setTabTitle("Compte");
+        setTabTitle("Vérifiez ou modifiez les informations de votre compte");
     }
   }
+
+  useEffect(() => {
+    setTitle(tab);
+  }, [tab]);
 
   const handleTabsChange = (event, value) => {
     Router.push({
       pathname: "/settings",
       query: { tab: value }
     });
-    setTitle();
+    setTitle(value);
   };
 
   return (
@@ -177,7 +186,7 @@ function Settings() {
       <Headers
         color="dark"
         brand="La Flamme Connectée"
-        links={<HeaderLinks />}
+        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
         fixed
         changeColorOnScroll={{
           height: 650,
@@ -198,7 +207,7 @@ function Settings() {
             <div className={classes.content}>
               {tab === "profile" && (
                 <Profile
-                  profile={user}
+                  profile={isEditMode ? currentUser : values}
                   values={values}
                   changeProfileHandler={handleProfileChange}
                   changeDateHandler={handleDateChange}
@@ -211,7 +220,7 @@ function Settings() {
               )}
               {tab === "address" && (
                 <Address
-                  profile={user}
+                  profile={currentUser}
                   values={values}
                   changeAddressHandler={handleAddressChange}
                   submitHandler={handleSubmit}
@@ -223,8 +232,8 @@ function Settings() {
                   errors={errors}
                 />
               )}
-              {tab === "security" && <Security />}
-              {tab === "options" && <Options />}
+              {tab === "security" && <Security userId={currentUser._id} />}
+              {/* {tab === "options" && <Options />} */}
             </div>
           </Card>
         </GridItem>
@@ -233,4 +242,10 @@ function Settings() {
   );
 }
 
-export default Settings;
+SettingsPage.getInitialProps = async ctx => {
+  const { currentUser } = await authInitialProps(ctx);
+  const isLoggedIn = Object.keys(currentUser).length !== 0;
+  return { currentUser, isLoggedIn };
+};
+
+export default SettingsPage;

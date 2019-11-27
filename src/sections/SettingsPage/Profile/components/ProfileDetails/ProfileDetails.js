@@ -9,20 +9,24 @@ import Button from "components/CustomButtons/Button.js";
 import flo from "static/img/faces/Florian.jpg";
 import CardAvatar from "components/Card/CardAvatar";
 import CardFooter from "components/Card/CardFooter";
-import { ToggleContext } from "../../../../../contexts/toggle.context";
 import Box from "@material-ui/core/Box";
 import GridItem from "components/Grid/GridItem";
 import PictureUpload from "components/CustomUpload/PictureUpload";
 import GridContainer from "components/Grid/GridContainer";
-import CustomLinearProgress from "../../../../../../components/CustomLinearProgress/CustomLinearProgress";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import svg1 from "static/img/svg/undraw_personal_info_0okl.svg";
+import MediaSvg from "../../../../../../components/Media/MediaSvg";
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: theme.spacing(10)
+    justifyContent: "center",
+    marginBottom: theme.spacing(5),
+    [theme.breakpoints.down("sm")]: {
+      marginTop: theme.spacing(5)
+    }
   },
   pictureText: {
     width: "100%",
@@ -34,6 +38,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginBottom: theme.spacing(5),
+
     marginLeft: theme.spacing(-4)
   },
   name: {
@@ -57,20 +63,12 @@ const useStyles = makeStyles(theme => ({
 function ProfileDetails({ profile, isLoading }) {
   const classes = useStyles();
   return (
-    <GridContainer alignItems="center">
-      <GridItem className={classes.root} sm={4}>
-        <CardAvatar profile className={classes.avatar}>
-          <a href="#pablo" onClick={e => e.preventDefault()}>
-            {/*<img src={flo} alt="..." />*/}
-            <PictureUpload />
-          </a>
-        </CardAvatar>
-        <div className={classes.pictureText}>
-          <h6>Choisir une photo</h6>
-        </div>
+    <GridContainer alignItems="center" justify="center">
+      <GridItem className={classes.root} xs={8} sm={12} md={6}>
+        <MediaSvg src={svg1} size="large" />
       </GridItem>
-      <GridItem sm={8} className={classes.content}>
-        {/*<CardContent>*/}
+      <GridItem xs={12} sm={12} md={6} className={classes.content}>
+        {/* <CardContent> */}
         {isLoading ? (
           <CircularProgress className={classes.progress} />
         ) : (
@@ -80,16 +78,16 @@ function ProfileDetails({ profile, isLoading }) {
             </Typography>
 
             <Typography color="textSecondary" variant="body1">
-              {profile.emailToClient}
+              {profile.email}
             </Typography>
           </div>
         )}
 
-        {/*)}*/}
+        {/* )} */}
         <Typography color="textSecondary" variant="body1">
           {profile.role !== "user" ? profile.role : null}
         </Typography>
-        {/*</CardContent>*/}
+        {/* </CardContent> */}
       </GridItem>
     </GridContainer>
   );

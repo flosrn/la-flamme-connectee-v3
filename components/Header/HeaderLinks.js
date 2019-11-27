@@ -52,36 +52,31 @@ import Button from "components/CustomButtons/Button";
 
 import styles from "static/jss/la-flamme-connectee/components/headerLinksStyle";
 
-import { UserContext } from "src/contexts/UserContext";
-import axioswal from "axioswal";
 import axios from "axios";
 import Swal from "sweetalert2";
 import redirectTo from "src/lib/redirectTo";
+import Cookies from "js-cookie";
 
 const useStyles = makeStyles(styles);
 
 // contexts
 import { ScrollContext } from "src/contexts/scroll.context";
 import ButtonLink from "../CustomButtons/ButtonLink";
+import getHost from "../../server/api/get-host";
 
-export default function HeaderLinks({ isEditSuccess, ...props }) {
-  const {
-    state: { isLoggedIn, user },
-    dispatch
-  } = useContext(UserContext);
-
+export default function HeaderLinks({ isLoggedIn, user, isEditSuccess, ...props }) {
   const handleLogout = event => {
     event.preventDefault();
-    axios.delete("/api/auth/session").then(response => {
+    axios.get(`${getHost()}/auth/logout`).then(response => {
+      console.log("response : ", response);
       Swal.fire({
         type: response.data.status,
         title: response.data.message,
-        toast: true,
-        position: "bottom-end",
-        showConfirmButton: false,
-        timer: 3000
+        timer: 4000
       });
-      dispatch({ type: "clear" });
+      if (response.data.status === "success") {
+        Cookies.set("token", "loggedOut");
+      }
       redirectTo("/");
     });
   };

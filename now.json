@@ -1,9 +1,11 @@
 {
   "name": "La Flamme Connectée",
   "version": 2,
-  "builds": [{ "src": "package.json", "use": "@now/next@canary" }],
+  "builds": [{ "src": "next.config.js", "use": "@now/next" }],
   "build": {
     "env": {
+      "API_URL": "@api-url",
+
       "MONGODB_URI": "@mongodb-uri",
       "CLOUDINARY_URL": "@cloudinary-url",
 

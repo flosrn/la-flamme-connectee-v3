@@ -9,11 +9,12 @@ import Slide from "@material-ui/core/Slide";
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
 import { Face, RecordVoiceOver } from "@material-ui/icons";
-import { UserContext } from "src/contexts/UserContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import redirectTo from "src/lib/redirectTo";
+import Cookies from "js-cookie";
 import { schema } from "./RegisterFormSchema";
+import getHost from "../../../../../server/api/get-host";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -48,7 +49,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function RegisterForm({ className, ...rest }) {
-  const { dispatch } = useContext(UserContext);
   const [values, setValues] = useState({});
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
@@ -69,13 +69,15 @@ function RegisterForm({ className, ...rest }) {
     event.preventDefault();
     setLoading(true);
     axios
-      .post("/api/auth/register", {
+      .post(`${getHost()}/auth/register`, {
         firstName: values.firstName,
         lastName: values.lastName,
-        email: values.emailToClient,
-        password: values.password
+        email: values.email,
+        password: values.password,
+        passwordConfirm: values.passwordConfirm
       })
       .then(response => {
+        console.log("response : ", response);
         Swal.fire({
           type: response.data.status,
           title: response.data.message,
@@ -85,7 +87,11 @@ function RegisterForm({ className, ...rest }) {
             redirectTo("/");
           }
         });
-        dispatch({ type: "fetch" });
+        if (response.data.status === "success") {
+          Cookies.set("token", response.data.data.token, {
+            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
+          });
+        }
         setLoading(false);
       });
   }
@@ -128,8 +134,8 @@ function RegisterForm({ className, ...rest }) {
           }}
         />
         <TextField
-          error={hasError("emailToClient.js")}
-          helperText={hasError("emailToClient.js") ? errors.email[0] : null}
+          error={hasError("email")}
+          helperText={hasError("email") ? errors.email[0] : null}
           fullWidth
           label="Adresse mail"
           name="email"

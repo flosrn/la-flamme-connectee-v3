@@ -5,11 +5,14 @@ import { makeStyles } from "@material-ui/styles";
 import { Card, CardHeader, CardContent, CardActions, Grid, Divider, TextField, colors } from "@material-ui/core";
 import Button from "components/CustomButtons/Button";
 import Box from "@material-ui/core/Box";
-import GridItem from "../../../../components/Grid/GridItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import axios from "axios";
+import Swal from "sweetalert2";
+import GridItem from "../../../../components/Grid/GridItem";
 import GridContainer from "../../../../components/Grid/GridContainer";
 // import { updateMyPassword } from "../../../server/lib/api";
 import CustomSnackBar from "../../../../components/Snackbar/CustomSnackBar";
+import getHost from "../../../../server/api/get-host";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -42,7 +45,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Security({ className, ...rest }) {
+function Security({ userId }) {
   const [values, setValues] = useState({
     passwordCurrent: "",
     password: "",
@@ -71,32 +74,33 @@ function Security({ className, ...rest }) {
 
   const handleSubmit = event => {
     event.preventDefault();
-    setValid(true);
-    setOpen(false);
     setLoading(true);
-    // setTimeout(() => {
-    //   updateMyPassword(values)
-    //     .then(response => {
-    //       setLoading(false);
-    //       setOpen(true);
-    //       setValid(true);
-    //       setEditMode(false);
-    //       setMsg("Vos changements ont bien été pris en compte");
-    //       console.log(response);
-    //     })
-    //     .catch(err => {
-    //       const error = (err.response && err.response.data) || err.message;
-    //       setLoading(false);
-    //       setValid(false);
-    //       setOpen(true);
-    //       setMsg(error);
-    //       console.log(error);
-    //     });
-    // }, 2000);
+    axios.patch(`${getHost()}/auth/updatePassword`, { userId, values }).then(response => {
+      console.log("response : ", response);
+      setTimeout(() => {
+        Swal.fire({
+          type: response.data.status,
+          title: response.data.message,
+          confirmButtonColor: "#ff7961",
+          position: "bottom"
+        });
+        setEditMode(false);
+        setLoading(false);
+        if (response.data.status === "success") {
+          setValues({
+            ...values,
+            passwordCurrent: "",
+            password: "",
+            passwordConfirm: ""
+          });
+        }
+      }, 1500);
+    });
   };
 
   const handleCancel = () => {
     setEditMode(false);
+    setLoading(false);
     setValues({
       ...values,
       passwordCurrent: "",
@@ -163,7 +167,7 @@ function Security({ className, ...rest }) {
                     Annuler
                   </Button>
                   <div className={classes.wrapper} style={{ cursor: !isValid && "not-allowed" }}>
-                    <Button type="submit" color="primary" disabled={!isValid || isLoading}>
+                    <Button type="submit" color="secondary" disabled={!isValid || isLoading}>
                       Sauvegarder
                     </Button>
                     {isLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
@@ -174,7 +178,6 @@ function Security({ className, ...rest }) {
           </CardActions>
         </form>
       </GridItem>
-      <CustomSnackBar open={open} message={msg} duration={4000} closeHandler={() => setOpen(false)} error={!isValid} />
     </GridContainer>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
+import getHost from "../../server/api/get-host";
 
 const fakeCart = [
   { id: "prod_GB4kHqmbn25Bq3", name: "flam'connect" },
@@ -17,23 +18,13 @@ export function ShoppingCartProvider({ children }) {
     const cart = Cookies.getJSON("cart");
     console.log("cart from cookies : ", cart);
 
-    if (cart) {
+    if (cart && cart.length > 0) {
       setItems(cart);
     }
-
-    axios
-      .get("/api/checkout/getProductsList")
-      .then(response => {
-        console.log("response : ", response);
-      })
-      .catch(error => {
-        console.log("error : ", error);
-      });
   }, []);
 
   useEffect(() => {
     Cookies.set("cart", items);
-    console.log("items : ", items);
   }, [items]);
 
   const addItem = product => {

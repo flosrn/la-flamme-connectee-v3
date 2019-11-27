@@ -6,6 +6,8 @@ module.exports = withCSS(
   withSass(
     withImages({
       env: {
+        API_URL: process.env.API_URL,
+
         MONGODB_URI: process.env.MONGODB_URI,
         CLOUDINARY_URL: process.env.CLOUDINARY_URL,
 

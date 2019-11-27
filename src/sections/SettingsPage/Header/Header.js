@@ -22,7 +22,7 @@ function Header(props) {
   return (
     <div {...rest} className={clsx(classes.root, className)}>
       <Typography variant="h4" gutterBottom>
-        Paramètres de compte
+        MON COMPTE
       </Typography>
       <Box mt={2}>
         <Typography variant="body1" align="center">

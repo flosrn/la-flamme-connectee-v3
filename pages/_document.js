@@ -2,9 +2,11 @@ import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/styles";
 import theme from "theme";
+import { getSessionFromServer, getUserScript, authInitialProps } from "../server/api/auth";
 
 class MyDocument extends Document {
   render() {
+    // const { currentUser = {} } = this.props;
     return (
       <html lang="en">
         <Head>
@@ -28,6 +30,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          {/* <script dangerouslySetInnerHTML={{ __html: getUserScript(currentUser) }} /> */}
           <NextScript />
         </body>
       </html>
@@ -68,9 +71,11 @@ MyDocument.getInitialProps = async ctx => {
     });
 
   const initialProps = await Document.getInitialProps(ctx);
+  // const currentUser = await getSessionFromServer(ctx);
 
   return {
     ...initialProps,
+    // ...currentUser,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       <React.Fragment key="styles">

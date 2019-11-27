@@ -29,6 +29,7 @@ export default function CustomInput(props) {
     white,
     inputRootCustomClasses,
     success,
+    value,
     changeHandler
   } = props;
   const classes = useStyles();
@@ -70,6 +71,7 @@ export default function CustomInput(props) {
           underline: underlineClasses
         }}
         id={id}
+        value={value}
         onChange={changeHandler}
         {...inputProps}
       />

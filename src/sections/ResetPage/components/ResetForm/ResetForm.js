@@ -9,8 +9,11 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
 import CustomSnackBar from "components/Snackbar/CustomSnackBar";
-import { UserContext } from "src/contexts/UserContext";
 import axioswal from "axioswal";
+import axios from "axios";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
+import getHost from "../../../../../server/api/get-host";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -39,12 +42,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ResetForm({ token, className, ...rest }) {
-  const { dispatch } = useContext(UserContext);
   const [values, setValues] = useState({});
-  const [isError, setError] = useState(false);
-  const [open, setOpen] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [msg, setMsg] = useState("");
 
   const handleChange = e => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -52,40 +51,27 @@ function ResetForm({ token, className, ...rest }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // setError(false);
-    // setOpen(false);
-    // setLoading(true);
-    // resetPassword(token, values)
-    //   .then(res => {
-    //     setError(false);
-    //     setOpen(true);
-    //     setLoading(false);
-    //     setMsg("ok");
-    //     setTimeout(() => {
-    //       window.location.href = "/login";
-    //       // Router.replace("/");
-    //     }, 2500);
-    //   })
-    //   .catch(err => {
-    //     const error = (err.response && err.response.data) || err.message;
-    //     setMsg(error);
-    //     setError(true);
-    //     setOpen(true);
-    //     setLoading(false);
-    //   });
-    axioswal.patch("/api/auth/resetPassword", { password: values.password, token }).then(response => {
-      if (response.status === "ok") {
-        // redirectTo("/");
-      }
-    });
+    setLoading(true);
+    axios
+      .patch(`${getHost()}/auth/resetPassword`, {
+        password: values.password,
+        passwordConfirm: values.passwordConfirm,
+        token
+      })
+      .then(response => {
+        Swal.fire({
+          type: response.data.status,
+          title: response.data.message,
+          text: response.data.text,
+          confirmButtonColor: "#ff7961"
+        }).then(result => {
+          if (response.data.status === "success" && result.value) {
+            window.location.href = "/login";
+          }
+        });
+      });
+    setLoading(false);
   };
-
-  function handleClose(event, reason) {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  }
 
   const classes = useStyles();
   return (
@@ -134,7 +120,6 @@ function ResetForm({ token, className, ...rest }) {
       >
         Sauvegarder
       </Button>
-      <CustomSnackBar handleClose={handleClose} duration={6000} message={msg} open={open} error={isError} />
     </form>
   );
 }

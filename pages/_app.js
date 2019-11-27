@@ -2,7 +2,6 @@ import React from "react";
 import App from "next/app";
 import { ThemeProvider } from "@material-ui/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { UserContextProvider } from "src/contexts/UserContext";
 import "static/scss/la-flamme-connectee.scss";
 import theme from "theme";
 import { ShoppingCartProvider } from "src/contexts/ShoppingCartContext";
@@ -19,14 +18,12 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
     return (
-      <UserContextProvider>
-        <ShoppingCartProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </ShoppingCartProvider>
-      </UserContextProvider>
+      <ShoppingCartProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ShoppingCartProvider>
     );
   }
 }

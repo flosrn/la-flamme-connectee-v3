@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 function LoginForm({ className, email, password, changeHandler, submitHandler, isLoading, clickHandler, ...rest }) {
   const classes = useStyles();
   return (
-    <form {...rest} className={clsx(classes.root, className)} onSubmit={submitHandler("authenticate")}>
+    <form {...rest} className={clsx(classes.root, className)} onSubmit={submitHandler("login")}>
       <div className={classes.fields}>
         <TextField
           fullWidth
