@@ -53,6 +53,7 @@ function RegisterForm({ className, ...rest }) {
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
   const [isLoading, setLoading] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -99,105 +100,126 @@ function RegisterForm({ className, ...rest }) {
   const hasError = field => !!(touched[field] && errors[field]);
 
   return (
-    <form {...rest} className={clsx(classes.root, className)} onSubmit={handleSubmit}>
-      <div className={classes.fields}>
-        <TextField
-          error={hasError("firstName")}
-          helperText={hasError("firstName") ? errors.firstName[0] : null}
-          label="Prénom"
-          name="firstName"
-          onChange={handleChange}
-          value={values.firstName || ""}
-          variant="outlined"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Face className={classes.inputIconsColor} />
-              </InputAdornment>
-            )
-          }}
-        />
-        <TextField
-          error={hasError("lastName")}
-          helperText={hasError("lastName") ? errors.lastName[0] : null}
-          label="Nom"
-          name="lastName"
-          onChange={handleChange}
-          value={values.lastName || ""}
-          variant="outlined"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <RecordVoiceOver className={classes.inputIconsColor} />
-              </InputAdornment>
-            )
-          }}
-        />
-        <TextField
-          error={hasError("email")}
-          helperText={hasError("email") ? errors.email[0] : null}
-          fullWidth
-          label="Adresse mail"
-          name="email"
-          onChange={handleChange}
-          value={values.email || ""}
-          variant="outlined"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Email className={classes.inputIconsColor} />
-              </InputAdornment>
-            )
-          }}
-        />
-        <TextField
-          error={hasError("password")}
-          helperText={hasError("password") ? errors.password[0] : null}
-          fullWidth
-          label="Mot de passe"
-          name="password"
-          onChange={handleChange}
-          type="password"
-          value={values.password || ""}
-          variant="outlined"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Lock className={classes.inputIconsColor} />
-              </InputAdornment>
-            )
-          }}
-        />
-        <TextField
-          error={hasError("passwordConfirm")}
-          helperText={hasError("passwordConfirm") ? errors.passwordConfirm[0] : null}
-          fullWidth
-          label="Confirmation de mot de passe"
-          name="passwordConfirm"
-          onChange={handleChange}
-          type="password"
-          value={values.passwordConfirm || ""}
-          variant="outlined"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <Lock className={classes.inputIconsColor} />
-              </InputAdornment>
-            )
-          }}
-        />
-      </div>
-      <Button
-        className={classes.submitButton}
-        color="secondary"
-        disabled={isLoading}
-        size="large"
-        type="submit"
-        variant="contained"
-      >
-        Créer un compte
-      </Button>
-    </form>
+    <>
+      <form {...rest} className={clsx(classes.root, className)} onSubmit={handleSubmit}>
+        <div className={classes.fields}>
+          <TextField
+            error={hasError("email")}
+            helperText={hasError("email") ? errors.email[0] : null}
+            fullWidth
+            label="Adresse mail"
+            name="email"
+            onChange={handleChange}
+            value={values.email || ""}
+            variant="outlined"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Email className={classes.inputIconsColor} />
+                </InputAdornment>
+              )
+            }}
+          />
+          <TextField
+            error={hasError("password")}
+            helperText={hasError("password") ? errors.password[0] : null}
+            fullWidth
+            label="Mot de passe"
+            name="password"
+            onChange={handleChange}
+            type="password"
+            value={values.password || ""}
+            variant="outlined"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Lock className={classes.inputIconsColor} />
+                </InputAdornment>
+              )
+            }}
+          />
+          {isClicked && (
+            <>
+              <TextField
+                error={hasError("passwordConfirm")}
+                helperText={hasError("passwordConfirm") ? errors.passwordConfirm[0] : null}
+                fullWidth
+                label="Confirmation de mot de passe"
+                name="passwordConfirm"
+                onChange={handleChange}
+                type="password"
+                value={values.passwordConfirm || ""}
+                variant="outlined"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Lock className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  )
+                }}
+              />
+              <TextField
+                error={hasError("firstName")}
+                helperText={hasError("firstName") ? errors.firstName[0] : null}
+                label="Prénom"
+                name="firstName"
+                onChange={handleChange}
+                value={values.firstName || ""}
+                variant="outlined"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Face className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  )
+                }}
+              />
+              <TextField
+                error={hasError("lastName")}
+                helperText={hasError("lastName") ? errors.lastName[0] : null}
+                label="Nom"
+                name="lastName"
+                onChange={handleChange}
+                value={values.lastName || ""}
+                variant="outlined"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <RecordVoiceOver className={classes.inputIconsColor} />
+                    </InputAdornment>
+                  )
+                }}
+              />
+            </>
+          )}
+        </div>
+        {isClicked && (
+          <Button
+            className={classes.submitButton}
+            color="secondary"
+            disabled={isLoading}
+            size="large"
+            type="submit"
+            variant="contained"
+          >
+            Créer un compte
+          </Button>
+        )}
+      </form>
+      {!isClicked && (
+        <Button
+          className={classes.submitButton}
+          color="secondary"
+          disabled={isLoading}
+          size="large"
+          variant="contained"
+          type="button"
+          onClick={() => setIsClicked(true)}
+        >
+          Créer un compte
+        </Button>
+      )}
+    </>
   );
 }
 

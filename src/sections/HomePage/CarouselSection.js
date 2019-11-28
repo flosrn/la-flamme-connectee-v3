@@ -11,16 +11,16 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Card from "components/Card/Card";
 // images
-import image1 from "static/img/flamco/flamco-info.jpg";
-import image2 from "static/img/flamco/flamco-hand.jpg";
-import image3 from "static/img/flamco/flamconnect-start.gif";
-import image4 from "static/img/contura/background-contura-max.jpg";
-import image5 from "static/img/objects/hand-iphone.png";
+import image1 from "public/img/flamco/flamco-info.jpg";
+import image2 from "public/img/flamco/flamco-hand.jpg";
+import image3 from "public/img/flamco/flamconnect-start.gif";
+import image4 from "public/img/contura/background-contura-max.jpg";
+import image5 from "public/img/objects/hand-iphone.png";
 // animations
 import { Controller, Scene } from "react-scrollmagic";
 import { Tween, Timeline } from "react-gsap";
 // styles
-import { container } from "static/jss/la-flamme-connectee";
+import { container } from "public/jss/la-flamme-connectee";
 
 const useStyles = makeStyles(theme => ({
   section: {

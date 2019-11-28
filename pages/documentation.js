@@ -6,9 +6,9 @@ import LayoutPage from "components/Page/LayoutPage";
 import HowWorks from "src/sections/HomePage/HowWorks";
 import TopDownSection from "src/sections/HomePage/TopDownSection";
 // images
-import backgroundImage from "static/img/contura/background-contura-max.jpg";
-import svg1 from "static/img/svg/undraw_questions_75e0.svg";
-import svg2 from "static/img/svg/undraw_light_the_fire_gt58.svg";
+import backgroundImage from "public/img/contura/background-contura-max.jpg";
+import svg1 from "public/img/svg/undraw_questions_75e0.svg";
+import svg2 from "public/img/svg/undraw_light_the_fire_gt58.svg";
 
 function DocumentationPage() {
   return (

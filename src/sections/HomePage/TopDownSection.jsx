@@ -9,9 +9,9 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import InfoArea from "components/InfoArea/InfoArea";
 // style for this page
-import { useStyles } from "static/jss/la-flamme-connectee/views/homePageSections/topDownStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections/topDownStyle";
 
-import topDownImg from "static/img/flamco/topdown-info.jpg";
+import topDownImg from "public/img/flamco/topdown-info.jpg";
 
 import { Typography } from "@material-ui/core";
 

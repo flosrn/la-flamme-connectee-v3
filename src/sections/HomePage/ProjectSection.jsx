@@ -6,7 +6,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import constants style
-import { title } from "static/jss/la-flamme-connectee";
+import { title } from "public/jss/la-flamme-connectee";
 // @material-ui/icons
 import Icon from "@material-ui/core/Icon";
 // core components
@@ -15,9 +15,9 @@ import GridItem from "components/Grid/GridItem";
 import CustomInput from "components/CustomInput/CustomInput";
 import Button from "components/CustomButtons/Button";
 import { Typography } from "@material-ui/core";
-import gif from "static/img/objects/3d-print.gif";
+import gif from "public/img/objects/3d-print.gif";
 
-import svg from "static/img/svg/undraw_Data_points_ubvs.svg";
+import svg from "public/img/svg/undraw_Data_points_ubvs.svg";
 import MediaSvg from "../../../components/Media/MediaSvg";
 
 // styles for this page

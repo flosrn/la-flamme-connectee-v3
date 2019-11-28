@@ -19,14 +19,16 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PersonIcon from "@material-ui/icons/Person";
 
 // core components
-import styles from "static/jss/la-flamme-connectee/components/headerStyle";
+import styles from "public/jss/la-flamme-connectee/components/headerStyle";
 import { Badge } from "@material-ui/core";
+import logo from "public/img/logo/laflammeco.png";
 import { ShoppingCartContext } from "../../src/contexts/ShoppingCartContext";
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const { isLoggedIn, user } = props;
+  const { color, links, fixed, absolute, hiddenLogo } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
   const { items } = useContext(ShoppingCartContext);
@@ -50,12 +52,13 @@ export default function Header(props) {
     if (windowsScrollTop > changeColorOnScroll.height) {
       document.body.getElementsByTagName("header")[0].classList.remove(classes[color]);
       document.body.getElementsByTagName("header")[0].classList.add(classes[changeColorOnScroll.color]);
+      hiddenLogo && document.body.querySelector("#brandLogo").classList.remove(classes.hiddenBrandLogo);
     } else {
       document.body.getElementsByTagName("header")[0].classList.add(classes[color]);
       document.body.getElementsByTagName("header")[0].classList.remove(classes[changeColorOnScroll.color]);
+      hiddenLogo && document.body.querySelector("#brandLogo").classList.add(classes.hiddenBrandLogo);
     }
   };
-  const { color, links, brand, fixed, absolute } = props;
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
@@ -65,14 +68,19 @@ export default function Header(props) {
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
-        {/* <Button className={classes.title}> */}
-        {/*  <Link href="/"> */}
-        {/*    <a>{brand}</a> */}
-        {/*  </Link> */}
-        {/* </Button> */}
+        <Button
+          className={classNames(classes.brandLogo, hiddenLogo ? classes.hiddenBrandLogo : classes.fixedBrandLogo)}
+          id="brandLogo"
+        >
+          <Link href="/">
+            <a>
+              <img src={logo} alt="logo" className={classes.brandLogo} />
+            </a>
+          </Link>
+        </Button>
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
-          <IconButton color="inherit" onClick={handleDrawerToggle} className={classes.cartIcon}>
+          <IconButton color="inherit" href="/login?action=login" className={classes.userIcon}>
             <PersonIcon className={classes.cartIcon} />
             <p>{isLoggedIn && `${user.firstName} ${user.lastName}`}</p>
           </IconButton>
@@ -84,6 +92,9 @@ export default function Header(props) {
         </Hidden>
         <Hidden mdUp>
           <div>
+            <IconButton color="inherit" href="/login?action=login" className={classes.userIcon}>
+              <PersonIcon className={classes.cartIcon} />
+            </IconButton>
             <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
               <Badge badgeContent={items.length} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />

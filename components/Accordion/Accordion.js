@@ -10,7 +10,7 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 // @material-ui/icons
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
-import { useStyles } from "static/jss/la-flamme-connectee/components/accordionStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/components/accordionStyle";
 
 export default function Accordion(props) {
   const [active, setActive] = React.useState(props.active.length === undefined ? [props.active] : props.active);

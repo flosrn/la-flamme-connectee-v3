@@ -11,7 +11,7 @@ import ListItem from "@material-ui/core/ListItem";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 
-import styles from "static/jss/la-flamme-connectee/components/footerStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/footerStyle.js";
 
 const useStyles = makeStyles(styles);
 

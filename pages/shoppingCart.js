@@ -7,7 +7,7 @@ import LayoutPage from "components/Page/LayoutPage";
 // sections
 import ContactSection from "src/sections/HomePage/ContactSection";
 // images
-import backgroundImage from "static/img/contura/background-contura3.jpg";
+import backgroundImage from "public/img/contura/background-contura3.jpg";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -40,13 +40,13 @@ import Button from "components/CustomButtons/Button";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 
-import product1 from "static/img/objects/detourage/volcano-flam_front.png";
-import product2 from "static/img/objects/detourage/volcano-trio.png";
-import product3 from "static/img/objects/detourage/flam-connect-pack.png";
+import product1 from "public/img/objects/detourage/volcano-flam_front.png";
+import product2 from "public/img/objects/detourage/volcano-trio.png";
+import product3 from "public/img/objects/detourage/flam-connect-pack.png";
 import axios from "axios";
-import { cardTitle } from "static/jss/la-flamme-connectee";
+import { cardTitle } from "public/jss/la-flamme-connectee";
 import ShoppingCart from "@material-ui/core/SvgIcon/SvgIcon";
-import svg1 from "../static/img/svg/undraw_add_to_cart_vkjp.svg";
+import svg1 from "../public/img/svg/undraw_add_to_cart_vkjp.svg";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 
 const useStyles = makeStyles(theme => ({

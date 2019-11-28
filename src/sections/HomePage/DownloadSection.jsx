@@ -6,7 +6,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles, Hidden, Typography } from "@material-ui/core";
 // import constants style
-import { title } from "static/jss/la-flamme-connectee";
+import { title } from "public/jss/la-flamme-connectee";
 // @material-ui/icons
 import { Wifi, Category, PhonelinkRing, Whatshot, Android } from "@material-ui/icons";
 // core components
@@ -15,7 +15,7 @@ import GridItem from "components/Grid/GridItem";
 import InfoArea from "components/InfoArea/InfoArea";
 import Button from "components/CustomButtons/Button";
 // logo
-import Logo from "static/img/logo/laflammeco.png";
+import Logo from "public/img/logo/laflammeco.png";
 
 // style for this page
 const useStyles = makeStyles(theme => ({

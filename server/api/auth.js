@@ -31,8 +31,6 @@ export const getSessionFromServer = async ctx => {
   const { token } = await nextCookie(ctx);
 
   const apiUrl = `${getHost()}/users/profile`;
-  // const apiUrl = `${process.env.API_URL}/users/profile`;
-  console.log("apiUrl : ", apiUrl);
 
   let currentUser = {};
 

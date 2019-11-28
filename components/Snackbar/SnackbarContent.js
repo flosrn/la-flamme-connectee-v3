@@ -10,7 +10,7 @@ import Icon from "@material-ui/core/Icon";
 import Close from "@material-ui/icons/Close";
 // core components
 
-import styles from "static/jss/la-flamme-connectee/components/snackbarContentStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/snackbarContentStyle.js";
 
 const useStyles = makeStyles(styles);
 

@@ -14,7 +14,7 @@ import Clear from "@material-ui/icons/Clear";
 import Check from "@material-ui/icons/Check";
 // core components
 
-import styles from "static/jss/la-flamme-connectee/components/customInputStyle";
+import styles from "public/jss/la-flamme-connectee/components/customInputStyle";
 
 const useStyles = makeStyles(styles);
 

@@ -4,8 +4,8 @@ import MediaSvg from "components/Media/MediaSvg";
 import LayoutPage from "components/Page/LayoutPage";
 // sections
 // images
-import backgroundImage from "static/img/contura/background-contura2.jpg";
-import svg1 from "static/img/svg/undraw_add_to_cart_vkjp.svg";
+import backgroundImage from "public/img/contura/background-contura2.jpg";
+import svg1 from "public/img/svg/undraw_add_to_cart_vkjp.svg";
 import axios from "axios";
 import ProductSection from "../src/sections/HomePage/ProductsSection";
 import getHost from "../server/api/get-host";

@@ -6,7 +6,7 @@ import classNames from "classnames";
 // @material-ui/core components
 import Icon from "@material-ui/core/Icon";
 
-import { useStyles } from "static/jss/la-flamme-connectee/components/infoStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/components/infoStyle";
 
 export default function InfoArea(props) {
   const { title, description, iconColor, vertical, className } = props;

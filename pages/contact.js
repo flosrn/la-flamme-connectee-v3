@@ -5,8 +5,8 @@ import LayoutPage from "components/Page/LayoutPage";
 // sections
 import ContactSection from "src/sections/HomePage/ContactSection";
 // images
-import backgroundImage from "static/img/contura/background-contura3.jpg";
-import svg1 from "../static/img/svg/undraw_contact_us_15o2.svg";
+import backgroundImage from "public/img/contura/background-contura3.jpg";
+import svg1 from "../public/img/svg/undraw_contact_us_15o2.svg";
 
 function ContactPage() {
   return (

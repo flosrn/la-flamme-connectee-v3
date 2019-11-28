@@ -19,13 +19,13 @@ import MediaSvg from "components/Media/MediaSvg";
 import PresentationSection from "src/sections/HomePage/PresentationSection";
 import CarouselSection from "src/sections/HomePage/CarouselSection";
 // images
-import backgroundImage from "static/img/flamco/flamco-main-dark.jpg";
-import logo from "static/img/logo/laflammeco.png";
-import lepine from "static/img/logo/lepine-double.png";
-import svg from "static/img/svg/undraw_smart_home_28oy.svg";
+import backgroundImage from "public/img/flamco/flamco-main-dark.jpg";
+import logo from "public/img/logo/laflammeco.png";
+import lepine from "public/img/logo/lepine-double.png";
+import svg from "public/img/svg/undraw_smart_home_28oy.svg";
 // style for this page
-import { useStyles } from "static/jss/la-flamme-connectee/views/homePage";
-import svg3 from "static/img/svg/undraw_team_page_pgpr.svg";
+import { useStyles } from "public/jss/la-flamme-connectee/views/homePage";
+import svg3 from "public/img/svg/undraw_team_page_pgpr.svg";
 import ProjectSection from "../src/sections/HomePage/ProjectSection";
 import TeamSection from "../src/sections/HomePage/TeamSection";
 import AlertDialogSlide from "../components/Alert/AlertDialogVideoSlide";
@@ -73,9 +73,10 @@ function HomePage({ currentUser, isLoggedIn }) {
         fixed
         user={currentUser}
         isLoggedIn={isLoggedIn}
+        hiddenLogo={true}
         changeColorOnScroll={{
-          height: 100,
-          color: "white",
+          height: 300,
+          color: "dark",
           navColor: "black"
         }}
       />

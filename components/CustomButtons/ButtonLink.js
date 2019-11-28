@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-import { useStyles } from "static/jss/la-flamme-connectee/components/buttonStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/components/buttonStyle";
 
 const ButtonLink = React.forwardRef((props, ref) => {
   const {

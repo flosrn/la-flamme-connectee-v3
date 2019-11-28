@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import styles from "static/jss/la-flamme-connectee/components/cardStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/cardStyle.js";
 
 const useStyles = makeStyles(styles);
 

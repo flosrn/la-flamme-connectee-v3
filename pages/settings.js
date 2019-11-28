@@ -23,6 +23,7 @@ import Cookies from "js-cookie";
 import { authInitialProps } from "../server/api/auth";
 import HomePage from "./index";
 import getHost from "../server/api/get-host";
+import { withAuthSync } from "../server/api/withAuth";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -242,10 +243,10 @@ function SettingsPage({ currentUser, isLoggedIn }) {
   );
 }
 
-SettingsPage.getInitialProps = async ctx => {
-  const { currentUser } = await authInitialProps(ctx);
-  const isLoggedIn = Object.keys(currentUser).length !== 0;
-  return { currentUser, isLoggedIn };
-};
+// SettingsPage.getInitialProps = async ctx => {
+//   const { currentUser } = await authInitialProps(ctx);
+//   const isLoggedIn = Object.keys(currentUser).length !== 0;
+//   return { currentUser, isLoggedIn };
+// };
 
-export default SettingsPage;
+export default withAuthSync(SettingsPage);

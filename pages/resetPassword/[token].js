@@ -5,18 +5,19 @@ import { Typography, Divider, Avatar } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import LockOutlined from "@material-ui/icons/LockOutlined";
 
-import stove from "static/img/contura/contura2.jpg";
+import stove from "public/img/contura/contura2.jpg";
 
 import Page from "components/Page";
 import gradients from "utils/gradients";
 import LoginForm from "src/sections/LoginPage/components/LoginForm";
 // import Card from "../components/Card/Card";
 import CardBody from "components/Card/CardBody";
-import { blackColor, hexToRgb } from "static/jss/la-flamme-connectee";
+import { blackColor, hexToRgb } from "public/jss/la-flamme-connectee";
 import GridContainer from "components/Grid/GridContainer";
 import Card from "components/Card/Card";
 import GridItem from "components/Grid/GridItem";
 import ResetForm from "src/sections/ResetPage/components/ResetForm";
+import LoginPage from "../login";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,23 +68,19 @@ function ResetPassword({ token }) {
   const classes = useStyles();
 
   return (
-    <GridContainer className={classes.root}>
-      <GridItem sm={8} md={6} lg={4}>
-        <Card className={classes.card}>
-          <CardBody className={classes.content}>
-            <LockIcon className={classes.icon} />
+    <LoginPage>
+      <CardBody className={classes.content}>
+        <LockIcon className={classes.icon} />
 
-            <Typography gutterBottom variant="h3">
-              Réinitialisation de mot de passe
-            </Typography>
-            <Typography variant="subtitle2">Entrez un nouveau mot de passe pour vous connecter</Typography>
-            <ResetForm className={classes.loginForm} token={token} />
+        <Typography gutterBottom variant="h4">
+          Réinitialisation de mot de passe
+        </Typography>
+        <Typography variant="subtitle2">Entrez un nouveau mot de passe pour vous connecter</Typography>
+        <ResetForm className={classes.loginForm} token={token} />
 
-            <Divider className={classes.divider} />
-          </CardBody>
-        </Card>
-      </GridItem>
-    </GridContainer>
+        <Divider className={classes.divider} />
+      </CardBody>
+    </LoginPage>
   );
 }
 

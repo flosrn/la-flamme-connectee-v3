@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 // core components
 import Button from "components/CustomButtons/Button.js";
 
-import defaultImage from "static/img/image_placeholder.jpg";
-import defaultAvatar from "static/img/placeholder.jpg";
+import defaultImage from "public/img/image_placeholder.jpg";
+import defaultAvatar from "public/img/placeholder.jpg";
 
 export default function ImageUpload(props) {
   const [file, setFile] = React.useState(null);

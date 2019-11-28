@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { makeStyles } from "@material-ui/core/styles";
 
 // core components
-import styles from "static/jss/la-flamme-connectee/components/parallaxStyle";
+import styles from "public/jss/la-flamme-connectee/components/parallaxStyle";
 
 const useStyles = makeStyles(styles);
 

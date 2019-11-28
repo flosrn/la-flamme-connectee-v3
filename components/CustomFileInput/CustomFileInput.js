@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Button from "components/CustomButtons/Button.js";
 
-import styles from "static/jss/la-flamme-connectee/components/customFileInputStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/customFileInputStyle.js";
 
 const useStyles = makeStyles(styles);
 

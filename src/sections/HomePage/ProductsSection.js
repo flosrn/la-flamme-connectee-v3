@@ -8,16 +8,16 @@ import Accordion from "components/Accordion/Accordion";
 // icons
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 // images
-import product1 from "static/img/objects/detourage/volcano-flam_front-2.png";
-import product2 from "static/img/objects/detourage/flam-connect-pack.png";
-import product3 from "static/img/objects/detourage/flamconnect_back.png";
-import product4 from "static/img/objects/detourage/flamconnect_front.png";
-import product5 from "static/img/objects/detourage/volcano-trio.png";
-import product6 from "static/img/objects/detourage/volcano-pack_front.png";
-import product7 from "static/img/objects/detourage/volcano-pack_top.png";
+import product1 from "public/img/objects/detourage/volcano-flam_front-2.png";
+import product2 from "public/img/objects/detourage/flam-connect-pack.png";
+import product3 from "public/img/objects/detourage/flamconnect_back.png";
+import product4 from "public/img/objects/detourage/flamconnect_front.png";
+import product5 from "public/img/objects/detourage/volcano-trio.png";
+import product6 from "public/img/objects/detourage/volcano-pack_front.png";
+import product7 from "public/img/objects/detourage/volcano-pack_top.png";
 import Divider from "@material-ui/core/Divider";
 // styles
-import { useStyles } from "static/jss/la-flamme-connectee/views/productStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/views/productStyle";
 // contexts
 import { ShoppingCartContext } from "src/contexts/ShoppingCartContext";
 

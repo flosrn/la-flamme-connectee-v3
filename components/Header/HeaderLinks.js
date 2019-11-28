@@ -51,7 +51,7 @@ import Error from "@material-ui/icons/Error";
 import CustomDropdown from "components/CustomDropdown/CustomDropdown";
 import Button from "components/CustomButtons/Button";
 
-import styles from "static/jss/la-flamme-connectee/components/headerLinksStyle";
+import styles from "public/jss/la-flamme-connectee/components/headerLinksStyle";
 
 import axios from "axios";
 import Swal from "sweetalert2";

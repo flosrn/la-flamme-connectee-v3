@@ -2,7 +2,7 @@ import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import { container, grayColor, main, mainRaised, mlAuto, section, title } from "static/jss/la-flamme-connectee";
+import { container, grayColor, main, mainRaised, mlAuto, section, title } from "public/jss/la-flamme-connectee";
 // @material-ui/core components
 import { IconButton } from "@material-ui/core";
 // @material-ui/icons

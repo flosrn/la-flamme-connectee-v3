@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 // core components
 
-import styles from "static/jss/la-flamme-connectee/components/mediaStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/mediaStyle.js";
 
 const useStyles = makeStyles(styles);
 

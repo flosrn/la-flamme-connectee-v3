@@ -19,7 +19,7 @@ import {
   blackColor,
   grayColor,
   hexToRgb
-} from "static/jss/la-flamme-connectee";
+} from "public/jss/la-flamme-connectee";
 
 const useStyles = makeStyles(theme => ({
   timeline: {

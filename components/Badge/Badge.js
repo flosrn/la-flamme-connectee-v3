@@ -4,7 +4,7 @@ import classNames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 
-import { useStyles } from "static/jss/la-flamme-connectee/components/badgeStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/components/badgeStyle";
 
 export default function Badge(props) {
   const { color, children, className } = props;

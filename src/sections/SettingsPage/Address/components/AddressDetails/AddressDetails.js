@@ -6,7 +6,7 @@ import { CardContent, CardActions, Avatar, Typography } from "@material-ui/core"
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import Button from "components/CustomButtons/Button.js";
-import flo from "static/img/faces/Florian.jpg";
+import flo from "public/img/faces/Florian.jpg";
 import CardAvatar from "components/Card/CardAvatar";
 import CardFooter from "components/Card/CardFooter";
 import { ToggleContext } from "../../../../../contexts/toggle.context";

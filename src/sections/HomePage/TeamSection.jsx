@@ -17,13 +17,13 @@ import Button from "components/CustomButtons/Button";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 
-import { useStyles } from "static/jss/la-flamme-connectee/views/homePageSections/teamStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections/teamStyle";
 // img
-import team1 from "static/img/faces/Patrick.jpg";
-import team2 from "static/img/faces/Marie.jpg";
-import team3 from "static/img/faces/Florian.jpg";
+import team1 from "public/img/faces/Patrick.jpg";
+import team2 from "public/img/faces/Marie.jpg";
+import team3 from "public/img/faces/Florian.jpg";
 // import colors
-import { facebookColor, instagramColor, linkedinColor, twitterColor } from "static/jss/la-flamme-connectee";
+import { facebookColor, instagramColor, linkedinColor, twitterColor } from "public/jss/la-flamme-connectee";
 
 import MediaSvg from "../../../components/Media/MediaSvg";
 

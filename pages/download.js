@@ -6,9 +6,9 @@ import LayoutPage from "components/Page/LayoutPage";
 import DownloadSection from "src/sections/HomePage/DownloadSection";
 import ConnectSection from "src/sections/HomePage/ConnectSection";
 // images
-import backgroundImage from "static/img/contura/background-contura4.jpg";
-import svg1 from "static/img/svg/undraw_download_pc33.svg";
-import svg2 from "static/img/svg/undraw_signal_searching_bhpc.svg";
+import backgroundImage from "public/img/contura/background-contura4.jpg";
+import svg1 from "public/img/svg/undraw_download_pc33.svg";
+import svg2 from "public/img/svg/undraw_signal_searching_bhpc.svg";
 
 function DownloadPage() {
   return (

@@ -5,14 +5,14 @@ import { Typography, Divider, Avatar } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import LockOutlined from "@material-ui/icons/LockOutlined";
 
-import stove from "static/img/contura/contura2.jpg";
+import stove from "public/img/contura/contura2.jpg";
 
 import Page from "components/Page";
 import gradients from "utils/gradients";
 import LoginForm from "src/sections/LoginPage/components/LoginForm";
 // import Card from "../components/Card/Card";
 import CardBody from "components/Card/CardBody";
-import { blackColor, hexToRgb } from "static/jss/la-flamme-connectee";
+import { blackColor, hexToRgb } from "public/jss/la-flamme-connectee";
 import GridContainer from "components/Grid/GridContainer";
 import Card from "components/Card/Card";
 import GridItem from "components/Grid/GridItem";

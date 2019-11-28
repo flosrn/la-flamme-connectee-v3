@@ -6,7 +6,7 @@ import { CardContent, CardActions, Avatar, Typography } from "@material-ui/core"
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import Button from "components/CustomButtons/Button.js";
-import flo from "static/img/faces/Florian.jpg";
+import flo from "public/img/faces/Florian.jpg";
 import CardAvatar from "components/Card/CardAvatar";
 import CardFooter from "components/Card/CardFooter";
 import Box from "@material-ui/core/Box";
@@ -14,7 +14,7 @@ import GridItem from "components/Grid/GridItem";
 import PictureUpload from "components/CustomUpload/PictureUpload";
 import GridContainer from "components/Grid/GridContainer";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import svg1 from "static/img/svg/undraw_personal_info_0okl.svg";
+import svg1 from "public/img/svg/undraw_personal_info_0okl.svg";
 import MediaSvg from "../../../../../../components/Media/MediaSvg";
 
 const useStyles = makeStyles(theme => ({

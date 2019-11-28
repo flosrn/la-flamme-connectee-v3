@@ -10,7 +10,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 
-import { useStyles } from "static/jss/la-flamme-connectee/components/tableStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/components/tableStyle";
 
 export default function CustomTable(props) {
   const {

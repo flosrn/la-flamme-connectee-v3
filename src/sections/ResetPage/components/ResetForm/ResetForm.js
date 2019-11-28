@@ -66,7 +66,7 @@ function ResetForm({ token, className, ...rest }) {
           confirmButtonColor: "#ff7961"
         }).then(result => {
           if (response.data.status === "success" && result.value) {
-            window.location.href = "/login";
+            window.location.href = "/login?action=login";
           }
         });
       });

@@ -1,6 +1,6 @@
 import React from "react";
 
-import defaultImage from "static/img/faces/default-avatar.png";
+import defaultImage from "public/img/faces/default-avatar.png";
 
 export default function PictureUpload() {
   const [file, setFile] = React.useState(null);

@@ -13,7 +13,7 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Timeline from "components/Timeline/Timeline";
 // style for this page
-import { useStyles } from "static/jss/la-flamme-connectee/views/homePageSections/howWorksStyle";
+import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections/howWorksStyle";
 // img
 // import Stove from "../../../static/img/stoves/stove-exemple.png";;
 // contexts

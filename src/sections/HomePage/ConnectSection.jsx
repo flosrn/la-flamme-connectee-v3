@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import constants style
-import { title } from "static/jss/la-flamme-connectee";
+import { title } from "public/jss/la-flamme-connectee";
 // @material-ui/icons
 import { HourglassEmpty, Whatshot, CloudOff } from "@material-ui/icons";
 // @material-ui/core
