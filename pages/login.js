@@ -30,6 +30,7 @@ import getHost from "../server/api/get-host";
 import redirectTo from "../src/lib/redirectTo";
 import ButtonLink from "../components/CustomButtons/ButtonLink";
 import ResetPassword from "./resetPassword/[token]";
+import FooterDark from "../components/Footer/FooterDark";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -39,10 +40,10 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "column"
     // background: `url(${stove}) no-repeat center center fixed`,
     // backgroundSize: "cover",
     // overflow: "hidden",
-    padding: theme.spacing(6, 2)
   },
   container: {
     display: "flex",
@@ -164,6 +165,7 @@ function LoginPage({ children }) {
           </Card>
         </GridItem>
       </GridContainer>
+      <FooterDark />
     </div>
   );
 }

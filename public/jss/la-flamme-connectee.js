@@ -311,7 +311,7 @@ const mainRaised = {
     marginRight: "10px",
     padding: "0 15px"
   },
-  margin: "-60px 30px 0px",
+  margin: "-60px 30px -70px",
   borderRadius: "6px",
   boxShadow: `0 16px 24px 2px rgba(${hexToRgb(blackColor)}, 0.14), 0 6px 30px 5px rgba(${hexToRgb(
     blackColor

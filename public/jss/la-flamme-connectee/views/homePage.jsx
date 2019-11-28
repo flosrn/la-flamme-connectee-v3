@@ -16,7 +16,7 @@ export const useStyles = makeStyles(theme => ({
   },
   mainRaised: {
     ...mainRaised,
-    margin: "-20px 120px 0px"
+    margin: "-20px 120px -70px"
   },
   parallax: {
     overflow: "hidden",

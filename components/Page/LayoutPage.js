@@ -12,6 +12,7 @@ import Header from "../Header/Header";
 import HeaderLinks from "../Header/HeaderLinks";
 import Parallax from "../Parallax/Parallax";
 import FooterCustom from "../Footer/FooterCustom";
+import FooterDark from "../Footer/FooterDark";
 
 const useStyles = makeStyles(theme => ({
   mlAuto,
@@ -104,9 +105,9 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition }
         links={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 120,
-          color: "white",
-          navColor: "dark"
+          height: 300,
+          color: "dark",
+          navColor: "black"
         }}
       />
       <Parallax filter="dark" image={backgroundImage} className={classes.parallax} style={{ backgroundPosition }} />
@@ -120,8 +121,8 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition }
             </div>
             {children}
           </div>
-          <FooterCustom />
         </div>
+        <FooterDark />
       </div>
     </div>
   );

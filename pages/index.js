@@ -31,6 +31,7 @@ import TeamSection from "../src/sections/HomePage/TeamSection";
 import AlertDialogSlide from "../components/Alert/AlertDialogVideoSlide";
 
 import { authInitialProps } from "../server/api/auth";
+import FooterDark from "../components/Footer/FooterDark";
 
 function HomePage({ currentUser, isLoggedIn }) {
   const [open, setOpen] = React.useState(false);
@@ -73,7 +74,7 @@ function HomePage({ currentUser, isLoggedIn }) {
         fixed
         user={currentUser}
         isLoggedIn={isLoggedIn}
-        hiddenLogo={true}
+        hiddenLogo
         changeColorOnScroll={{
           height: 300,
           color: "dark",
@@ -145,7 +146,7 @@ function HomePage({ currentUser, isLoggedIn }) {
         <TeamSection />
         <ProjectSection />
       </div>
-      <FooterCustom />
+      <FooterDark />
     </div>
   );
 }
