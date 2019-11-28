@@ -71,6 +71,8 @@ function HomePage({ currentUser, isLoggedIn }) {
         color="transparent"
         links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
         fixed
+        user={currentUser}
+        isLoggedIn={isLoggedIn}
         changeColorOnScroll={{
           height: 100,
           color: "white",

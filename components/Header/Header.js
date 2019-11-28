@@ -16,6 +16,8 @@ import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 import Close from "@material-ui/icons/Close";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import PersonIcon from "@material-ui/icons/Person";
+
 // core components
 import styles from "static/jss/la-flamme-connectee/components/headerStyle";
 import { Badge } from "@material-ui/core";
@@ -24,6 +26,7 @@ import { ShoppingCartContext } from "../../src/contexts/ShoppingCartContext";
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+  const { isLoggedIn, user } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
   const { items } = useContext(ShoppingCartContext);
@@ -69,6 +72,10 @@ export default function Header(props) {
         {/* </Button> */}
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
+          <IconButton color="inherit" onClick={handleDrawerToggle} className={classes.cartIcon}>
+            <PersonIcon className={classes.cartIcon} />
+            <p>{isLoggedIn && `${user.firstName} ${user.lastName}`}</p>
+          </IconButton>
           <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
             <Badge badgeContent={items.length} color="secondary">
               <ShoppingCartIcon className={classes.cartIcon} />

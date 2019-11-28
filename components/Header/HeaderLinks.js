@@ -23,6 +23,7 @@ import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import AssignmentInd from "@material-ui/icons/AssignmentInd";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import HelpIcon from "@material-ui/icons/Help";
 import ViewDay from "@material-ui/icons/ViewDay";
 import Dns from "@material-ui/icons/Dns";
 import Build from "@material-ui/icons/Build";
@@ -125,70 +126,100 @@ export default function HeaderLinks({ isLoggedIn, user, isEditSuccess, ...props 
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        {/*<Button component={ButtonLink} href="/" className={classes.navLink} color="transparent">*/}
-        {/*  <Home className={classes.icons} /> Accueil*/}
-        {/*</Button>*/}
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/documentation" className={classes.navLink} color="transparent">
-          <Description className={classes.icons} /> Documentation
+        <Button component={ButtonLink} href="/" className={classes.navLink} color="transparent">
+          <Home className={classes.icons} /> Accueil
         </Button>
       </ListItem>
+      {/*<ListItem className={classes.listItem}>*/}
+      {/*  <Button component={ButtonLink} href="/documentation" className={classes.navLink} color="transparent">*/}
+      {/*    <Description className={classes.icons} /> Documentation*/}
+      {/*  </Button>*/}
+      {/*</ListItem>*/}
       <ListItem className={classes.listItem}>
         <Button component={ButtonLink} href="/products" className={classes.navLink} color="transparent">
           <ShoppingBasketIcon className={classes.icons} /> Produits
         </Button>
       </ListItem>
+      {/*<ListItem className={classes.listItem}>*/}
+      {/*  <Button component={ButtonLink} href="/download" className={classes.navLink} color="transparent">*/}
+      {/*    <DownloadIcon className={classes.icons} /> Téléchargement*/}
+      {/*  </Button>*/}
+      {/*</ListItem>*/}
+      {/*<ListItem className={classes.listItem}>*/}
+      {/*  <Button component={ButtonLink} href="/contact" className={classes.navLink} color="transparent">*/}
+      {/*    <Mail className={classes.icons} /> Contact*/}
+      {/*  </Button>*/}
+      {/*</ListItem>*/}
       <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/download" className={classes.navLink} color="transparent">
-          <DownloadIcon className={classes.icons} /> Téléchargement
-        </Button>
+        <CustomDropdown
+          noLiPadding
+          navDropdown
+          hoverColor={dropdownHoverColor}
+          buttonText="Aide"
+          buttonProps={{
+            className: classes.navLink,
+            color: "transparent"
+          }}
+          buttonIcon={HelpIcon}
+          dropdownList={[
+            <Link href="/documentation">
+              <a className={classes.dropdownLink}>
+                <Description className={classes.dropdownIcons} /> Documentation
+              </a>
+            </Link>,
+            <Link href="/download">
+              <a className={classes.dropdownLink}>
+                <DownloadIcon className={classes.dropdownIcons} /> Téléchargement
+              </a>
+            </Link>,
+            <Link href="/contact">
+              <a className={classes.dropdownLink}>
+                <Mail className={classes.dropdownIcons} /> Contact
+              </a>
+            </Link>
+          ]}
+        />
       </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/contact" className={classes.navLink} color="transparent">
-          <Mail className={classes.icons} /> Contact
-        </Button>
-      </ListItem>
-      {isLoggedIn ? (
-        <>
-          <ListItem className={classes.listItem}>
-            <CustomDropdown
-              noLiPadding
-              navDropdown
-              hoverColor={dropdownHoverColor}
-              buttonText="Mon profil"
-              buttonProps={{
-                className: classes.navLink,
-                color: "transparent"
-              }}
-              buttonIcon={Apps}
-              dropdownList={[
-                <Link href="/settings" as="/settings?tab=profile">
-                  <a className={classes.dropdownLink}>
-                    <AccountCircle className={classes.dropdownIcons} /> {user.firstName} {user.lastName}
-                  </a>
-                </Link>,
-                <a className={classes.dropdownLink} onClick={handleLogout}>
-                  <ExitToApp className={classes.dropdownIcons} /> Déconnexion
-                </a>
-              ]}
-            />
-          </ListItem>
-        </>
-      ) : (
-        <>
-          <ListItem className={classes.listItem}>
-            <Button component={ButtonLink} href="/login" className={classes.navLink} color="transparent">
-              <AccountCircle className={classes.icons} /> Se Connecter
-            </Button>
-          </ListItem>
-          {/*<ListItem className={classes.listItem}>*/}
-          {/*  <Button component={ButtonLink} href="/signup" className={classes.navLink} color="transparent">*/}
-          {/*    <Assignment className={classes.icons} /> Inscription*/}
-          {/*  </Button>*/}
-          {/*</ListItem>*/}
-        </>
-      )}
+      {/*{isLoggedIn ? (*/}
+      {/*  <>*/}
+      {/*    <ListItem className={classes.listItem}>*/}
+      {/*      <CustomDropdown*/}
+      {/*        noLiPadding*/}
+      {/*        navDropdown*/}
+      {/*        hoverColor={dropdownHoverColor}*/}
+      {/*        buttonText="Mon profil"*/}
+      {/*        buttonProps={{*/}
+      {/*          className: classes.navLink,*/}
+      {/*          color: "transparent"*/}
+      {/*        }}*/}
+      {/*        buttonIcon={Apps}*/}
+      {/*        dropdownList={[*/}
+      {/*          <Link href="/settings" as="/settings?tab=profile">*/}
+      {/*            <a className={classes.dropdownLink}>*/}
+      {/*              <AccountCircle className={classes.dropdownIcons} /> {user.firstName} {user.lastName}*/}
+      {/*            </a>*/}
+      {/*          </Link>,*/}
+      {/*          <a className={classes.dropdownLink} onClick={handleLogout}>*/}
+      {/*            <ExitToApp className={classes.dropdownIcons} /> Déconnexion*/}
+      {/*          </a>*/}
+      {/*        ]}*/}
+      {/*      />*/}
+      {/*    </ListItem>*/}
+      {/*  </>*/}
+      {/*) : (*/}
+      {/*  <>*/}
+      {/*    <ListItem className={classes.listItem}>*/}
+      {/*      <Button component={ButtonLink} href="/login" className={classes.navLink} color="transparent">*/}
+      {/*        <AccountCircle className={classes.icons} /> Se Connecter*/}
+      {/*      </Button>*/}
+      {/*    </ListItem>*/}
+      {/*    /!*<ListItem className={classes.listItem}>*!/*/}
+      {/*    /!*  <Button component={ButtonLink} href="/signup" className={classes.navLink} color="transparent">*!/*/}
+      {/*    /!*    <Assignment className={classes.icons} /> Inscription*!/*/}
+      {/*    /!*  </Button>*!/*/}
+      {/*    /!*</ListItem>*!/*/}
+      {/*  </>*/}
+      {/*)}*/}
     </List>
   );
 }
