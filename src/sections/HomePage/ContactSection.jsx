@@ -88,7 +88,7 @@ function ContactSection({ ...props }) {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
-    axios.post(`${getHost()}/email/sendEmailForUs`, { name, email, content }).then(response => {
+    axios.post(`${getHost()}/email/sendContactEmail`, { name, email, content }).then(response => {
       Swal.fire({
         type: response.data.status,
         title: `${response.data.message}${response.data.status === "success" ?
@@ -158,9 +158,6 @@ function ContactSection({ ...props }) {
                     rows: 7
                   }}
                 />
-                {/*{content.length < 80 && (*/}
-                {/*  <span className={classes.textCount}>{80 - content.length}</span>*/}
-                {/*)}*/}
               </GridItem>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
@@ -190,7 +187,7 @@ function ContactSection({ ...props }) {
             description={
               <>
                 <a href="tel:+33 6 10 44 03 73">+33 6 10 44 03 73</a>
-                <p> Lun - Dim, 8:00-22:00</p>
+                <p> Lun - Dim, 8:00-20:00</p>
               </>
             }
             icon={Phone}

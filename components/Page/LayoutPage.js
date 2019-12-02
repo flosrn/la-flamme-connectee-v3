@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition }) {
+function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, user, isLoggedIn }) {
   const classes = useStyles();
 
   const easeInOutQuad = (t, b, c, d) => {
@@ -102,8 +102,10 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition }
       <Header
         color="transparent"
         brand="La Flamme Connectée"
-        links={<HeaderLinks />}
+        links={<HeaderLinks user={user} isLoggedIn={isLoggedIn} />}
         fixed
+        user={user}
+        isLoggedIn={isLoggedIn}
         changeColorOnScroll={{
           height: 300,
           color: "dark",

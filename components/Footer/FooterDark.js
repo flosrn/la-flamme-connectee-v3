@@ -13,6 +13,7 @@ import Button from "../CustomButtons/Button";
 import Footer from "./Footer";
 import GridContainer from "../Grid/GridContainer";
 import GridItem from "../Grid/GridItem";
+import SocialIcons from "../Icons/SocialIcons";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -96,6 +97,7 @@ const useStyles = makeStyles(theme => ({
   payments: {
     width: "95%",
     verticalAlign: "middle",
+    padding: "15px 0 0 0",
     [theme.breakpoints.down("sm")]: {
       width: "70%"
     }
@@ -117,6 +119,10 @@ const useStyles = makeStyles(theme => ({
         padding: "0 50px"
       }
     }
+  },
+  socials: {
+    padding: "15px 0",
+    margin: 0
   }
 }));
 
@@ -147,10 +153,9 @@ function FooterDark() {
               <i className="fas fa-envelope" style={{ marginRight: 5 }} /> Mail:{" "}
               <a href="mailto:contact@laflammeconnectee.fr">contact@laflammeconnectee.fr</a>
             </div>
-            <p>&nbsp;</p>
-            <p>
-              <img src={payments} alt="payments" className={classes.payments} />
-            </p>
+            <div className={classes.socials}>
+              <SocialIcons />
+            </div>
           </div>
         </GridItem>
         <GridItem xs={12} sm={6} md={3} lg={3} className={classes.gridItem}>
@@ -158,24 +163,32 @@ function FooterDark() {
           <div className={classes.itemContent}>
             <ul className={classes.menu}>
               <li>
-                <Link href="/">
+                <Link href="/products">
                   <a>Produits</a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/settings?tab=profile">
                   <a>Mon compte</a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/settings?tab=my-orders">
+                  <a>Suivi de vos commandes</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/documentation">
                   <a>Documentation</a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/download">
                   <a>Téléchargement</a>
                 </Link>
+              </li>
+              <li className={classes.payments}>
+                <img src={payments} alt="payments" />
               </li>
             </ul>
           </div>
@@ -185,18 +198,13 @@ function FooterDark() {
           <div className={classes.itemContent}>
             <ul className={classes.menu}>
               <li>
-                <Link href="/">
+                <Link href="/contact">
                   <a>Une question sur un produit ?</a>
                 </Link>
               </li>
               <li>
-                <Link href="/">
-                  <a>Suivi de vos commandes</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <a>Presse</a>
+                <Link href="/contact">
+                  <a>Signaler un problème</a>
                 </Link>
               </li>
             </ul>

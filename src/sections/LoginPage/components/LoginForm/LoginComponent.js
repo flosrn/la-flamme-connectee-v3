@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/styles";
 import { Typography, Divider, Avatar, Button } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
@@ -99,6 +100,7 @@ function LoginComponent({ clickHandler }) {
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [isForgot, setForgot] = useState(false);
+  const Router = useRouter();
 
   const handleChange = value => event => {
     value === "email" && setEmail(event.target.value);
@@ -116,8 +118,12 @@ function LoginComponent({ clickHandler }) {
         confirmButtonColor: "#ff7961"
       }).then(result => {
         if (response.data.status === "success" && result.value) {
-          // redirectTo("/");
-          window.location.href = "/";
+          const cart = Cookies.getJSON("cart");
+          if (cart.length > 0) {
+            Router.push("/shoppingCart").then(() => window.scrollTo(0, 0));
+          } else {
+            Router.push("/").then(() => window.scrollTo(0, 0));
+          }
         }
       });
       if (response.data.status === "success" && type !== "forgotPassword") {

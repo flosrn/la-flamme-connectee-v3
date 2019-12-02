@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/styles";
@@ -15,7 +17,13 @@ import PictureUpload from "components/CustomUpload/PictureUpload";
 import GridContainer from "components/Grid/GridContainer";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import svg1 from "public/img/svg/undraw_personal_info_0okl.svg";
+
+import axios from "axios";
+import Swal from "sweetalert2";
+import Cookies from "js-cookie";
+import getHost from "../../../../../../server/api/get-host";
 import MediaSvg from "../../../../../../components/Media/MediaSvg";
+import redirectTo from "../../../../../lib/redirectTo";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -61,6 +69,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ProfileDetails({ profile, isLoading }) {
+  const Router = useRouter();
+  const handleLogout = event => {
+    event.preventDefault();
+    axios.get(`${getHost()}/auth/logout`).then(response => {
+      Swal.fire({
+        type: response.data.status,
+        title: response.data.message,
+        timer: 4000
+      });
+      if (response.data.status === "success") {
+        Cookies.set("token", "loggedOut");
+        Router.push("/login?action=login");
+      }
+    });
+  };
+
   const classes = useStyles();
   return (
     <GridContainer alignItems="center" justify="center">
@@ -68,7 +92,6 @@ function ProfileDetails({ profile, isLoading }) {
         <MediaSvg src={svg1} size="large" />
       </GridItem>
       <GridItem xs={12} sm={12} md={6} className={classes.content}>
-        {/* <CardContent> */}
         {isLoading ? (
           <CircularProgress className={classes.progress} />
         ) : (
@@ -87,7 +110,11 @@ function ProfileDetails({ profile, isLoading }) {
         <Typography color="textSecondary" variant="body1">
           {profile.role !== "user" ? profile.role : null}
         </Typography>
-        {/* </CardContent> */}
+        <Button onClick={handleLogout} color="transparent" className={classes.logout}>
+          <Link href="/login?action=login">
+            <a>Se déconnecter</a>
+          </Link>
+        </Button>
       </GridItem>
     </GridContainer>
   );

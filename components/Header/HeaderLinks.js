@@ -66,22 +66,6 @@ import ButtonLink from "../CustomButtons/ButtonLink";
 import getHost from "../../server/api/get-host";
 
 export default function HeaderLinks({ isLoggedIn, user, isEditSuccess, ...props }) {
-  const handleLogout = event => {
-    event.preventDefault();
-    axios.get(`${getHost()}/auth/logout`).then(response => {
-      console.log("response : ", response);
-      Swal.fire({
-        type: response.data.status,
-        title: response.data.message,
-        timer: 4000
-      });
-      if (response.data.status === "success") {
-        Cookies.set("token", "loggedOut");
-      }
-      redirectTo("/");
-    });
-  };
-
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
     if (t < 1) return (c / 2) * t * t + b;

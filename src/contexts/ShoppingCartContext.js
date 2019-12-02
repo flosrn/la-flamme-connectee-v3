@@ -16,15 +16,16 @@ export function ShoppingCartProvider({ children }) {
 
   useEffect(() => {
     const cart = Cookies.getJSON("cart");
-    console.log("cart from cookies : ", cart);
-
+    const cartTotal = Cookies.getJSON("cartTotal");
     if (cart && cart.length > 0) {
       setItems(cart);
+      setTotal(cartTotal);
     }
   }, []);
 
   useEffect(() => {
     Cookies.set("cart", items);
+    Cookies.set("cartTotal", total);
   }, [items]);
 
   const addItem = product => {
@@ -37,31 +38,26 @@ export function ShoppingCartProvider({ children }) {
         items.map(item => (item.id === newItem.id ? Object.assign({}, item, { quantity: item.quantity + 1 }) : item))
       );
     }
+    setTotal(total + product.price);
   };
 
   const removeItem = product => {
-    const itemIndex = items.find(item => item.id === product.id);
-    if (itemIndex && itemIndex.quantity > 1) {
+    const newItem = items.find(item => item.id === product.id);
+    if (newItem && newItem.quantity > 1) {
       setItems(
-        items.map(item => (item.id === itemIndex.id ? Object.assign({}, item, { quantity: item.quantity - 1 }) : item))
+        items.map(item => (item.id === newItem.id ? Object.assign({}, item, { quantity: item.quantity - 1 }) : item))
       );
-    }
-  };
-
-  const deleteItem = productId => {
-    if (items.length > 1) {
-      items.map(item => {
-        if (item.id === productId) {
-          setItems(items.splice(item, 1));
-        }
-      });
     } else {
-      setItems([]);
+      const itemsDestructured = [...items];
+      const index = itemsDestructured.findIndex(item => item.id === newItem.id);
+      itemsDestructured.splice(index, 1);
+      setItems(itemsDestructured);
     }
+    setTotal(total - product.price);
   };
 
   return (
-    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, deleteItem, total }}>
+    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, total }}>
       {children}
     </ShoppingCartContext.Provider>
   );

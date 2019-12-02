@@ -20,6 +20,7 @@ import svg3 from "public/img/svg/undraw_Savings_dwkw.svg";
 // animations
 import { Controller, Scene } from "react-scrollmagic";
 import { Tween } from "react-gsap";
+import lepine from "../../../public/img/logo/lepine-black.png";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -44,6 +45,9 @@ const useStyles = makeStyles(theme => ({
         flexDirection: "column-reverse"
       }
     }
+  },
+  lepine: {
+    width: 215,
   }
 }));
 

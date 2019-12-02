@@ -12,9 +12,9 @@ export const auth = ctx => {
   const { token } = nextCookie(ctx);
 
   // If there's no token, it means the user is not logged in.
-  if (!token) {
+  if (!token || token === "loggedOut") {
     if (typeof window === "undefined") {
-      ctx.res.writeHead(302, { Location: "/login" });
+      ctx.res.writeHead(302, { Location: "/login?action=login" });
       ctx.res.end();
     } else {
       Router.push("/login");
@@ -36,7 +36,7 @@ export const withAuthSync = WrappedComponent => {
     const syncLogout = event => {
       if (event.key === "logout") {
         console.log("logged out from storage!");
-        Router.push("/login");
+        Router.push("/login?action=login");
       }
     };
 

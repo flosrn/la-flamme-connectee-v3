@@ -1,4 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
+import { useRouter } from "next/router";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -40,16 +42,23 @@ import Button from "components/CustomButtons/Button";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 
-import product1 from "public/img/objects/detourage/volcano-flam_front.png";
 import product2 from "public/img/objects/detourage/volcano-trio.png";
 import product3 from "public/img/objects/detourage/flam-connect-pack.png";
 import axios from "axios";
 import { cardTitle } from "public/jss/la-flamme-connectee";
 import ShoppingCart from "@material-ui/core/SvgIcon/SvgIcon";
+import Swal from "sweetalert2";
 import svg1 from "../public/img/svg/undraw_add_to_cart_vkjp.svg";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
+import { authInitialProps } from "../server/api/auth";
+import HomePage from "./index";
+import getHost from "../server/api/get-host";
+import FooterDark from "../components/Footer/FooterDark";
 
 const useStyles = makeStyles(theme => ({
+  container: {
+    marginTop: -50
+  },
   cardTitle,
   cardItem: {
     padding: "10px",
@@ -156,39 +165,53 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ShoppingCartPage() {
-  const [stripe, setStripe] = useState(null);
-  const { items, addItem, removeItem, deleteItem } = useContext(ShoppingCartContext);
+function ShoppingCartPage({ currentUser, isLoggedIn }) {
+  const { items, addItem, removeItem, total } = useContext(ShoppingCartContext);
   const classes = useStyles();
-
-  useEffect(() => {
-    setStripe(window.Stripe(process.env.STRIPE_PUBLIC_KEY_TEST));
-  }, []);
-
-  const goToCheckout = () => {
-    const values = {
-      name: "flo"
-    };
-    axios
-      .post("/api/checkout/getCheckoutSession", values)
-      .then(response => {
-        stripe.redirectToCheckout({
-          sessionId: response.data.id
-        });
-      })
-      .catch(error => {
-        console.log("error : ", error);
-      });
-  };
+  const Router = useRouter();
 
   const login = () => {
-    console.log("x : ");
+    if (isLoggedIn) {
+      // goToCheckout();
+      Router.push("/checkout").then(() => window.scrollTo(0, 0));
+    } else {
+      Swal.fire({
+        title: "Veuillez vous connecter pour effectuer cet achat",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Se connecter",
+        cancelButtonText: "S'inscrire",
+        confirmButtonColor: "#ff7961",
+        reverseButtons: true
+      }).then(result => {
+        if (result.value) {
+          Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          Router.push("/login?action=register").then(() => window.scrollTo(0, 0));
+        }
+      });
+    }
   };
 
   return (
-    <LayoutPage backgroundImage={backgroundImage} sectionId="contact" backgroundPosition="30% 85%">
-      <MediaSvg src={svg1} alt="contact-us" size="medium" mt={30} />
-      <div className={classes.container}>
+    <div className={classes.root}>
+      <Header
+        color="dark"
+        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
+        fixed
+        user={currentUser}
+        isLoggedIn={isLoggedIn}
+      />
+      <GridContainer justify="center">
+        <GridItem xs={8} sm={10} md={10} lg={8}>
+          <MediaSvg src={svg1} alt="contact-us" size="small" mt={100} />
+        </GridItem>
+      </GridContainer>
+      <div className={classes.container} id="shoppingCart">
         <Card plain>
           <CardBody className={classes.cardBody}>
             <h3 className={classes.cardTitle}>Votre panier</h3>
@@ -196,11 +219,11 @@ function ShoppingCartPage() {
               <GridItem md={6}>
                 {items.length > 0 ? (
                   items.map(item => (
-                    <Card className={classes.cardItem}>
+                    <Card className={classes.cardItem} key={item.id}>
                       <GridContainer className={classes.gridContainer}>
                         <GridItem sm={4} className={classes.cardColumn}>
                           <div className={classes.cardPicture}>
-                            <img src={product1} alt="product" />
+                            <img src={item.images[0].original} alt="product" />
                           </div>
                           <div className={classes.cardName}>{item.name}</div>
                         </GridItem>
@@ -222,17 +245,13 @@ function ShoppingCartPage() {
 
                         <GridItem sm={4} className={classes.cardColumn}>
                           <div className={classes.columnName}>Prix</div>
-                          <div className={classes.columnContent}>100</div>
+                          <div className={classes.columnContent}>{item.price} €</div>
                         </GridItem>
                       </GridContainer>
 
-                      <IconButton
-                        color="secondary"
-                        className={classes.deleteButton}
-                        onClick={() => deleteItem(item.id)}
-                      >
-                        <ClearIcon />
-                      </IconButton>
+                      {/* <IconButton color="secondary" className={classes.deleteButton} onClick={() => deleteItem(item)}> */}
+                      {/*  <ClearIcon /> */}
+                      {/* </IconButton> */}
                     </Card>
                   ))
                 ) : (
@@ -247,11 +266,11 @@ function ShoppingCartPage() {
                   <div className={classes.cardRow}>
                     <div className={classes.rowTotal}>
                       <div className={classes.rowName}>Total</div>
-                      <div className={classes.rowContent}>100</div>
+                      <div className={classes.rowContent}>{Math.floor(total) >= 0 ? Math.floor(total) : 0} €</div>
                     </div>
                     <div className={classes.rowPurchase}>
                       <div className={classes.purchaseButton}>
-                        <Button round color="secondary" onClick={login}>
+                        <Button round color="secondary" disabled={items.length <= 0} onClick={login}>
                           Passer commande <KeyboardArrowRight />
                         </Button>
                       </div>
@@ -283,8 +302,15 @@ function ShoppingCartPage() {
           </CardBody>
         </Card>
       </div>
-    </LayoutPage>
+      <FooterDark />
+    </div>
   );
 }
+
+ShoppingCartPage.getInitialProps = async ctx => {
+  const { currentUser } = await authInitialProps(ctx);
+  const isLoggedIn = Object.keys(currentUser).length !== 0;
+  return { currentUser, isLoggedIn };
+};
 
 export default ShoppingCartPage;

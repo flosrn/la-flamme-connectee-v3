@@ -19,7 +19,8 @@
       "SENDGRID_PASSWORD": "@sendgrid-password",
 
       "STRIPE_PUBLIC_KEY_TEST": "@stripe-public-key-test",
-      "STRIPE_SECRET_KEY_TEST": "@stripe-secret-key-test"
+      "STRIPE_SECRET_KEY_TEST": "@stripe-secret-key-test",
+      "STRIPE_WEBHOOK_SECRET_TEST": "@stripe-webhook-secret-test"
     }
   }
 }

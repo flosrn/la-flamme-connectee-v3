@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/styles";
 import { Tabs, Tab, Divider, colors } from "@material-ui/core";
 
 import Headers from "components/Header/Header";
-import { Header, Profile, Address, Security, Options } from "src/sections/SettingsPage";
+import { Header, Profile, Address, Security, Orders } from "src/sections/SettingsPage";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Card from "components/Card/Card";
@@ -19,11 +19,11 @@ import axioswal from "axioswal";
 import axios from "axios";
 import Swal from "sweetalert2";
 import HeaderLinks from "components/Header/HeaderLinks";
-import Cookies from "js-cookie";
 import { authInitialProps } from "../server/api/auth";
 import HomePage from "./index";
 import getHost from "../server/api/get-host";
 import { withAuthSync } from "../server/api/withAuth";
+import FooterDark from "../components/Footer/FooterDark";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -103,6 +103,7 @@ function SettingsPage({ currentUser, isLoggedIn }) {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    console.log("values : ", values);
     setLoading(true);
     axios
       .patch(`${getHost()}/users/updateProfile`, {
@@ -132,8 +133,10 @@ function SettingsPage({ currentUser, isLoggedIn }) {
   // ========== FORM VALIDATION ========== //
 
   useEffect(() => {
-    const errors = validate(values.address, schema);
-    setErrors(errors || {});
+    if (values.address) {
+      const errors = validate(values.address, schema);
+      setErrors(errors || {});
+    }
   }, [values]);
 
   const hasError = field => !!(touched[field] && errors[field]);
@@ -144,7 +147,7 @@ function SettingsPage({ currentUser, isLoggedIn }) {
     { value: "profile", label: "Profil" },
     { value: "address", label: "Adresse" },
     { value: "security", label: "Sécurité" },
-    { value: "options", label: "Options" }
+    { value: "my-orders", label: "Mes commandes" }
   ];
 
   const Router = useRouter();
@@ -162,7 +165,7 @@ function SettingsPage({ currentUser, isLoggedIn }) {
       case tabName === "security":
         setTabTitle("Modifiez le mot de passe de votre compte");
         break;
-      case tabName === "options":
+      case tabName === "my-orders":
         setTabTitle("Gérez les options de votre compte");
         break;
       default:
@@ -189,11 +192,8 @@ function SettingsPage({ currentUser, isLoggedIn }) {
         brand="La Flamme Connectée"
         links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
         fixed
-        changeColorOnScroll={{
-          height: 650,
-          color: "white",
-          navColor: "black"
-        }}
+        user={currentUser}
+        isLoggedIn={isLoggedIn}
       />
       <GridContainer className={classes.container} direction="column" justify="center" alignItems="center" spacing={0}>
         <GridItem xs={12} sm={10} lg={6}>
@@ -234,19 +234,20 @@ function SettingsPage({ currentUser, isLoggedIn }) {
                 />
               )}
               {tab === "security" && <Security userId={currentUser._id} />}
-              {/* {tab === "options" && <Options />} */}
+              {tab === "my-orders" && <Orders user={currentUser} />}
             </div>
           </Card>
         </GridItem>
       </GridContainer>
+      <FooterDark />
     </div>
   );
 }
 
-// SettingsPage.getInitialProps = async ctx => {
-//   const { currentUser } = await authInitialProps(ctx);
-//   const isLoggedIn = Object.keys(currentUser).length !== 0;
-//   return { currentUser, isLoggedIn };
-// };
+SettingsPage.getInitialProps = async ctx => {
+  const { currentUser } = await authInitialProps(ctx);
+  const isLoggedIn = Object.keys(currentUser).length !== 0;
+  return { currentUser, isLoggedIn };
+};
 
 export default withAuthSync(SettingsPage);

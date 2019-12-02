@@ -21,7 +21,8 @@ module.exports = withCSS(
         SENDGRID_PASSWORD: process.env.SENDGRID_PASSWORD,
 
         STRIPE_PUBLIC_KEY_TEST: process.env.STRIPE_PUBLIC_KEY_TEST,
-        STRIPE_SECRET_KEY_TEST: process.env.STRIPE_SECRET_KEY_TEST
+        STRIPE_SECRET_KEY_TEST: process.env.STRIPE_SECRET_KEY_TEST,
+        STRIPE_WEBHOOK_SECRET_TEST: process.env.STRIPE_WEBHOOK_SECRET_TEST
       }
     })
   )

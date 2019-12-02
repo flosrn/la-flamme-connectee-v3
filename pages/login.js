@@ -31,19 +31,14 @@ import redirectTo from "../src/lib/redirectTo";
 import ButtonLink from "../components/CustomButtons/ButtonLink";
 import ResetPassword from "./resetPassword/[token]";
 import FooterDark from "../components/Footer/FooterDark";
+import { authInitialProps } from "../server/api/auth";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    // height: "100vh",
-    // width: "100%",
-    // position: "fixed",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column"
-    // background: `url(${stove}) no-repeat center center fixed`,
-    // backgroundSize: "cover",
-    // overflow: "hidden",
   },
   container: {
     display: "flex",
@@ -102,7 +97,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LoginPage({ children }) {
+function LoginPage({ children, currentUser, isLoggedIn }) {
   const [action, setAction] = useState("login");
   const classes = useStyles();
   const Router = useRouter();
@@ -131,7 +126,13 @@ function LoginPage({ children }) {
 
   return (
     <div className={classes.root}>
-      <Header color="dark" links={<HeaderLinks />} fixed />
+      <Header
+        color="dark"
+        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
+        fixed
+        user={currentUser}
+        isLoggedIn={isLoggedIn}
+      />
       <GridContainer className={classes.container}>
         <GridItem sm={8} md={6} lg={5} xl={4}>
           <Card className={classes.card}>{selectComponent()}</Card>
@@ -169,5 +170,11 @@ function LoginPage({ children }) {
     </div>
   );
 }
+
+LoginPage.getInitialProps = async ctx => {
+  const { currentUser } = await authInitialProps(ctx);
+  const isLoggedIn = Object.keys(currentUser).length !== 0;
+  return { currentUser, isLoggedIn };
+};
 
 export default LoginPage;

@@ -123,8 +123,4 @@ const Options = props => {
   );
 };
 
-Options.propTypes = {
-  className: PropTypes.string
-};
-
 export default Options;

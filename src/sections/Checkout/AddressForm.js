@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function AdressForm({
+function AddressForm({
   values,
   changeHandler,
   submitHandler,
@@ -77,7 +77,6 @@ function AdressForm({
                   onChange={changeHandler}
                   value={(values.address && values.address.street1) || ""}
                   variant="outlined"
-                  disabled={!isEditMode || isLoading}
                 />
               </Grid>
               <Grid item md={6} xs={12}>
@@ -91,7 +90,6 @@ function AdressForm({
                   onChange={changeHandler}
                   value={(values.address && values.address.zip) || ""}
                   variant="outlined"
-                  disabled={!isEditMode || isLoading}
                   inputProps={{
                     maxLength: 5
                   }}
@@ -107,41 +105,14 @@ function AdressForm({
                   onChange={changeHandler}
                   value={(values.address && values.address.city) || ""}
                   variant="outlined"
-                  disabled={!isEditMode || isLoading}
                 />
               </Grid>
             </Grid>
           </CardContent>
-          <Divider />
-          <CardActions className={classes.cardActions}>
-            <GridItem xs={6} className={classes.footer}>
-              {!isEditMode ? (
-                <Button color="primary" onClick={editHandler}>
-                  Modifier
-                </Button>
-              ) : (
-                <>
-                  <Button color="primary" onClick={cancelHandler}>
-                    Annuler
-                  </Button>
-                  <div className={classes.wrapper} style={{ cursor: isError && "not-allowed" }}>
-                    <Button type="submit" color="secondary" disabled={isError || isLoading}>
-                      Sauvegarder
-                    </Button>
-                    {isLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
-                  </div>
-                </>
-              )}
-            </GridItem>
-          </CardActions>
         </form>
       </GridItem>
     </GridContainer>
   );
 }
 
-AdressForm.propTypes = {
-  className: PropTypes.string
-};
-
-export default AdressForm;
+export default AddressForm;

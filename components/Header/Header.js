@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // nodejs library to set properties for components
@@ -29,6 +30,7 @@ const useStyles = makeStyles(styles);
 export default function Header(props) {
   const { isLoggedIn, user } = props;
   const { color, links, fixed, absolute, hiddenLogo } = props;
+  const Router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const classes = useStyles();
   const { items } = useContext(ShoppingCartContext);
@@ -45,6 +47,15 @@ export default function Header(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const handleRedirect = () => {
+    if (isLoggedIn) {
+      Router.push("/settings?tab=profile").then(() => window.scrollTo(0, 0));
+    } else {
+      Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
+    }
+  };
+
   const headerColorChange = () => {
     const { color, changeColorOnScroll } = props;
 
@@ -80,7 +91,7 @@ export default function Header(props) {
         </Button>
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
-          <IconButton color="inherit" href="/login?action=login" className={classes.userIcon}>
+          <IconButton color="inherit" onClick={handleRedirect} className={classes.userIcon}>
             <PersonIcon className={classes.cartIcon} />
             <p>{isLoggedIn && `${user.firstName} ${user.lastName}`}</p>
           </IconButton>
@@ -92,7 +103,7 @@ export default function Header(props) {
         </Hidden>
         <Hidden mdUp>
           <div>
-            <IconButton color="inherit" href="/login?action=login" className={classes.userIcon}>
+            <IconButton color="inherit" onClick={handleRedirect} className={classes.userIcon}>
               <PersonIcon className={classes.cartIcon} />
             </IconButton>
             <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>

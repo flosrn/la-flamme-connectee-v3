@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import clsx from "clsx";
 import validate from "validate.js";
 import { makeStyles } from "@material-ui/styles";
@@ -55,6 +56,7 @@ function RegisterForm({ className, ...rest }) {
   const [isLoading, setLoading] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const classes = useStyles();
+  const Router = useRouter();
 
   useEffect(() => {
     const errors = validate(values, schema);
@@ -85,7 +87,12 @@ function RegisterForm({ className, ...rest }) {
           confirmButtonColor: "#ff7961"
         }).then(result => {
           if (response.data.status === "success" && result.value) {
-            redirectTo("/");
+            const cart = Cookies.getJSON("cart");
+            if (cart.length > 0) {
+              Router.push("/shoppingCart").then(() => window.scrollTo(0, 0));
+            } else {
+              Router.push("/").then(() => window.scrollTo(0, 0));
+            }
           }
         });
         if (response.data.status === "success") {

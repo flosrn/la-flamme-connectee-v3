@@ -21,7 +21,9 @@ import CarouselSection from "src/sections/HomePage/CarouselSection";
 // images
 import backgroundImage from "public/img/flamco/flamco-main-dark.jpg";
 import logo from "public/img/logo/laflammeco.png";
-import lepine from "public/img/logo/lepine-double.png";
+// import lepine from "public/img/logo/lepine-double.png";
+import lepine from "public/img/logo/lepine-black.png";
+
 import svg from "public/img/svg/undraw_smart_home_28oy.svg";
 // style for this page
 import { useStyles } from "public/jss/la-flamme-connectee/views/homePage";
@@ -82,7 +84,7 @@ function HomePage({ currentUser, isLoggedIn }) {
         }}
       />
       <Parallax filter="dark" image={backgroundImage} className={classes.parallax}>
-        {/* <img alt="Lepine" src={lepine} className={classes.lepine} /> */}
+        {/* <img alt="Lepine" src={lepine2} className={classes.lepine} /> */}
         <div className={classes.containerBackground}>
           <div className={classes.titleContainer}>
             <GridItem xs={12} sm={12} md={12} className={classes.gridItem} id="title">
@@ -110,22 +112,10 @@ function HomePage({ currentUser, isLoggedIn }) {
         </div>
         <div className={classes.container}>
           <PresentationSection />
-          <GridContainer justify="center">
-            <GridItem center>
-              <Typography variant="subtitle2" align="center">
-                En partenariat avec{" "}
-                <a href="https://www.contura.eu/fr/france/" target="_blank">
-                  Contura
-                </a>
-                , leader du chauffage au bois
-              </Typography>
-            </GridItem>
-          </GridContainer>
+          {/* <img alt="Lepine" src={lepine} className={classes.lepine} /> */}
           <CarouselSection />
           <GridContainer justify="center">
-            <GridItem center>
-              <MediaSvg src={svg} alt="smart-home" size="medium" />
-            </GridItem>
+            <GridItem center>{/* <MediaSvg src={svg} alt="smart-home" size="medium" /> */}</GridItem>
           </GridContainer>
           <GridContainer justify="center" className={classes.bottom}>
             <GridItem center>

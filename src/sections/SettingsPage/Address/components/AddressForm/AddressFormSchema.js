@@ -1,5 +1,5 @@
 export const schema = {
-  street: {
+  street1: {
     presence: { allowEmpty: false, message: "^Veuillez renseigner votre rue" }
   },
   zip: {

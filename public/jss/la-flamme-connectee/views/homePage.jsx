@@ -109,21 +109,16 @@ export const useStyles = makeStyles(theme => ({
   },
   lepine: {
     zIndex: 2,
-    position: "absolute",
-    left: 0,
-    top: 0,
-    transform: "rotate(-12deg)",
-    width: 150,
-    [theme.breakpoints.up("sm")]: {
-      // width: 175
-    },
-    [theme.breakpoints.up("md")]: {
-      width: 200,
-      top: 60
-    },
-    [theme.breakpoints.up("lg")]: {
-      width: 215
-    }
+    // position: "absolute",
+    // left: 0,
+    // top: 70,
+    // transform: "rotate(-12deg)",
+    width: 215,
+    // display: "none",
+    // [theme.breakpoints.up("md")]: {
+    //   width: 175
+    //   display: "block"
+    // }
   },
   fixed: {
     position: "fixed !important",
