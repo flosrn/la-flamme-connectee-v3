@@ -14,8 +14,6 @@ import clsx from "clsx";
 import CustomSnackBar from "components/Snackbar/CustomSnackBar";
 import validate from "validate.js";
 import { schema } from "src/sections/SettingsPage/Address/components/AddressForm/AddressFormSchema";
-import { UserContext } from "src/contexts/UserContext";
-import axioswal from "axioswal";
 import axios from "axios";
 import Swal from "sweetalert2";
 import HeaderLinks from "components/Header/HeaderLinks";
@@ -99,6 +97,19 @@ function SettingsPage({ currentUser, isLoggedIn }) {
     }
   };
 
+  const handleAdressRemove = () => {
+    setValues({
+      ...values,
+      address: {
+        ...values.address,
+        street1: "",
+        street2: "",
+        zip: "",
+        city: ""
+      }
+    });
+  };
+
   // ========== SUBMIT HANDLER ========== //
 
   const handleSubmit = async event => {
@@ -166,7 +177,7 @@ function SettingsPage({ currentUser, isLoggedIn }) {
         setTabTitle("Modifiez le mot de passe de votre compte");
         break;
       case tabName === "my-orders":
-        setTabTitle("Gérez les options de votre compte");
+        setTabTitle("Consultez le détail de vos commandes");
         break;
       default:
         setTabTitle("Vérifiez ou modifiez les informations de votre compte");
@@ -224,6 +235,7 @@ function SettingsPage({ currentUser, isLoggedIn }) {
                   profile={currentUser}
                   values={values}
                   changeAddressHandler={handleAddressChange}
+                  removeAddressHandler={handleAdressRemove}
                   submitHandler={handleSubmit}
                   editHandler={() => setEditMode(!isEditMode)}
                   cancelHandler={handleCancel}

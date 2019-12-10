@@ -139,7 +139,7 @@ export default function HeaderLinks({ isLoggedIn, user, isEditSuccess, ...props 
           noLiPadding
           navDropdown
           hoverColor={dropdownHoverColor}
-          buttonText="Aide"
+          buttonText="En savoir plus"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"
@@ -155,14 +155,14 @@ export default function HeaderLinks({ isLoggedIn, user, isEditSuccess, ...props 
               <a className={classes.dropdownLink}>
                 <DownloadIcon className={classes.dropdownIcons} /> Téléchargement
               </a>
-            </Link>,
-            <Link href="/contact">
-              <a className={classes.dropdownLink}>
-                <Mail className={classes.dropdownIcons} /> Contact
-              </a>
             </Link>
           ]}
         />
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Button component={ButtonLink} href="/contact" className={classes.navLink} color="transparent">
+          <Mail className={classes.icons} /> Contact
+        </Button>
       </ListItem>
       {/*{isLoggedIn ? (*/}
       {/*  <>*/}

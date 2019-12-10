@@ -5,6 +5,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import "public/scss/la-flamme-connectee.scss";
 import theme from "theme";
 import { ShoppingCartProvider } from "src/contexts/ShoppingCartContext";
+import { Provider } from "react-redux";
+import withReduxStore from "src/lib/with-redux-store";
 
 class MyApp extends App {
   componentDidMount() {
@@ -16,16 +18,18 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, reduxStore } = this.props;
     return (
       <ShoppingCartProvider>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
+          <Provider store={reduxStore}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </Provider>
         </ThemeProvider>
       </ShoppingCartProvider>
     );
   }
 }
 
-export default MyApp;
+export default withReduxStore(MyApp);

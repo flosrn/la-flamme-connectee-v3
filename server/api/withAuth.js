@@ -17,7 +17,7 @@ export const auth = ctx => {
       ctx.res.writeHead(302, { Location: "/login?action=login" });
       ctx.res.end();
     } else {
-      Router.push("/login");
+      Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
     }
   }
 
@@ -28,7 +28,7 @@ export const logout = () => {
   cookie.remove("token");
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
-  Router.push("/login");
+  Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
 };
 
 export const withAuthSync = WrappedComponent => {
@@ -36,7 +36,7 @@ export const withAuthSync = WrappedComponent => {
     const syncLogout = event => {
       if (event.key === "logout") {
         console.log("logged out from storage!");
-        Router.push("/login?action=login");
+        Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
       }
     };
 

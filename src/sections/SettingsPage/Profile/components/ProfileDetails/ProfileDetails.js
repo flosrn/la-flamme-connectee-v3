@@ -70,6 +70,7 @@ const useStyles = makeStyles(theme => ({
 
 function ProfileDetails({ profile, isLoading }) {
   const Router = useRouter();
+
   const handleLogout = event => {
     event.preventDefault();
     axios.get(`${getHost()}/auth/logout`).then(response => {

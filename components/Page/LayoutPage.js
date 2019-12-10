@@ -13,6 +13,8 @@ import HeaderLinks from "../Header/HeaderLinks";
 import Parallax from "../Parallax/Parallax";
 import FooterCustom from "../Footer/FooterCustom";
 import FooterDark from "../Footer/FooterDark";
+import { authInitialProps } from "../../server/api/auth";
+import LoginPage from "../../pages/login";
 
 const useStyles = makeStyles(theme => ({
   mlAuto,
@@ -65,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, user, isLoggedIn }) {
+function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, currentUser, isLoggedIn }) {
   const classes = useStyles();
 
   const easeInOutQuad = (t, b, c, d) => {
@@ -102,9 +104,9 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, 
       <Header
         color="transparent"
         brand="La Flamme Connectée"
-        links={<HeaderLinks user={user} isLoggedIn={isLoggedIn} />}
+        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
         fixed
-        user={user}
+        user={currentUser}
         isLoggedIn={isLoggedIn}
         changeColorOnScroll={{
           height: 300,

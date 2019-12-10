@@ -51,6 +51,7 @@ function Address({
   profile,
   values,
   changeAddressHandler,
+  removeAddressHandler,
   submitHandler,
   editHandler,
   cancelHandler,
@@ -67,6 +68,7 @@ function Address({
         values={values}
         changeHandler={changeAddressHandler}
         submitHandler={submitHandler}
+        removeHandler={removeAddressHandler}
         editHandler={editHandler}
         isEditMode={isEditMode}
         cancelHandler={cancelHandler}

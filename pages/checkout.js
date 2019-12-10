@@ -3,7 +3,9 @@ import { makeStyles } from "@material-ui/styles";
 
 import axios from "axios";
 import Button from "components/CustomButtons/Button";
-import svg from "public/img/svg/undraw_delivery_address_03n0.svg";
+import svg1 from "public/img/svg/undraw_delivery_address_03n0.svg";
+import svg2 from "public/img/svg/undraw_mail1_uab6.svg";
+import svg3 from "public/img/svg/undraw_deliveries_131a.svg";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -12,6 +14,9 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import validate from "validate.js";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "src/store/store";
+import { CardContent, CardHeader, Divider } from "@material-ui/core";
 import HeaderLinks from "../components/Header/HeaderLinks";
 import Header from "../components/Header/Header";
 import { authInitialProps } from "../server/api/auth";
@@ -27,9 +32,8 @@ import { schema } from "../src/sections/SettingsPage/Address/components/AddressF
 import AddressForm from "../src/sections/Checkout/AddressForm";
 import getHost from "../server/api/get-host";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
-
-const dev = process.env.NODE_ENV !== "production";
-export const server = dev ? "http://localhost:3000" : "https://laflammeconnectee.fr";
+import { withAuthSync } from "../server/api/withAuth";
+import SummaryItems from "../src/sections/Checkout/SummaryItems";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,13 +51,13 @@ const useStyles = makeStyles(theme => ({
   },
   gridItem: {
     display: "flex",
-    // alignItems: "center",
     justifyContent: "center",
     "& img": {
       height: 150
     }
   },
   gridContent: {
+    width: "100%",
     [theme.breakpoints.down("md")]: {
       marginTop: 30
     }
@@ -63,25 +67,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function DeliveryMethod() {
-  const [value, setValue] = React.useState("home");
-
-  const handleChange = event => {
-    setValue(event.target.value);
-  };
+// DELIVERY COMPONENT
+function DeliveryMethod({ value, changeHandler }) {
   const classes = useStyles();
-
   return (
     <GridContainer justifycontent="center">
-      <GridItem lg={6} className={classes.gridItem}>
-        <MediaSvg src={svg} />
+      <GridItem xl={6} className={classes.gridItem}>
+        <MediaSvg src={svg1} />
       </GridItem>
-      <GridItem lg={6} className={classes.gridItem}>
+      <GridItem xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>
           <div>
             <FormControl component="fieldset" className={classes.formControl}>
               <FormLabel component="legend">Sélectionnez une méthode de livraison</FormLabel>
-              <RadioGroup aria-label="deliveryMethod" name="deliveryMethod" value={value} onChange={handleChange}>
+              <RadioGroup aria-label="deliveryMethod" name="deliveryMethod" value={value} onChange={changeHandler}>
                 <FormControlLabel value="home" control={<Radio />} label="Livraison à mon domicile" />
                 <FormControlLabel value="relay" control={<Radio />} label="Livraison en point relais" />
               </RadioGroup>
@@ -93,18 +92,19 @@ function DeliveryMethod() {
   );
 }
 
-function Address({ values, changeHandler, submitHandler, hasError, errors }) {
+// ADDRESS COMPONENT
+function Address({ values, value, changeHandler, submitHandler, hasError, errors }) {
   const classes = useStyles();
-
   return (
     <GridContainer justifycontent="center">
-      <GridItem lg={6} className={classes.gridItem}>
-        <MediaSvg src={svg} />
+      <GridItem xl={6} className={classes.gridItem}>
+        <MediaSvg src={svg2} />
       </GridItem>
-      <GridItem lg={6} className={classes.gridItem}>
+      <GridItem xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>
           <AddressForm
             values={values}
+            value={value}
             changeHandler={changeHandler}
             submitHandler={submitHandler}
             hasError={hasError}
@@ -116,27 +116,64 @@ function Address({ values, changeHandler, submitHandler, hasError, errors }) {
   );
 }
 
+// SUMMARY COMPONENT
 function Summary() {
+  const classes = useStyles();
+  const user = useSelector(state => state.user);
+  const { items, total } = useContext(ShoppingCartContext);
   return (
-    <div>
-      <div>Confirmation</div>
-    </div>
+    <GridContainer justifycontent="center">
+      <GridItem xl={6} className={classes.gridItem}>
+        <MediaSvg src={svg3} />
+      </GridItem>
+      <GridItem xs={12} xl={6} className={classes.gridItem}>
+        <div className={classes.gridContent}>
+          <CardHeader title="Votre panier :" />
+          <Divider />
+          <CardContent className={classes.cardContent}>
+            <SummaryItems items={items} total={total} />
+          </CardContent>
+          <CardHeader title="Votre Adresse :" />
+          <Divider />
+          <CardContent className={classes.cardContent}>
+            <p>
+              <strong>
+                {" "}
+                {user.address.firstName} {user.address.lastName}
+              </strong>
+            </p>
+            <p>{user.address.street1}</p>
+            <p>
+              {user.address.zip} {user.address.city}
+            </p>
+          </CardContent>
+        </div>
+      </GridItem>
+    </GridContainer>
   );
 }
 
+// CHECKOUT PAGE
 function CheckoutPage({ currentUser, isLoggedIn }) {
   const [stripe, setStripe] = useState(null);
   const [values, setValues] = useState({});
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
+  const [isError, setError] = useState(false);
+  const [isEmpty, setEmpty] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [value, setValue] = useState("home");
   const { items, total } = useContext(ShoppingCartContext);
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   // ========== DATA FETCHING ========== //
 
+  // process.env.NODE_ENV === "development" ? process.env.STRIPE_PUBLIC_KEY_TEST : process.env.STRIPE_PUBLIC_KEY
+
   useEffect(() => {
-    setStripe(window.Stripe(process.env.STRIPE_PUBLIC_KEY_TEST));
+    setStripe(window.Stripe(process.env.STRIPE_PUBLIC_KEY));
     setValues(currentUser);
   }, [currentUser]);
 
@@ -156,21 +193,26 @@ function CheckoutPage({ currentUser, isLoggedIn }) {
     });
   };
 
+  const handleRadioChange = event => {
+    setValue(event.target.value);
+  };
+
   // ========== SUBMIT HANDLER ========== //
 
-  const handleSubmit = async event => {
-    // event.preventDefault();
-    console.log("values : ", values);
+  const handleStore = () => {
+    dispatch(setUser(values));
+  };
+
+  const handleSubmit = async () => {
     setLoading(true);
     axios
       .patch(`${getHost()}/users/updateProfile`, {
         values
       })
-      .then(response => {
-        console.log("response : ", response);
+      .then(() => {
         setTimeout(() => {
           axios
-            .post(`${getHost()}/orders/getCheckoutSession`, { currentUser, items, total })
+            .post(`${getHost()}/checkout/createCheckoutSession`, { currentUser, items })
             .then(response => {
               stripe.redirectToCheckout({
                 sessionId: response.data.session.id
@@ -182,6 +224,7 @@ function CheckoutPage({ currentUser, isLoggedIn }) {
           setLoading(false);
         }, 1500);
       });
+    setLoading(false);
   };
 
   // ========== FORM VALIDATION ========== //
@@ -195,6 +238,14 @@ function CheckoutPage({ currentUser, isLoggedIn }) {
 
   const hasError = field => !!(touched[field] && errors[field]);
 
+  useEffect(() => {
+    if (hasError("firstName") || hasError("lastName") || hasError("street1") || hasError("zip") || hasError("city")) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }, [errors]);
+
   return (
     <div className={classes.root}>
       <Header
@@ -205,20 +256,24 @@ function CheckoutPage({ currentUser, isLoggedIn }) {
         isLoggedIn={isLoggedIn}
       />
       <GridContainer className={classes.container}>
-        <GridItem md={8}>
+        <GridItem sm={8} md={8}>
           <Card>
             <CheckoutStepper
               submitHandler={handleSubmit}
+              storeHandler={handleStore}
+              isError={isError}
+              address={values.address}
               components={[
-                <DeliveryMethod />,
+                <DeliveryMethod value={value} changeHandler={handleRadioChange} />,
                 <Address
                   values={values}
+                  value={value}
                   changeHandler={handleAddressChange}
                   submitHandler={handleSubmit}
                   hasError={hasError}
                   errors={errors}
                 />,
-                <Summary />
+                <Summary values={values} />
               ]}
             />
           </Card>
@@ -235,4 +290,4 @@ CheckoutPage.getInitialProps = async ctx => {
   return { currentUser, isLoggedIn };
 };
 
-export default CheckoutPage;
+export default withAuthSync(CheckoutPage);

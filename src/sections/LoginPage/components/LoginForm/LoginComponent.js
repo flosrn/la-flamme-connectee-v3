@@ -5,9 +5,6 @@ import { makeStyles } from "@material-ui/styles";
 import { Typography, Divider, Avatar, Button } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import LockOutlined from "@material-ui/icons/LockOutlined";
-
-import stove from "public/img/contura/contura2.jpg";
-
 import Page from "components/Page";
 import gradients from "utils/gradients";
 import LoginForm from "src/sections/LoginPage/components/LoginForm";
@@ -27,26 +24,6 @@ import getHost from "server/api/get-host";
 import ButtonLink from "../../../../../components/CustomButtons/ButtonLink";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    height: "100vh",
-    width: "100%",
-    // position: "fixed",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    // background: `url(${stove}) no-repeat center center fixed`,
-    // backgroundSize: "cover",
-    // overflow: "hidden",
-    padding: theme.spacing(6, 2)
-  },
-  container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 400
-    }
-  },
   card: {
     height: 450
   },
@@ -120,7 +97,7 @@ function LoginComponent({ clickHandler }) {
         if (response.data.status === "success" && result.value) {
           const cart = Cookies.getJSON("cart");
           if (cart.length > 0) {
-            Router.push("/shoppingCart").then(() => window.scrollTo(0, 0));
+            Router.push("/shopping-cart").then(() => window.scrollTo(0, 0));
           } else {
             Router.push("/").then(() => window.scrollTo(0, 0));
           }

@@ -8,6 +8,7 @@ import GridItem from "components/Grid/GridItem";
 import Button from "components/CustomButtons/Button";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Link from "next/link";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -17,7 +18,9 @@ const useStyles = makeStyles(theme => ({
   },
   cardActions: {
     display: "flex",
-    justifyContent: "center"
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "16px 24px 0 24px"
   },
   footer: {
     marginBottom: theme.spacing(-2),
@@ -34,6 +37,9 @@ const useStyles = makeStyles(theme => ({
     left: "50%",
     marginTop: -12,
     marginLeft: -12
+  },
+  removeButton: {
+    marginTop: 20
   }
 }));
 
@@ -41,6 +47,7 @@ function AdressForm({
   values,
   changeHandler,
   submitHandler,
+  removeHandler,
   editHandler,
   isEditMode,
   cancelHandler,
@@ -133,6 +140,9 @@ function AdressForm({
                 </>
               )}
             </GridItem>
+            <Button onClick={removeHandler} color="transparent" className={classes.removeButton}>
+              Supprimer cette adresse
+            </Button>
           </CardActions>
         </form>
       </GridItem>

@@ -162,6 +162,9 @@ const useStyles = makeStyles(theme => ({
   },
   emptyCart: {
     textAlign: "center"
+  },
+  itemPrice: {
+    color: theme.palette.secondary.main
   }
 }));
 
@@ -211,97 +214,105 @@ function ShoppingCartPage({ currentUser, isLoggedIn }) {
           <MediaSvg src={svg1} alt="contact-us" size="small" mt={100} />
         </GridItem>
       </GridContainer>
-      <div className={classes.container} id="shoppingCart">
-        <Card plain>
-          <CardBody className={classes.cardBody}>
-            <h3 className={classes.cardTitle}>Votre panier</h3>
-            <GridContainer>
-              <GridItem md={6}>
-                {items.length > 0 ? (
-                  items.map(item => (
-                    <Card className={classes.cardItem} key={item.id}>
-                      <GridContainer className={classes.gridContainer}>
-                        <GridItem sm={4} className={classes.cardColumn}>
-                          <div className={classes.cardPicture}>
-                            <img src={item.images[0].original} alt="product" />
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={10} md={10} lg={8}>
+          <div className={classes.container} id="shoppingCart">
+            <Card plain>
+              <CardBody className={classes.cardBody}>
+                <h3 className={classes.cardTitle}>Votre panier</h3>
+                <GridContainer>
+                  <GridItem md={6}>
+                    {items.length > 0 ? (
+                      items.map(item => (
+                        <Card className={classes.cardItem} key={item.id}>
+                          <GridContainer className={classes.gridContainer}>
+                            <GridItem sm={4} className={classes.cardColumn}>
+                              <div className={classes.cardPicture}>
+                                <img src={item.images[0].original} alt="product" />
+                              </div>
+                              <div className={classes.cardName}>{item.name}</div>
+                            </GridItem>
+
+                            <GridItem sm={4} className={classes.cardColumn}>
+                              <div className={classes.columnName}>Quantité</div>
+                              <div className={classes.columnContent}>
+                                <div className={classes.columnQuantity}>
+                                  <IconButton color="secondary" onClick={() => removeItem(item)}>
+                                    <RemoveIcon />
+                                  </IconButton>
+                                  {item.quantity}
+                                  <IconButton color="secondary" onClick={() => addItem(item)}>
+                                    <AddIcon />
+                                  </IconButton>
+                                </div>
+                              </div>
+                            </GridItem>
+
+                            <GridItem sm={4} className={classes.cardColumn}>
+                              <div className={classes.columnName}>Prix</div>
+                              <div className={classes.columnContent}>
+                                <p className={classes.itemPrice}>{item.price} €</p>
+                              </div>
+                            </GridItem>
+                          </GridContainer>
+
+                          {/* <IconButton color="secondary" className={classes.deleteButton} onClick={() => deleteItem(item)}> */}
+                          {/*  <ClearIcon /> */}
+                          {/* </IconButton> */}
+                        </Card>
+                      ))
+                    ) : (
+                      <Card className={classes.cardItemEmpty}>
+                        <div className={classes.emptyCart}>Votre panier est vide !</div>
+                      </Card>
+                    )}
+                  </GridItem>
+
+                  <GridItem md={6}>
+                    <Card className={classes.cardOrder}>
+                      <div className={classes.cardRow}>
+                        <div className={classes.rowTotal}>
+                          <div className={classes.rowName}>Total</div>
+                          <div className={classes.rowContent}>
+                            <strong>{Math.floor(total) >= 0 ? Math.floor(total) : 0} €</strong>
                           </div>
-                          <div className={classes.cardName}>{item.name}</div>
-                        </GridItem>
-
-                        <GridItem sm={4} className={classes.cardColumn}>
-                          <div className={classes.columnName}>Quantité</div>
-                          <div className={classes.columnContent}>
-                            <div className={classes.columnQuantity}>
-                              <IconButton color="secondary" onClick={() => removeItem(item)}>
-                                <RemoveIcon />
-                              </IconButton>
-                              {item.quantity}
-                              <IconButton color="secondary" onClick={() => addItem(item)}>
-                                <AddIcon />
-                              </IconButton>
-                            </div>
+                        </div>
+                        <div className={classes.rowPurchase}>
+                          <div className={classes.purchaseButton}>
+                            <Button round color="secondary" disabled={items.length <= 0} onClick={login}>
+                              Passer commande <KeyboardArrowRight />
+                            </Button>
                           </div>
-                        </GridItem>
-
-                        <GridItem sm={4} className={classes.cardColumn}>
-                          <div className={classes.columnName}>Prix</div>
-                          <div className={classes.columnContent}>{item.price} €</div>
-                        </GridItem>
-                      </GridContainer>
-
-                      {/* <IconButton color="secondary" className={classes.deleteButton} onClick={() => deleteItem(item)}> */}
-                      {/*  <ClearIcon /> */}
-                      {/* </IconButton> */}
-                    </Card>
-                  ))
-                ) : (
-                  <Card className={classes.cardItemEmpty}>
-                    <div className={classes.emptyCart}>Votre panier est vide !</div>
-                  </Card>
-                )}
-              </GridItem>
-
-              <GridItem md={6}>
-                <Card className={classes.cardOrder}>
-                  <div className={classes.cardRow}>
-                    <div className={classes.rowTotal}>
-                      <div className={classes.rowName}>Total</div>
-                      <div className={classes.rowContent}>{Math.floor(total) >= 0 ? Math.floor(total) : 0} €</div>
-                    </div>
-                    <div className={classes.rowPurchase}>
-                      <div className={classes.purchaseButton}>
-                        <Button round color="secondary" disabled={items.length <= 0} onClick={login}>
-                          Passer commande <KeyboardArrowRight />
-                        </Button>
+                          <GridContainer className={classes.rowIcons}>
+                            <GridItem sm={4} className={classes.gridIcon}>
+                              <div className={classes.icon}>
+                                <LocalShippingIcon fontSize="large" color="primary" />
+                              </div>
+                              <div className={classes.iconLabel}>Frais de port gratuit</div>
+                            </GridItem>
+                            <GridItem sm={4} className={classes.gridIcon}>
+                              <div className={classes.icon}>
+                                <SentimentSatisfiedAltIcon fontSize="large" color="primary" />
+                              </div>
+                              <div className={classes.iconLabel}>Satisfait ou remboursé</div>
+                            </GridItem>
+                            <GridItem sm={4} className={classes.gridIcon}>
+                              <div className={classes.icon}>
+                                <VerifiedUserIcon fontSize="large" color="primary" />
+                              </div>
+                              <div className={classes.iconLabel}>Payment sécurisé</div>
+                            </GridItem>
+                          </GridContainer>
+                        </div>
                       </div>
-                      <GridContainer className={classes.rowIcons}>
-                        <GridItem sm={4} className={classes.gridIcon}>
-                          <div className={classes.icon}>
-                            <LocalShippingIcon fontSize="large" />
-                          </div>
-                          <div className={classes.iconLabel}>Frais de port gratuit</div>
-                        </GridItem>
-                        <GridItem sm={4} className={classes.gridIcon}>
-                          <div className={classes.icon}>
-                            <SentimentSatisfiedAltIcon fontSize="large" />
-                          </div>
-                          <div className={classes.iconLabel}>Satisfait ou remboursé</div>
-                        </GridItem>
-                        <GridItem sm={4} className={classes.gridIcon}>
-                          <div className={classes.icon}>
-                            <VerifiedUserIcon fontSize="large" />
-                          </div>
-                          <div className={classes.iconLabel}>Payment sécurisé</div>
-                        </GridItem>
-                      </GridContainer>
-                    </div>
-                  </div>
-                </Card>
-              </GridItem>
-            </GridContainer>
-          </CardBody>
-        </Card>
-      </div>
+                    </Card>
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
+            </Card>
+          </div>
+        </GridItem>
+      </GridContainer>
       <FooterDark />
     </div>
   );

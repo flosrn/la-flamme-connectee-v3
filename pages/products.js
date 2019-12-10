@@ -8,13 +8,13 @@ import backgroundImage from "public/img/contura/background-contura2.jpg";
 import svg1 from "public/img/svg/undraw_empty_cart_co35.svg";
 import axios from "axios";
 
-import product1 from "public/img/objects/detourage/volcano-flam_front-2.png";
-import product2 from "public/img/objects/detourage/flam-connect-pack.png";
-import product3 from "public/img/objects/detourage/flamconnect_back.png";
-import product4 from "public/img/objects/detourage/flamconnect_front.png";
-import product5 from "public/img/objects/detourage/volcano-trio.png";
-import product6 from "public/img/objects/detourage/volcano-pack_front.png";
-import product7 from "public/img/objects/detourage/volcano-pack_top.png";
+// import product1 from "public/img/objects/detourage/volcano-flam_front-2.png";
+// import product2 from "public/img/objects/detourage/flam-connect-pack.png";
+// import product3 from "public/img/objects/detourage/flamconnect_back.png";
+// import product4 from "public/img/objects/detourage/flamconnect_front.png";
+// import product5 from "public/img/objects/detourage/volcano-trio.png";
+// import product6 from "public/img/objects/detourage/volcano-pack_front.png";
+// import product7 from "public/img/objects/detourage/volcano-pack_top.png";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import getHost from "../server/api/get-host";
 import ProductSection from "../src/sections/HomePage/ProductsSection";
@@ -51,40 +51,6 @@ const fakeCart = [
   }
 ];
 
-const imageCarousel1 = [
-  {
-    original: product1,
-    thumbnail: product1
-  },
-  {
-    original: product2,
-    thumbnail: product2
-  },
-  {
-    original: product3,
-    thumbnail: product3
-  },
-  {
-    original: product4,
-    thumbnail: product4
-  }
-];
-
-const imageCarousel2 = [
-  {
-    original: product5,
-    thumbnail: product5
-  },
-  {
-    original: product6,
-    thumbnail: product6
-  },
-  {
-    original: product7,
-    thumbnail: product7
-  }
-];
-
 function ProductsPage({ isLoggedIn, currentUser }) {
   const [products, setProducts] = useState(null);
   const classes = useStyles();
@@ -93,14 +59,13 @@ function ProductsPage({ isLoggedIn, currentUser }) {
     axios
       .get(`${getHost()}/products/getProducts`)
       .then(response => {
-        // console.log("response.data.data.products : ", response.data.data.products);
         setProducts(response.data.data.products);
       })
       .catch(error => {
         console.log("error : ", error);
       });
   }, []);
-  console.log("products : ", products);
+
   return (
     <div className={classes.root}>
       <Header

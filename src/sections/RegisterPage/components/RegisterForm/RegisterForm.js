@@ -89,7 +89,7 @@ function RegisterForm({ className, ...rest }) {
           if (response.data.status === "success" && result.value) {
             const cart = Cookies.getJSON("cart");
             if (cart.length > 0) {
-              Router.push("/shoppingCart").then(() => window.scrollTo(0, 0));
+              Router.push("/shopping-cart").then(() => window.scrollTo(0, 0));
             } else {
               Router.push("/").then(() => window.scrollTo(0, 0));
             }

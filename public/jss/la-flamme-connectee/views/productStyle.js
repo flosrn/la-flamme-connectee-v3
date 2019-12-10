@@ -8,7 +8,8 @@ export const useStyles = makeStyles(theme => ({
     marginBottom: 0
   },
   mainPrice: {
-    margin: "10px 0px 25px"
+    margin: "10px 0px 25px",
+    fontWeight: "bold"
   },
   textCenter: {
     textAlign: "center!important"
@@ -66,5 +67,11 @@ export const useStyles = makeStyles(theme => ({
   subtitle: {
     fontSize: "14px",
     fontStyle: "italic"
+  },
+  center: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: "130px 0"
   }
 }));

@@ -6,13 +6,19 @@ import LayoutPage from "components/Page/LayoutPage";
 import HowWorks from "src/sections/HomePage/HowWorks";
 import TopDownSection from "src/sections/HomePage/TopDownSection";
 // images
-import backgroundImage from "public/img/contura/background-contura-max.jpg";
 import svg1 from "public/img/svg/undraw_questions_75e0.svg";
 import svg2 from "public/img/svg/undraw_light_the_fire_gt58.svg";
+import { authInitialProps } from "../server/api/auth";
 
-function DocumentationPage() {
+function DocumentationPage({ currentUser, isLoggedIn }) {
   return (
-    <LayoutPage backgroundImage={backgroundImage} sectionId="howWorks" backgroundPosition="0 100%">
+    <LayoutPage
+      backgroundImage={require("/public/img/contura/background-contura-400.jpg")}
+      sectionId="howWorks"
+      backgroundPosition="0 100%"
+      currentUser={currentUser}
+      isLoggedIn={isLoggedIn}
+    >
       <MediaSvg src={svg1} alt="questions" size="medium" mt={50} />
       <HowWorks />
       <MediaSvg src={svg2} alt="questions" size="medium" mt={20} />
@@ -20,5 +26,11 @@ function DocumentationPage() {
     </LayoutPage>
   );
 }
+
+DocumentationPage.getInitialProps = async ctx => {
+  const { currentUser } = await authInitialProps(ctx);
+  const isLoggedIn = Object.keys(currentUser).length !== 0;
+  return { currentUser, isLoggedIn };
+};
 
 export default DocumentationPage;

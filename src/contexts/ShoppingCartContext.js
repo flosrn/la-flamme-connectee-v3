@@ -56,8 +56,13 @@ export function ShoppingCartProvider({ children }) {
     setTotal(total - product.price);
   };
 
+  const emptyCart = () => {
+    setItems([]);
+    setTotal(0);
+  };
+
   return (
-    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, total }}>
+    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, emptyCart, total }}>
       {children}
     </ShoppingCartContext.Provider>
   );

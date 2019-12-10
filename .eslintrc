@@ -34,10 +34,12 @@
     "jsx-a11y/label-has-for": [ "error", {"required": {"some": [ "nesting", "id"  ] }}],
     "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }],
     "import/prefer-default-export": "off",
+    "import/no-absolute-path": "off",
+    "import/no-unresolved": "off",
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "no-underscore-dangle": ["error", {"allow": ["_id"]}],
-    "import/no-unresolved": "off",
     "react/prop-types": "off",
+    "global-require": "off",
     "no-console": "off"
   }
 }

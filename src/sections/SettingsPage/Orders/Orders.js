@@ -37,6 +37,10 @@ const useStyles = makeStyles(theme => ({
   orderId: {
     fontWeight: "bold"
   },
+  cardContent: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
   cardLeft: {
     "& img": {
       width: 100
@@ -69,26 +73,40 @@ const Orders = props => {
         <form>
           <GridContainer>
             <GridItem className={classes.gridItem}>
-              {orders.length > 0 &&
+              {orders.length > 0 ? (
                 orders.map(order => (
                   <Card className={classes.card} key={order._id}>
                     <div className={classes.cardHeader}>
                       <div className={classes.orderId}>#{order.orderId}</div>
                       <div>
                         statut:{" "}
-                        <Link href="#">
-                          <a> {order.status}</a>
+                        <Link href="/settings?tabs=my-orders">
+                          <a>{order.status}</a>
                         </Link>
                       </div>
                     </div>
-                    <CardContent>
+                    <CardContent className={classes.cardContent}>
                       <div className={classes.cardLeft}>
                         <img src={order.products[0].custom.images[0]} alt="img" />
-                        {order.products[0].custom.name}
+                        {order.products[1] && <img src={order.products[1].custom.images[0]} alt="img" />}
+                        <p>
+                          x{order.products[0].quantity} <strong>{order.products[0].custom.name}</strong>{" "}
+                          {order.products[1] && (
+                            <>
+                              + x{order.products[1].quantity} <strong>{order.products[1].custom.name}</strong>
+                            </>
+                          )}
+                        </p>
+                      </div>
+                      <div className={classes.cardRight}>
+                        <strong>{order.amount} €</strong>
                       </div>
                     </CardContent>
                   </Card>
-                ))}
+                ))
+              ) : (
+                <p>Vous n'avez aucune commande en cours</p>
+              )}
             </GridItem>
           </GridContainer>
         </form>

@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import cookie from "js-cookie";
 import nextCookie from "next-cookies";
-import fetch from "isomorphic-unfetch";
 import axios from "axios";
 import getHost from "./get-host";
 

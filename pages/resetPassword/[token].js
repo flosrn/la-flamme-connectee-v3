@@ -5,8 +5,6 @@ import { Typography, Divider, Avatar } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import LockOutlined from "@material-ui/icons/LockOutlined";
 
-import stove from "public/img/contura/contura2.jpg";
-
 import Page from "components/Page";
 import gradients from "utils/gradients";
 import LoginForm from "src/sections/LoginPage/components/LoginForm";
@@ -20,22 +18,9 @@ import ResetForm from "src/sections/ResetPage/components/ResetForm";
 import LoginPage from "../login";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    height: "100vh",
-    width: "100%",
-    position: "fixed",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: `url(${stove}) no-repeat center center fixed`,
-    backgroundSize: "cover",
-    overflow: "hidden",
-    padding: theme.spacing(6, 2)
-  },
   content: {
     padding: theme.spacing(8, 4, 3, 4)
   },
-
   icon: {
     backgroundImage: gradients.green,
     color: theme.palette.white,

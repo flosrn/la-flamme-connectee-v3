@@ -1,3 +1,4 @@
+/* eslint import/no-absolute-path:0 */
 import React from "react";
 import Link from "next/link";
 // nodejs library that concatenates classes
@@ -34,6 +35,7 @@ import AlertDialogSlide from "../components/Alert/AlertDialogVideoSlide";
 
 import { authInitialProps } from "../server/api/auth";
 import FooterDark from "../components/Footer/FooterDark";
+import ProductSection from "../src/sections/HomePage/ProductSection";
 
 function HomePage({ currentUser, isLoggedIn }) {
   const [open, setOpen] = React.useState(false);
@@ -83,7 +85,7 @@ function HomePage({ currentUser, isLoggedIn }) {
           navColor: "black"
         }}
       />
-      <Parallax filter="dark" image={backgroundImage} className={classes.parallax}>
+      <Parallax filter="dark" image={require("/public/img/flamco/flamco-main-dark.jpg")} className={classes.parallax}>
         {/* <img alt="Lepine" src={lepine2} className={classes.lepine} /> */}
         <div className={classes.containerBackground}>
           <div className={classes.titleContainer}>
@@ -112,8 +114,7 @@ function HomePage({ currentUser, isLoggedIn }) {
         </div>
         <div className={classes.container}>
           <PresentationSection />
-          {/* <img alt="Lepine" src={lepine} className={classes.lepine} /> */}
-          <CarouselSection />
+          <ProductSection />
           <GridContainer justify="center">
             <GridItem center>{/* <MediaSvg src={svg} alt="smart-home" size="medium" /> */}</GridItem>
           </GridContainer>
@@ -125,7 +126,7 @@ function HomePage({ currentUser, isLoggedIn }) {
                   <a>Documentation</a>
                 </Link>{" "}
                 et{" "}
-                <Link href="/product">
+                <Link href="/products">
                   <a>Produits</a>
                 </Link>
               </Typography>
@@ -135,6 +136,7 @@ function HomePage({ currentUser, isLoggedIn }) {
         {/* <MediaSvg src={svg3} alt="about-us" size="medium" mb={0} /> */}
         <TeamSection />
         <ProjectSection />
+        <CarouselSection />
       </div>
       <FooterDark />
     </div>

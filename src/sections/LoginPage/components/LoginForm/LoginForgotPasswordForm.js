@@ -49,7 +49,7 @@ function LoginForgotPasswordForm({ className, email, changeHandler, submitHandle
   const classes = useStyles();
   return (
     <form {...rest} className={clsx(classes.root, className)} onSubmit={submitHandler("forgotPassword")}>
-      <div className={classes.text}>Un mot de passe de réccupération vous sera envoyé par mail</div>
+      <div className={classes.text}>Un mail vous permettant de changer de mot de passe sera envoyé</div>
       <div className={classes.fields}>
         <TextField
           fullWidth

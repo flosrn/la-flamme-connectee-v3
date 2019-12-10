@@ -15,12 +15,10 @@ import MediaSvg from "components/Media/MediaSvg";
 // images
 import { title } from "public/jss/la-flamme-connectee";
 import svg1 from "public/img/svg/undraw_chore_list_iof3.svg";
-import svg2 from "public/img/svg/undraw_environment_iaus.svg";
-import svg3 from "public/img/svg/undraw_Savings_dwkw.svg";
 // animations
 import { Controller, Scene } from "react-scrollmagic";
 import { Tween } from "react-gsap";
-import lepine from "../../../public/img/logo/lepine-black.png";
+import lepineLogo from "public/img/logo/lepine-logo.png";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -46,8 +44,46 @@ const useStyles = makeStyles(theme => ({
       }
     }
   },
+  innovate: {
+    marginTop: 30,
+    marginBottom: 5
+  },
+  itemInvention: {
+    marginTop: 40,
+    marginBottom: 50,
+    [theme.breakpoints.up("md")]: {
+      marginTop: 60
+    },
+    [theme.breakpoints.up("xl")]: {
+      marginTop: 100
+    }
+  },
+  brevet: {
+    ...title
+  },
+  flamcoIphone: {
+    width: 300,
+    [theme.breakpoints.up("xl")]: {
+      width: 350
+    }
+  },
   lepine: {
-    width: 215,
+    width: 210
+  },
+  lepineLogo: {
+    width: 270,
+    [theme.breakpoints.down("xs")]: {
+      marginTop: 40
+    }
+  },
+  relativeContainer: {
+    marginTop: 130,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 50
+    }
+  },
+  avantageTitle: {
+    marginBottom: -160
   }
 }));
 
@@ -63,15 +99,51 @@ function PresentationSection() {
             Présentation
           </Typography>
           <h5 className={classes.description}>
-            Avec le système <strong>Flam'connect</strong>, programmez l'allumage de votre poêle ou insert en votre
-            absence.
-            <br />
+            Le <strong>Flam'connect</strong> est une invention unique et originale qui permet de programmer à distance,
+            via une application dédiée sur smartphone, l'allumage d'un poêle ou insert. <br />
             Profitez ainsi de votre maison à bonne température dès votre retour.
           </h5>
         </GridItem>
       </GridContainer>
+      <GridContainer justify="center" className={classes.innovate}>
+        <GridItem lg={9}>
+          <GridContainer justify="center">
+            <GridItem lg={6} center>
+              <img
+                src={require("/public/img/flamco/volcano-flam_iphone.png")}
+                alt="phone"
+                className={classes.flamcoIphone}
+              />
+            </GridItem>
+            <GridItem lg={6} className={classes.itemInvention}>
+              <GridContainer justify="center">
+                <GridItem center>
+                  <GridContainer justify="center">
+                    <GridItem sm={6} center>
+                      <img src={require("/public/img/logo/lepine-black.png")} alt="lepine" className={classes.lepine} />
+                    </GridItem>
+                    <GridItem sm={6} center>
+                      <img src={lepineLogo} alt="lepine-logo" className={classes.lepineLogo} />
+                    </GridItem>
+                  </GridContainer>
+                </GridItem>
+              </GridContainer>
+              {/*<Typography variant="h5" className={classes.brevet}>*/}
+              {/*  🥈 Invention brevetée 🥈*/}
+              {/*</Typography>*/}
+            </GridItem>
+          </GridContainer>
+        </GridItem>
+      </GridContainer>
       {!isPhone ? (
-        <div>
+        <div className={classes.relativeContainer}>
+          <GridContainer justify="center" className={classes.avantageTitle}>
+            <GridItem xs={10} sm={10} md={8} lg={6} className={classes.gridItem}>
+              <Typography variant="h3" className={classes.title}>
+                Avantages
+              </Typography>
+            </GridItem>
+          </GridContainer>
           <GridContainer justify="center" className={classes.gridContainer} id="trigger1">
             <GridItem md={6} center>
               <InfoArea
@@ -103,7 +175,7 @@ function PresentationSection() {
                   {progress => (
                     <Tween from={{ opacity: 0, y: "200px" }} to={{ opacity: 1, y: 0 }} totalProgress={progress} paused>
                       <div className="tween">
-                        <MediaSvg src={svg2} alt="svg2" />
+                        <MediaSvg src={require("/public/img/svg/undraw_environment_iaus.svg")} alt="svg2" />
                       </div>
                     </Tween>
                   )}
@@ -136,7 +208,7 @@ function PresentationSection() {
                   {progress => (
                     <Tween from={{ opacity: 0, y: "200px" }} to={{ opacity: 1, y: 0 }} totalProgress={progress} paused>
                       <div className="tween">
-                        <MediaSvg src={svg3} alt="svg3" />
+                        <MediaSvg src={require("/public/img/svg/undraw_Savings_dwkw.svg")} alt="svg3" />
                       </div>
                     </Tween>
                   )}
@@ -146,7 +218,14 @@ function PresentationSection() {
           </GridContainer>
         </div>
       ) : (
-        <div>
+        <div className={classes.relativeContainer}>
+          <GridContainer justify="center" className={classes.pro}>
+            <GridItem xs={10} sm={10} md={8} lg={6} className={classes.gridItem}>
+              <Typography variant="h3" className={classes.title}>
+                Avantages
+              </Typography>
+            </GridItem>
+          </GridContainer>
           <GridContainer justify="center" className={classes.gridContainer} id="trigger1">
             <GridItem md={6} center>
               <InfoArea
@@ -158,12 +237,12 @@ function PresentationSection() {
               />
             </GridItem>
             <GridItem md={6} center>
-              <MediaSvg src={svg1} alt="svg1" mt={50} />
+              <MediaSvg src={svg1} alt="svg1" mt={-50} />
             </GridItem>
           </GridContainer>
           <GridContainer justify="center" className={classes.gridContainer} id="trigger2">
             <GridItem md={6} center>
-              <MediaSvg src={svg2} alt="svg2" mt={50} />
+              <MediaSvg src={require("/public/img/svg/undraw_environment_iaus.svg")} alt="svg2" mt={50} />
             </GridItem>
             <GridItem md={6} center>
               <InfoArea
@@ -186,7 +265,7 @@ function PresentationSection() {
               />
             </GridItem>
             <GridItem md={6} center>
-              <MediaSvg src={svg3} alt="svg3" mt={50} />
+              <MediaSvg src={require("/public/img/svg/undraw_Savings_dwkw.svg")} alt="svg3" mt={50} />
             </GridItem>
           </GridContainer>
         </div>

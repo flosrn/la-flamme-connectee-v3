@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import ImageGallery from "react-image-gallery";
 // core components
 import Button from "components/CustomButtons/Button";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Accordion from "components/Accordion/Accordion";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // icons
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
 // images
@@ -14,9 +15,12 @@ import Divider from "@material-ui/core/Divider";
 import { useStyles } from "public/jss/la-flamme-connectee/views/productStyle";
 // contexts
 import { ShoppingCartContext } from "src/contexts/ShoppingCartContext";
-import img1 from "public/img/objects/detourage/volcano-flam_front.png";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 export default function ProductSection({ products }) {
+  // const [colorSelect, setColorSelect] = React.useState("Gris anthracite");
   const { addItem } = useContext(ShoppingCartContext);
   const classes = useStyles();
 
@@ -26,7 +30,7 @@ export default function ProductSection({ products }) {
         <h1 className={classes.title}>Les produits</h1>
       </GridContainer>
 
-      {products &&
+      {products ? (
         products.map(item => (
           <GridContainer className={classes.carouselContainer} id="products" key={item.id}>
             <GridItem sm={6} md={6}>
@@ -35,7 +39,7 @@ export default function ProductSection({ products }) {
             <GridItem sm={6} md={6}>
               <h3 className={classes.title}>{item.name}</h3>
               <p className={classes.subtitle}>{item.caption}</p>
-              <h3 className={classes.mainPrice}>{item.price}</h3>
+              <h3 className={classes.mainPrice}>{item.price} €</h3>
               <Accordion
                 active={0}
                 activeColor="secondary"
@@ -56,7 +60,48 @@ export default function ProductSection({ products }) {
                   }
                 ]}
               />
-              <GridContainer className={classes.pickSize} />
+              {/* {item.color && ( */}
+              {/*  <GridContainer className={classes.pickSize}> */}
+              {/*    <GridItem md={6} sm={6}> */}
+              {/*      <label>Couleur</label> */}
+              {/*      <FormControl fullWidth className={classes.selectFormControl}> */}
+              {/*        <Select */}
+              {/*          MenuProps={{ */}
+              {/*            className: classes.selectMenu */}
+              {/*          }} */}
+              {/*          classes={{ */}
+              {/*            select: classes.select */}
+              {/*          }} */}
+              {/*          value={colorSelect} */}
+              {/*          onChange={event => handleChange(event, item)} */}
+              {/*          inputProps={{ */}
+              {/*            name: "colorSelect", */}
+              {/*            id: "color-select" */}
+              {/*          }} */}
+              {/*        > */}
+              {/*          <MenuItem */}
+              {/*            classes={{ */}
+              {/*              root: classes.selectMenuItem, */}
+              {/*              selected: classes.selectMenuItemSelected */}
+              {/*            }} */}
+              {/*            value="Gris anthracite" */}
+              {/*          > */}
+              {/*            {"Gris anthracite"} */}
+              {/*          </MenuItem> */}
+              {/*          <MenuItem */}
+              {/*            classes={{ */}
+              {/*              root: classes.selectMenuItem, */}
+              {/*              selected: classes.selectMenuItemSelected */}
+              {/*            }} */}
+              {/*            value="Noir" */}
+              {/*          > */}
+              {/*            {"Noir"} */}
+              {/*          </MenuItem> */}
+              {/*        </Select> */}
+              {/*      </FormControl> */}
+              {/*    </GridItem> */}
+              {/*  </GridContainer> */}
+              {/* )} */}
               <GridContainer className={classes.pullRight}>
                 <Button round color="secondary" onClick={() => addItem(item)}>
                   Ajouter au panier &nbsp; <ShoppingCart />
@@ -64,7 +109,14 @@ export default function ProductSection({ products }) {
               </GridContainer>
             </GridItem>
           </GridContainer>
-        ))}
+        ))
+      ) : (
+        <GridContainer justify="center">
+          <GridItem md={4} className={classes.center}>
+            <CircularProgress color="secondary" />
+          </GridItem>
+        </GridContainer>
+      )}
 
       <Divider />
     </div>

@@ -95,7 +95,7 @@ export default function Header(props) {
             <PersonIcon className={classes.cartIcon} />
             <p>{isLoggedIn && `${user.firstName} ${user.lastName}`}</p>
           </IconButton>
-          <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
+          <IconButton color="inherit" href="/shopping-cart" className={classes.cartIcon}>
             <Badge badgeContent={items.length} color="secondary">
               <ShoppingCartIcon className={classes.cartIcon} />
             </Badge>
@@ -106,7 +106,7 @@ export default function Header(props) {
             <IconButton color="inherit" onClick={handleRedirect} className={classes.userIcon}>
               <PersonIcon className={classes.cartIcon} />
             </IconButton>
-            <IconButton color="inherit" href="/shoppingCart" className={classes.cartIcon}>
+            <IconButton color="inherit" href="/shopping-cart" className={classes.cartIcon}>
               <Badge badgeContent={items.length} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </Badge>

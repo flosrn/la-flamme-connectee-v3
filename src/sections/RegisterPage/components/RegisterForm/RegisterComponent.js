@@ -6,7 +6,6 @@ import PersonAddIcon from "@material-ui/icons/PersonAddOutlined";
 
 import RegisterForm from "src/sections/RegisterPage/components/RegisterForm";
 import gradients from "utils/gradients";
-import stove from "public/img/contura/contura2.jpg";
 import GridItem from "components/Grid/GridItem";
 import GridContainer from "components/Grid/GridContainer";
 import Card from "components/Card/Card";
@@ -14,18 +13,6 @@ import CardBody from "components/Card/CardBody";
 import ButtonLink from "../../../../../components/CustomButtons/ButtonLink";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    height: "100vh",
-    width: "100%",
-    position: "fixed",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    background: `url(${stove}) no-repeat center center fixed`,
-    backgroundSize: "cover",
-    overflow: "hidden",
-    padding: theme.spacing(6, 2)
-  },
   content: {
     padding: theme.spacing(8, 4, 3, 4)
   },

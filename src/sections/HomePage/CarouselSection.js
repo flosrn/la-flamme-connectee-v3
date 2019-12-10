@@ -10,15 +10,6 @@ import LocationOn from "@material-ui/icons/LocationOn";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Card from "components/Card/Card";
-// images
-import image1 from "public/img/flamco/flamco-info.jpg";
-import image2 from "public/img/flamco/flamco-hand.jpg";
-import image3 from "public/img/flamco/flamconnect-start.gif";
-import image4 from "public/img/contura/background-contura-max.jpg";
-import image5 from "public/img/objects/hand-iphone.png";
-// animations
-import { Controller, Scene } from "react-scrollmagic";
-import { Tween, Timeline } from "react-gsap";
 // styles
 import { container } from "public/jss/la-flamme-connectee";
 
@@ -67,25 +58,13 @@ export default function CarouselSection() {
     <div className={classes.section} id="carousel">
       <div className={classes.container}>
         <GridContainer>
-          <GridItem xs={12} sm={12} md={12} lg={10} className={classes.marginAuto}>
+          <GridItem xs={12} sm={12} md={9} lg={7} className={classes.marginAuto}>
             <Card>
               <Carousel {...settings}>
-                <img src={image1} alt="First slide" className="slick-image" />
-                <img src={image2} alt="Second slide" className="slick-image" />
+                <img src={require("/public/img/flamco/flamco-info.jpg")} alt="First slide" className="slick-image" />
+                <img src={require("/public/img/flamco/flamco-hand.jpg")} alt="Second slide" className="slick-image" />
               </Carousel>
             </Card>
-            {/* <div className={classes.imageContainer} id="img"> */}
-            {/*  <Controller> */}
-            {/*    <Scene triggerElement="#trigger4" duration="50%" triggerHook={matches ? 0.5 : 0} pin="#img"> */}
-            {/*      <Timeline target={<img src={image5} alt="image5" className={classes.imageHand} />}> */}
-            {/*        <Tween from={{ x: 400 }} to={{ x: 0 }} duration={2} /> */}
-            {/*        <Tween from={{ filter: "grayscale(100%) blur(3px)" }} to={{ filter: "none" }} duration={0.5}> */}
-            {/*          <img src={image4} alt="image4" className={classes.image} /> */}
-            {/*        </Tween> */}
-            {/*      </Timeline> */}
-            {/*    </Scene> */}
-            {/*  </Controller> */}
-            {/* </div> */}
           </GridItem>
         </GridContainer>
       </div>

@@ -15,7 +15,6 @@ import GridItem from "components/Grid/GridItem";
 import CustomInput from "components/CustomInput/CustomInput";
 import Button from "components/CustomButtons/Button";
 import { Typography } from "@material-ui/core";
-import gif from "public/img/objects/3d-print.gif";
 
 import svg from "public/img/svg/undraw_Data_points_ubvs.svg";
 import MediaSvg from "../../../components/Media/MediaSvg";
@@ -149,9 +148,6 @@ function ProjectSection({ ...props }) {
               Médaille d'Argent.
             </h5>
           </div>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6} className={classes.gifContainer}>
-          <img src={gif} alt="3dprint" />
         </GridItem>
       </GridContainer>
     </div>
