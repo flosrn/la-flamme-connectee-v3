@@ -7,6 +7,7 @@ body {
   overflow-x: hidden;
 }
 body,
+p,
 h1,
 h2,
 h3,
@@ -14,9 +15,10 @@ h4,
 h5,
 h6 {
   // font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-  font-family: "Quicksand", sans-serif;
+  //font-family: "Quicksand", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: 400;
-  line-height: 1.5em;
+  line-height: 1.6em;
 }
 h1,
 h2,
@@ -24,7 +26,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: inherit;
+  color: #212529;
 }
 h1,
 h2,
@@ -41,10 +43,13 @@ h6 {
 h1 {
   font-size: 3.3125rem;
   line-height: 1.15em;
+  font-weight: 900;
+  color: #212529;
 }
 h2 {
   font-size: 2.25rem;
   line-height: 1.5em;
+  font-weight: 700;
 }
 h3 {
   font-size: 1.5625rem;
@@ -66,6 +71,7 @@ h6 {
 p {
   font-size: 16px;
   margin: 0 0 10px;
+  color: #818992;
 }
 html {
   font-family: sans-serif;
@@ -101,9 +107,10 @@ a {
   color: $link-color-flo;
   text-decoration: none;
   background-color: transparent;
+  font-family: "Nunito", sans-serif;
   &:hover,
   &:focus {
-    color: darken($link-color-flo, 5%);
+    color: $link-hover-color-flo;
     text-decoration: none;
   }
 }
@@ -143,6 +150,19 @@ ul,
 dl {
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+ul {
+  padding: 0;
+  margin: 15px 0 25px;
+  list-style-type: none;
+}
+
+li {
+  color: #818992;
+  padding-left: 18px;
+  position: relative;
+  margin-bottom: 5px;
 }
 
 #images h4 {

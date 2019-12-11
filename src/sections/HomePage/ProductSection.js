@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,20 +12,17 @@ import Timeline from "@material-ui/icons/Timeline";
 import Group from "@material-ui/icons/Group";
 import FireplaceIcon from "@material-ui/icons/Fireplace";
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import CardHeader from "components/Card/CardHeader.js";
-import Button from "components/CustomButtons/Button.js";
-import Muted from "components/Typography/Muted.js";
-import InfoArea from "components/InfoArea/InfoArea.js";
-import Badge from "components/Badge/Badge.js";
+import GridContainer from "components/Grid/GridContainer";
+import GridItem from "components/Grid/GridItem";
+import Card from "components/Card/Card";
+import CardBody from "components/Card/CardBody";
+import Button from "components/CustomButtons/Button";
 
 import projectsStyle from "public/jss/la-flamme-connectee/views/homePageSections/productSection";
 
-import office2 from "public/img/contura/background-contura-max.jpg";
 import Link from "next/link";
+import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
+
 const useStyles = makeStyles(projectsStyle);
 
 export default function ProductSection({ ...rest }) {
@@ -35,14 +31,14 @@ export default function ProductSection({ ...rest }) {
     <div className="cd-section" {...rest}>
       <div className={classes.projects}>
         <div className={classes.container}>
-          <GridContainer justify="center">
+          <GridContainer justify="center" className="wow fadeInUp">
             <GridItem xs={12} sm={12} md={8} lg={6}>
               <Card
                 raised
                 background
                 style={{
                   backgroundImage: `url(${require("/public/img/contura/background-contura2-lowres.jpg")})`,
-                  backgroundPosition: "left bottom"
+                  backgroundPosition: "right bottom"
                 }}
               >
                 <CardBody background>
@@ -55,15 +51,15 @@ export default function ProductSection({ ...rest }) {
                     </a>
                   </Link>
                   <p className={classes.cardDescription}>
-                    Faites des économies d'énergie et profitez d'un feu agréable dès votre retour dans votre maison.
+                    "Gagnez en confort et privilégiez une énergie renouvelable en vous chauffant 100% au bois !
                     <br />
-                    Chauffez vous 100% au bois et privilégiez une énergie renouvellable, propre, locale et faites des
-                    économies sur votre facture d'énergie !
+                    Le Flam'connect s'adapte à tous types de foyer fermé déjà existant sans y apporter de modifications
+                    préalables !"
                   </p>
                   <Link href="/products">
-                    <Button round color="danger">
+                    <ButtonCustom round color="danger" animateButton>
                       <Icon>content_copy</Icon> Découvrir
-                    </Button>
+                    </ButtonCustom>
                   </Link>
                 </CardBody>
               </Card>

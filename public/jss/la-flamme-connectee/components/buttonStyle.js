@@ -564,7 +564,47 @@ export const useStyles = makeStyles(theme => ({
       }
     }
   },
-  fileButton: {
-    // display: "inline-block"
+  animateButton: {
+    transition: ".9s",
+    borderRadius: "5px",
+    "&:hover, &:focus, &:active": {
+      color: "#fff",
+      background: theme.palette.success.main,
+      transform: "translateY(-5px)"
+    },
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.main,
+      borderColor: theme.palette.secondary.main,
+      "&:after, &:before": {
+        width: "55%"
+      }
+    },
+    "&:after, &:before": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      height: "100%",
+      width: 0,
+      transition: ".4s",
+      background: theme.palette.success.main,
+      zIndex: -1,
+      borderRadius: "5px"
+    },
+    "&:before": {
+      right: 0
+    },
+    "&:after": {
+      left: 0
+    },
+    hoverWhite: {
+      "&animateButton:hover, &animateButton:focus, &animateButton:active": {
+        color: "#fff",
+        background: "#fff",
+        transform: "translateY(-5px)"
+      },
+      "&animateButton:after, &animateButton:before": {
+        background: "#fff"
+      }
+    }
   }
 }));

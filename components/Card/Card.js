@@ -25,6 +25,7 @@ export default function Card(props) {
     color,
     product,
     testimonial,
+    animateUp,
     ...rest
   } = props;
   const classes = useStyles();
@@ -39,7 +40,8 @@ export default function Card(props) {
     [classes[color]]: color,
     [classes.cardPricing]: pricing,
     [classes.cardProduct]: product,
-    [className]: className !== undefined
+    [className]: className !== undefined,
+    [classes.animateUp]: animateUp
   });
   return (
     <div className={cardClasses} {...rest}>

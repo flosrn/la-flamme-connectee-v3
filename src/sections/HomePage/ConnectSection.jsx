@@ -13,6 +13,7 @@ import Grid from "@material-ui/core/Grid";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CustomizedExpansionPanels from "components/ExpansionPanels/CustomizedExpansionPanels";
+import Title from "../../../components/Typography/Title";
 
 // style for this page
 const useStyles = makeStyles(theme => ({
@@ -51,7 +52,7 @@ function ConnectSection() {
     <div className={classes.section} id="connect">
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={6} className={classes.gridItem}>
-          <h2 className={classes.title}>Appairage du Flam'connect</h2>
+          <Title variant="h2" className={classes.title}>Appairage du Flam'connect</Title>
           <h5 className={classes.description}>
             Pour allumer votre poêle à distance ou programmer une plage horaire à laquelle il s'allumera, veuillez suivre les instructions suivante :
           </h5>

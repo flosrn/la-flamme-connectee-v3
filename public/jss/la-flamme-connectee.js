@@ -246,15 +246,11 @@ const defaultBoxShadow = {
 };
 
 const title = {
-  // color: grayColor[1],
-  color: myPrimaryColor[5],
   textDecoration: "none",
-  fontWeight: "700",
+  fontWeight: "900",
   marginTop: "30px",
   marginBottom: "25px",
-  minHeight: "32px",
-  // fontFamily: `"Roboto Slab", "Times New Roman", serif`
-  fontFamily: "Courgette"
+  minHeight: "32px"
 };
 
 const title2 = {
@@ -278,7 +274,7 @@ const cardTitle = {
 };
 
 const smallTitle = {
-  fontFamily: "Quicksand",
+  // fontFamily: "Quicksand",
   fontSize: "16px",
   fontWeight: 500
   // ...cardTitle,

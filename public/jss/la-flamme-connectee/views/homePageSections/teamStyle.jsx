@@ -33,7 +33,7 @@ export const useStyles = makeStyles(theme => ({
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none",
-    color: "#fff"
+    color: "#fff !important"
   },
   ...imagesStyle,
   itemGrid: {
@@ -49,7 +49,6 @@ export const useStyles = makeStyles(theme => ({
   description: {
     color: "#fff",
     textAlign: "center",
-    fontFamily: "Quicksand, sans-serif",
     fontWeight: 600
   },
   justifyCenter: {

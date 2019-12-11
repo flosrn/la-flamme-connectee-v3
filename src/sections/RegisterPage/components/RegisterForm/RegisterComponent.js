@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(8, 4, 3, 4)
   },
   icon: {
-    backgroundImage: gradients.secondary,
+    background: theme.palette.success.main,
     color: theme.palette.white,
     borderRadius: theme.shape.borderRadius,
     padding: theme.spacing(1),
@@ -35,12 +35,11 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0)
   },
   link: {
-    color: theme.palette.primary.main,
-    textDecoration: "underline",
-    "&:hover": {
-      color: theme.palette.primary.light,
-      textDecoration: "underline"
-    }
+    fontSize: "16px",
+    color: theme.palette.secondary.main
+  },
+  linkText: {
+    fontSize: "16px"
   }
 }));
 
@@ -50,15 +49,19 @@ const RegisterComponent = ({ clickHandler }) => {
   return (
     <CardBody className={classes.content}>
       <PersonAddIcon className={classes.icon} />
-      <Typography gutterBottom variant="h4">
+      <Typography gutterBottom variant="h3">
         Inscription
       </Typography>
       <Typography variant="subtitle2">Inscrivez vous sur le site La Flamme Connectée</Typography>
       <RegisterForm className={classes.registerForm} />
       <Divider className={classes.divider} />
-      <Link href={{ pathname: "/login", query: { action: "login" } }}>
-        <a className={classes.link}>Vous avez déjà un compte ? Connectez vous</a>
-      </Link>
+      <div className={classes.linkText}>
+        {" "}
+        Vous avez déjà un compte ?{" "}
+        <Link href={{ pathname: "/login", query: { action: "login" } }}>
+          <a className={classes.link}>Connectez vous</a>
+        </Link>
+      </div>
     </CardBody>
   );
 };

@@ -18,6 +18,8 @@ import { ShoppingCartContext } from "src/contexts/ShoppingCartContext";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
+import Title from "../../../components/Typography/Title";
 
 export default function ProductSection({ products }) {
   // const [colorSelect, setColorSelect] = React.useState("Gris anthracite");
@@ -27,7 +29,9 @@ export default function ProductSection({ products }) {
   return (
     <div className={classes.productPage}>
       <GridContainer justify="center">
-        <h1 className={classes.title}>Les produits</h1>
+        <Title variant="h2" className={classes.title}>
+          Les produits
+        </Title>
       </GridContainer>
 
       {products ? (
@@ -51,7 +55,7 @@ export default function ProductSection({ products }) {
                   {
                     title: "Caractéristiques",
                     content: (
-                      <ul>
+                      <ul className={classes.list}>
                         {item.specifications.map(spec => (
                           <li key={spec}>{spec}</li>
                         ))}
@@ -103,9 +107,9 @@ export default function ProductSection({ products }) {
               {/*  </GridContainer> */}
               {/* )} */}
               <GridContainer className={classes.pullRight}>
-                <Button round color="secondary" onClick={() => addItem(item)}>
+                <ButtonCustom round color="secondary" onClick={() => addItem(item)} animateButton>
                   Ajouter au panier &nbsp; <ShoppingCart />
-                </Button>
+                </ButtonCustom>
               </GridContainer>
             </GridItem>
           </GridContainer>

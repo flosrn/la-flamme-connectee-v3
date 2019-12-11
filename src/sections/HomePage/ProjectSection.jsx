@@ -18,17 +18,21 @@ import { Typography } from "@material-ui/core";
 
 import svg from "public/img/svg/undraw_Data_points_ubvs.svg";
 import MediaSvg from "../../../components/Media/MediaSvg";
+import Title from "../../../components/Typography/Title";
 
 // styles for this page
 const useStyles = makeStyles(theme => ({
-  section: {},
+  section: {
+    marginTop: 60
+  },
   title: {
     ...title,
     marginBottom: "50px",
     marginTop: "30px",
     minHeight: "32px",
     textDecoration: "none",
-    textAlign: "center"
+    textAlign: "center",
+    color: "#fff"
   },
   projectText: {
     textAlign: "justify"
@@ -59,12 +63,12 @@ function ProjectSection({ ...props }) {
   return (
     <div className={classes.section} id="project">
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={8}>
-          <Typography variant="h3" className={classes.title}>
+        <GridItem xs={12} sm={12} md={8} center>
+          <Title variant="h2" className={classes.title}>
             Notre histoire
-          </Typography>
+          </Title>
         </GridItem>
-        <GridItem xs={10} sm={10} md={8}>
+        <GridItem xs={10} sm={10} md={8} className="wow fadeInUp">
           <div className={classes.projectText}>
             <h5 className={classes.description}>
               Nous sommes propriétaire depuis 2000 d'une maison de 160 m² en banlieu toulousaine et nous consommions

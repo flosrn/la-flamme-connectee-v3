@@ -14,6 +14,7 @@ import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections
 import topDownImg from "public/img/flamco/topdown-info.jpg";
 
 import { Typography } from "@material-ui/core";
+import Title from "../../../components/Typography/Title";
 
 function TopDownSection() {
   const classes = useStyles();
@@ -21,9 +22,9 @@ function TopDownSection() {
     <div className={classes.section} id="topDown">
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8} className={classes.gridItem}>
-          <Typography variant="h3" className={classes.title}>
+          <Title variant="h2" className={classes.title}>
             La technique de l'allumage inversé
-          </Typography>
+          </Title>
           <h5 className={classes.description}>
             C’est une technique d’allumage de votre poêle ou insert à bois préconisée par l’
             <a href="https://www.ademe.fr/" target="_blank">

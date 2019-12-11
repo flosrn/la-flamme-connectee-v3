@@ -14,6 +14,7 @@ import GridItem from "components/Grid/GridItem";
 import Timeline from "components/Timeline/Timeline";
 // style for this page
 import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections/howWorksStyle";
+import Title from "../../../components/Typography/Title";
 // img
 // import Stove from "../../../static/img/stoves/stove-exemple.png";;
 // contexts
@@ -139,9 +140,9 @@ function HowWorks() {
     <div className={classes.section} id="howWorks">
       <GridContainer className={classes.gridContainer}>
         <GridItem xs={12} className={classes.gridItem}>
-          <Typography variant="h3" className={classes.title}>
+          <Title variant="h2" className={classes.title}>
             Comment ça marche ?
-          </Typography>
+          </Title>
         </GridItem>
         <GridContainer justify="center" className={classes.gridContainer}>
           {/* <GridItem xs={12} sm={12} md={4} lg={4} className={classes.gridItem}>

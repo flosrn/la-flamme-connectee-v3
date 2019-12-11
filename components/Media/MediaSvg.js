@@ -9,7 +9,11 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     alignItems: "center",
     marginTop: props => props.mt && `${props.mt}px`,
-    marginBottom: props => props.mb && `${props.mb}px`
+    marginBottom: props => props.mb && `${props.mb}px`,
+    transition: ".4s",
+    "&:hover": {
+      transform: props => props.animateUp && "translateY(-10px)"
+    }
   },
   svg: {
     width: props => (props.size === "medium" ? "60%" : props.size === "small" ? "45%" : "100%"),
@@ -17,13 +21,13 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0, 0, 0),
     [theme.breakpoints.down("sm")]: {
       margin: theme.spacing(0),
-      width: "100% !important"
+      width: "70% !important"
     }
   }
 }));
 
 export default function MediaSvg(props) {
-  const { src, alt, full, size, mt, mb } = props;
+  const { src, alt, full, size, mt, mb, animateUp } = props;
   const classes = useStyles(props);
   return (
     <GridContainer justify="center">

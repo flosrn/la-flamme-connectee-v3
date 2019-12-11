@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   icon: {
-    backgroundImage: gradients.green,
+    background: theme.palette.success.main,
     color: theme.palette.white,
     borderRadius: theme.shape.borderRadius,
     padding: theme.spacing(1),
@@ -55,12 +55,11 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0)
   },
   link: {
-    color: theme.palette.primary.main,
-    textDecoration: "underline",
-    "&:hover": {
-      color: theme.palette.primary.light,
-      textDecoration: "underline"
-    }
+    fontSize: "16px",
+    color: theme.palette.secondary.main
+  },
+  linkText: {
+    fontSize: "16px"
   },
   textDescription: {
     textAlign: "center"
@@ -117,7 +116,7 @@ function LoginComponent({ clickHandler }) {
       {!isForgot ? <LockIcon className={classes.icon} /> : <LockOutlined className={classes.icon} />}
       {!isForgot ? (
         <>
-          <Typography gutterBottom variant="h4">
+          <Typography gutterBottom variant="h3">
             Connexion
           </Typography>
           <Typography variant="subtitle2">Connectez vous au site La Flamme Connectée</Typography>
@@ -148,9 +147,12 @@ function LoginComponent({ clickHandler }) {
         </>
       )}
       <Divider className={classes.divider} />
-      <Link href={{ pathname: "/login", query: { action: "register" } }}>
-        <a className={classes.link}>Vous n'avez pas encore de compte ? Inscrivez vous</a>
-      </Link>
+      <div className={classes.linkText}>
+        Vous n'avez pas encore de compte ?{" "}
+        <Link href={{ pathname: "/login", query: { action: "register" } }}>
+          <a className={classes.link}>Inscrivez vous</a>
+        </Link>
+      </div>
     </CardBody>
   );
 }

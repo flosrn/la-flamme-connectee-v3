@@ -6,7 +6,7 @@ import overrides from "./overrides";
 
 const theme = createMuiTheme({
   palette,
-  // typography
+  typography,
   overrides
 });
 

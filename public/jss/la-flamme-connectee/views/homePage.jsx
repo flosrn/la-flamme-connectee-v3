@@ -28,8 +28,8 @@ export const useStyles = makeStyles(theme => ({
     ...container,
     zIndex: "2",
     position: "relative",
-    marginTop: theme.spacing(14),
-    [theme.breakpoints.up("xl")]: {
+    marginTop: theme.spacing(10),
+    [theme.breakpoints.between("sm", "md")]: {
       marginTop: theme.spacing(15)
     }
   },
@@ -67,26 +67,17 @@ export const useStyles = makeStyles(theme => ({
     marginTop: "20px",
     minHeight: "32px",
     color: "#FFFFFF",
-    textDecoration: "none",
-    letterSpacing: "3px",
-    fontFamily: "Courgette",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "35px"
-    }
+    textDecoration: "none"
   },
   subtitle: {
     maxWidth: "500px",
     margin: "10px auto 0",
     lineHeight: "40px",
-    letterSpacing: "3px",
-    fontFamily: "Economica",
     color: "#fff",
-    [theme.breakpoints.down("xs")]: {
-      fontSize: "20px"
-    }
+    fontWeight: 600
   },
   bottomText: {
-    fontFamily: "Quicksand",
+    // fontFamily: "Quicksand",
     fontSize: "14px",
     [theme.breakpoints.up("sm")]: {
       fontSize: "20px",

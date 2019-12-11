@@ -260,23 +260,35 @@ const useStyles = makeStyles(theme => ({
   timelineBody: {
     fontSize: "14px",
     lineHeight: "21px",
-    textAlign: "justify",
+    textAlign: "left",
     [theme.breakpoints.down("sm")]: {
       textAlign: "center"
     },
-    "& > div > p": {
-      fontFamily: "quicksand"
-    }
   },
   timelineFooter: {
     zIndex: "1000",
     position: "relative"
     // float: "left"
   },
+  footer: {
+    color: theme.palette.secondary.main,
+    "& span": {
+      color: theme.palette.secondary.main
+    }
+  },
   footerTitle: {
-    color: grayColor[7],
     fontWeight: "400",
-    margin: "10px 0px 0px"
+    margin: "10px 0px 0px",
+    color: theme.palette.secondary.main,
+    "& span": {
+      color: theme.palette.secondary.main
+    }
+  },
+  timelineFooter: {
+    color: theme.palette.secondary.main,
+    "& span": {
+      color: theme.palette.secondary.main
+    }
   },
   footerLine: {
     marginTop: "10px",

@@ -73,5 +73,17 @@ export const useStyles = makeStyles(theme => ({
     alignItems: "center",
     justifyContent: "center",
     margin: "130px 0"
+  },
+  list: {
+    "& li:before": {
+      content: "''",
+      position: "absolute",
+      left: 0,
+      top: 5,
+      width: 8,
+      height: 8,
+      borderRadius: "50%",
+      background: "#13c4a1"
+    }
   }
 }));

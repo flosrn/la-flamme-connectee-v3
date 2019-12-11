@@ -39,8 +39,8 @@ const projectsSection = {
   },
   cardDescription: {
     color: `rgba(${hexToRgb(whiteColor)}, 0.9) !important`,
-    fontFamily: "Quicksand",
-    fontWeight: 500
+    fontWeight: 500,
+    fontStyle: "italic"
   },
   sectionSpace: {
     height: "70px",

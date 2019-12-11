@@ -11,7 +11,7 @@ const useStyles = makeStyles(styles);
 export default function Small(props) {
   const { children } = props;
   const classes = useStyles();
-  return <div className={classes.defaultFontStyle + " " + classes.smallText}>{children}</div>;
+  return <div className={`${classes.defaultFontStyle} ${classes.smallText}`}>{children}</div>;
 }
 
 Small.propTypes = {

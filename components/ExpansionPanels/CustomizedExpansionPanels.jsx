@@ -156,7 +156,20 @@ const ExpansionPanelDetails = withStyles(theme => ({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     "& ul": {
-      textAlign: "left"
+      textAlign: "left",
+      "& li": {
+        fontSize: "14px"
+      },
+      "& li:before": {
+        content: "''",
+        position: "absolute",
+        left: 0,
+        top: 5,
+        width: 8,
+        height: 8,
+        borderRadius: "50%",
+        background: "#13c4a1"
+      }
     }
   }
 }))(MuiExpansionPanelDetails);

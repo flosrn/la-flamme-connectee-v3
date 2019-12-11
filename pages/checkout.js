@@ -51,10 +51,13 @@ const useStyles = makeStyles(theme => ({
   },
   gridItem: {
     display: "flex",
-    justifyContent: "center",
-    "& img": {
-      height: 150
-    }
+    justifyContent: "center"
+    // [theme.breakpoints.down("xs")]: {
+    //   "& img": {
+    //     width: "200px !important",
+    //     height: "100% !important"
+    //   }
+    // }
   },
   gridContent: {
     width: "100%",
@@ -73,7 +76,7 @@ function DeliveryMethod({ value, changeHandler }) {
   return (
     <GridContainer justifycontent="center">
       <GridItem xl={6} className={classes.gridItem}>
-        <MediaSvg src={svg1} />
+        <MediaSvg src={require("/public/img/svg/undraw_delivery_address_03n0.svg")} size="medium" />
       </GridItem>
       <GridItem xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>
@@ -98,7 +101,7 @@ function Address({ values, value, changeHandler, submitHandler, hasError, errors
   return (
     <GridContainer justifycontent="center">
       <GridItem xl={6} className={classes.gridItem}>
-        <MediaSvg src={svg2} />
+        <MediaSvg src={svg2} size="medium" />
       </GridItem>
       <GridItem xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>
@@ -124,7 +127,7 @@ function Summary() {
   return (
     <GridContainer justifycontent="center">
       <GridItem xl={6} className={classes.gridItem}>
-        <MediaSvg src={svg3} />
+        <MediaSvg src={require("/public/img/svg/undraw_deliveries_131a.svg")} size="medium" />
       </GridItem>
       <GridItem xs={12} xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>

@@ -25,10 +25,15 @@ class MyDocument extends Document {
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
           <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css?family=Courgette|Economica&display=swap" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Arima+Madurai&display=swap" rel="stylesheet" />
-          <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Montserrat&display=swap" rel="stylesheet" />
+          {/* <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Montserrat&display=swap" rel="stylesheet" /> */}
           <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,700&display=swap" rel="stylesheet" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,900&display=swap"
+            rel="stylesheet"
+          />
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+          {/* Animations */}
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
           {/* Payment */}
           <script src="https://js.stripe.com/v3/" />
         </Head>

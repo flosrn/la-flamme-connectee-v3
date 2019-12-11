@@ -8,6 +8,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
+import ButtonCustom from "../../../../../components/CustomButtons/ButtonCustom";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -32,11 +33,11 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(-2)
   },
   link: {
-    color: theme.palette.text.secondary,
-    fontSize: "12px",
+    color: theme.palette.title.primary,
+    fontSize: "16px",
     textTransform: "none",
     "&:hover": {
-      color: theme.palette.text.secondary,
+      color: theme.palette.success.main,
       backgroundColor: "transparent"
     }
   }
@@ -79,16 +80,17 @@ function LoginForm({ className, email, password, changeHandler, submitHandler, i
           }}
         />
       </div>
-      <Button
+      <ButtonCustom
         className={classes.submitButton}
         color="secondary"
         disabled={isLoading}
         size="large"
         type="submit"
         variant="contained"
+        animateButton
       >
         Connexion
-      </Button>
+      </ButtonCustom>
       <div className={classes.forgot}>
         <Button size="small" className={classes.link} onClick={clickHandler}>
           Mot de passe oublié ?

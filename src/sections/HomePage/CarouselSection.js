@@ -15,7 +15,7 @@ import { container } from "public/jss/la-flamme-connectee";
 
 const useStyles = makeStyles(theme => ({
   section: {
-    // padding: "70px 0"
+    paddingBottom: 50
   },
   container,
   marginAuto: {
@@ -59,7 +59,7 @@ export default function CarouselSection() {
       <div className={classes.container}>
         <GridContainer>
           <GridItem xs={12} sm={12} md={9} lg={7} className={classes.marginAuto}>
-            <Card>
+            <Card className="wow fadeInUp">
               <Carousel {...settings}>
                 <img src={require("/public/img/flamco/flamco-info.jpg")} alt="First slide" className="slick-image" />
                 <img src={require("/public/img/flamco/flamco-hand.jpg")} alt="Second slide" className="slick-image" />

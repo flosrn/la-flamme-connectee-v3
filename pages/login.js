@@ -29,6 +29,7 @@ import ButtonLink from "../components/CustomButtons/ButtonLink";
 import ResetPassword from "./resetPassword/[token]";
 import FooterDark from "../components/Footer/FooterDark";
 import { authInitialProps } from "../server/api/auth";
+import ButtonCustom from "../components/CustomButtons/ButtonCustom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -137,7 +138,7 @@ function LoginPage({ children, currentUser, isLoggedIn }) {
         <GridItem sm={8} md={6} lg={5} xl={4}>
           <Card className={classes.card}>
             <CardBody className={classes.contentRight}>
-              <Typography gutterBottom variant="h4">
+              <Typography gutterBottom variant="h3">
                 {action === "login" ? "Inscription" : "Connexion"}
               </Typography>
               <CardContent>
@@ -155,9 +156,16 @@ function LoginPage({ children, currentUser, isLoggedIn }) {
                     : { pathname: "/login", query: { action: "login" } }
                 }
               >
-                <Button className={classes.submitButton} color="primary" size="large" type="submit" variant="contained">
+                <ButtonCustom
+                  className={classes.submitButton}
+                  color="primary"
+                  size="large"
+                  type="submit"
+                  variant="contained"
+                  animateButton
+                >
                   {action === "login" ? "S'enregistrer" : "Se connecter"}
-                </Button>
+                </ButtonCustom>
               </Link>
             </CardBody>
           </Card>

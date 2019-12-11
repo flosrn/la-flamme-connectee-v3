@@ -22,6 +22,7 @@ import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections
 import { facebookColor, instagramColor, linkedinColor, twitterColor } from "public/jss/la-flamme-connectee";
 
 import MediaSvg from "../../../components/Media/MediaSvg";
+import Title from "../../../components/Typography/Title";
 
 function TeamSection() {
   const classes = useStyles();
@@ -29,14 +30,14 @@ function TeamSection() {
   return (
     <div className={classes.section} id="team">
       <div className={classes.relativeContainer}>
-        <Typography variant="h3" className={classes.title}>
+        <Title variant="h2" className={classes.title} color="textSecondary">
           L'équipe
-        </Typography>
+        </Title>
         <p className={classes.description}></p>
         <div>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={6} lg={6}>
-              <Card plain>
+            <GridItem xs={12} sm={12} md={6} lg={6} className="wow zoomIn">
+              <Card plain animateUp>
                 <GridItem xs={8} sm={4} md={6} className={classes.itemGrid}>
                   <img src={require("/public/img/faces/Patrick.jpg")} alt="..." className={imageClasses} />
                 </GridItem>
@@ -63,8 +64,8 @@ function TeamSection() {
                 {/*</Box>*/}
               </Card>
             </GridItem>
-            <GridItem xs={12} sm={12} md={6} lg={6}>
-              <Card plain>
+            <GridItem xs={12} sm={12} md={6} lg={6} className="wow zoomIn">
+              <Card plain animateUp>
                 <GridItem xs={8} sm={4} md={6} className={classes.itemGrid}>
                   <img src={require("/public/img/faces/Marie.jpg")} alt="..." className={imageClasses} />
                 </GridItem>
@@ -88,8 +89,8 @@ function TeamSection() {
                 {/*</Box>*/}
               </Card>
             </GridItem>
-            <GridItem xs={12} sm={12} md={12} lg={6}>
-              <Card plain>
+            <GridItem xs={12} sm={12} md={12} lg={6} className="wow zoomIn">
+              <Card plain animateUp>
                 <GridItem xs={8} sm={4} md={6} className={classes.itemGrid}>
                   <img src={require("/public/img/faces/Florian.jpg")} alt="..." className={imageClasses} />
                 </GridItem>

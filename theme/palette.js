@@ -15,13 +15,14 @@ export default {
   secondary: {
     contrastText: white,
     dark: "#F2785C",
-    main: "#ff7961",
+    main: "#FF8A73",
+    // main: "#ff7961",
     light: "#ffa98a"
   },
   success: {
     contrastText: white,
     dark: colors.green[900],
-    main: colors.green[600],
+    main: "#13c4a1",
     light: colors.green[400]
   },
   error: {
@@ -30,9 +31,12 @@ export default {
     main: colors.red[600],
     light: colors.red[400]
   },
+  title: {
+    primary: "#212529"
+  },
   text: {
-    primary: colors.blueGrey[900],
-    secondary: colors.blueGrey[600],
+    primary: "#818992",
+    secondary: "#fff",
     link: colors.blue[600]
   },
   link: colors.blue[800],

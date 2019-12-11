@@ -1,8 +1,8 @@
 /* eslint import/no-absolute-path:0 */
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import clsx from "clsx";
 // @material-ui/core
 import { Typography, Avatar, IconButton } from "@material-ui/core";
 // @material-ui/icons
@@ -29,17 +29,27 @@ import svg from "public/img/svg/undraw_smart_home_28oy.svg";
 // style for this page
 import { useStyles } from "public/jss/la-flamme-connectee/views/homePage";
 import svg3 from "public/img/svg/undraw_team_page_pgpr.svg";
+import VideoCover from "components/Video/VideoCover";
+import ModalVideo from "react-modal-video";
 import ProjectSection from "../src/sections/HomePage/ProjectSection";
 import TeamSection from "../src/sections/HomePage/TeamSection";
-import AlertDialogSlide from "../components/Alert/AlertDialogVideoSlide";
 
 import { authInitialProps } from "../server/api/auth";
 import FooterDark from "../components/Footer/FooterDark";
 import ProductSection from "../src/sections/HomePage/ProductSection";
+import VideoSection from "../src/sections/HomePage/VideoSection";
+import ButtonCustom from "../components/CustomButtons/ButtonCustom";
+
+const isServer = typeof window === "undefined";
+const WOW = !isServer ? require("wow.js") : null;
 
 function HomePage({ currentUser, isLoggedIn }) {
   const [open, setOpen] = React.useState(false);
   const classes = useStyles();
+
+  useEffect(() => {
+    new WOW().init();
+  });
 
   const easeInOutQuad = (t, b, c, d) => {
     t /= d / 2;
@@ -80,33 +90,32 @@ function HomePage({ currentUser, isLoggedIn }) {
         isLoggedIn={isLoggedIn}
         hiddenLogo
         changeColorOnScroll={{
-          height: 300,
+          height: 150,
           color: "dark",
           navColor: "black"
         }}
       />
-      <Parallax filter="dark" image={require("/public/img/flamco/flamco-main-dark.jpg")} className={classes.parallax}>
-        {/* <img alt="Lepine" src={lepine2} className={classes.lepine} /> */}
+      <VideoCover>
         <div className={classes.containerBackground}>
           <div className={classes.titleContainer}>
             <GridItem xs={12} sm={12} md={12} className={classes.gridItem} id="title">
-              <Typography variant="h3" align="center" className={classes.title}>
+              <Typography variant="h1" align="center" className={classes.title}>
                 La Flamme Connectée
               </Typography>
               <Avatar alt="Logo" src={logo} className={classes.logo} />
-              <Typography variant="h5" align="center" className={classes.subtitle}>
+              <Typography variant="h3" align="center" className={classes.subtitle}>
                 Allumez votre poêle ou insert à distance
               </Typography>
-              <Button color="danger" className={classes.buttonPlay} onClick={() => setOpen(true)}>
+              <ButtonCustom color="danger" className={classes.buttonPlay} animateButton onClick={() => setOpen(true)}>
                 <i className="fas fa-play" />
                 Découvrir en vidéo
-              </Button>
-              <AlertDialogSlide open={open} closeHandler={() => setOpen(false)} />
+              </ButtonCustom>
+              <ModalVideo channel="youtube" isOpen={open} videoId="gQ0yT21CaN8" onClose={() => setOpen(false)} />
             </GridItem>
           </div>
         </div>
-      </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)} id="main-panel">
+      </VideoCover>
+      <div className={clsx(classes.main, classes.mainRaised)} id="main-panel">
         <div className={classes.scrollDownContainer}>
           <IconButton className={classes.scrollDownButton} onClick={() => smoothScroll("presentation")}>
             <ExpandMoreIcon fontSize="large" className={classes.arrowButton} />
@@ -116,11 +125,13 @@ function HomePage({ currentUser, isLoggedIn }) {
           <PresentationSection />
           <ProductSection />
           <GridContainer justify="center">
-            <GridItem center>{/* <MediaSvg src={svg} alt="smart-home" size="medium" /> */}</GridItem>
+            <GridItem center className="wow fadeInUp">
+              <MediaSvg src={svg} alt="smart-home" size="medium" animateUp />
+            </GridItem>
           </GridContainer>
           <GridContainer justify="center" className={classes.bottom}>
-            <GridItem center>
-              <Typography variant="subtitle2" align="center">
+            <GridItem center className="wow fadeInUp">
+              <Typography variant="subtitle1" align="center">
                 Pour en savoir plus, consultez nos pages{" "}
                 <Link href="/documentation">
                   <a>Documentation</a>

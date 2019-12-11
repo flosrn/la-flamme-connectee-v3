@@ -16,6 +16,7 @@ import redirectTo from "src/lib/redirectTo";
 import Cookies from "js-cookie";
 import { schema } from "./RegisterFormSchema";
 import getHost from "../../../../../server/api/get-host";
+import ButtonCustom from "../../../../../components/CustomButtons/ButtonCustom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -214,7 +215,7 @@ function RegisterForm({ className, ...rest }) {
         )}
       </form>
       {!isClicked && (
-        <Button
+        <ButtonCustom
           className={classes.submitButton}
           color="secondary"
           disabled={isLoading}
@@ -222,9 +223,10 @@ function RegisterForm({ className, ...rest }) {
           variant="contained"
           type="button"
           onClick={() => setIsClicked(true)}
+          animateButton
         >
           Créer un compte
-        </Button>
+        </ButtonCustom>
       )}
     </>
   );

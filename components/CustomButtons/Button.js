@@ -23,6 +23,8 @@ const RegularButton = React.forwardRef((props, ref) => {
     justIcon,
     fileButton,
     className,
+    animateButton,
+    hoverWhite,
     ...rest
   } = props;
   const classes = useStyles();
@@ -38,8 +40,11 @@ const RegularButton = React.forwardRef((props, ref) => {
     [classes.link]: link,
     [classes.justIcon]: justIcon,
     [classes.fileButton]: fileButton,
-    [className]: className
+    [className]: className,
+    [classes.animateButton]: animateButton,
+    [classes.hoverWhite]: hoverWhite
   });
+
   return (
     <Button {...rest} ref={ref} className={btnClasses}>
       {children}
@@ -47,43 +52,43 @@ const RegularButton = React.forwardRef((props, ref) => {
   );
 });
 
-RegularButton.propTypes = {
-  color: PropTypes.oneOf([
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose",
-    "white",
-    "twitter",
-    "facebook",
-    "google",
-    "linkedin",
-    "pinterest",
-    "youtube",
-    "tumblr",
-    "github",
-    "behance",
-    "dribbble",
-    "reddit",
-    "instagram",
-    "transparent",
-    "iOS",
-    "android"
-  ]),
-  size: PropTypes.oneOf(["sm", "lg"]),
-  simple: PropTypes.bool,
-  round: PropTypes.bool,
-  fullWidth: PropTypes.bool,
-  disabled: PropTypes.bool,
-  block: PropTypes.bool,
-  link: PropTypes.bool,
-  justIcon: PropTypes.bool,
-  fileButton: PropTypes.bool,
-  children: PropTypes.node,
-  className: PropTypes.string
-};
+// RegularButton.propTypes = {
+//   color: PropTypes.oneOf([
+//     "primary",
+//     "secondary",
+//     "info",
+//     "success",
+//     "warning",
+//     "danger",
+//     "rose",
+//     "white",
+//     "twitter",
+//     "facebook",
+//     "google",
+//     "linkedin",
+//     "pinterest",
+//     "youtube",
+//     "tumblr",
+//     "github",
+//     "behance",
+//     "dribbble",
+//     "reddit",
+//     "instagram",
+//     "transparent",
+//     "iOS",
+//     "android"
+//   ]),
+//   size: PropTypes.oneOf(["sm", "lg"]),
+//   simple: PropTypes.bool,
+//   round: PropTypes.bool,
+//   fullWidth: PropTypes.bool,
+//   disabled: PropTypes.bool,
+//   block: PropTypes.bool,
+//   link: PropTypes.bool,
+//   justIcon: PropTypes.bool,
+//   fileButton: PropTypes.bool,
+//   children: PropTypes.node,
+//   className: PropTypes.string
+// };
 
 export default RegularButton;

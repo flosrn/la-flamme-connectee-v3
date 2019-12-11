@@ -1,6 +1,7 @@
 const withPlugins = require("next-compose-plugins");
 const css = require("@zeit/next-css");
 const sass = require("@zeit/next-sass");
+const videos = require("next-videos");
 const optimizedImages = require("next-optimized-images");
 
 const nextConfig = {
@@ -33,12 +34,13 @@ module.exports = withPlugins(
   [
     [css],
     [sass],
+    [videos],
     [
       optimizedImages,
       {
         optimizeImagesInDev: false,
         mozjpeg: {
-          quality: 40
+          quality: 55
         },
         optipng: {
           optimizationLevel: 5

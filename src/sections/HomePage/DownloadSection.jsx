@@ -16,6 +16,7 @@ import InfoArea from "components/InfoArea/InfoArea";
 import Button from "components/CustomButtons/Button";
 // logo
 import Logo from "public/img/logo/laflammeco.png";
+import Title from "../../../components/Typography/Title";
 
 // style for this page
 const useStyles = makeStyles(theme => ({
@@ -57,9 +58,9 @@ function DownloadSection(props) {
     <div className={classes.section} id="download">
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8} className={classes.gridItem}>
-          <Typography variant="h3" className={classes.title}>
+          <Title variant="h2" className={classes.title}>
             Téléchargement
-          </Typography>
+          </Title>
         </GridItem>
       </GridContainer>
       <GridContainer justify="center">

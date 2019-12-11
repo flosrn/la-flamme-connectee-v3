@@ -22,6 +22,8 @@ import Swal from "sweetalert2";
 import MediaSvg from "../../../components/Media/MediaSvg";
 import InfoArea from "components/InfoArea/InfoArea";
 import getHost from "../../../server/api/get-host";
+import Title from "../../../components/Typography/Title";
+import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
 
 // styles for this page
 const useStyles = makeStyles(theme => ({
@@ -108,9 +110,13 @@ function ContactSection({ ...props }) {
     <div className={classes.section} id="contact">
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={6} className={classes.gridItemRight}>
-          <Typography variant="h3" className={classes.title}>
+          <Title variant="h2" className={classes.title}>
             Nous contacter
-          </Typography>
+          </Title>
+        </GridItem>
+      </GridContainer>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12} md={6} className={classes.gridItemRight}>
           <GridContainer justify="center">
             <GridItem xs={12} sm={10}>
               <h4 className={classes.description}>
@@ -161,9 +167,9 @@ function ContactSection({ ...props }) {
               </GridItem>
               <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
-                  <Button color="secondary" type="submit" disabled={isLoading}>
+                  <ButtonCustom color="secondary" type="submit" disabled={isLoading} animateButton>
                     Envoyer
-                  </Button>
+                  </ButtonCustom>
                 </GridItem>
               </GridContainer>
             </GridContainer>

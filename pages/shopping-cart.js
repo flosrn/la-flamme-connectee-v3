@@ -54,6 +54,7 @@ import { authInitialProps } from "../server/api/auth";
 import HomePage from "./index";
 import getHost from "../server/api/get-host";
 import FooterDark from "../components/Footer/FooterDark";
+import ButtonCustom from "../components/CustomButtons/ButtonCustom";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -279,9 +280,9 @@ function ShoppingCartPage({ currentUser, isLoggedIn }) {
                         </div>
                         <div className={classes.rowPurchase}>
                           <div className={classes.purchaseButton}>
-                            <Button round color="secondary" disabled={items.length <= 0} onClick={login}>
+                            <ButtonCustom color="secondary" disabled={items.length <= 0} onClick={login} animateButton>
                               Passer commande <KeyboardArrowRight />
-                            </Button>
+                            </ButtonCustom>
                           </div>
                           <GridContainer className={classes.rowIcons}>
                             <GridItem sm={4} className={classes.gridIcon}>

@@ -13,7 +13,11 @@ import {
 export const useStyles = makeStyles(theme => ({
   infoArea: {
     maxWidth: "360px",
-    margin: "0 auto"
+    margin: "0 auto",
+    transition: ".4s",
+    "&:hover": {
+      transform: "translateY(-10px)"
+    }
     // padding: "0 0 30px"
   },
   iconWrapper: {
@@ -34,7 +38,7 @@ export const useStyles = makeStyles(theme => ({
     color: dangerColor[0]
   },
   success: {
-    color: successColor[0]
+    color: theme.palette.success.main
   },
   info: {
     color: infoColor[0]
@@ -51,7 +55,10 @@ export const useStyles = makeStyles(theme => ({
     fontSize: "2.25rem"
   },
   descriptionWrapper: {
-    color: grayColor[0],
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center",
     overflow: "hidden"
   },
   title: {
@@ -60,11 +67,10 @@ export const useStyles = makeStyles(theme => ({
     minHeight: "unset"
   },
   description: {
-    color: grayColor[0],
     overflow: "hidden",
     marginTop: "0px",
-    fontFamily: "quicksand",
-    fontSize: "16px"
+    fontSize: "16px",
+    width: "80%"
   },
   iconWrapperVertical: {
     float: "none"

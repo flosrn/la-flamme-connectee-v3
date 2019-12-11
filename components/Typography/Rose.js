@@ -11,7 +11,7 @@ const useStyles = makeStyles(styles);
 export default function Rose(props) {
   const { children } = props;
   const classes = useStyles();
-  return <div className={classes.defaultFontStyle + " " + classes.roseText}>{children}</div>;
+  return <div className={`${classes.defaultFontStyle} ${classes.roseText}`}>{children}</div>;
 }
 
 Rose.propTypes = {

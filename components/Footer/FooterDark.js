@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import classNames from "classnames";
+import clsx from "clsx";
 import { makeStyles } from "@material-ui/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -46,7 +46,6 @@ const useStyles = makeStyles(theme => ({
   },
   gridItem: {
     color: "rgba(255,255,255,.6)",
-    fontFamily: "quicksand",
     fontSize: "16px",
     marginTop: 50
   },
@@ -69,7 +68,8 @@ const useStyles = makeStyles(theme => ({
   },
   itemText: {
     padding: "25px 0 15px 0",
-    fontSize: "15px"
+    fontSize: "15px",
+    color: "rgba(255,255,255,.6)"
   },
   menu: {
     padding: "25px 0 6px 0",
@@ -77,9 +77,11 @@ const useStyles = makeStyles(theme => ({
     "& li": {
       padding: "5px 0",
       "& a": {
-        color: "rgba(255,255,255,.6) !important",
+        color: "rgba(255,255,255,.6)",
+        transition: ".4s",
         "&:hover": {
-          textDecoration: "underline"
+          color: theme.palette.success.main,
+          paddingLeft: 7
         }
       }
     }
@@ -134,7 +136,7 @@ function FooterDark() {
         <img src={logo} alt="logo" />
       </div>
       <GridContainer justify="center" className={classes.mainContainer}>
-        <GridItem xs={12} sm={6} md={3} lg={3} className={classes.gridItem}>
+        <GridItem xs={12} sm={6} md={3} lg={3} className={clsx(classes.gridItem, "wow fadeInLeft")}>
           <p className={classes.itemTitle}>À propos</p>
           <div className={classes.itemContent}>
             <p className={classes.itemText}>
@@ -158,7 +160,7 @@ function FooterDark() {
             </div>
           </div>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3} lg={3} className={classes.gridItem}>
+        <GridItem xs={12} sm={6} md={3} lg={3} className={clsx(classes.gridItem, "wow fadeInLeft")}>
           <div className={classes.itemTitle}>Informations</div>
           <div className={classes.itemContent}>
             <ul className={classes.menu}>
@@ -193,7 +195,7 @@ function FooterDark() {
             </ul>
           </div>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3} lg={3} className={classes.gridItem}>
+        <GridItem xs={12} sm={6} md={3} lg={3} className={clsx(classes.gridItem, "wow fadeInLeft")}>
           <div className={classes.itemTitle}>Nous contacter</div>
           <div className={classes.itemContent}>
             <ul className={classes.menu}>
@@ -210,7 +212,7 @@ function FooterDark() {
             </ul>
           </div>
         </GridItem>
-        <GridItem xs={12} sm={6} md={3} lg={3} className={classes.gridItem}>
+        <GridItem xs={12} sm={6} md={3} lg={3} className={clsx(classes.gridItem, "wow fadeInLeft")}>
           <img src={lepine} alt="lepine" className={classes.logoLepine} />
         </GridItem>
         <div className={classes.footerBottom}>
