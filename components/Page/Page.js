@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 // import useRouter from "utils/useRouter";
 import { useRouter } from "next/router";
 
-const NODE_ENV = process.env.NODE_ENV;
+const { NODE_ENV } = process.env;
 const GA_MEASUREMENT_ID = process.env.REACT_APP_GA_MEASUREMENT_ID;
 
 const Page = props => {

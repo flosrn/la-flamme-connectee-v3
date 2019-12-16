@@ -36,7 +36,7 @@ function TeamSection() {
         <p className={classes.description}></p>
         <div>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={6} lg={6} className="wow zoomIn">
+            <GridItem xs={12} sm={12} md={6} lg={6}>
               <Card plain animateUp>
                 <GridItem xs={8} sm={4} md={6} className={classes.itemGrid}>
                   <img src={require("/public/img/faces/Patrick.jpg")} alt="..." className={imageClasses} />
@@ -64,7 +64,7 @@ function TeamSection() {
                 {/*</Box>*/}
               </Card>
             </GridItem>
-            <GridItem xs={12} sm={12} md={6} lg={6} className="wow zoomIn">
+            <GridItem xs={12} sm={12} md={6} lg={6}>
               <Card plain animateUp>
                 <GridItem xs={8} sm={4} md={6} className={classes.itemGrid}>
                   <img src={require("/public/img/faces/Marie.jpg")} alt="..." className={imageClasses} />
@@ -89,7 +89,7 @@ function TeamSection() {
                 {/*</Box>*/}
               </Card>
             </GridItem>
-            <GridItem xs={12} sm={12} md={12} lg={6} className="wow zoomIn">
+            <GridItem xs={12} sm={12} md={12} lg={6}>
               <Card plain animateUp>
                 <GridItem xs={8} sm={4} md={6} className={classes.itemGrid}>
                   <img src={require("/public/img/faces/Florian.jpg")} alt="..." className={imageClasses} />

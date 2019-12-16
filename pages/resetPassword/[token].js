@@ -6,7 +6,6 @@ import LockIcon from "@material-ui/icons/Lock";
 import LockOutlined from "@material-ui/icons/LockOutlined";
 
 import Page from "components/Page";
-import gradients from "utils/gradients";
 import LoginForm from "src/sections/LoginPage/components/LoginForm";
 // import Card from "../components/Card/Card";
 import CardBody from "components/Card/CardBody";
@@ -22,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(8, 4, 3, 4)
   },
   icon: {
-    backgroundImage: gradients.green,
+    backgroundImage: theme.palette.success.main,
     color: theme.palette.white,
     borderRadius: theme.shape.borderRadius,
     padding: theme.spacing(1),

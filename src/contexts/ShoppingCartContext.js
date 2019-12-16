@@ -1,7 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
 import Cookies from "js-cookie";
-import axios from "axios";
-import getHost from "../../server/api/get-host";
 
 const fakeCart = [
   { id: "prod_GB4kHqmbn25Bq3", name: "flam'connect" },

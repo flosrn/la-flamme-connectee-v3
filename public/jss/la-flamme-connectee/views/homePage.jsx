@@ -31,6 +31,12 @@ export const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(10),
     [theme.breakpoints.between("sm", "md")]: {
       marginTop: theme.spacing(15)
+    },
+    "@media (max-width: 360px)": {
+      marginTop: theme.spacing(5)
+    },
+    "@media (max-height: 500px)": {
+      marginTop: theme.spacing(5)
     }
   },
   gridContainer: {
@@ -50,6 +56,16 @@ export const useStyles = makeStyles(theme => ({
     alignItems: "center",
     "& h1, & h3": {
       textAlign: "center"
+    },
+    "& button": {
+      "@media (max-height: 530px)": {
+        display: "none"
+      }
+    }
+  },
+  modalVideo: {
+    "@media (max-height: 530px)": {
+      display: "none"
     }
   },
   gridAbsolute: {
@@ -67,7 +83,13 @@ export const useStyles = makeStyles(theme => ({
     marginTop: "20px",
     minHeight: "32px",
     color: "#FFFFFF",
-    textDecoration: "none"
+    textDecoration: "none",
+    "@media (max-width: 400px)": {
+      fontSize: "40px"
+    },
+    "@media (max-width: 350px)": {
+      fontSize: "35px"
+    }
   },
   subtitle: {
     maxWidth: "500px",
@@ -77,7 +99,6 @@ export const useStyles = makeStyles(theme => ({
     fontWeight: 600
   },
   bottomText: {
-    // fontFamily: "Quicksand",
     fontSize: "14px",
     [theme.breakpoints.up("sm")]: {
       fontSize: "20px",
@@ -97,19 +118,6 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: "center",
     position: "absolute",
     bottom: 80
-  },
-  lepine: {
-    zIndex: 2,
-    // position: "absolute",
-    // left: 0,
-    // top: 70,
-    // transform: "rotate(-12deg)",
-    width: 215,
-    // display: "none",
-    // [theme.breakpoints.up("md")]: {
-    //   width: 175
-    //   display: "block"
-    // }
   },
   fixed: {
     position: "fixed !important",
@@ -173,16 +181,19 @@ export const useStyles = makeStyles(theme => ({
     padding: "0",
     marginTop: "0"
   },
-  buttonPlay: {
-    marginTop: theme.spacing(5)
-  },
   scrollDownContainer: {
     width: "100%",
     position: "absolute",
     left: 0,
     top: "-85px",
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    "@media (max-height: 650px)": {
+      display: "none"
+    },
+    "& .hidden": {
+      display: "none"
+    }
   },
   scrollDownButton: {
     color: "#fff",

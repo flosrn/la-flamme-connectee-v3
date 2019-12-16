@@ -127,7 +127,7 @@ const useStyles = makeStyles(theme => ({
       ", 0.4)"
   },
   primary: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: `${theme.palette.primary.main} !important`,
     boxShadow:
       "0 4px 20px 0px rgba(" +
       hexToRgb(blackColor) +
@@ -136,7 +136,7 @@ const useStyles = makeStyles(theme => ({
       ", 0.4)"
   },
   secondary: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: `${theme.palette.secondary.main} !important`,
     boxShadow:
       "0 4px 20px 0px rgba(" +
       hexToRgb(blackColor) +
@@ -267,8 +267,11 @@ const useStyles = makeStyles(theme => ({
   },
   timelineFooter: {
     zIndex: "1000",
-    position: "relative"
-    // float: "left"
+    position: "relative",
+    color: theme.palette.secondary.main,
+    "& span": {
+      color: theme.palette.secondary.main
+    }
   },
   footer: {
     color: theme.palette.secondary.main,
@@ -279,12 +282,6 @@ const useStyles = makeStyles(theme => ({
   footerTitle: {
     fontWeight: "400",
     margin: "10px 0px 0px",
-    color: theme.palette.secondary.main,
-    "& span": {
-      color: theme.palette.secondary.main
-    }
-  },
-  timelineFooter: {
     color: theme.palette.secondary.main,
     "& span": {
       color: theme.palette.secondary.main
@@ -324,6 +321,7 @@ function Timeline({ ...props }) {
           cx({
             [classes.timelineSimpleBadge]: simple
           });
+
         return (
           <li className={classes.item} key={key}>
             {prop.badgeIcon ? (

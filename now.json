@@ -6,25 +6,8 @@
     "env": {
       "API_URL": "@api-url",
 
-      "MONGODB_URI": "@mongodb-uri",
-      "CLOUDINARY_URL": "@cloudinary-url",
-
-      "EMAIL_USERNAME": "@email-username",
-      "EMAIL_PASSWORD": "@email-password",
-      "EMAIL_FROM": "@email-from",
-      "EMAIL_HOST": "@email-host",
-      "EMAIL_PORT": "@email-port",
-
-      "SENDGRID_USERNAME": "@sendgrid-username",
-      "SENDGRID_PASSWORD": "@sendgrid-password",
-
       "STRIPE_PUBLIC_KEY_TEST": "@stripe-public-key-test",
-      "STRIPE_SECRET_KEY_TEST": "@stripe-secret-key-test",
-      "STRIPE_WEBHOOK_SECRET_TEST": "@stripe-webhook-secret-test",
-
-      "STRIPE_PUBLIC_KEY": "@stripe-public-key",
-      "STRIPE_SECRET_KEY": "@stripe-secret-key",
-      "STRIPE_WEBHOOK_SECRET": "@stripe-webhook-secret"
+      "STRIPE_PUBLIC_KEY": "@stripe-public-key"
     }
   }
 }

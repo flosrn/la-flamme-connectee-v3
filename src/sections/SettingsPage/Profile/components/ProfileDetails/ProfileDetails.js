@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/styles";
-import { CardContent, CardActions, Avatar, Typography } from "@material-ui/core";
-import Card from "components/Card/Card.js";
-import CardBody from "components/Card/CardBody.js";
-import Button from "components/CustomButtons/Button.js";
+import { Typography } from "@material-ui/core";
+import Button from "components/CustomButtons/Button";
 import flo from "public/img/faces/Florian.jpg";
 import CardAvatar from "components/Card/CardAvatar";
 import CardFooter from "components/Card/CardFooter";
@@ -21,9 +19,8 @@ import svg1 from "public/img/svg/undraw_personal_info_0okl.svg";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
-import getHost from "../../../../../../server/api/get-host";
-import MediaSvg from "../../../../../../components/Media/MediaSvg";
-import redirectTo from "../../../../../lib/redirectTo";
+import getApiUrl from "utils/getApiUrl";
+import MediaSvg from "components/Media/MediaSvg";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -73,15 +70,15 @@ function ProfileDetails({ profile, isLoading }) {
 
   const handleLogout = event => {
     event.preventDefault();
-    axios.get(`${getHost()}/auth/logout`).then(response => {
+    axios.get(`${getApiUrl()}/auth/logout`).then(response => {
       Swal.fire({
         type: response.data.status,
         title: response.data.message,
         timer: 4000
       });
       if (response.data.status === "success") {
-        Cookies.set("token", "loggedOut");
-        Router.push("/login?action=login");
+        Cookies.remove("token");
+        Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
       }
     });
   };

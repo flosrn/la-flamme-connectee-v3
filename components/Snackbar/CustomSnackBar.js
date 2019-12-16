@@ -21,16 +21,21 @@ const variantIcon = {
   info: InfoIcon
 };
 
-export default function CustomSnackBar({ open, closeHandler, duration, message, error, ...rest }) {
+export default function CustomSnackBar({ open, clickHandler, closeHandler, duration, message, error, ...rest }) {
   return (
     <Snackbar open={open} onClose={closeHandler} autoHideDuration={duration}>
-      <MySnackbarContentWrapper onClose={closeHandler} variant={error ? "error" : "success"} message={message} />
+      <MySnackbarContentWrapper
+        clickHandler={clickHandler}
+        onClose={closeHandler}
+        variant={error ? "error" : "success"}
+        message={message}
+      />
     </Snackbar>
   );
 }
 
 function MySnackbarContentWrapper(props) {
-  const { className, message, onClose, variant, ...other } = props;
+  const { className, message, clickHandler, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
   const classes = useStyles1();
   return (
@@ -38,7 +43,7 @@ function MySnackbarContentWrapper(props) {
       className={clsx(classes[variant], className)}
       aria-describedby="client-snackbar"
       message={
-        <span id="client-snackbar" className={classes.message}>
+        <span id="client-snackbar" className={classes.message} onClick={clickHandler}>
           <Icon className={clsx(classes.icon, classes.iconVariant)} />
           {message}
         </span>
@@ -55,7 +60,7 @@ function MySnackbarContentWrapper(props) {
 
 const useStyles1 = makeStyles(theme => ({
   success: {
-    backgroundColor: green[600]
+    backgroundColor: theme.palette.success.main
   },
   error: {
     backgroundColor: theme.palette.error.main
@@ -75,6 +80,7 @@ const useStyles1 = makeStyles(theme => ({
   },
   message: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    fontSize: "16px"
   }
 }));

@@ -52,7 +52,7 @@ export default {
     fontFamily: "'Nunito', sans-serif"
   },
   subtitle2: {
-    color: palette.text.secondary,
+    color: palette.text.primary,
     fontWeight: 400,
     fontSize: "14px",
     lineHeight: "21px",

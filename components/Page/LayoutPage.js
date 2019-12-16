@@ -8,13 +8,11 @@ import { IconButton } from "@material-ui/core";
 // @material-ui/icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // core components
+import { scroller } from "react-scroll";
 import Header from "../Header/Header";
 import HeaderLinks from "../Header/HeaderLinks";
 import Parallax from "../Parallax/Parallax";
-import FooterCustom from "../Footer/FooterCustom";
 import FooterDark from "../Footer/FooterDark";
-import { authInitialProps } from "../../server/api/auth";
-import LoginPage from "../../pages/login";
 
 const useStyles = makeStyles(theme => ({
   mlAuto,
@@ -46,7 +44,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     position: "absolute",
     left: 0,
-    top: "-60px",
+    top: "-85px",
     display: "flex",
     justifyContent: "center"
   },
@@ -58,7 +56,7 @@ const useStyles = makeStyles(theme => ({
     animationTimingFunction: "ease"
   },
   arrowButton: {
-    fontSize: "40px"
+    fontSize: "80px"
   },
   "@keyframes bounce": {
     "0%": { top: "0px" },
@@ -70,33 +68,12 @@ const useStyles = makeStyles(theme => ({
 function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, currentUser, isLoggedIn }) {
   const classes = useStyles();
 
-  const easeInOutQuad = (t, b, c, d) => {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  };
-
-  const scrollTo = (element, to, duration) => {
-    const start = element.scrollTop;
-    const change = to - start + document.getElementById("main-panel").offsetTop;
-    let currentTime = 0;
-    const increment = 20;
-
-    const animateScroll = () => {
-      currentTime += increment;
-      const val = easeInOutQuad(currentTime, start, change, duration);
-      element.scrollTop = val;
-      if (currentTime < duration) {
-        setTimeout(animateScroll, increment);
-      }
-    };
-    animateScroll();
-  };
-
-  const smoothScroll = target => {
-    const targetScroll = document.getElementById(target);
-    scrollTo(document.documentElement, targetScroll.offsetTop, 900);
+  const scrollTo = el => {
+    scroller.scrollTo(el, {
+      duration: 1500,
+      delay: 0,
+      smooth: "easeInOutQuad"
+    });
   };
 
   return (
@@ -119,7 +96,7 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, 
         <div className={classes.container}>
           <div className={classNames(classes.main, classes.mainRaised)}>
             <div className={classes.scrollDownContainer}>
-              <IconButton className={classes.scrollDownButton} onClick={() => smoothScroll(sectionId)}>
+              <IconButton className={classes.scrollDownButton} onClick={() => scrollTo(sectionId)}>
                 <ExpandMoreIcon fontSize="large" className={classes.arrowButton} />
               </IconButton>
             </div>

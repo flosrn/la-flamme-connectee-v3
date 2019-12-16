@@ -3,9 +3,6 @@ import { makeStyles } from "@material-ui/styles";
 
 import axios from "axios";
 import Button from "components/CustomButtons/Button";
-import svg1 from "public/img/svg/undraw_delivery_address_03n0.svg";
-import svg2 from "public/img/svg/undraw_mail1_uab6.svg";
-import svg3 from "public/img/svg/undraw_deliveries_131a.svg";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -17,22 +14,22 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "src/store/store";
 import { CardContent, CardHeader, Divider } from "@material-ui/core";
+import svg1 from "public/img/svg/undraw_delivery_address_03n0.svg";
+import svg2 from "public/img/svg/undraw_mail1_uab6.svg";
+import svg3 from "public/img/svg/undraw_deliveries_131a.svg";
+import getApiUrl from "utils/getApiUrl";
 import HeaderLinks from "../components/Header/HeaderLinks";
 import Header from "../components/Header/Header";
-import { authInitialProps } from "../server/api/auth";
 import FooterDark from "../components/Footer/FooterDark";
 import CheckoutStepper from "../components/Steppers/CheckoutStepper";
 import GridContainer from "../components/Grid/GridContainer";
 import Card from "../components/Card/Card";
 import GridItem from "../components/Grid/GridItem";
-import LoginComponent from "../src/sections/LoginPage/components/LoginForm/LoginComponent";
-import RegisterComponent from "../src/sections/RegisterPage/components/RegisterForm/RegisterComponent";
 import MediaSvg from "../components/Media/MediaSvg";
 import { schema } from "../src/sections/SettingsPage/Address/components/AddressForm/AddressFormSchema";
 import AddressForm from "../src/sections/Checkout/AddressForm";
-import getHost from "../server/api/get-host";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
-import { withAuthSync } from "../server/api/withAuth";
+import { withAuthSync } from "../api/withAuth";
 import SummaryItems from "../src/sections/Checkout/SummaryItems";
 
 const useStyles = makeStyles(theme => ({
@@ -52,12 +49,6 @@ const useStyles = makeStyles(theme => ({
   gridItem: {
     display: "flex",
     justifyContent: "center"
-    // [theme.breakpoints.down("xs")]: {
-    //   "& img": {
-    //     width: "200px !important",
-    //     height: "100% !important"
-    //   }
-    // }
   },
   gridContent: {
     width: "100%",
@@ -76,7 +67,7 @@ function DeliveryMethod({ value, changeHandler }) {
   return (
     <GridContainer justifycontent="center">
       <GridItem xl={6} className={classes.gridItem}>
-        <MediaSvg src={require("/public/img/svg/undraw_delivery_address_03n0.svg")} size="medium" />
+        <MediaSvg src={svg1} size="medium" />
       </GridItem>
       <GridItem xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>
@@ -127,7 +118,7 @@ function Summary() {
   return (
     <GridContainer justifycontent="center">
       <GridItem xl={6} className={classes.gridItem}>
-        <MediaSvg src={require("/public/img/svg/undraw_deliveries_131a.svg")} size="medium" />
+        <MediaSvg src={svg3} size="medium" />
       </GridItem>
       <GridItem xs={12} xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>
@@ -157,7 +148,7 @@ function Summary() {
 }
 
 // CHECKOUT PAGE
-function CheckoutPage({ currentUser, isLoggedIn }) {
+function CheckoutPage({ currentUser }) {
   const [stripe, setStripe] = useState(null);
   const [values, setValues] = useState({});
   const [touched, setTouched] = useState({});
@@ -209,13 +200,13 @@ function CheckoutPage({ currentUser, isLoggedIn }) {
   const handleSubmit = async () => {
     setLoading(true);
     axios
-      .patch(`${getHost()}/users/updateProfile`, {
+      .patch(`${getApiUrl()}/users/updateProfile`, {
         values
       })
       .then(() => {
         setTimeout(() => {
           axios
-            .post(`${getHost()}/checkout/createCheckoutSession`, { currentUser, items })
+            .post(`${getApiUrl()}/checkout/createCheckoutSession`, { currentUser, items })
             .then(response => {
               stripe.redirectToCheckout({
                 sessionId: response.data.session.id
@@ -251,13 +242,7 @@ function CheckoutPage({ currentUser, isLoggedIn }) {
 
   return (
     <div className={classes.root}>
-      <Header
-        color="dark"
-        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
-        fixed
-        user={currentUser}
-        isLoggedIn={isLoggedIn}
-      />
+      <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer className={classes.container}>
         <GridItem sm={8} md={8}>
           <Card>
@@ -287,10 +272,8 @@ function CheckoutPage({ currentUser, isLoggedIn }) {
   );
 }
 
-CheckoutPage.getInitialProps = async ctx => {
-  const { currentUser } = await authInitialProps(ctx);
-  const isLoggedIn = Object.keys(currentUser).length !== 0;
-  return { currentUser, isLoggedIn };
+CheckoutPage.getInitialProps = () => {
+  return { isProtect: true };
 };
 
 export default withAuthSync(CheckoutPage);

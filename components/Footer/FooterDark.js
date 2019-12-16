@@ -218,8 +218,9 @@ function FooterDark() {
         <div className={classes.footerBottom}>
           <div className={classes.footer}>
             <p>
-              © 2019 <a href="https://www.laflammeconnectee.fr/">LA FLAMME CONNECTÉE</a>. Tous droits réservés
+              © 2019 <a href="https://www.laflammeconnectee.fr/">LA FLAMME CONNECTÉE</a>.
             </p>
+            <p>Tous droits réservés</p>
           </div>
         </div>
       </GridContainer>

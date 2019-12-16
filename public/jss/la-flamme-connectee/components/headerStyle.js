@@ -15,8 +15,9 @@ import {
   grayColor,
   hexToRgb
 } from "public/jss/la-flamme-connectee";
+import { makeStyles } from "@material-ui/core/styles";
 
-const headerStyle = theme => ({
+const headerStyle = makeStyles(theme => ({
   appBar: {
     display: "flex",
     border: "0",
@@ -202,7 +203,8 @@ const headerStyle = theme => ({
     "& p": {
       margin: 0,
       fontSize: "12px",
-      fontStyle: "italic"
+      fontStyle: "italic",
+      color: "#fff"
     }
   },
   brandLogo: {
@@ -210,6 +212,9 @@ const headerStyle = theme => ({
     left: "50%",
     top: 0,
     transform: "translateX(-50%)",
+    "&:hover": {
+      background: "transparent"
+    },
     "& img": {
       width: 57
     },
@@ -224,6 +229,6 @@ const headerStyle = theme => ({
   fixedBrandLogo: {
     visibility: "visible"
   }
-});
+}));
 
 export default headerStyle;

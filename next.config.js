@@ -1,49 +1,36 @@
 const withPlugins = require("next-compose-plugins");
-const css = require("@zeit/next-css");
-const sass = require("@zeit/next-sass");
-const videos = require("next-videos");
-const optimizedImages = require("next-optimized-images");
+const withCss = require("@zeit/next-css");
+const withSaas = require("@zeit/next-sass");
+const withVideos = require("next-videos");
+const withOptimizedImages = require("next-optimized-images");
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true"
+});
 
 const nextConfig = {
   env: {
     API_URL: process.env.API_URL,
 
-    MONGODB_URI: process.env.MONGODB_URI,
-    CLOUDINARY_URL: process.env.CLOUDINARY_URL,
-
-    EMAIL_USERNAME: process.env.EMAIL_USERNAME,
-    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
-    EMAIL_FROM: process.env.EMAIL_FROM,
-    EMAIL_HOST: process.env.EMAIL_HOST,
-    EMAIL_PORT: process.env.EMAIL_PORT,
-
-    SENDGRID_USERNAME: process.env.SENDGRID_USERNAME,
-    SENDGRID_PASSWORD: process.env.SENDGRID_PASSWORD,
-
     STRIPE_PUBLIC_KEY_TEST: process.env.STRIPE_PUBLIC_KEY_TEST,
-    STRIPE_SECRET_KEY_TEST: process.env.STRIPE_SECRET_KEY_TEST,
-    STRIPE_WEBHOOK_SECRET_TEST: process.env.STRIPE_WEBHOOK_SECRET_TEST,
-
-    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
-    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET
+    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY
   }
 };
 
 module.exports = withPlugins(
   [
-    [css],
-    [sass],
-    [videos],
+    [withCss],
+    [withSaas],
+    [withVideos],
+    [withBundleAnalyzer],
     [
-      optimizedImages,
+      withOptimizedImages,
       {
         optimizeImagesInDev: false,
         mozjpeg: {
-          quality: 55
+          quality: 70
         },
         optipng: {
-          optimizationLevel: 5
+          optimizationLevel: 4
         }
       }
     ]

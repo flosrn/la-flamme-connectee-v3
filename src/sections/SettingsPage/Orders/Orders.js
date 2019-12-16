@@ -17,7 +17,7 @@ import {
   Divider,
   colors
 } from "@material-ui/core";
-import getHost from "server/api/get-host";
+import getApiUrl from "utils/getApiUrl";
 import GridContainer from "../../../../components/Grid/GridContainer";
 import GridItem from "../../../../components/Grid/GridItem";
 
@@ -55,7 +55,7 @@ const Orders = props => {
 
   useEffect(() => {
     axios
-      .get(`${getHost()}/orders/${user._id}`)
+      .get(`${getApiUrl()}/orders/${user._id}`)
       .then(response => {
         console.log("response : ", response);
         setOrders(response.data.data.orders);

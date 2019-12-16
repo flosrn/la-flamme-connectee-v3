@@ -5,7 +5,6 @@ import { Typography, Divider } from "@material-ui/core";
 import PersonAddIcon from "@material-ui/icons/PersonAddOutlined";
 
 import RegisterForm from "src/sections/RegisterPage/components/RegisterForm";
-import gradients from "utils/gradients";
 import GridItem from "components/Grid/GridItem";
 import GridContainer from "components/Grid/GridContainer";
 import Card from "components/Card/Card";

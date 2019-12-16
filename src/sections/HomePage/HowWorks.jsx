@@ -15,40 +15,17 @@ import Timeline from "components/Timeline/Timeline";
 // style for this page
 import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections/howWorksStyle";
 import Title from "../../../components/Typography/Title";
-// img
-// import Stove from "../../../static/img/stoves/stove-exemple.png";;
-// contexts
+import { scroller } from "react-scroll";
 
 function HowWorks() {
   const classes = useStyles();
 
-  const easeInOutQuad = (t, b, c, d) => {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  };
-
-  const scrollTo = (element, to, duration) => {
-    const start = element.scrollTop;
-    const change = to - start + document.getElementById("main-panel").offsetTop;
-    let currentTime = 0;
-    const increment = 20;
-
-    const animateScroll = () => {
-      currentTime += increment;
-      const val = easeInOutQuad(currentTime, start, change, duration);
-      element.scrollTop = val;
-      if (currentTime < duration) {
-        setTimeout(animateScroll, increment);
-      }
-    };
-    animateScroll();
-  };
-
-  const smoothScroll = target => {
-    const targetScroll = document.getElementById(target);
-    scrollTo(document.documentElement, targetScroll.offsetTop, 900);
+  const scrollTo = el => {
+    scroller.scrollTo(el, {
+      duration: 1500,
+      delay: 0,
+      smooth: "easeInOutQuad"
+    });
   };
 
   const widgetStories = [
@@ -57,7 +34,7 @@ function HowWorks() {
       inverted: true,
       badgeColor: "primary",
       badgeIcon: Wifi,
-      title: "Je connecte le boitier Flam'connect au wifi",
+      title: "Je connecte le Flam'connect au wifi",
       titleColor: "primary",
       body: (
         <p>
@@ -75,7 +52,7 @@ function HowWorks() {
     {
       // Second story
       inverted: true,
-      badgeColor: "success",
+      badgeColor: "secondary",
       badgeIcon: Category,
       title: "Je prépare mon foyer bois",
       titleColor: "success",
@@ -86,16 +63,7 @@ function HowWorks() {
           Pour une meilleure efficacité, utilisez <strong>la technique de l'allumage inversé</strong>.
         </p>
       ),
-      footerTitle: (
-        <Button
-          onClick={e => {
-            e.preventDefault();
-            smoothScroll("topDown");
-          }}
-        >
-          Qu'est-ce que l'allumage inversé ?
-        </Button>
-      )
+      footerTitle: <Button onClick={() => scrollTo("topDown")}>Qu'est-ce que l'allumage inversé ?</Button>
     },
     {
       // Third story
@@ -130,7 +98,7 @@ function HowWorks() {
       titleColor: "secondary",
       body: (
         <div>
-          <p>Quand vous rentrez, votre habitation est à bonne température.</p>
+          <p>Quand vous rentrez, votre habitation est à bonne température 😍🔥</p>
         </div>
       )
     }

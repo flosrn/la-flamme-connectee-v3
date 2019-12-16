@@ -24,12 +24,17 @@ export const useStyles = makeStyles(theme => ({
   },
   gridImg: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItems: "center"
   },
   topDownImg: {
     width: "95%",
+    margin: "20px 0",
     [theme.breakpoints.up("lg")]: {
       width: "85%"
+    },
+    [theme.breakpoints.down("xs")]: {
+      maxHeight: "300px"
     }
   },
   gridItemBottom: {

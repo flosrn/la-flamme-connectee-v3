@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import ImageGallery from "react-image-gallery";
+import { useRouter } from "next/router";
 // core components
 import Button from "components/CustomButtons/Button";
 import GridContainer from "components/Grid/GridContainer";
@@ -18,13 +19,26 @@ import { ShoppingCartContext } from "src/contexts/ShoppingCartContext";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import DoneIcon from "@material-ui/icons/Done";
 import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
 import Title from "../../../components/Typography/Title";
+import CustomSnackBar from "../../../components/Snackbar/CustomSnackBar";
 
 export default function ProductSection({ products }) {
   // const [colorSelect, setColorSelect] = React.useState("Gris anthracite");
+  const [open, setOpen] = React.useState(false);
   const { addItem } = useContext(ShoppingCartContext);
   const classes = useStyles();
+  const Router = useRouter();
+
+  const handleClick = item => {
+    addItem(item);
+    setOpen(true);
+  };
+
+  const handleClickSnackBar = () => {
+    Router.push("/shopping-cart").then(() => window.scrollTo(0, 0));
+  };
 
   return (
     <div className={classes.productPage}>
@@ -107,7 +121,7 @@ export default function ProductSection({ products }) {
               {/*  </GridContainer> */}
               {/* )} */}
               <GridContainer className={classes.pullRight}>
-                <ButtonCustom round color="secondary" onClick={() => addItem(item)} animateButton>
+                <ButtonCustom round color="secondary" onClick={() => handleClick(item)} animateButton>
                   Ajouter au panier &nbsp; <ShoppingCart />
                 </ButtonCustom>
               </GridContainer>
@@ -121,8 +135,14 @@ export default function ProductSection({ products }) {
           </GridItem>
         </GridContainer>
       )}
-
       <Divider />
+      <CustomSnackBar
+        message="Produit ajouté au panier !"
+        open={open}
+        duration={5000}
+        clickHandler={handleClickSnackBar}
+        closeHandler={() => setOpen(false)}
+      />
     </div>
   );
 }

@@ -12,7 +12,7 @@ import GridItem from "../../../../components/Grid/GridItem";
 import GridContainer from "../../../../components/Grid/GridContainer";
 // import { updateMyPassword } from "../../../server/lib/api";
 import CustomSnackBar from "../../../../components/Snackbar/CustomSnackBar";
-import getHost from "../../../../server/api/get-host";
+import getApiUrl from "utils/getApiUrl";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -75,7 +75,7 @@ function Security({ userId }) {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
-    axios.patch(`${getHost()}/auth/updatePassword`, { userId, values }).then(response => {
+    axios.patch(`${getApiUrl()}/auth/updatePassword`, { userId, values }).then(response => {
       console.log("response : ", response);
       setTimeout(() => {
         Swal.fire({

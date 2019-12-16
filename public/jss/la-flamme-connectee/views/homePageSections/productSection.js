@@ -93,6 +93,9 @@ const projectsSection = {
       margin: "70px auto",
       maxWidth: "970px"
     }
+  },
+  bottom: {
+    margin: "40px 0"
   }
 };
 

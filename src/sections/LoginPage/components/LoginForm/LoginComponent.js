@@ -6,7 +6,6 @@ import { Typography, Divider, Avatar, Button } from "@material-ui/core";
 import LockIcon from "@material-ui/icons/Lock";
 import LockOutlined from "@material-ui/icons/LockOutlined";
 import Page from "components/Page";
-import gradients from "utils/gradients";
 import LoginForm from "src/sections/LoginPage/components/LoginForm";
 // import Card from "components/Card/Card";
 import { blackColor, hexToRgb } from "public/jss/la-flamme-connectee";
@@ -19,9 +18,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import CardContent from "@material-ui/core/CardContent";
-import redirectTo from "src/lib/redirectTo";
-import getHost from "server/api/get-host";
-import ButtonLink from "../../../../../components/CustomButtons/ButtonLink";
+import redirectTo from "utils/redirectTo";
+import getApiUrl from "utils/getApiUrl";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -86,7 +84,7 @@ function LoginComponent({ clickHandler }) {
   const handleSubmit = type => event => {
     event.preventDefault();
     setLoading(true);
-    axios.post(`${getHost()}/auth/${type}`, { email, password }).then(response => {
+    axios.post(`${getApiUrl()}/auth/${type}`, { email, password }).then(response => {
       Swal.fire({
         type: response.data.status,
         title: response.data.message,

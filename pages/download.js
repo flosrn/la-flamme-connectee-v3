@@ -7,17 +7,16 @@ import DownloadSection from "src/sections/HomePage/DownloadSection";
 import ConnectSection from "src/sections/HomePage/ConnectSection";
 // images
 import svg1 from "public/img/svg/undraw_download_pc33.svg";
-import svg2 from "public/img/svg/undraw_signal_searching_bhpc.svg";
-import { authInitialProps } from "../server/api/auth";
+import svg2 from "public/img/svg/undraw_light_the_fire_gt58.svg";
+import { withAuthSync } from "../api/withAuth";
 
-function DownloadPage({ currentUser, isLoggedIn }) {
+function DownloadPage({ currentUser }) {
   return (
     <LayoutPage
       backgroundImage={require("/public/img/contura/background-contura4-lowres.jpg")}
       sectionId="download"
       backgroundPosition="50% 100%"
       currentUser={currentUser}
-      isLoggedIn={isLoggedIn}
     >
       <MediaSvg src={svg1} alt="questions" size="medium" mt={30} />
       <DownloadSection />
@@ -27,10 +26,4 @@ function DownloadPage({ currentUser, isLoggedIn }) {
   );
 }
 
-DownloadPage.getInitialProps = async ctx => {
-  const { currentUser } = await authInitialProps(ctx);
-  const isLoggedIn = Object.keys(currentUser).length !== 0;
-  return { currentUser, isLoggedIn };
-};
-
-export default DownloadPage;
+export default withAuthSync(DownloadPage);

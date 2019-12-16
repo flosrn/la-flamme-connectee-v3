@@ -4,11 +4,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles(theme => ({
   section: {
-    // padding: "70px 0",
     textAlign: "center",
     backgroundImage: `url(${require("/public/img/contura/background-contura-400.jpg")})`,
     backgroundSize: "cover",
     backgroundPosition: "left bottom",
+    backgroundAttachment: "fixed",
     position: "relative",
     padding: "50px 0",
     "&:after": {

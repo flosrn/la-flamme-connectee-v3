@@ -6,14 +6,10 @@ import { Box, Button, TextField } from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
-import CustomSnackBar from "components/Snackbar/CustomSnackBar";
-import axioswal from "axioswal";
 import axios from "axios";
 import Swal from "sweetalert2";
-import Cookies from "js-cookie";
-import getHost from "../../../../../server/api/get-host";
+import getApiUrl from "utils/getApiUrl";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -53,7 +49,7 @@ function ResetForm({ token, className, ...rest }) {
     e.preventDefault();
     setLoading(true);
     axios
-      .patch(`${getHost()}/auth/resetPassword`, {
+      .patch(`${getApiUrl()}/auth/resetPassword`, {
         password: values.password,
         passwordConfirm: values.passwordConfirm,
         token

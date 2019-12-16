@@ -68,7 +68,7 @@ function ProjectSection({ ...props }) {
             Notre histoire
           </Title>
         </GridItem>
-        <GridItem xs={10} sm={10} md={8} className="wow fadeInUp">
+        <GridItem xs={10} sm={10} md={8}>
           <div className={classes.projectText}>
             <h5 className={classes.description}>
               Nous sommes propriétaire depuis 2000 d'une maison de 160 m² en banlieu toulousaine et nous consommions

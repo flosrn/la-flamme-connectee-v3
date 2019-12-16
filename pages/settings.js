@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-
 import { makeStyles } from "@material-ui/styles";
 import { Tabs, Tab, Divider, colors } from "@material-ui/core";
 
@@ -9,18 +8,14 @@ import { Header, Profile, Address, Security, Orders } from "src/sections/Setting
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Card from "components/Card/Card";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import clsx from "clsx";
-import CustomSnackBar from "components/Snackbar/CustomSnackBar";
+
 import validate from "validate.js";
 import { schema } from "src/sections/SettingsPage/Address/components/AddressForm/AddressFormSchema";
 import axios from "axios";
-import Swal from "sweetalert2";
 import HeaderLinks from "components/Header/HeaderLinks";
-import { authInitialProps } from "../server/api/auth";
-import HomePage from "./index";
-import getHost from "../server/api/get-host";
-import { withAuthSync } from "../server/api/withAuth";
+import getApiUrl from "utils/getApiUrl";
+import Swal from "sweetalert2";
+import { withAuthSync } from "../api/withAuth";
 import FooterDark from "../components/Footer/FooterDark";
 
 const useStyles = makeStyles(theme => ({
@@ -31,6 +26,13 @@ const useStyles = makeStyles(theme => ({
   tabs: {
     marginTop: theme.spacing(3)
   },
+  tabStyle: {
+    letterSpacing: 0,
+    padding: "12px 8px",
+    [theme.breakpoints.up("sm")]: {
+      minWidth: 130
+    }
+  },
   divider: {
     backgroundColor: colors.grey[300]
   },
@@ -39,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function SettingsPage({ currentUser, isLoggedIn }) {
+function SettingsPage({ currentUser }) {
   const [values, setValues] = useState({});
   const [isEditMode, setEditMode] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -117,11 +119,10 @@ function SettingsPage({ currentUser, isLoggedIn }) {
     console.log("values : ", values);
     setLoading(true);
     axios
-      .patch(`${getHost()}/users/updateProfile`, {
+      .patch(`${getApiUrl()}/users/updateProfile`, {
         values
       })
       .then(response => {
-        console.log("response : ", response);
         setTimeout(() => {
           Swal.fire({
             type: response.data.status,
@@ -201,10 +202,9 @@ function SettingsPage({ currentUser, isLoggedIn }) {
       <Headers
         color="dark"
         brand="La Flamme Connectée"
-        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
+        links={<HeaderLinks user={currentUser} />}
         fixed
         user={currentUser}
-        isLoggedIn={isLoggedIn}
       />
       <GridContainer className={classes.container} direction="column" justify="center" alignItems="center" spacing={0}>
         <GridItem xs={12} sm={10} lg={6}>
@@ -212,7 +212,13 @@ function SettingsPage({ currentUser, isLoggedIn }) {
             <Header title={tabTitle} />
             <Tabs className={classes.tabs} onChange={handleTabsChange} scrollButtons="auto" value={tab} centered>
               {tabs.map(tab => (
-                <Tab key={tab.value} label={tab.label} value={tab.value} onClick={handleCancel} />
+                <Tab
+                  key={tab.value}
+                  label={tab.label}
+                  value={tab.value}
+                  onClick={handleCancel}
+                  className={classes.tabStyle}
+                />
               ))}
             </Tabs>
             <Divider className={classes.divider} />
@@ -256,10 +262,8 @@ function SettingsPage({ currentUser, isLoggedIn }) {
   );
 }
 
-SettingsPage.getInitialProps = async ctx => {
-  const { currentUser } = await authInitialProps(ctx);
-  const isLoggedIn = Object.keys(currentUser).length !== 0;
-  return { currentUser, isLoggedIn };
+SettingsPage.getInitialProps = () => {
+  return { isProtect: true };
 };
 
 export default withAuthSync(SettingsPage);

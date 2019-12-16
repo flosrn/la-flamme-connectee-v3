@@ -1,35 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { makeStyles } from "@material-ui/styles";
-import { Typography, Divider, Avatar, Button } from "@material-ui/core";
-import LockIcon from "@material-ui/icons/Lock";
-import LockOutlined from "@material-ui/icons/LockOutlined";
-import Page from "components/Page";
-import gradients from "utils/gradients";
-import LoginForm from "src/sections/LoginPage/components/LoginForm";
-// import Card from "../components/Card/Card";
-import { blackColor, hexToRgb } from "public/jss/la-flamme-connectee";
+import { Typography } from "@material-ui/core";
 import CardBody from "components/Card/CardBody";
 import GridContainer from "components/Grid/GridContainer";
 import Card from "components/Card/Card";
 import GridItem from "components/Grid/GridItem";
-import LoginForgotPasswordForm from "src/sections/LoginPage/components/LoginForm/LoginForgotPasswordForm";
-import axios from "axios";
-import Swal from "sweetalert2";
-import Cookies from "js-cookie";
 import CardContent from "@material-ui/core/CardContent";
 import HeaderLinks from "components/Header/HeaderLinks";
 import Header from "components/Header/Header";
 import LoginComponent from "src/sections/LoginPage/components/LoginForm/LoginComponent";
 import RegisterComponent from "src/sections/RegisterPage/components/RegisterForm/RegisterComponent";
 import { useRouter } from "next/router";
-import getHost from "../server/api/get-host";
-import redirectTo from "../src/lib/redirectTo";
-import ButtonLink from "../components/CustomButtons/ButtonLink";
-import ResetPassword from "./resetPassword/[token]";
 import FooterDark from "../components/Footer/FooterDark";
-import { authInitialProps } from "../server/api/auth";
 import ButtonCustom from "../components/CustomButtons/ButtonCustom";
+import { withAuthSync } from "../api/withAuth";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -55,18 +40,6 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.down("sm")]: {
       height: "auto !important"
     }
-  },
-  icon: {
-    backgroundImage: gradients.green,
-    color: theme.palette.white,
-    borderRadius: theme.shape.borderRadius,
-    padding: theme.spacing(1),
-    position: "absolute",
-    top: -32,
-    left: theme.spacing(3),
-    height: 64,
-    width: 64,
-    fontSize: 32
   },
   loginForm: {
     marginTop: theme.spacing(3)
@@ -95,7 +68,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LoginPage({ children, currentUser, isLoggedIn }) {
+function LoginPage({ children, currentUser }) {
   const [action, setAction] = useState("login");
   const classes = useStyles();
   const Router = useRouter();
@@ -124,13 +97,7 @@ function LoginPage({ children, currentUser, isLoggedIn }) {
 
   return (
     <div className={classes.root}>
-      <Header
-        color="dark"
-        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
-        fixed
-        user={currentUser}
-        isLoggedIn={isLoggedIn}
-      />
+      <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer className={classes.container}>
         <GridItem sm={8} md={6} lg={5} xl={4}>
           <Card className={classes.card}>{selectComponent()}</Card>
@@ -176,10 +143,4 @@ function LoginPage({ children, currentUser, isLoggedIn }) {
   );
 }
 
-LoginPage.getInitialProps = async ctx => {
-  const { currentUser } = await authInitialProps(ctx);
-  const isLoggedIn = Object.keys(currentUser).length !== 0;
-  return { currentUser, isLoggedIn };
-};
-
-export default LoginPage;
+export default withAuthSync(LoginPage);

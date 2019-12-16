@@ -56,7 +56,7 @@ const useStyles = makeStyles(theme => ({
       marginRight: "4px",
       verticalAlign: "middle"
     },
-    "&$justIcon": {
+    "&.justIcon": {
       "& .fab,& .fas,& .far,& .fal,& .material-icons": {
         marginTop: "0px",
         marginRight: "0px",
@@ -99,6 +99,9 @@ const useStyles = makeStyles(theme => ({
       boxShdow: `0 14px 26px -12px rgba(${hexToRgb(theme.palette.secondary.main)},.42), 0 4px 23px 0 rgba(${hexToRgb(
         blackColor
       )},.12), 0 8px 10px -5px rgba(${hexToRgb(theme.palette.secondary.main)},.2)`
+    },
+    "&:focus": {
+      backgroundColor: `${theme.palette.secondary.main} !important`
     }
   },
   danger: {
@@ -106,11 +109,15 @@ const useStyles = makeStyles(theme => ({
     boxShadow: `0 2px 2px 0 rgba(${hexToRgb(dangerColor[0])}, 0.14), 0 3px 1px -2px rgba(${hexToRgb(
       dangerColor[0]
     )}, 0.2), 0 1px 5px 0 rgba(${hexToRgb(dangerColor[0])}, 0.12)`,
-    "&:hover,&:focus": {
+    "&:hover": {
       color: `${dangerColor[0]} !important`,
       boxShadow: `0 14px 26px -12px rgba(${hexToRgb(dangerColor[0])}, 0.42), 0 4px 23px 0px rgba(${hexToRgb(
         blackColor
       )}, 0.12), 0 8px 10px -5px rgba(${hexToRgb(dangerColor[0])}, 0.2)`
+    },
+    "&:focus": {
+      backgroundColor: `${dangerColor[0]} !important`
+      // color: `#fff !important`
     },
     "&:after, &:before": {
       backgroundColor: "#fff !important"
@@ -136,14 +143,15 @@ const useStyles = makeStyles(theme => ({
   animateButton: {
     transition: ".9s",
     borderRadius: "5px",
-    "&:hover, &:focus, &:active": {
+    animationDuration: "1.5s",
+    "&:hover, &:active": {
       color: "#fff",
-      background: theme.palette.success.main,
-      transform: "translateY(-5px)"
+      background: theme.palette.success.main
     },
     "&:hover": {
       backgroundColor: theme.palette.secondary.main,
       borderColor: theme.palette.secondary.main,
+      transform: "translateY(-5px)",
       "&:after, &:before": {
         width: "55%"
       }
@@ -168,7 +176,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 const ButtonCustom = React.forwardRef((props, ref) => {
-  const { color, round, fullWidth, size, disabled, animateButton, children, ...rest } = props;
+  const { color, round, fullWidth, size, disabled, justIcon, animateButton, children, ...rest } = props;
+  const [btnClickEffectClass, setBtnClickEffectClass] = React.useState(null);
   const classes = useStyles(props);
   const btnClasses = clsx({
     [classes.button]: true,
@@ -177,10 +186,22 @@ const ButtonCustom = React.forwardRef((props, ref) => {
     [classes.round]: round,
     [classes.fullWidth]: fullWidth,
     [classes.disabled]: disabled,
+    [classes.justIcon]: justIcon,
     [classes.animateButton]: animateButton
   });
+  const handleAnimationEnd = () => {
+    setTimeout(() => {
+      setBtnClickEffectClass("");
+    }, 2000);
+  };
   return (
-    <Button {...rest} ref={ref} className={btnClasses}>
+    <Button
+      {...rest}
+      ref={ref}
+      className={clsx(btnClasses, classes[btnClickEffectClass])}
+      // onMouseUp={() => setBtnClickEffectClass("animationPulse")}
+      // onAnimationEnd={() => handleAnimationEnd()}
+    >
       {children}
     </Button>
   );

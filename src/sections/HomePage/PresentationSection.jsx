@@ -17,10 +17,8 @@ import MediaSvg from "components/Media/MediaSvg";
 import { title } from "public/jss/la-flamme-connectee";
 import svg1 from "public/img/svg/undraw_chore_list_iof3.svg";
 // animations
-import { Controller, Scene } from "react-scrollmagic";
-import { Tween } from "react-gsap";
 import lepineLogo from "public/img/logo/lepine-logo.png";
-import Title from "../../../components/Typography/Title";
+import Title from "components/Typography/Title";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -37,9 +35,7 @@ const useStyles = makeStyles(theme => ({
   description: {
     color: "#999"
   },
-  gridContainer: {
-
-  },
+  gridContainer: {},
   reverse: {
     [theme.breakpoints.down("sm")]: {
       flexDirection: "column-reverse !important"
@@ -112,7 +108,7 @@ function PresentationSection() {
           <Title variant="h2" className={classes.title}>
             Présentation
           </Title>
-          <h5 className={clsx(classes.description, "wow fadeInUp")}>
+          <h5 className={clsx(classes.description)}>
             Le <strong>Flam'connect</strong> est une invention unique et originale qui permet de programmer à distance,
             via une application dédiée sur smartphone, l'allumage d'un poêle à bois ou insert. <br />
             Profitez ainsi de votre maison à bonne température dès votre retour.
@@ -122,7 +118,7 @@ function PresentationSection() {
       <GridContainer justify="center" className={classes.innovate}>
         <GridItem lg={9}>
           <GridContainer justify="center">
-            <GridItem lg={6} center className="wow fadeInUp">
+            <GridItem lg={6} center>
               <img
                 src={require("/public/img/flamco/volcano-flam_iphone.png")}
                 alt="phone"
@@ -133,10 +129,14 @@ function PresentationSection() {
               <GridContainer justify="center">
                 <GridItem center>
                   <GridContainer justify="center">
-                    <GridItem sm={6} center className="wow fadeInUp">
-                      <img src={require("/public/img/logo/lepine-black.png")} alt="lepine" className={clsx(classes.lepine, classes.animateUp)} />
+                    <GridItem sm={6} center>
+                      <img
+                        src={require("/public/img/logo/lepine-black.png")}
+                        alt="lepine"
+                        className={clsx(classes.lepine, classes.animateUp)}
+                      />
                     </GridItem>
-                    <GridItem sm={6} center className="wow fadeInUp">
+                    <GridItem sm={6} center>
                       <img src={lepineLogo} alt="lepine-logo" className={clsx(classes.lepineLogo, classes.animateUp)} />
                     </GridItem>
                   </GridContainer>
@@ -147,15 +147,15 @@ function PresentationSection() {
         </GridItem>
       </GridContainer>
       <div className={classes.relativeContainer}>
-        <GridContainer justify="center" className={classes.pro}>
+        <GridContainer justify="center">
           <GridItem xs={10} sm={10} md={8} lg={6} className={classes.gridItem}>
             <Title variant="h2" className={classes.title}>
               Avantages
             </Title>
           </GridItem>
         </GridContainer>
-        <GridContainer justify="center" className={clsx(classes.noMarginTop)}>
-          <GridItem md={6} center className={clsx(classes.marginFirst, "wow fadeInUp")}>
+        <GridContainer justify="center" className={classes.noMarginTop}>
+          <GridItem md={6} center className={classes.marginFirst}>
             <InfoArea
               title="Pratique"
               description="Avec votre smartphone, visualisez la température de votre maison en temps réel."
@@ -164,15 +164,15 @@ function PresentationSection() {
               vertical
             />
           </GridItem>
-          <GridItem md={6} center className="wow fadeInUp">
+          <GridItem md={6} center>
             <MediaSvg src={svg1} alt="svg1" mt={-50} animateUp />
           </GridItem>
         </GridContainer>
         <GridContainer justify="center" className={clsx(classes.gridContainer, classes.reverse)}>
-          <GridItem md={6} center className="wow fadeInUp">
+          <GridItem md={6} center>
             <MediaSvg src={require("/public/img/svg/undraw_environment_iaus.svg")} alt="svg2" mt={30} animateUp />
           </GridItem>
-          <GridItem md={6} center className="wow fadeInUp">
+          <GridItem md={6} center>
             <InfoArea
               title="Écologique"
               description="Avec l'allumage inversé, vous rejetez moins de particules fines dans l’atmosphère, encrassez moins votre conduit et votre vitre, et améliorez votre tirage."
@@ -183,7 +183,7 @@ function PresentationSection() {
           </GridItem>
         </GridContainer>
         <GridContainer justify="center">
-          <GridItem md={6} center className="wow fadeInUp">
+          <GridItem md={6} center>
             <InfoArea
               title="Économique"
               description="En allumant votre foyer bois à l'avance avec Flam'connect vous économiserez le coût de votre autre source de chaleur (électricité, fioul, gaz...)."
@@ -192,7 +192,7 @@ function PresentationSection() {
               vertical
             />
           </GridItem>
-          <GridItem md={6} center className="wow fadeInUp">
+          <GridItem md={6} center>
             <MediaSvg src={require("/public/img/svg/undraw_Savings_dwkw.svg")} alt="svg3" mt={30} animateUp />
           </GridItem>
         </GridContainer>

@@ -8,7 +8,6 @@ import GridItem from "components/Grid/GridItem";
 import Button from "components/CustomButtons/Button";
 
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Link from "next/link";
 
 const useStyles = makeStyles(theme => ({
   root: {},

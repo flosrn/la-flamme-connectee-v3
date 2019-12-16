@@ -12,11 +12,11 @@ import Lock from "@material-ui/icons/LockOutlined";
 import { Face, RecordVoiceOver } from "@material-ui/icons";
 import axios from "axios";
 import Swal from "sweetalert2";
-import redirectTo from "src/lib/redirectTo";
+import redirectTo from "utils/redirectTo";
 import Cookies from "js-cookie";
+import getApiUrl from "utils/getApiUrl";
+import ButtonCustom from "components/CustomButtons/ButtonCustom";
 import { schema } from "./RegisterFormSchema";
-import getHost from "../../../../../server/api/get-host";
-import ButtonCustom from "../../../../../components/CustomButtons/ButtonCustom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -73,7 +73,7 @@ function RegisterForm({ className, ...rest }) {
     event.preventDefault();
     setLoading(true);
     axios
-      .post(`${getHost()}/auth/register`, {
+      .post(`${getApiUrl()}/auth/register`, {
         firstName: values.firstName,
         lastName: values.lastName,
         email: values.email,
@@ -202,16 +202,17 @@ function RegisterForm({ className, ...rest }) {
           )}
         </div>
         {isClicked && (
-          <Button
+          <ButtonCustom
             className={classes.submitButton}
             color="secondary"
             disabled={isLoading}
             size="large"
             type="submit"
             variant="contained"
+            animateButton
           >
             Créer un compte
-          </Button>
+          </ButtonCustom>
         )}
       </form>
       {!isClicked && (

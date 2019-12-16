@@ -6,16 +6,15 @@ import LayoutPage from "components/Page/LayoutPage";
 import ContactSection from "src/sections/HomePage/ContactSection";
 // images
 import svg1 from "../public/img/svg/undraw_contact_us_15o2.svg";
-import { authInitialProps } from "../server/api/auth";
+import { withAuthSync } from "../api/withAuth";
 
-function ContactPage({ currentUser, isLoggedIn }) {
+function ContactPage({ currentUser }) {
   return (
     <LayoutPage
       backgroundImage={require("/public/img/contura/background-contura3-lowres.jpg")}
       sectionId="contact"
       backgroundPosition="30% 85%"
       currentUser={currentUser}
-      isLoggedIn={isLoggedIn}
     >
       <MediaSvg src={svg1} alt="contact-us" size="medium" mt={30} />
       <ContactSection />
@@ -23,10 +22,4 @@ function ContactPage({ currentUser, isLoggedIn }) {
   );
 }
 
-ContactPage.getInitialProps = async ctx => {
-  const { currentUser } = await authInitialProps(ctx);
-  const isLoggedIn = Object.keys(currentUser).length !== 0;
-  return { currentUser, isLoggedIn };
-};
-
-export default ContactPage;
+export default withAuthSync(ContactPage);

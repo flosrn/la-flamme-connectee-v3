@@ -59,7 +59,7 @@ export default function CarouselSection() {
       <div className={classes.container}>
         <GridContainer>
           <GridItem xs={12} sm={12} md={9} lg={7} className={classes.marginAuto}>
-            <Card className="wow fadeInUp">
+            <Card>
               <Carousel {...settings}>
                 <img src={require("/public/img/flamco/flamco-info.jpg")} alt="First slide" className="slick-image" />
                 <img src={require("/public/img/flamco/flamco-hand.jpg")} alt="Second slide" className="slick-image" />

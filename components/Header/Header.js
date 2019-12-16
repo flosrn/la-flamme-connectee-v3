@@ -6,7 +6,7 @@ import classNames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -20,15 +20,42 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PersonIcon from "@material-ui/icons/Person";
 
 // core components
-import styles from "public/jss/la-flamme-connectee/components/headerStyle";
+import useStyles from "public/jss/la-flamme-connectee/components/headerStyle";
 import { Badge } from "@material-ui/core";
 import logo from "public/img/logo/laflammeco.png";
 import { ShoppingCartContext } from "../../src/contexts/ShoppingCartContext";
 
-const useStyles = makeStyles(styles);
+const StyledBadge = withStyles(theme => ({
+  badge: {
+    backgroundColor: theme.palette.success.main,
+    "&::after": {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      borderRadius: "50%",
+      animation: "$ripple 1.2s infinite ease-in-out",
+      border: "1px solid #44b700",
+      content: '""'
+    }
+  },
+  "@keyframes ripple": {
+    "0%": {
+      transform: "scale(.8)",
+      opacity: 1
+    },
+    "100%": {
+      transform: "scale(2.4)",
+      opacity: 0
+    }
+  }
+}))(Badge);
 
 export default function Header(props) {
-  const { isLoggedIn, user } = props;
+  const { user } = props;
+  const isLoggedIn = Object.keys(user).length !== 0;
+
   const { color, links, fixed, absolute, hiddenLogo } = props;
   const Router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -104,7 +131,13 @@ export default function Header(props) {
         <Hidden mdUp>
           <div>
             <IconButton color="inherit" onClick={handleRedirect} className={classes.userIcon}>
-              <PersonIcon className={classes.cartIcon} />
+              {isLoggedIn ? (
+                <StyledBadge variant="dot">
+                  <PersonIcon className={classes.cartIcon} />
+                </StyledBadge>
+              ) : (
+                <PersonIcon className={classes.cartIcon} />
+              )}
             </IconButton>
             <IconButton color="inherit" href="/shopping-cart" className={classes.cartIcon}>
               <Badge badgeContent={items.length} color="secondary">

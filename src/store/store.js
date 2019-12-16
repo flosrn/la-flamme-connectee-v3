@@ -6,15 +6,10 @@ const exampleInitialState = {
   user: null
 };
 
-// export const actionTypes = {
-//   SET_USER: "SET_USER"
-// };
-
 // REDUCERS
 export const reducer = (state = exampleInitialState, action) => {
   switch (action.type) {
     case "SET_USER":
-      // return console.log("action.payload : ", action.payload);
       return {
         ...state,
         user: action.payload

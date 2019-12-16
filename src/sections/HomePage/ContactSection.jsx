@@ -21,7 +21,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import MediaSvg from "../../../components/Media/MediaSvg";
 import InfoArea from "components/InfoArea/InfoArea";
-import getHost from "../../../server/api/get-host";
+import getApiUrl from "utils/getApiUrl";
 import Title from "../../../components/Typography/Title";
 import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
 
@@ -90,7 +90,7 @@ function ContactSection({ ...props }) {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
-    axios.post(`${getHost()}/email/sendContactEmail`, { name, email, content }).then(response => {
+    axios.post(`${getApiUrl()}/email/sendContactEmail`, { name, email, content }).then(response => {
       Swal.fire({
         type: response.data.status,
         title: `${response.data.message}${response.data.status === "success" ?
@@ -180,9 +180,9 @@ function ContactSection({ ...props }) {
             className={classes.info}
             title="Rencontrez nous sur place"
             description={
-              <p>
+              <>
                 Lieu dit Nagut, <br /> 31370 Poucharramet, <br /> France
-              </p>
+              </>
             }
             icon={PinDrop}
             iconColor="primary"

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 // @material-ui/core components
@@ -21,8 +22,6 @@ import IconButton from "@material-ui/core/IconButton";
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
 import Close from "@material-ui/icons/Close";
-import Remove from "@material-ui/icons/Remove";
-import Add from "@material-ui/icons/Add";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
@@ -41,20 +40,16 @@ import Table from "components/Table/Table";
 import Button from "components/CustomButtons/Button";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
-
-import product2 from "public/img/objects/detourage/volcano-trio.png";
-import product3 from "public/img/objects/detourage/flam-connect-pack.png";
-import axios from "axios";
 import { cardTitle } from "public/jss/la-flamme-connectee";
-import ShoppingCart from "@material-ui/core/SvgIcon/SvgIcon";
 import Swal from "sweetalert2";
+import { Typography } from "@material-ui/core";
 import svg1 from "../public/img/svg/undraw_add_to_cart_vkjp.svg";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
-import { authInitialProps } from "../server/api/auth";
-import HomePage from "./index";
-import getHost from "../server/api/get-host";
+
 import FooterDark from "../components/Footer/FooterDark";
 import ButtonCustom from "../components/CustomButtons/ButtonCustom";
+import { withAuthSync } from "../api/withAuth";
+import Title from "../components/Typography/Title";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -166,17 +161,19 @@ const useStyles = makeStyles(theme => ({
   },
   itemPrice: {
     color: theme.palette.secondary.main
+  },
+  productsMsg: {
+    marginTop: 15
   }
 }));
 
-function ShoppingCartPage({ currentUser, isLoggedIn }) {
+function ShoppingCartPage({ currentUser }) {
   const { items, addItem, removeItem, total } = useContext(ShoppingCartContext);
   const classes = useStyles();
   const Router = useRouter();
 
   const login = () => {
-    if (isLoggedIn) {
-      // goToCheckout();
+    if (Object.keys(currentUser).length !== 0) {
       Router.push("/checkout").then(() => window.scrollTo(0, 0));
     } else {
       Swal.fire({
@@ -203,13 +200,7 @@ function ShoppingCartPage({ currentUser, isLoggedIn }) {
 
   return (
     <div className={classes.root}>
-      <Header
-        color="dark"
-        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
-        fixed
-        user={currentUser}
-        isLoggedIn={isLoggedIn}
-      />
+      <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer justify="center">
         <GridItem xs={8} sm={10} md={10} lg={8}>
           <MediaSvg src={svg1} alt="contact-us" size="small" mt={100} />
@@ -220,7 +211,11 @@ function ShoppingCartPage({ currentUser, isLoggedIn }) {
           <div className={classes.container} id="shoppingCart">
             <Card plain>
               <CardBody className={classes.cardBody}>
-                <h3 className={classes.cardTitle}>Votre panier</h3>
+                <GridItem center>
+                  <Title variant="h2" className={classes.cardTitle}>
+                    Votre panier
+                  </Title>
+                </GridItem>
                 <GridContainer>
                   <GridItem md={6}>
                     {items.length > 0 ? (
@@ -265,6 +260,11 @@ function ShoppingCartPage({ currentUser, isLoggedIn }) {
                     ) : (
                       <Card className={classes.cardItemEmpty}>
                         <div className={classes.emptyCart}>Votre panier est vide !</div>
+                        <div className={classes.productsMsg}>
+                          <Link href="/products">
+                            <a>Voir les produits</a>
+                          </Link>
+                        </div>
                       </Card>
                     )}
                   </GridItem>
@@ -319,10 +319,4 @@ function ShoppingCartPage({ currentUser, isLoggedIn }) {
   );
 }
 
-ShoppingCartPage.getInitialProps = async ctx => {
-  const { currentUser } = await authInitialProps(ctx);
-  const isLoggedIn = Object.keys(currentUser).length !== 0;
-  return { currentUser, isLoggedIn };
-};
-
-export default ShoppingCartPage;
+export default withAuthSync(ShoppingCartPage);

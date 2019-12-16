@@ -35,9 +35,13 @@ function TopDownSection() {
           </h5>
         </GridItem>
       </GridContainer>
-      <GridContainer alignItems="center">
-        <GridItem xs={12} sm={12} md={6} lg={7} className={classes.gridImg}>
-          <img src={topDownImg} alt="explications-topdown" className={classes.topDownImg} />
+      <GridContainer justify="center" alignItems="center">
+        <GridItem xs={11} sm={8} md={6} lg={7} center className={classes.gridImg}>
+          <img
+            src={require("/public/img/flamco/topdown-info.jpg")}
+            alt="explications-topdown"
+            className={classes.topDownImg}
+          />
         </GridItem>
         <GridItem xs={12} sm={12} md={6} lg={5} className={classes.gridItemBottom}>
           <InfoArea

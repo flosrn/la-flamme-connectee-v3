@@ -70,7 +70,8 @@ export const useStyles = makeStyles(theme => ({
     overflow: "hidden",
     marginTop: "0px",
     fontSize: "16px",
-    width: "80%"
+    width: "80%",
+    color: theme.palette.text.primary
   },
   iconWrapperVertical: {
     float: "none"

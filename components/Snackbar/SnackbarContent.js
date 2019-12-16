@@ -10,14 +10,14 @@ import Icon from "@material-ui/core/Icon";
 import Close from "@material-ui/icons/Close";
 // core components
 
-import styles from "public/jss/la-flamme-connectee/components/snackbarContentStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/snackbarContentStyle";
 
 const useStyles = makeStyles(styles);
 
 export default function SnackbarContent(props) {
   const { message, color, close, icon } = props;
   const classes = useStyles();
-  var action = [];
+  let action = [];
   const closeAlert = () => {
     setAlert(null);
   };
@@ -50,8 +50,8 @@ export default function SnackbarContent(props) {
         </div>
       }
       classes={{
-        root: classes.root + " " + classes[color],
-        message: classes.message + " " + classes.container
+        root: `${classes.root} ${classes[color]}`,
+        message: `${classes.message} ${classes.container}`
       }}
     />
   );
