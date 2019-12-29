@@ -20,6 +20,8 @@ import Cookies from "js-cookie";
 import CardContent from "@material-ui/core/CardContent";
 import redirectTo from "utils/redirectTo";
 import getApiUrl from "utils/getApiUrl";
+import dynamic from "next/dynamic";
+import { login } from "api/apiRequests";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -68,7 +70,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LoginComponent({ clickHandler }) {
+function LoginComponent() {
   const classes = useStyles();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState("");
@@ -84,29 +86,7 @@ function LoginComponent({ clickHandler }) {
   const handleSubmit = type => event => {
     event.preventDefault();
     setLoading(true);
-    axios.post(`${getApiUrl()}/auth/${type}`, { email, password }).then(response => {
-      Swal.fire({
-        type: response.data.status,
-        title: response.data.message,
-        text: response.data.text,
-        confirmButtonColor: "#ff7961"
-      }).then(result => {
-        if (response.data.status === "success" && result.value) {
-          const cart = Cookies.getJSON("cart");
-          if (cart.length > 0) {
-            Router.push("/shopping-cart").then(() => window.scrollTo(0, 0));
-          } else {
-            Router.push("/").then(() => window.scrollTo(0, 0));
-          }
-        }
-      });
-      if (response.data.status === "success" && type !== "forgotPassword") {
-        Cookies.set("token", response.data.data.token, {
-          expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
-        });
-      }
-    });
-    setLoading(false);
+    login({ type, email, password, setLoading });
   };
 
   return (

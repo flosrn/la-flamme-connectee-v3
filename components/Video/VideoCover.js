@@ -38,9 +38,9 @@ export default function VideoSection({ children }) {
   const classes = useStyles();
   return (
     <div className={classes.root} id="video-fond">
-      <video width="480" autoPlay muted loop className={classes.video}>
-        <source type="video/mp4" src={require("/public/img/flamco/test.mp4")} />
-        {/* <source type="video/webm" src={require("/public/img/flamco/2k-6s.webm")} /> */}
+      <video width="480" autoPlay muted loop playsInline className={classes.video}>
+        <source type="video/mp4" src={require("/public/video/fire-video.mp4")} />
+        <source type="video/webm" src={require("/public/video/fire-video.webm")} />
       </video>
       <>{children}</>
     </div>

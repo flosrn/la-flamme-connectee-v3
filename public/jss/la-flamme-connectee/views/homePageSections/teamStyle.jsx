@@ -8,7 +8,7 @@ export const useStyles = makeStyles(theme => ({
     backgroundImage: `url(${require("/public/img/contura/background-contura-400.jpg")})`,
     backgroundSize: "cover",
     backgroundPosition: "left bottom",
-    backgroundAttachment: "fixed",
+    // backgroundAttachment: "fixed",
     position: "relative",
     padding: "50px 0",
     "&:after": {

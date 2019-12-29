@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/styles";
-import axios from "axios";
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardActions,
-  Grid,
-  FormControlLabel,
-  Checkbox,
-  Typography,
-  Button,
-  Divider,
-  colors
-} from "@material-ui/core";
-import getApiUrl from "utils/getApiUrl";
-import GridContainer from "../../../../components/Grid/GridContainer";
-import GridItem from "../../../../components/Grid/GridItem";
+import { Card, CardHeader, CardContent, Divider } from "@material-ui/core";
+import { getOrders } from "api/apiRequests";
+import GridContainer from "components/Grid/GridContainer";
+import GridItem from "components/Grid/GridItem";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -54,15 +40,7 @@ const Orders = props => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${getApiUrl()}/orders/${user._id}`)
-      .then(response => {
-        console.log("response : ", response);
-        setOrders(response.data.data.orders);
-      })
-      .catch(error => {
-        console.log("error : ", error);
-      });
+    getOrders({ userId: user._id, setOrders });
   }, []);
 
   return (

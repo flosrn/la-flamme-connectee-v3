@@ -8,7 +8,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Favorite from "@material-ui/icons/Favorite";
 import logo from "public/img/logo/laflammeco.png";
 import lepine from "public/img/logo/lepine.png";
-import payments from "public/img/logo/payments.png";
+import payments from "public/img/logo/payment-footer.png";
 import Button from "../CustomButtons/Button";
 import Footer from "./Footer";
 import GridContainer from "../Grid/GridContainer";
@@ -97,11 +97,13 @@ const useStyles = makeStyles(theme => ({
     }
   },
   payments: {
-    width: "95%",
     verticalAlign: "middle",
     padding: "15px 0 0 0",
-    [theme.breakpoints.down("sm")]: {
-      width: "70%"
+    [theme.breakpoints.down("xs")]: {
+      width: "65%"
+    },
+    "& > img": {
+      width: "100%"
     }
   },
   footerBottom: {

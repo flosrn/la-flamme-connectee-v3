@@ -10,21 +10,21 @@ import styles from "public/jss/la-flamme-connectee/components/parallaxStyle";
 const useStyles = makeStyles(styles);
 
 export default function Parallax(props) {
-  const [transform, setTransform] = React.useState("");
-  let windowScrollTop;
+  // const [transform, setTransform] = React.useState("");
+  // let windowScrollTop;
 
-  const resetTransform = () => {
-    const windowScrollTop = window.pageYOffset / 3;
-    setTransform(`translate3d(0,${windowScrollTop}px,0)`);
-  };
-
-  React.useEffect(() => {
-    window.addEventListener("scroll", resetTransform);
-    setTransform(`translate3d(0,${windowScrollTop}px,0)`);
-    return function cleanup() {
-      window.removeEventListener("scroll", resetTransform);
-    };
-  });
+  // const resetTransform = () => {
+  //   const windowScrollTop = window.pageYOffset / 3;
+  //   setTransform(`translate3d(0,${windowScrollTop}px,0)`);
+  // };
+  //
+  // React.useEffect(() => {
+  //   window.addEventListener("scroll", resetTransform);
+  //   setTransform(`translate3d(0,${windowScrollTop}px,0)`);
+  //   return function cleanup() {
+  //     window.removeEventListener("scroll", resetTransform);
+  //   };
+  // });
 
   const { filter, className, children, style, image, small } = props;
   const classes = useStyles();
@@ -39,8 +39,8 @@ export default function Parallax(props) {
       className={parallaxClasses}
       style={{
         ...style,
-        backgroundImage: `url(${image})`,
-        transform
+        backgroundImage: `url(${image})`
+        // transform
       }}
     >
       {children}

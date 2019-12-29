@@ -11,7 +11,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Header from "components/Header/Header";
 import GridItem from "components/Grid/GridItem";
 import HeaderLinks from "components/Header/HeaderLinks";
-
+import VideoCover from "components/Video/VideoCover";
 // sections
 import PresentationSection from "src/sections/HomePage/PresentationSection";
 import CarouselSection from "src/sections/HomePage/CarouselSection";
@@ -21,18 +21,16 @@ import logo from "public/img/logo/laflammeco.png";
 // style for this page
 import { useStyles } from "public/jss/la-flamme-connectee/views/homePage";
 import ModalVideo from "react-modal-video";
+import { scroller } from "react-scroll";
 import ProjectSection from "../src/sections/HomePage/ProjectSection";
 import TeamSection from "../src/sections/HomePage/TeamSection";
 
 import FooterDark from "../components/Footer/FooterDark";
 import ProductSection from "../src/sections/HomePage/ProductSection";
 import ButtonCustom from "../components/CustomButtons/ButtonCustom";
-import { scroller } from "react-scroll";
 import { withAuthSync } from "../api/withAuth";
-
-const VideoCover = dynamic(() => import("components/Video/VideoCover"), {
-  loading: () => <p>Loading...</p>
-});
+import BannerSection from "../src/sections/HomePage/BannerSection";
+import BenefitsSection from "../src/sections/HomePage/BenefitsSection";
 
 function HomePage({ currentUser }) {
   const [open, setOpen] = React.useState(false);
@@ -82,7 +80,7 @@ function HomePage({ currentUser }) {
               <ModalVideo
                 channel="youtube"
                 isOpen={open}
-                videoId="gQ0yT21CaN8"
+                videoId="JNxbjR0GbjU"
                 onClose={handleVideo}
                 className={classes.modalVideo}
               />
@@ -97,6 +95,8 @@ function HomePage({ currentUser }) {
           </IconButton>
         </div>
         <PresentationSection />
+        {/* <BannerSection /> */}
+        <BenefitsSection />
         <ProductSection />
         <TeamSection />
         <ProjectSection />

@@ -33,7 +33,7 @@ import ButtonLink from "../CustomButtons/ButtonLink";
 
 const useStyles = makeStyles(styles);
 
-export default function HeaderLinks({ user, isEditSuccess, ...props }) {
+export default function HeaderLinks({ ...props }) {
   const { dropdownHoverColor } = props;
   const classes = useStyles();
   return (
@@ -43,26 +43,11 @@ export default function HeaderLinks({ user, isEditSuccess, ...props }) {
           <Home className={classes.icons} /> Accueil
         </Button>
       </ListItem>
-      {/* <ListItem className={classes.listItem}> */}
-      {/*  <Button component={ButtonLink} href="/documentation" className={classes.navLink} color="transparent"> */}
-      {/*    <Description className={classes.icons} /> Documentation */}
-      {/*  </Button> */}
-      {/* </ListItem> */}
       <ListItem className={classes.listItem}>
         <Button component={ButtonLink} href="/products" className={classes.navLink} color="transparent">
           <ShoppingBasketIcon className={classes.icons} /> Produits
         </Button>
       </ListItem>
-      {/* <ListItem className={classes.listItem}> */}
-      {/*  <Button component={ButtonLink} href="/download" className={classes.navLink} color="transparent"> */}
-      {/*    <DownloadIcon className={classes.icons} /> Téléchargement */}
-      {/*  </Button> */}
-      {/* </ListItem> */}
-      {/* <ListItem className={classes.listItem}> */}
-      {/*  <Button component={ButtonLink} href="/contact" className={classes.navLink} color="transparent"> */}
-      {/*    <Mail className={classes.icons} /> Contact */}
-      {/*  </Button> */}
-      {/* </ListItem> */}
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
@@ -93,46 +78,6 @@ export default function HeaderLinks({ user, isEditSuccess, ...props }) {
           <Mail className={classes.icons} /> Contact
         </Button>
       </ListItem>
-      {/* {isLoggedIn ? ( */}
-      {/*  <> */}
-      {/*    <ListItem className={classes.listItem}> */}
-      {/*      <CustomDropdown */}
-      {/*        noLiPadding */}
-      {/*        navDropdown */}
-      {/*        hoverColor={dropdownHoverColor} */}
-      {/*        buttonText="Mon profil" */}
-      {/*        buttonProps={{ */}
-      {/*          className: classes.navLink, */}
-      {/*          color: "transparent" */}
-      {/*        }} */}
-      {/*        buttonIcon={Apps} */}
-      {/*        dropdownList={[ */}
-      {/*          <Link href="/settings" as="/settings?tab=profile"> */}
-      {/*            <a className={classes.dropdownLink}> */}
-      {/*              <AccountCircle className={classes.dropdownIcons} /> {user.firstName} {user.lastName} */}
-      {/*            </a> */}
-      {/*          </Link>, */}
-      {/*          <a className={classes.dropdownLink} onClick={handleLogout}> */}
-      {/*            <ExitToApp className={classes.dropdownIcons} /> Déconnexion */}
-      {/*          </a> */}
-      {/*        ]} */}
-      {/*      /> */}
-      {/*    </ListItem> */}
-      {/*  </> */}
-      {/* ) : ( */}
-      {/*  <> */}
-      {/*    <ListItem className={classes.listItem}> */}
-      {/*      <Button component={ButtonLink} href="/login" className={classes.navLink} color="transparent"> */}
-      {/*        <AccountCircle className={classes.icons} /> Se Connecter */}
-      {/*      </Button> */}
-      {/*    </ListItem> */}
-      {/*    /!*<ListItem className={classes.listItem}>*!/ */}
-      {/*    /!*  <Button component={ButtonLink} href="/signup" className={classes.navLink} color="transparent">*!/ */}
-      {/*    /!*    <Assignment className={classes.icons} /> Inscription*!/ */}
-      {/*    /!*  </Button>*!/ */}
-      {/*    /!*</ListItem>*!/ */}
-      {/*  </> */}
-      {/* )} */}
     </List>
   );
 }

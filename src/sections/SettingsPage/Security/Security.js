@@ -2,17 +2,14 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/styles";
-import { Card, CardHeader, CardContent, CardActions, Grid, Divider, TextField, colors } from "@material-ui/core";
+import { CardHeader, CardContent, CardActions, Grid, Divider, TextField, colors } from "@material-ui/core";
 import Button from "components/CustomButtons/Button";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import axios from "axios";
-import Swal from "sweetalert2";
+import { updatePassword } from "api/apiRequests";
 import GridItem from "../../../../components/Grid/GridItem";
 import GridContainer from "../../../../components/Grid/GridContainer";
 // import { updateMyPassword } from "../../../server/lib/api";
-import CustomSnackBar from "../../../../components/Snackbar/CustomSnackBar";
-import getApiUrl from "utils/getApiUrl";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -54,8 +51,6 @@ function Security({ userId }) {
   const [isEditMode, setEditMode] = useState(false);
   const [isValid, setValid] = useState(false);
   const [isLoading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [msg, setMsg] = useState("");
   const classes = useStyles();
 
   useEffect(() => {
@@ -75,27 +70,7 @@ function Security({ userId }) {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true);
-    axios.patch(`${getApiUrl()}/auth/updatePassword`, { userId, values }).then(response => {
-      console.log("response : ", response);
-      setTimeout(() => {
-        Swal.fire({
-          type: response.data.status,
-          title: response.data.message,
-          confirmButtonColor: "#ff7961",
-          position: "bottom"
-        });
-        setEditMode(false);
-        setLoading(false);
-        if (response.data.status === "success") {
-          setValues({
-            ...values,
-            passwordCurrent: "",
-            password: "",
-            passwordConfirm: ""
-          });
-        }
-      }, 1500);
-    });
+    updatePassword({ userId, values, setEditMode, setLoading, setValues });
   };
 
   const handleCancel = () => {

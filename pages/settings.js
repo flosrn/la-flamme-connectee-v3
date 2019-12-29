@@ -15,6 +15,7 @@ import axios from "axios";
 import HeaderLinks from "components/Header/HeaderLinks";
 import getApiUrl from "utils/getApiUrl";
 import Swal from "sweetalert2";
+import { updateProfile } from "api/apiRequests";
 import { withAuthSync } from "../api/withAuth";
 import FooterDark from "../components/Footer/FooterDark";
 
@@ -116,24 +117,7 @@ function SettingsPage({ currentUser }) {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    console.log("values : ", values);
-    setLoading(true);
-    axios
-      .patch(`${getApiUrl()}/users/updateProfile`, {
-        values
-      })
-      .then(response => {
-        setTimeout(() => {
-          Swal.fire({
-            type: response.data.status,
-            title: response.data.message,
-            confirmButtonColor: "#ff7961",
-            position: "bottom-right"
-          });
-          setEditMode(false);
-          setLoading(false);
-        }, 1500);
-      });
+    updateProfile({ values, setEditMode, setLoading });
   };
 
   const handleCancel = () => {

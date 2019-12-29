@@ -54,7 +54,7 @@ export default function ProductSection() {
                   <Pulse>
                     <Link href="/products">
                       <ButtonCustom round color="danger" animateButton>
-                        <Icon>content_copy</Icon> Découvrir
+                        <Icon>shopping_cart</Icon> Passer commande
                       </ButtonCustom>
                     </Link>
                   </Pulse>

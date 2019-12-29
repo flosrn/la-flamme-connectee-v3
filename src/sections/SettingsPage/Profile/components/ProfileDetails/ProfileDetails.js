@@ -1,26 +1,16 @@
 import React from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
 import Button from "components/CustomButtons/Button";
-import flo from "public/img/faces/Florian.jpg";
-import CardAvatar from "components/Card/CardAvatar";
-import CardFooter from "components/Card/CardFooter";
-import Box from "@material-ui/core/Box";
 import GridItem from "components/Grid/GridItem";
-import PictureUpload from "components/CustomUpload/PictureUpload";
 import GridContainer from "components/Grid/GridContainer";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import svg1 from "public/img/svg/undraw_personal_info_0okl.svg";
-
-import axios from "axios";
-import Swal from "sweetalert2";
-import Cookies from "js-cookie";
-import getApiUrl from "utils/getApiUrl";
 import MediaSvg from "components/Media/MediaSvg";
+import { logout } from "api/apiRequests";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,23 +56,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ProfileDetails({ profile, isLoading }) {
-  const Router = useRouter();
-
-  const handleLogout = event => {
-    event.preventDefault();
-    axios.get(`${getApiUrl()}/auth/logout`).then(response => {
-      Swal.fire({
-        type: response.data.status,
-        title: response.data.message,
-        timer: 4000
-      });
-      if (response.data.status === "success") {
-        Cookies.remove("token");
-        Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
-      }
-    });
-  };
-
   const classes = useStyles();
   return (
     <GridContainer alignItems="center" justify="center">
@@ -108,7 +81,7 @@ function ProfileDetails({ profile, isLoading }) {
         <Typography color="textSecondary" variant="body1">
           {profile.role !== "user" ? profile.role : null}
         </Typography>
-        <Button onClick={handleLogout} color="transparent" className={classes.logout}>
+        <Button onClick={() => logout()} color="transparent" className={classes.logout}>
           <Link href="/login?action=login">
             <a>Se déconnecter</a>
           </Link>

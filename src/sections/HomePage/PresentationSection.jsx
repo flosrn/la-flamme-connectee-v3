@@ -1,24 +1,15 @@
 import React from "react";
 import clsx from "clsx";
 // @material-ui/core components
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { Typography } from "@material-ui/core";
-// @material-ui/icons
-import EcoIcon from "@material-ui/icons/Eco";
-import EuroIcon from "@material-ui/icons/Euro";
-import ThumbUpIcon from "@material-ui/icons/ThumbUp";
+import { makeStyles } from "@material-ui/core/styles";
 // core components
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
-import InfoArea from "components/InfoArea/InfoArea";
-import MediaSvg from "components/Media/MediaSvg";
-// images
-import { title } from "public/jss/la-flamme-connectee";
-import svg1 from "public/img/svg/undraw_chore_list_iof3.svg";
-// animations
-import lepineLogo from "public/img/logo/lepine-logo.png";
 import Title from "components/Typography/Title";
+// images
+import lepineLogo from "public/img/logo/lepine-logo.png";
+// styles
+import { title } from "public/jss/la-flamme-connectee";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -100,7 +91,6 @@ const useStyles = makeStyles(theme => ({
 
 function PresentationSection() {
   const classes = useStyles();
-  const theme = useTheme();
   return (
     <div className={classes.section} id="presentation">
       <GridContainer justify="center">
@@ -146,57 +136,6 @@ function PresentationSection() {
           </GridContainer>
         </GridItem>
       </GridContainer>
-      <div className={classes.relativeContainer}>
-        <GridContainer justify="center">
-          <GridItem xs={10} sm={10} md={8} lg={6} className={classes.gridItem}>
-            <Title variant="h2" className={classes.title}>
-              Avantages
-            </Title>
-          </GridItem>
-        </GridContainer>
-        <GridContainer justify="center" className={classes.noMarginTop}>
-          <GridItem md={6} center className={classes.marginFirst}>
-            <InfoArea
-              title="Pratique"
-              description="Avec votre smartphone, visualisez la température de votre maison en temps réel."
-              icon={ThumbUpIcon}
-              iconColor="primary"
-              vertical
-            />
-          </GridItem>
-          <GridItem md={6} center>
-            <MediaSvg src={svg1} alt="svg1" mt={-50} animateUp />
-          </GridItem>
-        </GridContainer>
-        <GridContainer justify="center" className={clsx(classes.gridContainer, classes.reverse)}>
-          <GridItem md={6} center>
-            <MediaSvg src={require("/public/img/svg/undraw_environment_iaus.svg")} alt="svg2" mt={30} animateUp />
-          </GridItem>
-          <GridItem md={6} center>
-            <InfoArea
-              title="Écologique"
-              description="Avec l'allumage inversé, vous rejetez moins de particules fines dans l’atmosphère, encrassez moins votre conduit et votre vitre, et améliorez votre tirage."
-              icon={EcoIcon}
-              iconColor="success"
-              vertical
-            />
-          </GridItem>
-        </GridContainer>
-        <GridContainer justify="center">
-          <GridItem md={6} center>
-            <InfoArea
-              title="Économique"
-              description="En allumant votre foyer bois à l'avance avec Flam'connect vous économiserez le coût de votre autre source de chaleur (électricité, fioul, gaz...)."
-              icon={EuroIcon}
-              iconColor="secondary"
-              vertical
-            />
-          </GridItem>
-          <GridItem md={6} center>
-            <MediaSvg src={require("/public/img/svg/undraw_Savings_dwkw.svg")} alt="svg3" mt={30} animateUp />
-          </GridItem>
-        </GridContainer>
-      </div>
     </div>
   );
 }

@@ -1,23 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/styles";
-
-import axios from "axios";
-import Button from "components/CustomButtons/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import validate from "validate.js";
-import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "src/store/store";
 import { CardContent, CardHeader, Divider } from "@material-ui/core";
 import svg1 from "public/img/svg/undraw_delivery_address_03n0.svg";
 import svg2 from "public/img/svg/undraw_mail1_uab6.svg";
 import svg3 from "public/img/svg/undraw_deliveries_131a.svg";
-import getApiUrl from "utils/getApiUrl";
 import HeaderLinks from "../components/Header/HeaderLinks";
 import Header from "../components/Header/Header";
 import FooterDark from "../components/Footer/FooterDark";
@@ -31,6 +25,7 @@ import AddressForm from "../src/sections/Checkout/AddressForm";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 import { withAuthSync } from "../api/withAuth";
 import SummaryItems from "../src/sections/Checkout/SummaryItems";
+import { createCheckoutSession } from "api/apiRequests";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -199,26 +194,7 @@ function CheckoutPage({ currentUser }) {
 
   const handleSubmit = async () => {
     setLoading(true);
-    axios
-      .patch(`${getApiUrl()}/users/updateProfile`, {
-        values
-      })
-      .then(() => {
-        setTimeout(() => {
-          axios
-            .post(`${getApiUrl()}/checkout/createCheckoutSession`, { currentUser, items })
-            .then(response => {
-              stripe.redirectToCheckout({
-                sessionId: response.data.session.id
-              });
-            })
-            .catch(error => {
-              console.log("error : ", error);
-            });
-          setLoading(false);
-        }, 1500);
-      });
-    setLoading(false);
+    createCheckoutSession({ values, currentUser, items, stripe, setLoading });
   };
 
   // ========== FORM VALIDATION ========== //

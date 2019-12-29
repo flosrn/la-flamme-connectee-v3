@@ -3,19 +3,14 @@ import { useRouter } from "next/router";
 import clsx from "clsx";
 import validate from "validate.js";
 import { makeStyles } from "@material-ui/styles";
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Slide from "@material-ui/core/Slide";
 
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/LockOutlined";
 import { Face, RecordVoiceOver } from "@material-ui/icons";
-import axios from "axios";
-import Swal from "sweetalert2";
-import redirectTo from "utils/redirectTo";
-import Cookies from "js-cookie";
-import getApiUrl from "utils/getApiUrl";
 import ButtonCustom from "components/CustomButtons/ButtonCustom";
+import { register } from "api/apiRequests";
 import { schema } from "./RegisterFormSchema";
 
 const useStyles = makeStyles(theme => ({
@@ -72,37 +67,14 @@ function RegisterForm({ className, ...rest }) {
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    axios
-      .post(`${getApiUrl()}/auth/register`, {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        password: values.password,
-        passwordConfirm: values.passwordConfirm
-      })
-      .then(response => {
-        console.log("response : ", response);
-        Swal.fire({
-          type: response.data.status,
-          title: response.data.message,
-          confirmButtonColor: "#ff7961"
-        }).then(result => {
-          if (response.data.status === "success" && result.value) {
-            const cart = Cookies.getJSON("cart");
-            if (cart.length > 0) {
-              Router.push("/shopping-cart").then(() => window.scrollTo(0, 0));
-            } else {
-              Router.push("/").then(() => window.scrollTo(0, 0));
-            }
-          }
-        });
-        if (response.data.status === "success") {
-          Cookies.set("token", response.data.data.token, {
-            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
-          });
-        }
-        setLoading(false);
-      });
+    register({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      password: values.password,
+      passwordConfirm: values.passwordConfirm,
+      setLoading
+    });
   }
 
   const hasError = field => !!(touched[field] && errors[field]);

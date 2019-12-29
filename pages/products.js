@@ -16,6 +16,7 @@ import Header from "../components/Header/Header";
 import GridItem from "../components/Grid/GridItem";
 import GridContainer from "../components/Grid/GridContainer";
 import { withAuthSync } from "../api/withAuth";
+import { getProducts } from "../api/apiRequests";
 
 const useStyles = makeStyles(theme => ({
   root: {}
@@ -26,14 +27,7 @@ function ProductsPage({ currentUser }) {
   const classes = useStyles();
 
   useEffect(() => {
-    axios
-      .get(`${getApiUrl()}/products/getProducts`)
-      .then(response => {
-        setProducts(response.data.data.products);
-      })
-      .catch(error => {
-        console.log("error : ", error);
-      });
+    getProducts({ setProducts });
   }, []);
 
   return (
