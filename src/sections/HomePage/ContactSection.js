@@ -19,9 +19,9 @@ import Button from "components/CustomButtons/Button";
 import { Typography } from "@material-ui/core";
 import axios from "axios";
 import Swal from "sweetalert2";
-import MediaSvg from "../../../components/Media/MediaSvg";
 import InfoArea from "components/InfoArea/InfoArea";
 import getApiUrl from "utils/getApiUrl";
+import MediaSvg from "../../../components/Media/MediaSvg";
 import Title from "../../../components/Typography/Title";
 import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
 
@@ -93,8 +93,9 @@ function ContactSection({ ...props }) {
     axios.post(`${getApiUrl()}/email/sendContactEmail`, { name, email, content }).then(response => {
       Swal.fire({
         type: response.data.status,
-        title: `${response.data.message}${response.data.status === "success" ?
-          ", nous vous répondrons dans les plus brefs délais" : ""}`,
+        title: `${response.data.message}${
+          response.data.status === "success" ? ", nous vous répondrons dans les plus brefs délais" : ""
+        }`,
         timer: 5000
       });
       if (response.data.status === "success") {

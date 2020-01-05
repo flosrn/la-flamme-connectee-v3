@@ -64,25 +64,6 @@ export default function ProductSection() {
           </GridContainer>
         </div>
       </div>
-      <GridContainer justify="center">
-        <GridItem center>
-          <MediaSvg src={svg} alt="smart-home" size="medium" animateUp />
-        </GridItem>
-      </GridContainer>
-      <GridContainer justify="center" className={classes.bottom}>
-        <GridItem center>
-          <Typography variant="subtitle1" align="center">
-            Pour en savoir plus, consultez nos pages{" "}
-            <Link href="/documentation">
-              <a>Documentation</a>
-            </Link>{" "}
-            et{" "}
-            <Link href="/products">
-              <a>Produits</a>
-            </Link>
-          </Typography>
-        </GridItem>
-      </GridContainer>
     </>
   );
 }

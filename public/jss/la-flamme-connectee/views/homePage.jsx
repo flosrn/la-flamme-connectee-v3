@@ -11,9 +11,7 @@ import {
 } from "public/jss/la-flamme-connectee";
 
 export const useStyles = makeStyles(theme => ({
-  main: {
-    ...main
-  },
+  main,
   mainRaised: {
     ...mainRaised,
     margin: "-20px 120px -70px"
@@ -23,95 +21,6 @@ export const useStyles = makeStyles(theme => ({
     backgroundPosition: "bottom",
     alignItems: "flex-start",
     height: "95vh"
-  },
-  containerBackground: {
-    ...container,
-    zIndex: "2",
-    position: "relative",
-    marginTop: theme.spacing(10),
-    [theme.breakpoints.between("sm", "md")]: {
-      marginTop: theme.spacing(15)
-    },
-    "@media (max-width: 360px)": {
-      marginTop: theme.spacing(5)
-    },
-    "@media (max-height: 500px)": {
-      marginTop: theme.spacing(5)
-    }
-  },
-  gridContainer: {
-    display: "flex",
-    justifyContent: "center",
-    color: "#fff",
-    position: " absolute",
-    bottom: "100px",
-    left: "50%",
-    transform: "translate(-50%)",
-    zIndex: "1",
-    width: "100%"
-  },
-  gridItem: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    "& h1, & h3": {
-      textAlign: "center"
-    },
-    "& button": {
-      "@media (max-height: 530px)": {
-        display: "none"
-      }
-    }
-  },
-  modalVideo: {
-    "@media (max-height: 530px)": {
-      display: "none"
-    }
-  },
-  gridAbsolute: {
-    position: "fixed",
-    top: 0
-  },
-  textCenter: {
-    display: "flex",
-    textAlign: "center"
-  },
-  title: {
-    ...title,
-    display: "inline-block",
-    position: "relative",
-    marginTop: "20px",
-    minHeight: "32px",
-    color: "#FFFFFF",
-    textDecoration: "none",
-    "@media (max-width: 400px)": {
-      fontSize: "40px"
-    },
-    "@media (max-width: 350px)": {
-      fontSize: "35px"
-    }
-  },
-  subtitle: {
-    maxWidth: "500px",
-    margin: "10px auto 0",
-    lineHeight: "40px",
-    color: "#fff",
-    fontWeight: 600
-  },
-  bottomText: {
-    fontSize: "14px",
-    [theme.breakpoints.up("sm")]: {
-      fontSize: "20px",
-      letterSpacing: "2px"
-    }
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    [theme.breakpoints.down("xs")]: {
-      width: 85,
-      height: 85
-    }
   },
   scrollToBottom: {
     display: "flex",
@@ -180,37 +89,5 @@ export const useStyles = makeStyles(theme => ({
     marginBottom: "0",
     padding: "0",
     marginTop: "0"
-  },
-  scrollDownContainer: {
-    width: "100%",
-    position: "absolute",
-    left: 0,
-    top: "-85px",
-    display: "flex",
-    justifyContent: "center",
-    "@media (max-height: 650px)": {
-      display: "none"
-    },
-    "& .hidden": {
-      display: "none"
-    }
-  },
-  scrollDownButton: {
-    color: "#fff",
-    animationName: "$bounce",
-    animationDuration: "1.5s",
-    animationIterationCount: "infinite",
-    animationTimingFunction: "ease"
-  },
-  bottom: {
-    padding: theme.spacing(5, 0, 5)
-  },
-  arrowButton: {
-    fontSize: "80px"
-  },
-  "@keyframes bounce": {
-    "0%": { top: "0px" },
-    "50%": { top: "-20px" },
-    "100%": { top: "0px" }
   }
 }));

@@ -19,7 +19,7 @@ import { title } from "public/jss/la-flamme-connectee";
 
 const useStyles = makeStyles(theme => ({
   section: {
-    padding: "70px 0 10px",
+    padding: "0 0 10px",
     textAlign: "center"
   },
   title: {
@@ -71,10 +71,10 @@ const useStyles = makeStyles(theme => ({
     }
   },
   relativeContainer: {
-    marginTop: 130,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: 50
-    }
+    marginTop: 20
+    // [theme.breakpoints.down("sm")]: {
+    //   marginTop: 50
+    // }
   },
   avantageTitle: {
     marginBottom: -160

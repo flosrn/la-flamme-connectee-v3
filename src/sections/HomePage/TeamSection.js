@@ -104,7 +104,7 @@ function TeamSection() {
                     <p className={classes.description}>
                       Ayant un diplôme de concepteur développeur informatique, il a réalisé de A à Z le site internet La
                       Flamme Connectée. Florian s'occupe aussi des stratégies de communication à adopter pour faire
-                      vivre l'image de la marque au travers des réseaux sociaux.
+                      vivre l'image de la marque à travers les réseaux sociaux.
                     </p>
                   </GridItem>
                 </CardBody>

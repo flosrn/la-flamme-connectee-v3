@@ -55,6 +55,18 @@ const useStyles = makeStyles(theme => ({
       marginTop: "30px",
       width: "90%"
     }
+  },
+  list: {
+    "& li:before": {
+      content: "''",
+      position: "absolute",
+      left: 0,
+      top: 8,
+      width: 8,
+      height: 8,
+      borderRadius: "50%",
+      background: "#13c4a1"
+    }
   }
 }));
 
@@ -72,7 +84,9 @@ function ProjectSection({ ...props }) {
           <div className={classes.projectText}>
             <h5 className={classes.description}>
               Nous sommes propriétaire depuis 2000 d'une maison de 160 m² en banlieu toulousaine et nous consommions
-              1400 L/an de fioul pour avoir une température d'environ 17 degrès.<br /><br />
+              1400 L/an de fioul pour avoir une température d'environ 17 degrès.
+              <br />
+              <br />
             </h5>
             <h5 className={classes.description}>
               <strong>En 2013</strong> nous investissons dans un poêle à bois Scandinave de la marque{" "}
@@ -89,17 +103,18 @@ function ProjectSection({ ...props }) {
               , que nous utilisons comme énergie d'appoint.
             </h5>
             <h5 className={classes.description}>
-              La dépense énergétique de notre foyer passe alors à 700 L/an de fioul pour avoir 17 °+ 3 stères de bois/an pour monter
-              à une température de 20°-21°<br />
+              La dépense énergétique de notre foyer passe alors à 700 L/an de fioul pour avoir 17 °+ 3 stères de bois/an
+              pour monter à une température de 20°-21°
+              <br />
               Il reste cependant 2 points noirs :
-              <ul>
+              <ul className={classes.list}>
                 <li>la consommation de fioul</li>
                 <li>le retour dans une maison à 17°</li>
               </ul>
             </h5>
             <h5 className={classes.description}>
-              Étant depuis toujours passionné par les innovations, les inventions et les nouvelles technologies, je
-              me fixe comme objectif de mettre au point un système me permettant d’allumer mon poêle à bois à distance.
+              Étant depuis toujours passionné par les innovations, les inventions et les nouvelles technologies, je me
+              fixe comme objectif de mettre au point un système me permettant d’allumer mon poêle à bois à distance.
               <br />
               <br />
             </h5>
@@ -107,34 +122,40 @@ function ProjectSection({ ...props }) {
               <strong>2014 naissance du premier prototype :</strong>
             </h5>
             <h5 className={classes.description}>
-              Nous décidons de nous rendre au Concours Lépine de Paris avec mon épouse, en tant que visiteur, et
-              nous mandatons une société qui réalise une recherche d’antériorité mondiale, qui confirme que le
-              système n’existe pas.<br /><br />
+              Nous décidons de nous rendre au Concours Lépine de Paris avec mon épouse, en tant que visiteur, et nous
+              mandatons une société qui réalise une recherche d’antériorité mondiale, qui confirme que le système
+              n’existe pas.
+              <br />
+              <br />
             </h5>
             <h5 className={classes.description}>
               <strong>2015,</strong> nous allumons régulièrement notre poêle grace à mon invention et décidons de
               supprimer notre chaudière. <br />
-              Nous nous chauffons désormais 100% bois et consommons 7 stères de bois.<br />
+              Nous nous chauffons désormais 100% bois et consommons 7 stères de bois.
+              <br />
               Objectifs atteints :
-              <ul>
+              <ul className={classes.list}>
                 <li>plus besoin du fioul</li>
                 <li>le retour dans une maison à 20°-21°</li>
               </ul>
             </h5>
             <h5 className={classes.description}>
               <strong>C'est en 2018</strong> que mon fils Florian m'incite à acheter une imprimante 3D, ce qui m'a
-              offert des possibilitées nouvelles.<br /><br />
+              offert des possibilitées nouvelles.
+              <br />
+              <br />
             </h5>
             <h5 className={classes.description}>
               <strong>Avril 2019</strong>, je dépose un Brevet et je décide de présenter mon invention au Concours
-              Lépine de Paris en tant qu'inventeur.
-              Ayant remporté une Médaille d’Argent et un franc succès auprès du public et des professionnels du
-              chauffage au bois, je décide de retravailler mon produit pour le rendre plus léger, plus design et plus
-              convivial, afin de le produire personnellement et le commercialiser<br /><br />
+              Lépine de Paris en tant qu'inventeur. Ayant remporté une Médaille d’Argent et un franc succès auprès du
+              public et des professionnels du chauffage au bois, je décide de retravailler mon produit pour le rendre
+              plus léger, plus design et plus convivial, afin de le produire personnellement et le commercialiser
+              <br />
+              <br />
             </h5>
             <h5 className={classes.description}>
-              <strong>Juin 2019</strong>, après de longues recherches, nous commencons la production à plus grande échelle
-              en aquérant une 2ème imprimante 3D.
+              <strong>Juin 2019</strong>, après de longues recherches, nous commencons la production à plus grande
+              échelle en aquérant une 2ème imprimante 3D.
             </h5>
             <h5 className={classes.description}>
               Les boîtiers plastiques sont composés de PLA, un polymère thermoplastique entièrement biodégradable et
@@ -145,11 +166,14 @@ function ProjectSection({ ...props }) {
               <a href="https://www.energiemarie.fr/" target="_blank">
                 la Société Energie Marie
               </a>{" "}
-              basée dans la banlieue Nantaise qui produit des allume-feu écologiques qui ont une combustion longue durée (10 minutes).<br /><br />
+              basée dans la banlieue Nantaise qui produit des allume-feu écologiques qui ont une combustion longue durée
+              (10 minutes).
+              <br />
+              <br />
             </h5>
             <h5 className={classes.description}>
-              <strong>Octobre 2019</strong>, nous participons au Concours Lépine de Montpellier avec mon nouveau produit et remporte une deuxième
-              Médaille d'Argent.
+              <strong>Octobre 2019</strong>, nous participons au Concours Lépine de Montpellier avec mon nouveau produit
+              et remporte une deuxième Médaille d'Argent.
             </h5>
           </div>
         </GridItem>

@@ -14,7 +14,10 @@ import { title } from "public/jss/la-flamme-connectee";
 const useStyles = makeStyles(theme => ({
   section: {
     padding: "70px 0 10px",
-    textAlign: "center"
+    textAlign: "center",
+    [theme.breakpoints.up("lg")]: {
+      paddingBottom: 50
+    }
   },
   title: {
     ...title,

@@ -14,8 +14,8 @@ import GridItem from "components/Grid/GridItem";
 import Timeline from "components/Timeline/Timeline";
 // style for this page
 import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections/howWorksStyle";
-import Title from "../../../components/Typography/Title";
 import { scroller } from "react-scroll";
+import Title from "../../../components/Typography/Title";
 
 function HowWorks() {
   const classes = useStyles();

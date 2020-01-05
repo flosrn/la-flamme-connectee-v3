@@ -1,8 +1,9 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import ScrollToSectionComponent from "../ActionComponent/ScrollToSectionComponent";
 
 const useStyles = makeStyles(theme => ({
-  root: {
+  videoContainer: {
     position: "relative",
     width: "100%",
     height: "95vh",
@@ -37,12 +38,15 @@ const useStyles = makeStyles(theme => ({
 export default function VideoSection({ children }) {
   const classes = useStyles();
   return (
-    <div className={classes.root} id="video-fond">
-      <video width="480" autoPlay muted loop playsInline className={classes.video}>
-        <source type="video/mp4" src={require("/public/video/fire-video.mp4")} />
-        <source type="video/webm" src={require("/public/video/fire-video.webm")} />
-      </video>
-      <>{children}</>
-    </div>
+    <>
+      <div className={classes.videoContainer} id="video-fond">
+        <video width="480" autoPlay muted loop playsInline className={classes.video}>
+          <source type="video/mp4" src={require("/public/video/fire-video.mp4")} />
+          <source type="video/webm" src={require("/public/video/fire-video.webm")} />
+        </video>
+        <>{children}</>
+      </div>
+      <ScrollToSectionComponent />
+    </>
   );
 }

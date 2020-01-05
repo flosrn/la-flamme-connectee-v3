@@ -52,9 +52,12 @@ function ConnectSection() {
     <div className={classes.section} id="connect">
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={6} className={classes.gridItem}>
-          <Title variant="h2" className={classes.title}>Appairage du Flam'connect</Title>
+          <Title variant="h2" className={classes.title}>
+            Appairage du Flam'connect
+          </Title>
           <h5 className={classes.description}>
-            Pour allumer votre poêle à distance ou programmer une plage horaire à laquelle il s'allumera, veuillez suivre les instructions suivante :
+            Pour allumer votre poêle à distance ou programmer une plage horaire à laquelle il s'allumera, veuillez
+            suivre les instructions suivante :
           </h5>
         </GridItem>
       </GridContainer>
