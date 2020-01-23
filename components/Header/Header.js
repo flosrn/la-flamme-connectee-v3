@@ -155,6 +155,7 @@ export default function Header(props) {
           variant="temporary"
           anchor="left"
           open={mobileOpen}
+          className={classes.drawerRoot}
           classes={{
             paper: classes.drawerPaper
           }}

@@ -15,55 +15,48 @@ import MediaSvg from "components/Media/MediaSvg";
 
 import svg from "public/img/svg/undraw_smart_home_28oy.svg";
 import projectsStyle from "public/jss/la-flamme-connectee/views/homePageSections/productSection";
+import fabricationFrLogo from "public/img/logo/fabrication-francaise.png";
 import Fade from "react-reveal/Fade";
-import Pulse from "react-reveal/Pulse";
+import LayoutSection from "../../../components/Page/LayoutSection";
 
 const useStyles = makeStyles(projectsStyle);
 
-export default function ProductSection() {
+export default function ProductSection({ isDesktop }) {
   const classes = useStyles();
   return (
-    <>
-      <div className={classes.projects}>
-        <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={8} lg={6}>
-              <Card
-                raised
-                background
-                style={{
-                  backgroundImage: `url(${require("/public/img/contura/background-contura2-lowres.jpg")})`,
-                  backgroundPosition: "right bottom"
-                }}
-              >
-                <CardBody background>
-                  <h6 className={classes.cardCategory}>INNOVATION</h6>
-                  <Link href="/products">
-                    <a>
-                      <h3 className={classes.cardTitleWhite}>
-                        Avec le Flam'connect, ne rentrez plus dans une maison froide
-                      </h3>
-                    </a>
-                  </Link>
-                  <p className={classes.cardDescription}>
-                    "Gagnez en confort et privilégiez une énergie renouvelable en vous chauffant 100% au bois !
-                    <br />
-                    Le Flam'connect s'adapte à tous types de foyer fermé déjà existant sans y apporter de modifications
-                    préalables !"
-                  </p>
-                  <Pulse>
-                    <Link href="/products">
-                      <ButtonCustom round color="danger" animateButton>
-                        <Icon>shopping_cart</Icon> Passer commande
-                      </ButtonCustom>
-                    </Link>
-                  </Pulse>
-                </CardBody>
-              </Card>
-            </GridItem>
-          </GridContainer>
-        </div>
-      </div>
-    </>
+    <LayoutSection>
+      <GridItem xs={12} sm={12} md={8} lg={6}>
+        {/* <Fade spy={isDesktop} bottom cascade ssrFadeout> */}
+        <Card
+          raised
+          background
+          style={{
+            backgroundImage: `url(${require("/public/img/contura/background-contura2-lowres.jpg")})`,
+            backgroundPosition: "right bottom"
+          }}
+        >
+          <CardBody background>
+            <h6 className={classes.cardCategory}>INNOVATION</h6>
+            <Link href="/products">
+              <a>
+                <h3 className={classes.cardTitleWhite}>Avec le Flam'connect, ne rentrez plus dans une maison froide</h3>
+              </a>
+            </Link>
+            <p className={classes.cardDescription}>
+              "Gagnez en confort et privilégiez une énergie renouvelable en vous chauffant 100% au bois !
+              <br />
+              Le Flam'connect s'adapte à tous types de foyer fermé déjà existant sans y apporter de modifications
+              préalables !"
+            </p>
+            <Link href="/products">
+              <ButtonCustom round color="danger" animateButton>
+                <Icon>shopping_cart</Icon> Passer commande
+              </ButtonCustom>
+            </Link>
+          </CardBody>
+        </Card>
+        {/* </Fade> */}
+      </GridItem>
+    </LayoutSection>
   );
 }

@@ -71,7 +71,9 @@ const headerStyle = makeStyles(theme => ({
   },
   appResponsive: {
     margin: "20px 10px",
-    marginTop: "0px"
+    marginTop: "0px",
+    height: "100%",
+    overflow: "hidden"
   },
   primary: {
     backgroundColor: primaryColor[0],
@@ -135,6 +137,11 @@ const headerStyle = makeStyles(theme => ({
     backgroundColor: `${whiteColor} !important`,
     boxShadow: `0 4px 18px 0px rgba(${hexToRgb(blackColor)}, 0.12), 0 7px 10px -5px rgba(${hexToRgb(blackColor)}, 0.15)`
   },
+  drawerRoot: {
+    height: "100%",
+    width: "100%",
+    overflow: "hidden"
+  },
   drawerPaper: {
     border: "none",
     bottom: "0",
@@ -146,7 +153,7 @@ const headerStyle = makeStyles(theme => ({
     position: "fixed",
     display: "block",
     top: "0",
-    height: "100vh",
+    height: "100%",
     right: "left",
     left: "0",
     visibility: "visible",
@@ -183,7 +190,7 @@ const headerStyle = makeStyles(theme => ({
     position: "absolute",
     right: "8px",
     top: "9px",
-    zIndex: "1"
+    zIndex: 2
   },
   menuIcon: {
     fontSize: "40px"

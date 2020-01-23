@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 // core components
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
-import CustomizedExpansionPanels from "components/ExpansionPanels/CustomizedExpansionPanels";
+import ConnectExpansionPanels from "components/ExpansionPanels/ConnectExpansionPanels";
 import Title from "../../../components/Typography/Title";
 
 // style for this page
@@ -63,7 +63,7 @@ function ConnectSection() {
       </GridContainer>
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={10} lg={8} className={classes.gridItem}>
-          <CustomizedExpansionPanels />
+          <ConnectExpansionPanels />
         </GridItem>
       </GridContainer>
       <GridContainer justify="center">

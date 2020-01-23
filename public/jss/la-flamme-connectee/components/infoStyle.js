@@ -13,11 +13,11 @@ import {
 export const useStyles = makeStyles(theme => ({
   infoArea: {
     maxWidth: "360px",
-    margin: "0 auto",
-    transition: ".4s",
-    "&:hover": {
-      transform: "translateY(-10px)"
-    }
+    margin: "0 auto"
+    // transition: ".4s",
+    // "&:hover": {
+    //   transform: "translateY(-10px)"
+    // }
     // padding: "0 0 30px"
   },
   iconWrapper: {

@@ -5,7 +5,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
@@ -14,17 +14,20 @@ import Grow from "@material-ui/core/Grow";
 import Divider from "@material-ui/core/Divider";
 import Popper from "@material-ui/core/Popper";
 // core components
-import Button from "components/CustomButtons/Button.js";
+import Button from "components/CustomButtons/Button";
 
-import styles from "public/jss/la-flamme-connectee/components/customDropdownStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/customDropdownStyle";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 
 const useStyles = makeStyles(styles);
 
 export default function CustomDropdown(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
 
   const handleClick = event => {
-    if (anchorEl && anchorEl.contains(event.target)) {
+    if (anchorEl && anchorEl.contains(event.target) && event.target.getAttribute("aria-owns") !== "menu-list") {
       setAnchorEl(null);
     } else {
       setAnchorEl(event.currentTarget);
@@ -66,7 +69,7 @@ export default function CustomDropdown(props) {
   });
   const dropdownItem = classNames({
     [classes.dropdownItem]: true,
-    [classes[hoverColor + "Hover"]]: true,
+    [classes[`${hoverColor}Hover`]]: true,
     [classes.noLiPadding]: noLiPadding,
     [classes.dropdownItemRTL]: rtlActive
   });
@@ -82,7 +85,8 @@ export default function CustomDropdown(props) {
           return (
             <Divider key={key} onClick={() => handleCloseMenu("divider")} className={classes.dropdownDividerItem} />
           );
-        } else if (prop.props !== undefined && prop.props["data-ref"] === "multi") {
+        }
+        if (prop.props !== undefined && prop.props["data-ref"] === "multi") {
           return (
             <MenuItem key={key} className={dropdownItem} style={{ overflow: "visible", padding: 0 }}>
               {prop}
@@ -106,6 +110,7 @@ export default function CustomDropdown(props) {
           aria-haspopup="true"
           {...buttonProps}
           onClick={handleClick}
+          onMouseEnter={isDesktop ? handleClick : undefined}
         >
           {buttonIcon !== undefined ? <props.buttonIcon className={classes.buttonIcon} /> : null}
           {buttonText !== undefined ? buttonText : null}
@@ -114,6 +119,7 @@ export default function CustomDropdown(props) {
       </div>
       <Popper
         open={Boolean(anchorEl)}
+        onMouseLeave={() => (isDesktop ? setAnchorEl(null) : undefined)}
         anchorEl={anchorEl}
         transition
         disablePortal

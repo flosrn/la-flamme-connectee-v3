@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 
 // core components
-import styles from "public/jss/la-flamme-connectee/components/cardStyle.js";
+import styles from "public/jss/la-flamme-connectee/components/cardStyle";
 
 const useStyles = makeStyles(styles);
 
@@ -40,8 +40,7 @@ export default function Card(props) {
     [classes[color]]: color,
     [classes.cardPricing]: pricing,
     [classes.cardProduct]: product,
-    [className]: className !== undefined,
-    [classes.animateUp]: animateUp
+    [className]: className !== undefined
   });
   return (
     <div className={cardClasses} {...rest}>

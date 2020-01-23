@@ -14,6 +14,7 @@ import Icon from "@material-ui/core/Icon";
 import Home from "@material-ui/icons/Home";
 import Description from "@material-ui/icons/Description";
 import Mail from "@material-ui/icons/Mail";
+import LiveHelpIcon from "@material-ui/icons/LiveHelp";
 import ExitToApp from "@material-ui/icons/ExitToApp";
 import DownloadIcon from "@material-ui/icons/CloudDownload";
 import LocalGroceryStoreIcon from "@material-ui/icons/LocalGroceryStore";
@@ -29,7 +30,9 @@ import Button from "components/CustomButtons/Button";
 import styles from "public/jss/la-flamme-connectee/components/headerLinksStyle";
 
 // contexts
+import Hidden from "@material-ui/core/Hidden";
 import ButtonLink from "../CustomButtons/ButtonLink";
+import SocialIconsNav from "../Icons/SocialIconsNav";
 
 const useStyles = makeStyles(styles);
 
@@ -38,46 +41,62 @@ export default function HeaderLinks({ ...props }) {
   const classes = useStyles();
   return (
     <List className={classes.list}>
-      <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/" className={classes.navLink} color="transparent">
-          <Home className={classes.icons} /> Accueil
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/products" className={classes.navLink} color="transparent">
-          <ShoppingBasketIcon className={classes.icons} /> Produits
-        </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          navDropdown
-          hoverColor={dropdownHoverColor}
-          buttonText="En savoir plus"
-          buttonProps={{
-            className: classes.navLink,
-            color: "transparent"
-          }}
-          buttonIcon={HelpIcon}
-          dropdownList={[
-            <Link href="/documentation">
-              <a className={classes.dropdownLink}>
-                <Description className={classes.dropdownIcons} /> Documentation
-              </a>
-            </Link>,
-            <Link href="/download">
-              <a className={classes.dropdownLink}>
-                <DownloadIcon className={classes.dropdownIcons} /> Téléchargement
-              </a>
-            </Link>
-          ]}
-        />
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button component={ButtonLink} href="/contact" className={classes.navLink} color="transparent">
-          <Mail className={classes.icons} /> Contact
-        </Button>
-      </ListItem>
+      <div>
+        <ListItem className={classes.listItem}>
+          <Button component={ButtonLink} href="/" className={classes.navLink} color="transparent">
+            <Home className={classes.icons} /> Accueil
+          </Button>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Button component={ButtonLink} href="/products" className={classes.navLink} color="transparent">
+            <ShoppingBasketIcon className={classes.icons} /> Produits
+          </Button>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <CustomDropdown
+            noLiPadding
+            navDropdown
+            hoverColor={dropdownHoverColor}
+            buttonText="En savoir plus"
+            buttonProps={{
+              className: classes.navLink,
+              color: "transparent"
+            }}
+            buttonIcon={HelpIcon}
+            dropdownList={[
+              <Link href="/documentation">
+                <a className={classes.dropdownLink}>
+                  <Description className={classes.dropdownIcons} /> Documentation
+                </a>
+              </Link>,
+              <Link href="/download">
+                <a className={classes.dropdownLink}>
+                  <DownloadIcon className={classes.dropdownIcons} /> Téléchargement
+                </a>
+              </Link>,
+              <Link href="/faq">
+                <a className={classes.dropdownLink}>
+                  <LiveHelpIcon className={classes.dropdownIcons} /> Foire aux questions
+                </a>
+              </Link>
+            ]}
+          />
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Button component={ButtonLink} href="/contact" className={classes.navLink} color="transparent">
+            <Mail className={classes.icons} /> Contact
+          </Button>
+        </ListItem>
+      </div>
+      <div>
+        <Hidden mdUp implementation="js">
+          <ListItem className={classes.listItem}>
+            <div className={classes.socialsContainer}>
+              <SocialIconsNav />
+            </div>
+          </ListItem>
+        </Hidden>
+      </div>
     </List>
   );
 }

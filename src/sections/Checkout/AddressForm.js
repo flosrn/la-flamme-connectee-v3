@@ -12,7 +12,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const useStyles = makeStyles(theme => ({
   root: {},
   cardContent: {
-    padding: "24px 20px"
+    padding: "24px 20px",
+    "& input": {
+      color: theme.palette.primary.main
+    }
   },
   datePicker: {
     margin: 0,

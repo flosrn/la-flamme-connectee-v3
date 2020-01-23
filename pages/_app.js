@@ -36,7 +36,7 @@ class MyApp extends App {
             site_name: "La Flamme Connectée - Allumez votre poêle à distance 🔥",
             images: [
               {
-                url: "https://drive.google.com/uc?export=view&id=1lEyWfrmlrH-Z_i2r5I_xrNujRx9XmhXq",
+                url: "https://drive.google.com/uc?export=view&id=SHA2nI2Tqtei1T2f1T8HWoe8zGWW6TMp",
                 width: 786,
                 height: 855,
                 alt: "Flam'connect"

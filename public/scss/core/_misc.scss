@@ -2,6 +2,9 @@ html * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+html, body, div#__next {
+  height: 100%;
+}
 body {
   font-size: 1rem;
   overflow-x: hidden;
@@ -267,4 +270,17 @@ li {
   #cd-vertical-nav {
     display: none;
   }
+}
+
+@media (min-width: 960px) {
+  #animateUp {
+    transition: .4s;
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #FF8A73;
 }

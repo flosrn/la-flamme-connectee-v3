@@ -44,7 +44,7 @@ function getStepContent(stepIndex, components) {
   }
 }
 
-export default function CheckoutStepper({ components, submitHandler, storeHandler, isError, address }) {
+export default function CheckoutStepper({ components, submitHandler, storeHandler, isError, address, checked }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const classes = useStyles();
   const steps = getSteps();
@@ -90,19 +90,42 @@ export default function CheckoutStepper({ components, submitHandler, storeHandle
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.backButton}>
                 Retour
               </Button>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleNext}
-                disabled={
-                  isError ||
-                  (activeStep !== 0 &&
-                    address &&
-                    (address.firstName === "" || address.lastName === "" || address.zip === "" || address.city === ""))
-                }
-              >
-                {activeStep === steps.length - 1 ? "Confirmer et payer" : "Suivant"}
-              </Button>
+              {activeStep === steps.length - 1 ? (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleNext}
+                  disabled={
+                    isError ||
+                    !checked ||
+                    (activeStep !== 0 &&
+                      address &&
+                      (address.firstName === "" ||
+                        address.lastName === "" ||
+                        address.zip === "" ||
+                        address.city === ""))
+                  }
+                >
+                  Confirmer et payer
+                </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleNext}
+                  disabled={
+                    isError ||
+                    (activeStep !== 0 &&
+                      address &&
+                      (address.firstName === "" ||
+                        address.lastName === "" ||
+                        address.zip === "" ||
+                        address.city === ""))
+                  }
+                >
+                  Suivant
+                </Button>
+              )}
             </div>
           </div>
         )}

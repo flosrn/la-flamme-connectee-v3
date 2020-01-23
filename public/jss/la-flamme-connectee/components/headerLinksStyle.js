@@ -13,15 +13,16 @@ const headerLinksStyle = theme => ({
       MsFlexDirection: "row",
       flexDirection: "row"
     },
-    [theme.breakpoints.down("sm")]: {
-      display: "block"
-    },
-    marginTop: "0px",
     display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: "0px",
     paddingLeft: "0",
     marginBottom: "0",
     listStyle: "none",
-    padding: "0"
+    padding: "0",
+    minHeight: "100%"
   },
   listItem: {
     float: "left",
@@ -31,12 +32,15 @@ const headerLinksStyle = theme => ({
     width: "auto",
     margin: "0",
     padding: "0",
+    zIndex: 1,
     [theme.breakpoints.down("sm")]: {
       "& ul": {
         maxHeight: "400px",
-        overflow: "scroll"
+        overflow: "hidden"
       },
       width: "100%",
+      color: "#212529",
+      opacity: "0.8",
       "&:not(:last-child)": {
         "&:after": {
           width: "calc(100% - 30px)",
@@ -157,7 +161,6 @@ const headerLinksStyle = theme => ({
     width: "24px",
     height: "24px",
     marginRight: "14px",
-    opacity: "0.5",
     marginTop: "-4px",
     top: "1px",
     verticalAlign: "middle",
@@ -170,11 +173,15 @@ const headerLinksStyle = theme => ({
     maxWidth: "24px"
   },
   dropdownLink: {
-    "&,&:hover,&:focus": {
-      color: "inherit",
-      textDecoration: "none",
-      display: "flex",
-      padding: "0.75rem 1.25rem 0.75rem 0.75rem"
+    color: "inherit",
+    textDecoration: "none",
+    display: "flex",
+    padding: "0.75rem 1.25rem 0.75rem 0.75rem",
+    "&:hover,&:focus": {
+      color: "#fff"
+    },
+    [theme.breakpoints.down("sm")]: {
+      color: "#212529"
     }
   },
   ...tooltip,
@@ -194,7 +201,10 @@ const headerLinksStyle = theme => ({
     MsFlexAlign: "center",
     alignItems: "center"
   },
-  mlAuto
+  mlAuto,
+  socialsContainer: {
+    paddingBottom: "15px"
+  }
 });
 
 export default headerLinksStyle;

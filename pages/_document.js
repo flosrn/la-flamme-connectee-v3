@@ -29,6 +29,7 @@ class MyDocument extends Document {
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
           {/* Animations */}
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" />
           {/* Payment */}
           <script src="https://js.stripe.com/v3/" />
         </Head>

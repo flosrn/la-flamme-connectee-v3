@@ -12,6 +12,7 @@ import GridItem from "components/Grid/GridItem";
 import Card from "components/Card/Card";
 // styles
 import { container } from "public/jss/la-flamme-connectee";
+import Fade from "react-reveal/Fade";
 
 const useStyles = makeStyles(theme => ({
   section: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function CarouselSection() {
+export default function CarouselSection({ isDesktop }) {
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -57,16 +58,18 @@ export default function CarouselSection() {
   return (
     <div className={classes.section} id="carousel">
       <div className={classes.container}>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={9} lg={7} className={classes.marginAuto}>
-            <Card>
-              <Carousel {...settings}>
-                <img src={require("/public/img/flamco/flamco-info.jpg")} alt="First slide" className="slick-image" />
-                <img src={require("/public/img/flamco/flamco-hand.jpg")} alt="Second slide" className="slick-image" />
-              </Carousel>
-            </Card>
-          </GridItem>
-        </GridContainer>
+        <Fade spy={isDesktop} bottom cascade ssrFadeout>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={9} lg={7} className={classes.marginAuto}>
+              <Card>
+                <Carousel {...settings}>
+                  <img src={require("/public/img/flamco/flamco-info.jpg")} alt="First slide" className="slick-image" />
+                  <img src={require("/public/img/flamco/flamco-hand.jpg")} alt="Second slide" className="slick-image" />
+                </Carousel>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </Fade>
       </div>
     </div>
   );

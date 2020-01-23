@@ -9,7 +9,7 @@ import {
   warningColor,
   infoColor,
   hexToRgb
-} from "public/jss/la-flamme-connectee.js";
+} from "public/jss/la-flamme-connectee";
 
 const cardStyle = {
   card: {
@@ -172,12 +172,6 @@ const cardStyle = {
       color: `rgba(${hexToRgb(whiteColor)}, 0.8)`
     },
     color: whiteColor
-  },
-  animateUp: {
-    transition: ".4s",
-    "&:hover": {
-      transform: "translateY(-10px)"
-    }
   }
 };
 

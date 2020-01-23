@@ -191,6 +191,26 @@ function FooterDark() {
                   <a>Téléchargement</a>
                 </Link>
               </li>
+              <li>
+                <Link href="/faq">
+                  <a>FAQ</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/legal-notice">
+                  <a>Mentions légales</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms-of-sales">
+                  <a>Condition générales d'utilisation</a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/terms-of-sales">
+                  <a>Condition générales de ventes</a>
+                </Link>
+              </li>
               <li className={classes.payments}>
                 <img src={payments} alt="payments" />
               </li>
@@ -220,7 +240,7 @@ function FooterDark() {
         <div className={classes.footerBottom}>
           <div className={classes.footer}>
             <p>
-              © 2019 <a href="https://www.laflammeconnectee.fr/">LA FLAMME CONNECTÉE</a>.
+              © 2020 <a href="https://www.laflammeconnectee.fr/">LA FLAMME CONNECTÉE</a>.
             </p>
             <p>Tous droits réservés</p>
           </div>

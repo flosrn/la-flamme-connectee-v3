@@ -3,16 +3,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import { Typography } from "@material-ui/core";
-import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import svg1 from "/public/img/svg/icons/packing.svg";
 import svg2 from "/public/img/svg/icons/secure.svg";
 import svg3 from "/public/img/svg/icons/like.svg";
+import Fade from "react-reveal/Fade";
+import Link from "next/link";
+import ButtonCustom from "components/CustomButtons/ButtonCustom";
+import LayoutSection from "../../../components/Page/LayoutSection";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    padding: "70px 0"
-  },
   infoContainer: {
     padding: "60px 0",
     background: "#f9f9f9",
@@ -55,7 +55,6 @@ const useStyles = makeStyles(theme => ({
   },
   bannerContainer: {
     background: "radial-gradient(ellipse at center,#585858 0,#232323 100%)",
-    // backgroundSize: "550% 450%",
     backgroundColor: "#343434",
     height: 130,
     margin: 0,
@@ -65,53 +64,59 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function BannerSection() {
+export default function BannerSection({ isDesktop }) {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <GridContainer justify="center" className={classes.infoContainer}>
-        <GridItem md={4} className={classes.item}>
-          <div className={classes.test}>
-            <img src={svg1} alt="svg1" className={classes.svg} />
-            <div className={classes.desc}>
-              <Typography variant="h4">Expédition</Typography>
-              <Typography variant="body1">
-                sous <strong>48H</strong>
-              </Typography>
+    <LayoutSection id="banner">
+      {/* <Fade spy={isDesktop} bottom cascade ssrFadeout> */}
+      <GridItem>
+        <GridContainer justify="center" className={classes.infoContainer}>
+          <GridItem md={4} className={classes.item}>
+            <div className={classes.test}>
+              <img src={svg1} alt="svg1" className={classes.svg} />
+              <div className={classes.desc}>
+                <Typography variant="h4">Expédition</Typography>
+                <Typography variant="body1">
+                  sous <strong>48H</strong>
+                </Typography>
+              </div>
             </div>
-          </div>
-        </GridItem>
-        <GridItem md={4} className={classes.item}>
-          <div className={classes.test}>
-            <img src={svg2} alt="svg2" className={classes.svg} />
-            <div className={classes.desc}>
-              <Typography variant="h4">Paiement</Typography>
-              <Typography variant="body1">
-                100% sécurisé par <strong>SSL</strong>
-              </Typography>
+          </GridItem>
+          <GridItem md={4} className={classes.item}>
+            <div className={classes.test}>
+              <img src={svg2} alt="svg2" className={classes.svg} />
+              <div className={classes.desc}>
+                <Typography variant="h4">Paiement</Typography>
+                <Typography variant="body1">
+                  100% sécurisé par <strong>SSL</strong>
+                </Typography>
+              </div>
             </div>
-          </div>
-        </GridItem>
-        <GridItem md={4} className={classes.item}>
-          <div className={classes.test}>
-            <img src={svg3} alt="svg3" className={classes.svg} />
-            <div className={classes.desc}>
-              <Typography variant="h4">Satisfait</Typography>
-              <Typography variant="body1">
-                ou remboursé pendant <strong>30j</strong>
-              </Typography>
+          </GridItem>
+          <GridItem md={4} className={classes.item}>
+            <div className={classes.test}>
+              <img src={svg3} alt="svg3" className={classes.svg} />
+              <div className={classes.desc}>
+                <Typography variant="h4">Satisfait</Typography>
+                <Typography variant="body1">
+                  ou remboursé pendant <strong>30j</strong>
+                </Typography>
+              </div>
             </div>
-          </div>
-        </GridItem>
-      </GridContainer>
-      <GridContainer justify="center" className={classes.bannerContainer}>
-        <GridItem center>
-          <ButtonCustom color="secondary" animateButton>
-            <ShoppingCartIcon />
-            Commander maintenant
-          </ButtonCustom>
-        </GridItem>
-      </GridContainer>
-    </div>
+          </GridItem>
+        </GridContainer>
+        <GridContainer justify="center" className={classes.bannerContainer}>
+          <GridItem center>
+            <Link href="/products">
+              <ButtonCustom color="secondary" animateButton>
+                <ShoppingCartIcon />
+                Commander maintenant
+              </ButtonCustom>
+            </Link>
+          </GridItem>
+        </GridContainer>
+      </GridItem>
+      {/* </Fade> */}
+    </LayoutSection>
   );
 }

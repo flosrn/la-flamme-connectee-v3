@@ -20,7 +20,10 @@ import FooterDark from "components/Footer/FooterDark";
 // authentication
 import { withAuthSync } from "api/withAuth";
 // styles for this page
+import { useTheme } from "@material-ui/core";
+import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 import { main, mainRaised } from "../public/jss/la-flamme-connectee";
+import TalkAboutUsSection from "../src/sections/HomePage/TalkAboutUsSection";
 
 const useStyles = makeStyles(theme => ({
   main,
@@ -32,20 +35,23 @@ const useStyles = makeStyles(theme => ({
 
 function HomePage({ currentUser }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
       <HeaderSection currentUser={currentUser} />
       <HeroSection />
       <div className={clsx(classes.main, classes.mainRaised)} id="main-panel">
-        <PresentationSection />
-        <ProductSection />
-        <BenefitsSection />
-        <BannerSection />
-        <LearnMoreSection />
-        <TeamSection />
-        <ProjectSection />
-        <CarouselSection />
-        <InstagramSection />
+        <PresentationSection isDesktop={isDesktop} />
+        <ProductSection isDesktop={isDesktop} />
+        <BenefitsSection isDesktop={isDesktop} />
+        <BannerSection isDesktop={isDesktop} />
+        <LearnMoreSection isDesktop={isDesktop} />
+        <TeamSection isDesktop={isDesktop} />
+        <ProjectSection isDesktop={isDesktop} />
+        {/* <CarouselSection isDesktop={isDesktop} /> */}
+        <TalkAboutUsSection isDesktop={isDesktop} />
+        {/* <InstagramSection /> */}
       </div>
       <FooterDark />
     </>

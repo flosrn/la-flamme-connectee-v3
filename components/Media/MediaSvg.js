@@ -10,18 +10,21 @@ const useStyles = makeStyles(theme => ({
     alignItems: "center",
     marginTop: props => props.mt && `${props.mt}px`,
     marginBottom: props => props.mb && `${props.mb}px`,
-    transition: ".4s",
-    "&:hover": {
-      transform: props => props.animateUp && "translateY(-10px)"
+    [theme.breakpoints.up("md")]: {
+      transition: ".4s",
+      "&:hover": {
+        transform: props => props.animateUp && "translateY(-10px)"
+      }
     }
   },
   svg: {
-    width: props => (props.size === "medium" ? "60%" : props.size === "small" ? "45%" : "100%"),
-    height: "100%",
+    width: props =>
+      props.size === "medium" ? "60%" : props.size === "small" ? "45%" : props.size === "extrasmall" ? "25%" : "100%",
+    // height: "100%",
     margin: theme.spacing(2, 0, 0, 0),
     [theme.breakpoints.down("sm")]: {
       margin: theme.spacing(0),
-      width: "70% !important"
+      width: props => (props.size === "extrasmall" ? "50% !important" : "70% !important")
     }
   }
 }));

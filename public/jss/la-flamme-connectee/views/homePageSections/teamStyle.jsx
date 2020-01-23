@@ -1,39 +1,10 @@
-import { cardTitle, title, smallTitle } from "public/jss/la-flamme-connectee";
+import { cardTitle, smallTitle } from "public/jss/la-flamme-connectee";
 import imagesStyle from "public/jss/la-flamme-connectee/imagesStyles";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 export const useStyles = makeStyles(theme => ({
-  section: {
-    textAlign: "center",
-    backgroundImage: `url(${require("/public/img/contura/background-contura-400.jpg")})`,
-    backgroundSize: "cover",
-    backgroundPosition: "left bottom",
-    // backgroundAttachment: "fixed",
-    position: "relative",
-    padding: "50px 0",
-    "&:after": {
-      content: "''",
-      display: "block",
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      zIndex: 1,
-      backgroundColor: "rgba(0,0,0,.6)"
-    },
-    [theme.breakpoints.down("xs")]: {
-      backgroundPosition: "10% bottom",
-      margin: "0 -15px"
-    }
-  },
-  title: {
-    ...title,
-    marginBottom: "1rem",
-    marginTop: "30px",
-    minHeight: "32px",
-    textDecoration: "none",
-    color: "#fff !important"
+  mainContainer: {
+    zIndex: 2
   },
   ...imagesStyle,
   itemGrid: {
@@ -70,26 +41,5 @@ export const useStyles = makeStyles(theme => ({
   },
   imgSize: {
     width: 140
-  },
-  gradientDark: {
-    // backgroundImage: `url(${require("/public/img/contura/background-contura-max.jpg")})`,
-    // backgroundSize: "cover",
-    // backgroundPosition: "left bottom",
-    // position: "relative",
-    // "&:after": {
-    //   content: "''",
-    //   display: "block",
-    //   position: "absolute",
-    //   top: 0,
-    //   left: 0,
-    //   width: "100%",
-    //   height: "100%",
-    //   zIndex: 1,
-    //   backgroundColor: "rgba(0,0,0,.5)"
-    // }
-  },
-  relativeContainer: {
-    position: "relative",
-    zIndex: 2
   }
 }));

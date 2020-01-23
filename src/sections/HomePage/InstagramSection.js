@@ -54,6 +54,10 @@ export default function InstagramSection() {
   //   setIndex(index + 1);
   // };
 
+  const handleFail = () => {
+    return null;
+  };
+
   return (
     <div className={classes.section} id="instagram">
       <GridContainer justify="center">
@@ -71,8 +75,8 @@ export default function InstagramSection() {
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={9} lg={7} center className={classes.gridItem}>
           <InstagramEmbed
-            url={urls[index]}
-            // maxWidth={500}
+            url="https://www.instagram.com/p/B65bnY0IPzH/"
+            maxWidth={500}
             hideCaption
             containerTagName="div"
             protocol=""
@@ -80,7 +84,7 @@ export default function InstagramSection() {
             onLoading={() => {}}
             onSuccess={() => {}}
             onAfterRender={() => {}}
-            onFailure={() => {}}
+            onFailure={handleFail}
           />
           {/* <div className={classes.actionContainer}> */}
           {/*  <Button onClick={handlePrevious}>Photo précédente</Button> */}

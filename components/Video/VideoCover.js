@@ -6,7 +6,7 @@ const useStyles = makeStyles(theme => ({
   videoContainer: {
     position: "relative",
     width: "100%",
-    height: "95vh",
+    height: "95%",
     display: "flex",
     alignItem: "center",
     justifyContent: "center",
@@ -20,7 +20,8 @@ const useStyles = makeStyles(theme => ({
       left: 0,
       content: "''",
       display: "block",
-      backgroundColor: "rgba(0,0,0,.2)"
+      backgroundColor: "rgba(0,0,0,.2)",
+      overflow: "hidden"
     }
   },
   video: {
@@ -31,7 +32,8 @@ const useStyles = makeStyles(theme => ({
     left: 0,
     display: "block",
     objectFit: "cover",
-    objectPosition: "bottom"
+    objectPosition: "bottom",
+    overflow: "hidden"
   }
 }));
 
@@ -45,8 +47,8 @@ export default function VideoSection({ children }) {
           <source type="video/webm" src={require("/public/video/fire-video.webm")} />
         </video>
         <>{children}</>
+        <ScrollToSectionComponent />
       </div>
-      <ScrollToSectionComponent />
     </>
   );
 }

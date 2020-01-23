@@ -16,7 +16,7 @@ import {
   whiteColor,
   grayColor,
   hexToRgb
-} from "public/jss/la-flamme-connectee.js";
+} from "public/jss/la-flamme-connectee";
 
 const customDropdownStyle = theme => ({
   popperClose: {
@@ -70,7 +70,7 @@ const customDropdownStyle = theme => ({
   dropdown: {
     borderRadius: "3px",
     border: "0",
-    boxShadow: "0 2px 5px 0 rgba(" + hexToRgb(blackColor) + ", 0.26)",
+    boxShadow: `0 2px 5px 0 rgba(${hexToRgb(blackColor)}, 0.26)`,
     top: "100%",
     zIndex: "1000",
     minWidth: "160px",
@@ -117,17 +117,21 @@ const customDropdownStyle = theme => ({
   },
   darkHover: {
     "&:hover": {
-      boxShadow:
-        "0 4px 20px 0px rgba(" +
-        hexToRgb(blackColor) +
-        ", 0.14), 0 7px 10px -5px rgba(" +
-        hexToRgb(grayColor[9]) +
-        ", 0.4)",
+      boxShadow: `0 4px 20px 0px rgba(${hexToRgb(blackColor)}, 0.14), 0 7px 10px -5px rgba(${hexToRgb(
+        grayColor[9]
+      )}, 0.4)`,
       backgroundColor: grayColor[9],
       color: whiteColor
     }
   },
   primaryHover: {
+    "&:hover": {
+      backgroundColor: primaryColor[0],
+      color: whiteColor,
+      ...primaryBoxShadow
+    }
+  },
+  secondaryHover: {
     "&:hover": {
       backgroundColor: primaryColor[0],
       color: whiteColor,
@@ -174,7 +178,7 @@ const customDropdownStyle = theme => ({
   },
   dropdownDividerItem: {
     margin: "5px 0",
-    backgroundColor: "rgba(" + hexToRgb(blackColor) + ", 0.12)",
+    backgroundColor: `rgba(${hexToRgb(blackColor)}, 0.12)`,
     height: "1px",
     overflow: "hidden"
   },

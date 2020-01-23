@@ -12,6 +12,10 @@ import { CardContent, CardHeader, Divider } from "@material-ui/core";
 import svg1 from "public/img/svg/undraw_delivery_address_03n0.svg";
 import svg2 from "public/img/svg/undraw_mail1_uab6.svg";
 import svg3 from "public/img/svg/undraw_deliveries_131a.svg";
+import { createCheckoutSession } from "api/apiRequests";
+import FormGroup from "@material-ui/core/FormGroup";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "next/link";
 import HeaderLinks from "../components/Header/HeaderLinks";
 import Header from "../components/Header/Header";
 import FooterDark from "../components/Footer/FooterDark";
@@ -25,7 +29,6 @@ import AddressForm from "../src/sections/Checkout/AddressForm";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 import { withAuthSync } from "../api/withAuth";
 import SummaryItems from "../src/sections/Checkout/SummaryItems";
-import { createCheckoutSession } from "api/apiRequests";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -106,7 +109,7 @@ function Address({ values, value, changeHandler, submitHandler, hasError, errors
 }
 
 // SUMMARY COMPONENT
-function Summary() {
+function Summary({ checked, changeHandler }) {
   const classes = useStyles();
   const user = useSelector(state => state.user);
   const { items, total } = useContext(ShoppingCartContext);
@@ -136,6 +139,25 @@ function Summary() {
               {user.address.zip} {user.address.city}
             </p>
           </CardContent>
+          <CardHeader title="Conditions générales d'utilisation :" />
+          <Divider />
+          <CardContent className={classes.cardContent}>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={checked} onChange={changeHandler} value="checked" style={{ color: "#FF8A73" }} />
+                }
+                label={
+                  <span>
+                    Je reconnais avoir pris connaissance des
+                    <Link href="/terms-of-sales">
+                      <a target="_blank"> CGU / CGV</a>
+                    </Link>
+                  </span>
+                }
+              />
+            </FormGroup>
+          </CardContent>
         </div>
       </GridItem>
     </GridContainer>
@@ -151,6 +173,7 @@ function CheckoutPage({ currentUser }) {
   const [isError, setError] = useState(false);
   const [isEmpty, setEmpty] = useState(false);
   const [isLoading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
   const [value, setValue] = useState("home");
   const { items, total } = useContext(ShoppingCartContext);
   const user = useSelector(state => state.user);
@@ -227,6 +250,7 @@ function CheckoutPage({ currentUser }) {
               storeHandler={handleStore}
               isError={isError}
               address={values.address}
+              checked={checked}
               components={[
                 <DeliveryMethod value={value} changeHandler={handleRadioChange} />,
                 <Address
@@ -237,7 +261,7 @@ function CheckoutPage({ currentUser }) {
                   hasError={hasError}
                   errors={errors}
                 />,
-                <Summary values={values} />
+                <Summary checked={checked} changeHandler={() => setChecked(!checked)} />
               ]}
             />
           </Card>

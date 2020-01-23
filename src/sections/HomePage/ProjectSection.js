@@ -17,8 +17,10 @@ import Button from "components/CustomButtons/Button";
 import { Typography } from "@material-ui/core";
 
 import svg from "public/img/svg/undraw_Data_points_ubvs.svg";
+import Fade from "react-reveal/Fade";
 import MediaSvg from "../../../components/Media/MediaSvg";
 import Title from "../../../components/Typography/Title";
+import LayoutSection from "../../../components/Page/LayoutSection";
 
 // styles for this page
 const useStyles = makeStyles(theme => ({
@@ -70,17 +72,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ProjectSection({ ...props }) {
+function ProjectSection({ isDesktop }) {
   const classes = useStyles();
   return (
-    <div className={classes.section} id="project">
-      <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={8} center>
-          <Title variant="h2" className={classes.title}>
-            Notre histoire
-          </Title>
-        </GridItem>
-        <GridItem xs={10} sm={10} md={8}>
+    <LayoutSection title="Notre histoire" id="projects">
+      <GridItem xs={10} sm={10} md={8}>
+        <Fade spy={isDesktop} bottom cascade ssrFadeout>
           <div className={classes.projectText}>
             <h5 className={classes.description}>
               Nous sommes propriétaire depuis 2000 d'une maison de 160 m² en banlieu toulousaine et nous consommions
@@ -176,9 +173,9 @@ function ProjectSection({ ...props }) {
               et remporte une deuxième Médaille d'Argent.
             </h5>
           </div>
-        </GridItem>
-      </GridContainer>
-    </div>
+        </Fade>
+      </GridItem>
+    </LayoutSection>
   );
 }
 

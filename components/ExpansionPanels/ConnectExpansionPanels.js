@@ -15,7 +15,7 @@ import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 // contexts
 
-function CustomizedExpansionPanels({ ...props }) {
+function ConnectExpansionPanels({ ...props }) {
   const { title, description } = props;
   const [expanded, setExpanded] = React.useState("panel1");
 
@@ -174,23 +174,4 @@ const ExpansionPanelDetails = withStyles(theme => ({
   }
 }))(MuiExpansionPanelDetails);
 
-export default CustomizedExpansionPanels;
-
-// Steppers.propTypes = {
-//   classes: PropTypes.object.isRequired,
-//   icon: PropTypes.object.isRequired,
-//   title: PropTypes.string.isRequired,
-//   description: PropTypes.string.isRequired,
-//   iconColor: PropTypes.oneOf([
-//     "primary",
-//     "warning",
-//     "danger",
-//     "success",
-//     "info",
-//     "rose",
-//     "gray"
-//   ]),
-//   vertical: PropTypes.bool
-// };
-
-// export default withStyles(steppersStyle)(Steppers);
+export default ConnectExpansionPanels;

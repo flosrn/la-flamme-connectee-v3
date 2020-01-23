@@ -45,10 +45,10 @@ const hexToRgb = input => {
 
 const drawerWidth = 260;
 
-const myPrimaryColor = ["#F2785C", "#F24C3D", "#F2D9BB", "#0E4473", "#9CD7F0", "#021859"];
+const myPrimaryColor = ["#FF8A73", "#F24C3D", "#F2D9BB", "#0E4473", "#9CD7F0", "#021859"];
 
 const primaryColor = [
-  "#F2785C",
+  "#FF8A73",
   "#F7A284",
   "#FBBD9D",
   "#FDD8BE",

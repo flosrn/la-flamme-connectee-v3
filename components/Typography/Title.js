@@ -6,6 +6,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    zIndex: 2
+  },
+  title: {
+    textAlign: "center"
+  },
   bar: {
     height: "4px",
     width: "85px",
@@ -40,12 +46,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Title(props) {
-  const { variant, color, children } = props;
+export default function Title({ variant, color, children }) {
   const classes = useStyles();
   return (
-    <div className={classes.sectionTitle}>
-      <Typography variant={variant} color={color} className={classes.title}>
+    <div className={classes.root}>
+      <Typography align="center" variant={variant} color={color}>
         {children}
       </Typography>
       <div className={classes.bar} />

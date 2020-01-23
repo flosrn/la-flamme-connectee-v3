@@ -8,7 +8,7 @@ import LayoutPage from "components/Page/LayoutPage";
 import HowWorks from "src/sections/HomePage/HowWorks";
 import TopDownSection from "src/sections/HomePage/TopDownSection";
 // images
-import svg1 from "public/img/svg/undraw_questions_75e0.svg";
+import svg1 from "public/img/svg/undraw_completed_steps_yurw (1).svg";
 import svg2 from "public/img/svg/undraw_light_the_fire_gt58.svg";
 import { withAuthSync } from "../api/withAuth";
 import GridContainer from "../components/Grid/GridContainer";
@@ -39,7 +39,7 @@ function DocumentationPage({ currentUser }) {
       backgroundPosition="0 100%"
       currentUser={currentUser}
     >
-      <MediaSvg src={svg1} alt="questions" size="medium" mt={50} />
+      <MediaSvg src={svg1} alt="questions" size="medium" mt={50} mb={30} />
       <HowWorks />
       {/* <GridContainer justify="center"> */}
       {/*  <GridItem xs={11} md={6} center className={classes.youtubeContainer}> */}
