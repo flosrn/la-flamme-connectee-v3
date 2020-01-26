@@ -11,12 +11,15 @@ import fabricationFrLogo from "../../../public/img/logo/fabrication-francaise.pn
 import LayoutSection from "../../../components/Page/LayoutSection";
 
 const useStyles = makeStyles(theme => ({
-  bottom: {
-    marginTop: 45
+  text: {
+    padding: "15px 30px"
   },
   fabricationFr: {
     width: "95%",
     paddingBottom: 30
+  },
+  svg: {
+    marginBottom: 25
   }
 }));
 
@@ -24,19 +27,18 @@ export default function LearnMoreSection({ isDesktop }) {
   const classes = useStyles();
   return (
     <LayoutSection id="learnMore">
-      {/* <Fade spy={isDesktop} bottom cascade ssrFadeout> */}
       <GridContainer justify="center">
         <GridItem xs={10} sm={8} md={6} lg={4} xl={3} center>
           <img src={fabricationFrLogo} alt="fabrication-fr" className={classes.fabricationFr} />
         </GridItem>
       </GridContainer>
-      <GridContainer justify="center">
+      <GridContainer justify="center" className={classes.svg}>
         <GridItem center>
           <MediaSvg src={svg} alt="smart-home" size="medium" />
         </GridItem>
       </GridContainer>
-      <GridContainer justify="center" className={classes.bottom}>
-        <GridItem xs={10} sm={8} center>
+      <GridContainer justify="center">
+        <GridItem sm={8} md={6} lg={4} xl={2} center className={classes.text}>
           <Typography variant="subtitle1" align="center">
             Pour en savoir plus, consultez nos pages{" "}
             <Link href="/documentation">
@@ -48,9 +50,7 @@ export default function LearnMoreSection({ isDesktop }) {
             </Link>
           </Typography>
         </GridItem>
-      </GridContainer>
-      <GridContainer justify="center" className={classes.bottom}>
-        <GridItem xs={10} sm={8} center>
+        <GridItem sm={8} md={6} lg={4} xl={2} center className={classes.text}>
           <Typography variant="subtitle1" align="center">
             Pour toutes questions supplémentaires, vous pouvez vous référer à notre{" "}
             <Link href="/faq">
@@ -59,7 +59,6 @@ export default function LearnMoreSection({ isDesktop }) {
           </Typography>
         </GridItem>
       </GridContainer>
-      {/* </Fade> */}
     </LayoutSection>
   );
 }

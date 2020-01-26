@@ -26,7 +26,7 @@ function ConnectExpansionPanels({ ...props }) {
     <div>
       <ExpansionPanel square expanded={expanded === "panel1"} onChange={handleChange("panel1")}>
         <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>0 - Prérequis :</Typography>
+          <Typography variant="h5">0 - Prérequis :</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>Avant d’utiliser votre Flam'connect, assurez-vous que :</Typography>
@@ -48,7 +48,7 @@ function ConnectExpansionPanels({ ...props }) {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === "panel2"} onChange={handleChange("panel2")}>
         <ExpansionPanelSummary aria-controls="panel2d-content" id="panel1d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>1 - Appairer votre Flam'connect :</Typography>
+          <Typography variant="h5">1 - Appairer votre Flam'connect :</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <ul>
@@ -72,7 +72,7 @@ function ConnectExpansionPanels({ ...props }) {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === "panel3"} onChange={handleChange("panel3")}>
         <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>2 - Comment utiliser votre Flam'connect :</Typography>
+          <Typography variant="h5">2 - Comment utiliser votre Flam'connect :</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <ul>
@@ -86,17 +86,17 @@ function ConnectExpansionPanels({ ...props }) {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === "panel4"} onChange={handleChange("panel4")}>
         <ExpansionPanelSummary aria-controls="panel4d-content" id="panel4d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>3 - A savoir :</Typography>
+          <Typography variant="h5">3 - A savoir :</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <ul>
-            <li>
-              La sonde TH Sensor fournie avec votre Flam'connect vous pernet de connaitre la température de votre
-              habitation en temps réel
-            </li>
-            <li>La température apparait au dessus du bouton ON/OFF sur votre application Ewelink</li>
-            <li>Restez en mode « manuel »</li>
-          </ul>
+          {/* <ul> */}
+          {/*  <li> */}
+          {/*    La sonde TH Sensor fournie avec votre Flam'connect vous pernet de connaitre la température de votre */}
+          {/*    habitation en temps réel */}
+          {/*  </li> */}
+          {/*  <li>La température apparait au dessus du bouton ON/OFF sur votre application Ewelink</li> */}
+          {/*  <li>Restez en mode « manuel »</li> */}
+          {/* </ul> */}
           <Typography>Si ce message s’affiche :</Typography>
           <i>« Erreur de couplage : Incapable de trouver l’appareil, vérifier la configuration ci-dessous »</i>
           <ul>
@@ -105,6 +105,45 @@ function ConnectExpansionPanels({ ...props }) {
             <li>
               Appuyez sur le bouton blanc 7 secondes, relâchez et recommencez l’opération 7 secondes jusqu’à ce que la
               led bleue clignote rapidement 1 fois par seconde{" "}
+            </li>
+          </ul>
+          <Typography>Si ce message s’affiche :</Typography>
+          <i>« Only supports 2.4G Wifi »</i>
+          <ul>
+            <li>Les nouvelles box internet disposent de 2 de bandes de fréquences wifi (2.4 gHz et 5 gHz).</li>
+            <li>Ce message indique que vous devez connecter votre Flam'connect à un wifi 2.4 gHz.</li>
+            <li>
+              Il vous suffit donc de connecter votre téléphone à votre réseaux 2.4 gHz juste le temps de l'appairage du
+              Flam'connect.
+            </li>
+            <li>
+              Si vous ne voyez pas de wifi 2.4 gHz dans les réseaux disponibles, pas de panique vous pouvez l'activer
+              simplement dans les paramètres de votre box internet. (Vous pouvez activer le wifi 2.4 gHz tout en
+              laissant activer le wifi 5 gHz).
+            </li>
+            <li>
+              Voici la méthode à suivre pour les différents opérateurs :{" "}
+              <a
+                href="https://assistance.orange.fr/livebox-modem/toutes-les-livebox-et-modems/installer-et-utiliser/piloter-et-parametrer-votre-materiel/le-parametrage-du-wifi/livebox-4-configurer-deux-reseaux-wifi-separement_188772-720614"
+                target="_blank"
+              >
+                Orange
+              </a>
+              ,{" "}
+              <a
+                href="https://assistance.sfr.fr/internet-tel-fixe/wifi-debit/changer-canal-wifi-utiliser-box-thd-sfr.html"
+                target="_blank"
+              >
+                SFR
+              </a>
+              ,{" "}
+              <a
+                href="https://uzer.zendesk.com/hc/fr/articles/115002473511-Comment-param%C3%A9trer-ma-box-"
+                target="_blank"
+              >
+                Free
+              </a>
+              .
             </li>
           </ul>
         </ExpansionPanelDetails>
@@ -160,7 +199,7 @@ const ExpansionPanelDetails = withStyles(theme => ({
       "& li": {
         fontSize: "14px"
       },
-      "& li:before": {
+      "& > li:before": {
         content: "''",
         position: "absolute",
         left: 0,

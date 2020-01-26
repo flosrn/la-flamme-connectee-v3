@@ -6,6 +6,8 @@ import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
+import { PayPalButton } from "react-paypal-button-v2";
+import stripe from "public/img/logo/payments/stripe.png";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -24,6 +26,25 @@ const useStyles = makeStyles(theme => ({
   },
   bottom: {
     padding: "20px 0 20px 20px"
+  },
+  paymentContainer: {
+    [theme.breakpoints.up("sm")]: {
+      width: 300
+    },
+    [theme.breakpoints.up("md")]: {
+      width: 400
+    }
+  },
+  stripe: {
+    width: "100%",
+    [theme.breakpoints.up("xs")]: {
+      width: 300,
+      display: "flex"
+    }
+  },
+  buttonOrder: {
+    width: "100%",
+    height: 45
   }
 }));
 
@@ -44,7 +65,15 @@ function getStepContent(stepIndex, components) {
   }
 }
 
-export default function CheckoutStepper({ components, submitHandler, storeHandler, isError, address, checked }) {
+export default function CheckoutStepper({
+  components,
+  submitHandler,
+  storeHandler,
+  paymentMethod,
+  isError,
+  address,
+  checked
+}) {
   const [activeStep, setActiveStep] = React.useState(0);
   const classes = useStyles();
   const steps = getSteps();
@@ -90,24 +119,50 @@ export default function CheckoutStepper({ components, submitHandler, storeHandle
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.backButton}>
                 Retour
               </Button>
-              {activeStep === steps.length - 1 ? (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleNext}
-                  disabled={
-                    isError ||
-                    !checked ||
-                    (activeStep !== 0 &&
-                      address &&
-                      (address.firstName === "" ||
-                        address.lastName === "" ||
-                        address.zip === "" ||
-                        address.city === ""))
-                  }
-                >
-                  Confirmer et payer
-                </Button>
+              {activeStep === steps.length - 1 && paymentMethod === "stripe" ? (
+                <div className={classes.paymentContainer}>
+                  <div style={{ cursor: !checked && "not-allowed" }}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={handleNext}
+                      className={classes.buttonOrder}
+                      disabled={
+                        isError ||
+                        !checked ||
+                        (activeStep !== 0 &&
+                          address &&
+                          (address.firstName === "" ||
+                            address.lastName === "" ||
+                            address.zip === "" ||
+                            address.city === ""))
+                      }
+                    >
+                      Confirmer et payer
+                    </Button>
+                  </div>
+                  <img src={stripe} alt="stripe" className={classes.stripe} />
+                </div>
+              ) : activeStep === steps.length - 1 && paymentMethod === "paypal" ? (
+                <div className={classes.paymentContainer} style={{ cursor: !checked && "not-allowed" }}>
+                  <div style={{ pointerEvents: !checked && "none" }}>
+                    <PayPalButton
+                      amount="0.01"
+                      // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                      onSuccess={(details, data) => {
+                        alert(`Transaction completed by ${details.payer.name.given_name}`);
+
+                        // OPTIONAL: Call your server to save the transaction
+                        return fetch("/paypal-transaction-complete", {
+                          method: "post",
+                          body: JSON.stringify({
+                            orderID: data.orderID
+                          })
+                        });
+                      }}
+                    />
+                  </div>
+                </div>
               ) : (
                 <Button
                   variant="contained"

@@ -9,8 +9,6 @@ import Favorite from "@material-ui/icons/Favorite";
 import logo from "public/img/logo/laflammeco.png";
 import lepine from "public/img/logo/lepine.png";
 import payments from "public/img/logo/payment-footer.png";
-import Button from "../CustomButtons/Button";
-import Footer from "./Footer";
 import GridContainer from "../Grid/GridContainer";
 import GridItem from "../Grid/GridItem";
 import SocialIcons from "../Icons/SocialIcons";

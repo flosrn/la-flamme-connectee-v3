@@ -16,6 +16,7 @@ import { createCheckoutSession } from "api/apiRequests";
 import FormGroup from "@material-ui/core/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "next/link";
+import withStyles from "@material-ui/core/styles/withStyles";
 import HeaderLinks from "../components/Header/HeaderLinks";
 import Header from "../components/Header/Header";
 import FooterDark from "../components/Footer/FooterDark";
@@ -60,26 +61,41 @@ const useStyles = makeStyles(theme => ({
 }));
 
 // DELIVERY COMPONENT
-function DeliveryMethod({ value, changeHandler }) {
+function DeliveryMethod({ deliveryMethod, changeDeliveryHandler }) {
   const classes = useStyles();
+
+  const GreyRadio = withStyles({
+    root: {
+      color: "#818992"
+    },
+    checked: {}
+  })(props => <Radio color="secondary" {...props} />);
+
   return (
-    <GridContainer justifycontent="center">
+    <GridContainer justify="center">
       <GridItem xl={6} className={classes.gridItem}>
         <MediaSvg src={svg1} size="medium" />
       </GridItem>
-      <GridItem xl={6} className={classes.gridItem}>
-        <div className={classes.gridContent}>
-          <div>
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend">Sélectionnez une méthode de livraison</FormLabel>
-              <RadioGroup aria-label="deliveryMethod" name="deliveryMethod" value={value} onChange={changeHandler}>
-                <FormControlLabel value="home" control={<Radio />} label="Livraison à mon domicile" />
-                <FormControlLabel value="relay" control={<Radio />} label="Livraison en point relais" />
-              </RadioGroup>
-            </FormControl>
+      <GridContainer justify="center">
+        <GridItem xl={6} className={classes.gridItem}>
+          <div className={classes.gridContent}>
+            <div>
+              <FormControl component="fieldset" className={classes.formControl}>
+                <FormLabel component="legend">Sélectionnez une méthode de livraison</FormLabel>
+                <RadioGroup
+                  aria-label="deliveryMethod"
+                  name="deliveryMethod"
+                  value={deliveryMethod}
+                  onChange={changeDeliveryHandler}
+                >
+                  <FormControlLabel value="home" control={<GreyRadio />} label="Livraison à mon domicile" />
+                  <FormControlLabel value="relay" control={<GreyRadio />} label="Livraison en point relais" />
+                </RadioGroup>
+              </FormControl>
+            </div>
           </div>
-        </div>
-      </GridItem>
+        </GridItem>
+      </GridContainer>
     </GridContainer>
   );
 }
@@ -109,16 +125,24 @@ function Address({ values, value, changeHandler, submitHandler, hasError, errors
 }
 
 // SUMMARY COMPONENT
-function Summary({ checked, changeHandler }) {
+function Summary({ checked, changeHandler, paymentMethod, changePaymentHandler }) {
   const classes = useStyles();
   const user = useSelector(state => state.user);
   const { items, total } = useContext(ShoppingCartContext);
+
+  const GreyRadio = withStyles({
+    root: {
+      color: "#818992"
+    },
+    checked: {}
+  })(props => <Radio color="secondary" {...props} />);
+
   return (
     <GridContainer justifycontent="center">
       <GridItem xl={6} className={classes.gridItem}>
         <MediaSvg src={svg3} size="medium" />
       </GridItem>
-      <GridItem xs={12} xl={6} className={classes.gridItem}>
+      <GridItem xl={6} className={classes.gridItem}>
         <div className={classes.gridContent}>
           <CardHeader title="Votre panier :" />
           <Divider />
@@ -138,6 +162,22 @@ function Summary({ checked, changeHandler }) {
             <p>
               {user.address.zip} {user.address.city}
             </p>
+          </CardContent>
+          <CardHeader title="Sélectionnez une méthode de paiment :" />
+          <Divider />
+          <CardContent className={classes.cardContent}>
+            <FormControl component="fieldset">
+              {/* <FormLabel component="legend">Sélectionnez une méthode de paiment</FormLabel> */}
+              <RadioGroup
+                aria-label="paymentMethod"
+                name="paymentMethod"
+                value={paymentMethod}
+                onChange={changePaymentHandler}
+              >
+                <FormControlLabel value="stripe" control={<GreyRadio />} label="Carte bancaire" />
+                <FormControlLabel value="paypal" control={<GreyRadio />} label="Paypal" />
+              </RadioGroup>
+            </FormControl>
           </CardContent>
           <CardHeader title="Conditions générales d'utilisation :" />
           <Divider />
@@ -174,7 +214,8 @@ function CheckoutPage({ currentUser }) {
   const [isEmpty, setEmpty] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
-  const [value, setValue] = useState("home");
+  const [deliveryMethod, setDeliveryMethod] = useState("home");
+  const [paymentMethod, setPaymentMethod] = useState("paypal");
   const { items, total } = useContext(ShoppingCartContext);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
@@ -203,10 +244,6 @@ function CheckoutPage({ currentUser }) {
       ...touched,
       [event.target.name]: true
     });
-  };
-
-  const handleRadioChange = event => {
-    setValue(event.target.value);
   };
 
   // ========== SUBMIT HANDLER ========== //
@@ -248,20 +285,29 @@ function CheckoutPage({ currentUser }) {
             <CheckoutStepper
               submitHandler={handleSubmit}
               storeHandler={handleStore}
+              paymentMethod={paymentMethod}
               isError={isError}
               address={values.address}
               checked={checked}
               components={[
-                <DeliveryMethod value={value} changeHandler={handleRadioChange} />,
+                <DeliveryMethod
+                  deliveryMethod={deliveryMethod}
+                  changeDeliveryHandler={e => setDeliveryMethod(e.target.value)}
+                />,
                 <Address
                   values={values}
-                  value={value}
+                  value={deliveryMethod}
                   changeHandler={handleAddressChange}
                   submitHandler={handleSubmit}
                   hasError={hasError}
                   errors={errors}
                 />,
-                <Summary checked={checked} changeHandler={() => setChecked(!checked)} />
+                <Summary
+                  checked={checked}
+                  changeHandler={() => setChecked(!checked)}
+                  paymentMethod={paymentMethod}
+                  changePaymentHandler={e => setPaymentMethod(e.target.value)}
+                />
               ]}
             />
           </Card>

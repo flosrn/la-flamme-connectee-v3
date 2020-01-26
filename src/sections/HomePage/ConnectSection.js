@@ -62,7 +62,7 @@ function ConnectSection() {
         </GridItem>
       </GridContainer>
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={10} lg={8} className={classes.gridItem}>
+        <GridItem xs={12} sm={10} md={8} lg={6} className={classes.gridItem}>
           <ConnectExpansionPanels />
         </GridItem>
       </GridContainer>

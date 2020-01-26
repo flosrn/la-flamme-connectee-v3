@@ -43,6 +43,7 @@ import CardBody from "components/Card/CardBody";
 import { cardTitle } from "public/jss/la-flamme-connectee";
 import Swal from "sweetalert2";
 import { Typography } from "@material-ui/core";
+import payment from "public/img/logo/payments/paiement-securise.png";
 import svg1 from "../public/img/svg/undraw_add_to_cart_vkjp.svg";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 
@@ -110,7 +111,7 @@ const useStyles = makeStyles(theme => ({
   },
   cardOrder: {
     padding: "10px",
-    height: "200px",
+    // height: "200px",
     [theme.breakpoints.down("sm")]: {
       height: "auto"
     }
@@ -164,6 +165,10 @@ const useStyles = makeStyles(theme => ({
   },
   productsMsg: {
     marginTop: 15
+  },
+  payments: {
+    width: "94%",
+    marginTop: 20
   }
 }));
 
@@ -301,8 +306,11 @@ function ShoppingCartPage({ currentUser }) {
                               <div className={classes.icon}>
                                 <VerifiedUserIcon fontSize="large" color="primary" />
                               </div>
-                              <div className={classes.iconLabel}>Payment sécurisé</div>
+                              <div className={classes.iconLabel}>Paiement sécurisé</div>
                             </GridItem>
+                          </GridContainer>
+                          <GridContainer justify="center">
+                            <img src={payment} alt="paiement-securise" className={classes.payments} />
                           </GridContainer>
                         </div>
                       </div>

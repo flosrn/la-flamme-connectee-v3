@@ -33,7 +33,7 @@ function FAQExpansionPanels({ ...props }) {
     <div className={classes.root}>
       <ExpansionPanel square expanded={expanded === "panel1"} onChange={handleChange("panel1")}>
         <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>Puis-je utiliser le Flam'connect avec mon foyer bois ?</Typography>
+          <Typography variant="h5">Puis-je utiliser le Flam'connect avec mon foyer bois ?</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -44,7 +44,7 @@ function FAQExpansionPanels({ ...props }) {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === "panel2"} onChange={handleChange("panel2")}>
         <ExpansionPanelSummary aria-controls="panel2d-content" id="panel2d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>L'allumage de mon poêle ou insert pendant mon absence est-il sécurisé ?</Typography>
+          <Typography variant="h5">L'allumage de mon poêle ou insert pendant mon absence est-il sécurisé ?</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -68,7 +68,7 @@ function FAQExpansionPanels({ ...props }) {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === "panel3"} onChange={handleChange("panel3")}>
         <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>Quel type de bûches puis-je utiliser avec le Flam'connect ?</Typography>
+          <Typography variant="h5">Quel type de bûches puis-je utiliser avec le Flam'connect ?</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -79,7 +79,7 @@ function FAQExpansionPanels({ ...props }) {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === "panel4"} onChange={handleChange("panel4")}>
         <ExpansionPanelSummary aria-controls="panel4d-content" id="panel4d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>
+          <Typography variant="h5">
             Puis-je démarrer mon foyer bois à distance sans utiliser la technique de l'allumage inversé ?
           </Typography>
         </ExpansionPanelSummary>
@@ -94,7 +94,7 @@ function FAQExpansionPanels({ ...props }) {
       </ExpansionPanel>
       <ExpansionPanel square expanded={expanded === "panel5"} onChange={handleChange("panel5")}>
         <ExpansionPanelSummary aria-controls="panel5d-content" id="panel5d-header" expandIcon={<ExpandMoreIcon />}>
-          <Typography>
+          <Typography variant="h5">
             Combien de temps à l'avance dois-je allumer mon feu pour que mon habitation soit à bonne température ?
           </Typography>
         </ExpansionPanelSummary>
