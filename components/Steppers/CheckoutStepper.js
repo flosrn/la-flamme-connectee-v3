@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { PayPalButton } from "react-paypal-button-v2";
 import stripe from "public/img/logo/payments/stripe.png";
+import getApiUrl from "../../utils/getApiUrl";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -70,6 +71,8 @@ export default function CheckoutStepper({
   submitHandler,
   storeHandler,
   paymentMethod,
+  data,
+  total,
   isError,
   address,
   checked
@@ -147,14 +150,18 @@ export default function CheckoutStepper({
                 <div className={classes.paymentContainer} style={{ cursor: !checked && "not-allowed" }}>
                   <div style={{ pointerEvents: !checked && "none" }}>
                     <PayPalButton
-                      amount="0.01"
+                      amount={total}
+                      currency="EUR"
                       // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                       onSuccess={(details, data) => {
                         alert(`Transaction completed by ${details.payer.name.given_name}`);
 
                         // OPTIONAL: Call your server to save the transaction
-                        return fetch("/paypal-transaction-complete", {
+                        return fetch(`${getApiUrl()}/checkout/paypalTransactionComplete`, {
                           method: "post",
+                          headers: {
+                            "content-type": "application/json"
+                          },
                           body: JSON.stringify({
                             orderID: data.orderID
                           })

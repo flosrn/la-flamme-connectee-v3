@@ -30,8 +30,9 @@ class MyDocument extends Document {
           {/* Animations */}
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" />
-          {/* Payment */}
+          {/* Payments */}
           <script src="https://js.stripe.com/v3/" />
+          <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR" />
         </Head>
         <body>
           <Main />

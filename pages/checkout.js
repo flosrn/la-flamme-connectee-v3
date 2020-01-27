@@ -286,6 +286,8 @@ function CheckoutPage({ currentUser }) {
               submitHandler={handleSubmit}
               storeHandler={handleStore}
               paymentMethod={paymentMethod}
+              data={items}
+              total={total}
               isError={isError}
               address={values.address}
               checked={checked}
