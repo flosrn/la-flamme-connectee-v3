@@ -156,7 +156,7 @@ export function getOrders({ userId, setOrders }) {
     });
 }
 
-// CREATE CHECKOUT SESSION
+// CREATE STRIPE CHECKOUT SESSION
 export function createCheckoutSession({ values, currentUser, items, stripe, setLoading }) {
   axios
     .patch(`${getApiUrl()}/users/updateProfile`, {
@@ -178,4 +178,30 @@ export function createCheckoutSession({ values, currentUser, items, stripe, setL
       }, 1500);
     });
   setLoading(false);
+}
+
+// GET PAYPAL TRANSACTION
+export function getPaypalTransaction({ data, items, currentUser }) {
+  axios
+    .post(`${getApiUrl()}/checkout/getPaypalTransaction`, {
+      data,
+      items,
+      currentUser
+    })
+    .then(response => {
+      Swal.fire({
+        type: response.data.status,
+        title: response.data.message,
+        confirmButtonColor: "#ff7961"
+      }).then(result => {
+        if (response.data.status === "success") {
+          Cookies.remove("cart");
+          Cookies.remove("cartTotal");
+          if (response.data.status === "success" && result.value) {
+            console.log("result : ", result);
+            redirectTo("/settings?tabs=my-orders");
+          }
+        }
+      });
+    });
 }

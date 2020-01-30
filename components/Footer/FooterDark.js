@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     background: "#212121",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    width: "100%"
   },
   containerLogo: {
     display: "flex",

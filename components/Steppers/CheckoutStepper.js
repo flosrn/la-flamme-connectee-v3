@@ -8,7 +8,9 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { PayPalButton } from "react-paypal-button-v2";
 import stripe from "public/img/logo/payments/stripe.png";
+import axios from "axios";
 import getApiUrl from "../../utils/getApiUrl";
+import { getPaypalTransaction } from "../../api/apiRequests";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -38,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   },
   stripe: {
     width: "100%",
-    [theme.breakpoints.up("xs")]: {
+    [theme.breakpoints.up("md")]: {
       width: 300,
       display: "flex"
     }
@@ -71,8 +73,9 @@ export default function CheckoutStepper({
   submitHandler,
   storeHandler,
   paymentMethod,
-  data,
+  items,
   total,
+  currentUser,
   isError,
   address,
   checked
@@ -150,22 +153,31 @@ export default function CheckoutStepper({
                 <div className={classes.paymentContainer} style={{ cursor: !checked && "not-allowed" }}>
                   <div style={{ pointerEvents: !checked && "none" }}>
                     <PayPalButton
-                      amount={total}
-                      currency="EUR"
-                      // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                      onSuccess={(details, data) => {
-                        alert(`Transaction completed by ${details.payer.name.given_name}`);
-
-                        // OPTIONAL: Call your server to save the transaction
-                        return fetch(`${getApiUrl()}/checkout/paypalTransactionComplete`, {
+                      shippingPreference="GET_FROM_FILE" // default is "GET_FROM_FILE"
+                      createOrder={() => {
+                        // This function sets up the details of the transaction, including the amount and line item details.
+                        return fetch(`${getApiUrl()}/checkout/createPaypalTransaction`, {
                           method: "post",
                           headers: {
                             "content-type": "application/json"
                           },
                           body: JSON.stringify({
-                            orderID: data.orderID
+                            currentUser,
+                            amount: {
+                              currency_code: "EUR",
+                              value: total
+                            }
                           })
-                        });
+                        })
+                          .then(res => {
+                            return res.json();
+                          })
+                          .then(data => {
+                            return data.orderID; // Use the same key name for order ID on the client and server
+                          });
+                      }}
+                      onApprove={data => {
+                        getPaypalTransaction({ data, items, currentUser });
                       }}
                     />
                   </div>

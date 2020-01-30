@@ -49,7 +49,8 @@ export const withAuthSync = WrappedComponent => {
         .then(response => {
           const { user } = response.data.data;
           currentUser = user || {};
-        });
+        })
+        .catch(err => {});
     }
     return { ...componentProps, currentUser };
   };

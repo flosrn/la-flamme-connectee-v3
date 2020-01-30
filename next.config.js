@@ -12,7 +12,9 @@ const nextConfig = {
     API_URL: process.env.API_URL,
 
     STRIPE_PUBLIC_KEY_TEST: process.env.STRIPE_PUBLIC_KEY_TEST,
-    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY
+    STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
+
+    PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID
   }
 };
 

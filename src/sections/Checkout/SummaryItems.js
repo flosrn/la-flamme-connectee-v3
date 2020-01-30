@@ -148,7 +148,7 @@ export default function SummaryItems({ items, total }) {
         </Card>
       )}
       <p>
-        Montant de la commande : <strong>{total} €</strong>
+        Montant total de la commande: <strong>{total} €</strong>
       </p>
     </>
   );

@@ -57,6 +57,20 @@ const useStyles = makeStyles(theme => ({
   },
   formControl: {
     margin: theme.spacing(3)
+  },
+  cardHeader: {
+    maxWidth: 270,
+    [theme.breakpoints.down("md")]: {
+      maxWidth: "100%"
+    },
+    [theme.breakpoints.up("xl")]: {
+      maxWidth: "100%"
+    }
+  },
+  cardAddress: {
+    [theme.breakpoints.up("lg")]: {
+      paddingTop: 54
+    }
   }
 }));
 
@@ -77,7 +91,7 @@ function DeliveryMethod({ deliveryMethod, changeDeliveryHandler }) {
         <MediaSvg src={svg1} size="medium" />
       </GridItem>
       <GridContainer justify="center">
-        <GridItem xl={6} className={classes.gridItem}>
+        <GridItem className={classes.gridItem}>
           <div className={classes.gridContent}>
             <div>
               <FormControl component="fieldset" className={classes.formControl}>
@@ -138,67 +152,72 @@ function Summary({ checked, changeHandler, paymentMethod, changePaymentHandler }
   })(props => <Radio color="secondary" {...props} />);
 
   return (
-    <GridContainer justifycontent="center">
-      <GridItem xl={6} className={classes.gridItem}>
+    <GridContainer justifyc="center">
+      <GridItem className={classes.gridItem}>
         <MediaSvg src={svg3} size="medium" />
       </GridItem>
-      <GridItem xl={6} className={classes.gridItem}>
-        <div className={classes.gridContent}>
-          <CardHeader title="Votre panier :" />
-          <Divider />
-          <CardContent className={classes.cardContent}>
-            <SummaryItems items={items} total={total} />
-          </CardContent>
-          <CardHeader title="Votre Adresse :" />
-          <Divider />
-          <CardContent className={classes.cardContent}>
-            <p>
-              <strong>
-                {" "}
-                {user.address.firstName} {user.address.lastName}
-              </strong>
-            </p>
-            <p>{user.address.street1}</p>
-            <p>
-              {user.address.zip} {user.address.city}
-            </p>
-          </CardContent>
-          <CardHeader title="Sélectionnez une méthode de paiment :" />
-          <Divider />
-          <CardContent className={classes.cardContent}>
-            <FormControl component="fieldset">
-              {/* <FormLabel component="legend">Sélectionnez une méthode de paiment</FormLabel> */}
-              <RadioGroup
-                aria-label="paymentMethod"
-                name="paymentMethod"
-                value={paymentMethod}
-                onChange={changePaymentHandler}
-              >
-                <FormControlLabel value="stripe" control={<GreyRadio />} label="Carte bancaire" />
-                <FormControlLabel value="paypal" control={<GreyRadio />} label="Paypal" />
-              </RadioGroup>
-            </FormControl>
-          </CardContent>
-          <CardHeader title="Conditions générales d'utilisation :" />
-          <Divider />
-          <CardContent className={classes.cardContent}>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox checked={checked} onChange={changeHandler} value="checked" style={{ color: "#FF8A73" }} />
-                }
-                label={
-                  <span>
-                    Je reconnais avoir pris connaissance des
-                    <Link href="/terms-of-sales">
-                      <a target="_blank"> CGU / CGV</a>
-                    </Link>
-                  </span>
-                }
-              />
-            </FormGroup>
-          </CardContent>
-        </div>
+
+      <GridItem lg={8}>
+        <CardHeader title="Votre panier :" />
+        <Divider />
+        <CardContent className={classes.cardContent}>
+          <SummaryItems items={items} total={total} />
+        </CardContent>
+      </GridItem>
+      <GridItem lg={4}>
+        <CardHeader title="Votre Adresse :" />
+        <Divider />
+        <CardContent className={classes.cardAddress}>
+          <p>
+            <strong>
+              {" "}
+              {user.address.firstName} {user.address.lastName}
+            </strong>
+          </p>
+          <p>{user.address.street1}</p>
+          <p>
+            {user.address.zip} {user.address.city}
+          </p>
+        </CardContent>
+      </GridItem>
+      <GridItem md={6}>
+        <CardHeader title="Sélectionnez une méthode de paiment :" className={classes.cardHeader} />
+        <Divider />
+        <CardContent className={classes.cardContent}>
+          <FormControl component="fieldset">
+            {/* <FormLabel component="legend">Sélectionnez une méthode de paiment</FormLabel> */}
+            <RadioGroup
+              aria-label="paymentMethod"
+              name="paymentMethod"
+              value={paymentMethod}
+              onChange={changePaymentHandler}
+            >
+              <FormControlLabel value="stripe" control={<GreyRadio />} label="Carte bancaire" />
+              <FormControlLabel value="paypal" control={<GreyRadio />} label="Paypal" />
+            </RadioGroup>
+          </FormControl>
+        </CardContent>
+      </GridItem>
+      <GridItem md={6}>
+        <CardHeader title="Acceptez les conditions générales d'utilisation :" className={classes.cardHeader} />
+        <Divider />
+        <CardContent className={classes.cardContent}>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox checked={checked} onChange={changeHandler} value="checked" style={{ color: "#FF8A73" }} />
+              }
+              label={
+                <span>
+                  Je reconnais avoir pris connaissance des
+                  <Link href="/terms-of-sales">
+                    <a target="_blank"> CGU / CGV</a>
+                  </Link>
+                </span>
+              }
+            />
+          </FormGroup>
+        </CardContent>
       </GridItem>
     </GridContainer>
   );
@@ -211,13 +230,10 @@ function CheckoutPage({ currentUser }) {
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
   const [isError, setError] = useState(false);
-  const [isEmpty, setEmpty] = useState(false);
-  const [isLoading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
   const [deliveryMethod, setDeliveryMethod] = useState("home");
   const [paymentMethod, setPaymentMethod] = useState("paypal");
   const { items, total } = useContext(ShoppingCartContext);
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -253,8 +269,7 @@ function CheckoutPage({ currentUser }) {
   };
 
   const handleSubmit = async () => {
-    setLoading(true);
-    createCheckoutSession({ values, currentUser, items, stripe, setLoading });
+    createCheckoutSession({ values, currentUser, items, stripe });
   };
 
   // ========== FORM VALIDATION ========== //
@@ -286,8 +301,9 @@ function CheckoutPage({ currentUser }) {
               submitHandler={handleSubmit}
               storeHandler={handleStore}
               paymentMethod={paymentMethod}
-              data={items}
+              items={items}
               total={total}
+              currentUser={currentUser}
               isError={isError}
               address={values.address}
               checked={checked}

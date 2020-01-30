@@ -7,7 +7,9 @@
       "API_URL": "@api-url",
 
       "STRIPE_PUBLIC_KEY_TEST": "@stripe-public-key-test",
-      "STRIPE_PUBLIC_KEY": "@stripe-public-key"
+      "STRIPE_PUBLIC_KEY": "@stripe-public-key",
+
+      "PAYPAL_CLIENT_ID": "AboSUf_mhRhrpa86FTovfZ-H0W_izvdtVUJGYJiiipqi9G5wCdBCpU5iLIteEk4eDojmLExGAP-LUc5f"
     }
   }
 }
