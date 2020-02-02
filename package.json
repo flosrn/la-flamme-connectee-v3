@@ -69,6 +69,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "responsive-loader": "^1.2.0",
+    "secure-ls": "^1.2.6",
     "stripe": "^7.13.0",
     "svg-sprite-loader": "^4.1.6",
     "sweetalert2": "^8.17.6",

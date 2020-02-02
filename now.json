@@ -6,6 +6,8 @@
     "env": {
       "API_URL": "@api-url",
 
+      "JWT_COOKIE_EXPIRES_IN": "@jwt-cookie-expires-in",
+
       "STRIPE_PUBLIC_KEY_TEST": "@stripe-public-key-test",
       "STRIPE_PUBLIC_KEY": "@stripe-public-key",
 

@@ -13,6 +13,7 @@ import HeaderLinks from "../../../components/Header/HeaderLinks";
 import FooterDark from "../../../components/Footer/FooterDark";
 import MediaSvg from "../../../components/Media/MediaSvg";
 import { withAuthSync } from "../../../api/withAuth";
+import manageLocalStorage from "../../../utils/manageLocalStorage";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -41,12 +42,13 @@ function SuccessPage({ currentUser, sessionId }) {
   useEffect(() => {
     axios
       .get(`${getApiUrl()}/checkout/getCheckoutSession/${sessionId}`)
-      .then(response => {
-        emptyCart();
-      })
+      .then(response => {})
       .catch(error => {
         console.log("error : ", error);
       });
+    emptyCart();
+    manageLocalStorage("remove", "cart");
+    manageLocalStorage("remove", "cartTotal");
   });
 
   return (

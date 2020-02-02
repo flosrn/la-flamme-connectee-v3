@@ -3,8 +3,9 @@ import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import getApiUrl from "utils/getApiUrl";
 import redirectTo from "utils/redirectTo";
+import manageLocalStorage from "utils/manageLocalStorage";
 
-// LOGIN
+// LOGIN / FORGOT PASSWORD
 export function login({ type, email, password, setLoading }) {
   axios.post(`${getApiUrl()}/auth/${type}`, { email, password }).then(response => {
     Swal.fire({
@@ -14,7 +15,7 @@ export function login({ type, email, password, setLoading }) {
       confirmButtonColor: "#ff7961"
     }).then(result => {
       if (response.data.status === "success" && result.value) {
-        const cart = Cookies.getJSON("cart");
+        const cart = manageLocalStorage("get", "cart");
         if (cart.length > 0) {
           redirectTo("/shopping-cart");
         } else {
@@ -157,7 +158,7 @@ export function getOrders({ userId, setOrders }) {
 }
 
 // CREATE STRIPE CHECKOUT SESSION
-export function createCheckoutSession({ values, currentUser, items, stripe, setLoading }) {
+export function createCheckoutSession({ values, currentUser, items, stripe }) {
   axios
     .patch(`${getApiUrl()}/users/updateProfile`, {
       values
@@ -174,10 +175,8 @@ export function createCheckoutSession({ values, currentUser, items, stripe, setL
           .catch(error => {
             console.log("error : ", error);
           });
-        setLoading(false);
       }, 1500);
     });
-  setLoading(false);
 }
 
 // GET PAYPAL TRANSACTION
@@ -195,10 +194,9 @@ export function getPaypalTransaction({ data, items, currentUser }) {
         confirmButtonColor: "#ff7961"
       }).then(result => {
         if (response.data.status === "success") {
-          Cookies.remove("cart");
-          Cookies.remove("cartTotal");
-          if (response.data.status === "success" && result.value) {
-            console.log("result : ", result);
+          manageLocalStorage("remove", "cart");
+          manageLocalStorage("remove", "cartTotal");
+          if (result.value) {
             redirectTo("/settings?tabs=my-orders");
           }
         }

@@ -11,6 +11,7 @@ import stripe from "public/img/logo/payments/stripe.png";
 import axios from "axios";
 import getApiUrl from "../../utils/getApiUrl";
 import { getPaypalTransaction } from "../../api/apiRequests";
+import scrollToTop from "../../utils/scrollToTop";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -90,15 +91,18 @@ export default function CheckoutStepper({
     } else {
       storeHandler();
       setActiveStep(prevActiveStep => prevActiveStep + 1);
+      scrollToTop();
     }
   }
 
   function handleBack() {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
+    scrollToTop();
   }
 
   function handleReset() {
     setActiveStep(0);
+    scrollToTop();
   }
 
   return (
@@ -189,12 +193,8 @@ export default function CheckoutStepper({
                   onClick={handleNext}
                   disabled={
                     isError ||
-                    (activeStep !== 0 &&
-                      address &&
-                      (address.firstName === "" ||
-                        address.lastName === "" ||
-                        address.zip === "" ||
-                        address.city === ""))
+                    (activeStep !== 0 && !address) ||
+                    (address && (!address.firstName || !address.lastName || !address.zip || !address.city))
                   }
                 >
                   Suivant

@@ -1,10 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import Cookies from "js-cookie";
-
-const fakeCart = [
-  { id: "prod_GB4kHqmbn25Bq3", name: "flam'connect" },
-  { id: "prod_GB5utpMXlpVFSL", name: "volcano'connect" }
-];
+import manageLocalStorage from "utils/manageLocalStorage";
 
 export const ShoppingCartContext = createContext();
 
@@ -13,8 +8,8 @@ export function ShoppingCartProvider({ children }) {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const cart = Cookies.getJSON("cart");
-    const cartTotal = Cookies.getJSON("cartTotal");
+    const cart = manageLocalStorage("get", "cart");
+    const cartTotal = manageLocalStorage("get", "cartTotal");
     if (cart && cart.length > 0) {
       setItems(cart);
       setTotal(cartTotal);
@@ -22,15 +17,17 @@ export function ShoppingCartProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    Cookies.set("cart", items);
-    Cookies.set("cartTotal", total);
+    manageLocalStorage("set", "cart", items);
+    manageLocalStorage("set", "cartTotal", total);
   }, [items]);
 
   const addItem = product => {
     const newItem = items.find(item => item.id === product.id);
     if (!newItem) {
       product.quantity = 1;
-      setItems(items.concat(product));
+      const itemsDestructured = [...items];
+      const newArr = itemsDestructured.concat(product);
+      setItems(newArr);
     } else {
       setItems(
         items.map(item => (item.id === newItem.id ? Object.assign({}, item, { quantity: item.quantity + 1 }) : item))

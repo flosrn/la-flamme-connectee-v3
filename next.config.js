@@ -11,6 +11,8 @@ const nextConfig = {
   env: {
     API_URL: process.env.API_URL,
 
+    JWT_COOKIE_EXPIRES_IN: process.env.JWT_COOKIE_EXPIRES_IN,
+
     STRIPE_PUBLIC_KEY_TEST: process.env.STRIPE_PUBLIC_KEY_TEST,
     STRIPE_PUBLIC_KEY: process.env.STRIPE_PUBLIC_KEY,
 

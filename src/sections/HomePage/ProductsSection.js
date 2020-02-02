@@ -1,6 +1,5 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import ImageGallery from "react-image-gallery";
-import { useRouter } from "next/router";
 // core components
 import Button from "components/CustomButtons/Button";
 import GridContainer from "components/Grid/GridContainer";
@@ -20,24 +19,46 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import DoneIcon from "@material-ui/icons/Done";
+import { getProducts } from "api/apiRequests";
 import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
 import Title from "../../../components/Typography/Title";
 import CustomSnackBar from "../../../components/Snackbar/CustomSnackBar";
+import redirectTo from "../../../utils/redirectTo";
 
-export default function ProductSection({ products }) {
-  // const [colorSelect, setColorSelect] = React.useState("Gris anthracite");
+export default function ProductSection() {
+  const [products, setProducts] = useState([]);
+  const [sizeSelect, setSizeSelect] = React.useState("24");
   const [open, setOpen] = React.useState(false);
   const { addItem } = useContext(ShoppingCartContext);
   const classes = useStyles();
-  const Router = useRouter();
+
+  useEffect(() => {
+    getProducts({ setProducts });
+  }, []);
 
   const handleClick = item => {
     addItem(item);
     setOpen(true);
   };
 
-  const handleClickSnackBar = () => {
-    Router.push("/shopping-cart").then(() => window.scrollTo(0, 0));
+  const handleChange = (event, item) => {
+    setSizeSelect(event.target.value);
+    const newPrice = event.target.value === "12" ? 25 : 46;
+    const productsDestructured = [...products];
+    const newItem = productsDestructured.find(product => product.id === item.id);
+    const arr = productsDestructured.map(product =>
+      product.id === newItem.id
+        ? Object.assign({}, product, {
+            caption: `Boîte de ${event.target.value}`,
+            size: event.target.value,
+            price: newPrice
+          })
+        : item
+    );
+    arr.splice(products[0], 1);
+    const newArr = [];
+    newArr.push(products[0]);
+    setProducts(newArr.concat(arr));
   };
 
   return (
@@ -78,10 +99,10 @@ export default function ProductSection({ products }) {
                   }
                 ]}
               />
-              {/* {item.color && ( */}
+              {/* {item.name === "Volcano'connect" && ( */}
               {/*  <GridContainer className={classes.pickSize}> */}
               {/*    <GridItem md={6} sm={6}> */}
-              {/*      <label>Couleur</label> */}
+              {/*      <label>Quantité d'allumes-feux</label> */}
               {/*      <FormControl fullWidth className={classes.selectFormControl}> */}
               {/*        <Select */}
               {/*          MenuProps={{ */}
@@ -90,11 +111,11 @@ export default function ProductSection({ products }) {
               {/*          classes={{ */}
               {/*            select: classes.select */}
               {/*          }} */}
-              {/*          value={colorSelect} */}
+              {/*          value={sizeSelect} */}
               {/*          onChange={event => handleChange(event, item)} */}
               {/*          inputProps={{ */}
-              {/*            name: "colorSelect", */}
-              {/*            id: "color-select" */}
+              {/*            name: "sizeSelect", */}
+              {/*            id: "size-select" */}
               {/*          }} */}
               {/*        > */}
               {/*          <MenuItem */}
@@ -102,18 +123,18 @@ export default function ProductSection({ products }) {
               {/*              root: classes.selectMenuItem, */}
               {/*              selected: classes.selectMenuItemSelected */}
               {/*            }} */}
-              {/*            value="Gris anthracite" */}
+              {/*            value="24" */}
               {/*          > */}
-              {/*            {"Gris anthracite"} */}
+              {/*            24 */}
               {/*          </MenuItem> */}
               {/*          <MenuItem */}
               {/*            classes={{ */}
               {/*              root: classes.selectMenuItem, */}
               {/*              selected: classes.selectMenuItemSelected */}
               {/*            }} */}
-              {/*            value="Noir" */}
+              {/*            value="12" */}
               {/*          > */}
-              {/*            {"Noir"} */}
+              {/*            12 */}
               {/*          </MenuItem> */}
               {/*        </Select> */}
               {/*      </FormControl> */}
@@ -140,7 +161,7 @@ export default function ProductSection({ products }) {
         message="Produit ajouté au panier !"
         open={open}
         duration={5000}
-        clickHandler={handleClickSnackBar}
+        clickHandler={() => redirectTo("/shopping-cart")}
         closeHandler={() => setOpen(false)}
       />
     </div>

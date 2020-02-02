@@ -30,6 +30,7 @@ import AddressForm from "../src/sections/Checkout/AddressForm";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 import { withAuthSync } from "../api/withAuth";
 import SummaryItems from "../src/sections/Checkout/SummaryItems";
+import scrollToTop from "../utils/scrollToTop";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -237,12 +238,20 @@ function CheckoutPage({ currentUser }) {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // ========== DATA FETCHING ========== //
-
   // process.env.NODE_ENV === "development" ? process.env.STRIPE_PUBLIC_KEY_TEST : process.env.STRIPE_PUBLIC_KEY
 
   useEffect(() => {
-    setStripe(window.Stripe(process.env.STRIPE_PUBLIC_KEY));
+    scrollToTop();
+    setStripe(
+      window.Stripe(
+        process.env.NODE_ENV === "development" ? process.env.STRIPE_PUBLIC_KEY_TEST : process.env.STRIPE_PUBLIC_KEY
+      )
+    );
+  }, []);
+
+  // ========== DATA FETCHING ========== //
+
+  useEffect(() => {
     setValues(currentUser);
   }, [currentUser]);
 

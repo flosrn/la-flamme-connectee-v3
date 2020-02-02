@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 // core components
 import MediaSvg from "components/Media/MediaSvg";
 import LayoutPage from "components/Page/LayoutPage";
 // sections
 // images
 import svg1 from "public/img/svg/undraw_empty_cart_co35.svg";
-import axios from "axios";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import getApiUrl from "utils/getApiUrl";
 
 import ProductSection from "../src/sections/HomePage/ProductsSection";
 import FooterDark from "../components/Footer/FooterDark";
@@ -16,19 +14,13 @@ import Header from "../components/Header/Header";
 import GridItem from "../components/Grid/GridItem";
 import GridContainer from "../components/Grid/GridContainer";
 import { withAuthSync } from "../api/withAuth";
-import { getProducts } from "../api/apiRequests";
 
 const useStyles = makeStyles(theme => ({
   root: {}
 }));
 
 function ProductsPage({ currentUser }) {
-  const [products, setProducts] = useState(null);
   const classes = useStyles();
-
-  useEffect(() => {
-    getProducts({ setProducts });
-  }, []);
 
   return (
     <div className={classes.root}>
@@ -40,7 +32,7 @@ function ProductsPage({ currentUser }) {
       </GridContainer>
       <GridContainer justify="center">
         <GridItem lg={8}>
-          <ProductSection products={products} />
+          <ProductSection />
         </GridItem>
       </GridContainer>
       <FooterDark />
