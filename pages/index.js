@@ -4,8 +4,8 @@ import clsx from "clsx";
 // @material-ui core
 import makeStyles from "@material-ui/core/styles/makeStyles";
 // sections
-import HeaderSection from "src/sections/HomePage/HeaderSection";
-import HeroSection from "src/sections/HomePage/HeroSection";
+import Header from "src/sections/HomePage/HeaderSection";
+import Hero from "src/sections/HomePage/HeroSection";
 import PresentationSection from "src/sections/HomePage/PresentationSection";
 import ProductSection from "src/sections/HomePage/ProductSection";
 import BenefitsSection from "src/sections/HomePage/BenefitsSection";
@@ -39,8 +39,8 @@ function HomePage({ currentUser }) {
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
-      <HeaderSection currentUser={currentUser} />
-      <HeroSection />
+      <Header currentUser={currentUser} />
+      <Hero />
       <div className={clsx(classes.main, classes.mainRaised)} id="main-panel">
         <PresentationSection isDesktop={isDesktop} />
         <ProductSection isDesktop={isDesktop} />

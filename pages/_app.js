@@ -22,6 +22,7 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, reduxStore } = this.props;
+
     return (
       <>
         <DefaultSeo

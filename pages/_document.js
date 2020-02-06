@@ -7,7 +7,6 @@ const paypalClientId = process.env.NODE_ENV === "development" ? "sb" : process.e
 
 class MyDocument extends Document {
   render() {
-    // const { currentUser = {} } = this.props;
     return (
       <html lang="en">
         <Head>

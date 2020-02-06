@@ -25,7 +25,19 @@ export default {
     main: "#13c4a1",
     light: colors.green[400]
   },
+  info: {
+    contrastText: white,
+    dark: colors.green[900],
+    main: "#FF8A73",
+    light: colors.green[400]
+  },
   error: {
+    contrastText: white,
+    dark: colors.red[900],
+    main: colors.red[600],
+    light: colors.red[400]
+  },
+  warning: {
     contrastText: white,
     dark: colors.red[900],
     main: colors.red[600],
