@@ -40,12 +40,12 @@ function SuccessPage({ currentUser, sessionId }) {
   const classes = useStyles();
 
   useEffect(() => {
-    axios
-      .get(`${getApiUrl()}/checkout/getCheckoutSession/${sessionId}`)
-      .then(response => {})
-      .catch(error => {
-        console.log("error : ", error);
-      });
+    // axios
+    //   .get(`${getApiUrl()}/checkout/getCheckoutSession/${sessionId}`)
+    //   .then(response => {})
+    //   .catch(error => {
+    //     console.log("error : ", error);
+    //   });
     emptyCart();
     manageLocalStorage("remove", "cart");
     manageLocalStorage("remove", "cartTotal");
