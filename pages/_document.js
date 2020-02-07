@@ -7,7 +7,6 @@ const paypalClientId = process.env.NODE_ENV === "development" ? "sb" : process.e
 
 class MyDocument extends Document {
   render() {
-    // const { currentUser = {} } = this.props;
     return (
       <html lang="en">
         <Head>
@@ -79,18 +78,11 @@ MyDocument.getInitialProps = async ctx => {
     });
 
   const initialProps = await Document.getInitialProps(ctx);
-  // const currentUser = await getSessionFromServer(ctx);
 
   return {
     ...initialProps,
-    // ...currentUser,
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [
-      <React.Fragment key="styles">
-        {initialProps.styles}
-        {sheets.getStyleElement()}
-      </React.Fragment>
-    ]
+    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()]
   };
 };
 

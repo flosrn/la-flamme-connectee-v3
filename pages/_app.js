@@ -1,13 +1,13 @@
 import React from "react";
 import App from "next/app";
-import { Provider } from "react-redux";
 import { ThemeProvider } from "@material-ui/styles";
 import { DefaultSeo } from "next-seo";
 import { Preloader, Placeholder } from "react-preloading-screen";
 import { ShoppingCartProvider } from "src/contexts/ShoppingCartContext";
+import { Provider } from "react-redux";
 import withReduxStore from "src/lib/with-redux-store";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Loader from "components/Loader/Loader";
+import CssBaseline from "@material-ui/core/CssBaseline";
 import "public/scss/la-flamme-connectee.scss";
 import theme from "theme";
 
@@ -44,8 +44,8 @@ class MyApp extends App {
             ]
           }}
         />
-        <ShoppingCartProvider>
-          <ThemeProvider theme={theme}>
+        <ThemeProvider theme={theme}>
+          <ShoppingCartProvider>
             <Preloader>
               <Provider store={reduxStore}>
                 <CssBaseline />
@@ -55,8 +55,8 @@ class MyApp extends App {
                 <Loader />
               </Placeholder>
             </Preloader>
-          </ThemeProvider>
-        </ShoppingCartProvider>
+          </ShoppingCartProvider>
+        </ThemeProvider>
       </>
     );
   }
