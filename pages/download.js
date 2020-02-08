@@ -17,6 +17,7 @@ function DownloadPage({ currentUser }) {
       sectionId="download"
       backgroundPosition="50% 100%"
       currentUser={currentUser}
+      meta={{ title: "Téléchargement" }}
     >
       <MediaSvg src={svg1} alt="questions" size="medium" mt={30} />
       <DownloadSection />

@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 // core components
 import MediaSvg from "components/Media/MediaSvg";
 import LayoutPage from "components/Page/LayoutPage";
@@ -7,6 +8,7 @@ import LayoutPage from "components/Page/LayoutPage";
 import svg1 from "public/img/svg/undraw_empty_cart_co35.svg";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
+import { NextSeo } from "next-seo";
 import ProductSection from "../src/sections/HomePage/ProductsSection";
 import FooterDark from "../components/Footer/FooterDark";
 import HeaderLinks from "../components/Header/HeaderLinks";
@@ -24,6 +26,10 @@ function ProductsPage({ currentUser }) {
 
   return (
     <div className={classes.root}>
+      <NextSeo
+        title="Produits"
+        description="Flam'connect&#8594; Boîtier domotique connecté au réseau wifi, &#10003; Démarre votre poêle ou insert à distance &#10003; Piloté par smartphone | Volcano'connect&#8594; Allume-feux connecté &#10003; Écologique"
+      />
       <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer justify="center">
         <GridItem xs={8} sm={10} md={10} lg={8}>

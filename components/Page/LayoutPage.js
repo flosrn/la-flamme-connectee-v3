@@ -9,6 +9,7 @@ import { IconButton } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // core components
 import { scroller } from "react-scroll";
+import { NextSeo } from "next-seo";
 import Header from "../Header/Header";
 import HeaderLinks from "../Header/HeaderLinks";
 import Parallax from "../Parallax/Parallax";
@@ -65,9 +66,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, currentUser, isLoggedIn }) {
+function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, currentUser, meta }) {
   const classes = useStyles();
-
   const scrollTo = el => {
     scroller.scrollTo(el, {
       duration: 1500,
@@ -78,13 +78,13 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, 
 
   return (
     <div className={classes.root}>
+      <NextSeo title={meta.title} description={meta.description} />
       <Header
         color="transparent"
         brand="La Flamme Connectée"
-        links={<HeaderLinks user={currentUser} isLoggedIn={isLoggedIn} />}
+        links={<HeaderLinks user={currentUser} />}
         fixed
         user={currentUser}
-        isLoggedIn={isLoggedIn}
         changeColorOnScroll={{
           height: 300,
           color: "dark",

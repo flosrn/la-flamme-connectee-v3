@@ -22,6 +22,7 @@ import { withAuthSync } from "api/withAuth";
 // styles for this page
 import { useTheme } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
+import { NextSeo } from "next-seo";
 import { main, mainRaised } from "../public/jss/la-flamme-connectee";
 import TalkAboutUsSection from "../src/sections/HomePage/TalkAboutUsSection";
 
@@ -39,6 +40,10 @@ function HomePage({ currentUser }) {
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   return (
     <>
+      <NextSeo
+        title="Accueil"
+        description="Le Flam'connect est un objet connecté qui permet d'allumer à distance son poêle ou insert à l'aide de son smartphone. Innovation concours Lépine."
+      />
       <HeaderSection currentUser={currentUser} />
       <HeroSection />
       <div className={clsx(classes.main, classes.mainRaised)} id="main-panel">

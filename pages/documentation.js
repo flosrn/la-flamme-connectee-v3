@@ -38,6 +38,7 @@ function DocumentationPage({ currentUser }) {
       sectionId="howWorks"
       backgroundPosition="0 100%"
       currentUser={currentUser}
+      meta={{ title: "Documentation" }}
     >
       <MediaSvg src={svg1} alt="questions" size="medium" mt={50} mb={30} />
       <HowWorks />

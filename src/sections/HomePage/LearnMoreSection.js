@@ -38,7 +38,7 @@ export default function LearnMoreSection({ isDesktop }) {
         </GridItem>
       </GridContainer>
       <GridContainer justify="center">
-        <GridItem sm={8} md={6} lg={4} xl={2} center className={classes.text}>
+        <GridItem sm={8} md={6} lg={4} center className={classes.text}>
           <Typography variant="subtitle1" align="center">
             Pour en savoir plus, consultez nos pages{" "}
             <Link href="/documentation">
@@ -50,7 +50,7 @@ export default function LearnMoreSection({ isDesktop }) {
             </Link>
           </Typography>
         </GridItem>
-        <GridItem sm={8} md={6} lg={4} xl={2} center className={classes.text}>
+        <GridItem sm={8} md={6} lg={4} center className={classes.text}>
           <Typography variant="subtitle1" align="center">
             Pour toutes questions supplémentaires, vous pouvez vous référer à notre{" "}
             <Link href="/faq">

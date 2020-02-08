@@ -13,6 +13,7 @@ function TermsOfSalesPage({ currentUser }) {
       sectionId="terms-of-sales"
       backgroundPosition="0% 100%"
       currentUser={currentUser}
+      meta={{ title: "Condition générales" }}
     >
       <MediaSvg src={svg1} alt="contact-us" size="extrasmall" mt={30} mb={30} />
       <TermsOfSalesSection />

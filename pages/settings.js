@@ -16,6 +16,7 @@ import HeaderLinks from "components/Header/HeaderLinks";
 import getApiUrl from "utils/getApiUrl";
 import Swal from "sweetalert2";
 import { updateProfile } from "api/apiRequests";
+import { NextSeo } from "next-seo";
 import { withAuthSync } from "../api/withAuth";
 import FooterDark from "../components/Footer/FooterDark";
 
@@ -183,6 +184,7 @@ function SettingsPage({ currentUser }) {
 
   return (
     <div className={classes.root}>
+      <NextSeo title="Mon profil" />
       <Headers
         color="dark"
         brand="La Flamme Connectée"

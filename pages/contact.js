@@ -15,6 +15,7 @@ function ContactPage({ currentUser }) {
       sectionId="contact"
       backgroundPosition="30% 85%"
       currentUser={currentUser}
+      meta={{ title: "Contact" }}
     >
       <MediaSvg src={svg1} alt="contact-us" size="medium" mt={30} />
       <ContactSection />

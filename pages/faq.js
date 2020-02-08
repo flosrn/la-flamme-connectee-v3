@@ -13,6 +13,7 @@ function FAQPage({ currentUser }) {
       sectionId="faq"
       backgroundPosition="0% 100%"
       currentUser={currentUser}
+      meta={{ title: "FAQ" }}
     >
       <MediaSvg src={svg1} alt="faq" size="small" mt={30} mb={30} />
       <FAQSection />

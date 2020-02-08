@@ -44,6 +44,7 @@ import { cardTitle } from "public/jss/la-flamme-connectee";
 import Swal from "sweetalert2";
 import { Typography } from "@material-ui/core";
 import payment from "public/img/logo/payments/paiement-securise.png";
+import { NextSeo } from "next-seo";
 import svg1 from "../public/img/svg/undraw_add_to_cart_vkjp.svg";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 
@@ -205,6 +206,7 @@ function ShoppingCartPage({ currentUser }) {
 
   return (
     <div className={classes.root}>
+      <NextSeo title="Mon panier" />
       <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer justify="center">
         <GridItem xs={8} sm={10} md={10} lg={8}>

@@ -36,6 +36,7 @@
     "import/prefer-default-export": "off",
     "import/no-absolute-path": "off",
     "import/no-unresolved": "off",
+    "no-unused-expressions": [2, { "allowShortCircuit": true }],
     "prefer-destructuring": ["error", { "object": true, "array": false }],
     "no-underscore-dangle": ["error", {"allow": ["_id"]}],
     "react/prop-types": "off",

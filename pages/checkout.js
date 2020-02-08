@@ -17,6 +17,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "next/link";
 import withStyles from "@material-ui/core/styles/withStyles";
+import { NextSeo } from "next-seo";
 import HeaderLinks from "../components/Header/HeaderLinks";
 import Header from "../components/Header/Header";
 import FooterDark from "../components/Footer/FooterDark";
@@ -302,6 +303,7 @@ function CheckoutPage({ currentUser }) {
 
   return (
     <div className={classes.root}>
+      <NextSeo title="Paiement" />
       <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer className={classes.container}>
         <GridItem sm={8} md={8}>
