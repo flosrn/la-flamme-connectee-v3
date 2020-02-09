@@ -13,7 +13,7 @@ function LegalNoticePage({ currentUser }) {
       sectionId="legal-notice"
       backgroundPosition="30% 85%"
       currentUser={currentUser}
-      meta={{ title: "Mentions légales" }}
+      meta={{ title: "Mentions légales", noindex: true }}
     >
       <MediaSvg src={svg1} alt="contact-us" size="small" mt={30} mb={30} />
       <LegalNoticeSection />

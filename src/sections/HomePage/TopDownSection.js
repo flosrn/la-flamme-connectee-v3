@@ -15,11 +15,15 @@ import topDownImg from "public/img/flamco/topdown-info.jpg";
 
 import { Typography } from "@material-ui/core";
 import Title from "../../../components/Typography/Title";
+import MediaSvg from "../../../components/Media/MediaSvg";
+import svg2 from "../../../public/img/svg/undraw_light_the_fire_gt58.svg";
+import LayoutPage from "../../../components/Page/LayoutPage";
 
 function TopDownSection() {
   const classes = useStyles();
   return (
     <div className={classes.section} id="topDown">
+      <MediaSvg src={svg2} alt="questions" size="medium" mt={20} />
       <GridContainer justify="center">
         <GridItem xs={12} sm={12} md={8} className={classes.gridItem}>
           <Title variant="h2" className={classes.title}>

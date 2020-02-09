@@ -184,7 +184,7 @@ function SettingsPage({ currentUser }) {
 
   return (
     <div className={classes.root}>
-      <NextSeo title="Mon profil" />
+      <NextSeo title="Mon profil" noindex />
       <Headers
         color="dark"
         brand="La Flamme Connectée"

@@ -175,6 +175,7 @@ const ExpansionPanelSummary = withStyles({
     borderBottom: "1px solid rgba(0, 0, 0, .125)",
     marginBottom: -1,
     minHeight: 56,
+    textAlign: "left",
     "&$expanded": {
       minHeight: 56
     }

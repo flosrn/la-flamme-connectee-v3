@@ -303,7 +303,7 @@ function CheckoutPage({ currentUser }) {
 
   return (
     <div className={classes.root}>
-      <NextSeo title="Paiement" />
+      <NextSeo title="Paiement" noindex />
       <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer className={classes.container}>
         <GridItem sm={8} md={8}>

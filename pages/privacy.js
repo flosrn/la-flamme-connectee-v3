@@ -13,7 +13,7 @@ function LegalNoticePage({ currentUser }) {
       sectionId="privacy"
       backgroundPosition="30% 85%"
       currentUser={currentUser}
-      meta={{ title: "Traitement des données" }}
+      meta={{ title: "Traitement des données", noindex: true }}
     >
       <MediaSvg src={svg1} alt="contact-us" size="small" mt={30} mb={30} />
       <PrivacySection />

@@ -1,21 +1,19 @@
 import React from "react";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 // core components
+import FooterDark from "components/Footer/FooterDark";
+import HeaderLinks from "components/Header/HeaderLinks";
+import Header from "components/Header/Header";
+import GridItem from "components/Grid/GridItem";
+import GridContainer from "components/Grid/GridContainer";
 import MediaSvg from "components/Media/MediaSvg";
-import LayoutPage from "components/Page/LayoutPage";
 // sections
+import ProductSection from "src/sections/HomePage/ProductsSection";
 // images
 import svg1 from "public/img/svg/undraw_empty_cart_co35.svg";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-import { NextSeo } from "next-seo";
-import ProductSection from "../src/sections/HomePage/ProductsSection";
-import FooterDark from "../components/Footer/FooterDark";
-import HeaderLinks from "../components/Header/HeaderLinks";
-import Header from "../components/Header/Header";
-import GridItem from "../components/Grid/GridItem";
-import GridContainer from "../components/Grid/GridContainer";
-import { withAuthSync } from "../api/withAuth";
+import { withAuthSync } from "api/withAuth";
 
 const useStyles = makeStyles(theme => ({
   root: {}

@@ -1,19 +1,20 @@
 import React from "react";
+import { NextSeo } from "next-seo";
+import { scroller } from "react-scroll";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import { container, grayColor, main, mainRaised, mlAuto, section, title } from "public/jss/la-flamme-connectee";
 // @material-ui/core components
 import { IconButton } from "@material-ui/core";
 // @material-ui/icons
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 // core components
-import { scroller } from "react-scroll";
-import { NextSeo } from "next-seo";
+import { container, grayColor, main, mainRaised, mlAuto, section, title } from "public/jss/la-flamme-connectee";
 import Header from "../Header/Header";
 import HeaderLinks from "../Header/HeaderLinks";
 import Parallax from "../Parallax/Parallax";
 import FooterDark from "../Footer/FooterDark";
+import MediaSvg from "../Media/MediaSvg";
 
 const useStyles = makeStyles(theme => ({
   mlAuto,
@@ -66,7 +67,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, currentUser, meta }) {
+function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, currentUser, meta, svg }) {
   const classes = useStyles();
   const scrollTo = el => {
     scroller.scrollTo(el, {
@@ -77,8 +78,8 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, 
   };
 
   return (
-    <div className={classes.root}>
-      <NextSeo title={meta.title} description={meta.description} />
+    <>
+      <NextSeo title={meta.title} description={meta.description} noindex={meta.noindex} nofollow={meta.nofollow} />
       <Header
         color="transparent"
         brand="La Flamme Connectée"
@@ -100,12 +101,13 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, 
                 <ExpandMoreIcon fontSize="large" className={classes.arrowButton} />
               </IconButton>
             </div>
+            {svg && <MediaSvg src={svg} alt="questions" size="medium" mt={50} mb={30} />}
             {children}
           </div>
         </div>
         <FooterDark />
       </div>
-    </div>
+    </>
   );
 }
 

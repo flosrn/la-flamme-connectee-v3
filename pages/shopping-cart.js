@@ -206,7 +206,7 @@ function ShoppingCartPage({ currentUser }) {
 
   return (
     <div className={classes.root}>
-      <NextSeo title="Mon panier" />
+      <NextSeo title="Mon panier" noindex />
       <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer justify="center">
         <GridItem xs={8} sm={10} md={10} lg={8}>

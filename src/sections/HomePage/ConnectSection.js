@@ -14,6 +14,9 @@ import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import ConnectExpansionPanels from "components/ExpansionPanels/ConnectExpansionPanels";
 import Title from "../../../components/Typography/Title";
+import MediaSvg from "../../../components/Media/MediaSvg";
+import svg2 from "../../../public/img/svg/undraw_light_the_fire_gt58.svg";
+import LayoutSection from "../../../components/Page/LayoutSection";
 
 // style for this page
 const useStyles = makeStyles(theme => ({
@@ -49,24 +52,22 @@ const useStyles = makeStyles(theme => ({
 function ConnectSection() {
   const classes = useStyles();
   return (
-    <div className={classes.section} id="connect">
-      <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={6} className={classes.gridItem}>
-          <Title variant="h2" className={classes.title}>
-            Appairage du Flam'connect
-          </Title>
-          <h5 className={classes.description}>
-            Pour allumer votre poêle à distance ou programmer une plage horaire à laquelle il s'allumera, veuillez
-            suivre les instructions suivante :
-          </h5>
-        </GridItem>
-      </GridContainer>
+    <LayoutSection
+      title="Appairage du Flam'connect"
+      id="connect"
+      desc={[
+        {
+          text:
+            "Pour allumer votre poêle à distance ou programmer une plage horaire à laquelle il s'allumera, veuillez suivre les instructions suivante :"
+        }
+      ]}
+    >
       <GridContainer justify="center">
         <GridItem xs={12} sm={10} md={8} lg={6} className={classes.gridItem}>
           <ConnectExpansionPanels />
         </GridItem>
       </GridContainer>
-      <GridContainer justify="center">
+      <GridContainer justify="center" style={{ width: "100%" }}>
         <GridItem xs={12} sm={10} md={8} lg={5} className={classes.videoContainer}>
           <iframe
             width="560"
@@ -79,7 +80,7 @@ function ConnectSection() {
           />
         </GridItem>
       </GridContainer>
-    </div>
+    </LayoutSection>
   );
 }
 

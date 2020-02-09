@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NextSeo } from "next-seo";
 import Link from "next/link";
 import { makeStyles } from "@material-ui/styles";
 import { Typography } from "@material-ui/core";
@@ -12,7 +13,6 @@ import Header from "components/Header/Header";
 import LoginComponent from "src/sections/LoginPage/components/LoginForm/LoginComponent";
 import RegisterComponent from "src/sections/RegisterPage/components/RegisterForm/RegisterComponent";
 import { useRouter } from "next/router";
-import { NextSeo } from "next-seo";
 import FooterDark from "../components/Footer/FooterDark";
 import ButtonCustom from "../components/CustomButtons/ButtonCustom";
 import { withAuthSync } from "../api/withAuth";
@@ -98,7 +98,7 @@ function LoginPage({ children, currentUser }) {
 
   return (
     <div className={classes.root}>
-      <NextSeo title="Connexion" />
+      <NextSeo title="Connexion" noindex />
       <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer className={classes.container}>
         <GridItem sm={8} md={6} lg={5} xl={4}>
