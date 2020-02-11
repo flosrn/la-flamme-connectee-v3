@@ -101,7 +101,7 @@ function LayoutPage({ children, backgroundImage, sectionId, backgroundPosition, 
                 <ExpandMoreIcon fontSize="large" className={classes.arrowButton} />
               </IconButton>
             </div>
-            {svg && <MediaSvg src={svg} alt="questions" size="medium" mt={50} mb={30} />}
+            {svg && <MediaSvg src={svg.url} alt={svg.name} size={svg.size} mt={30} />}
             {children}
           </div>
         </div>

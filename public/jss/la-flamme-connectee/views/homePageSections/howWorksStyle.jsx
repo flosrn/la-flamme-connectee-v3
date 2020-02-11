@@ -19,7 +19,6 @@ export const useStyles = makeStyles(theme => ({
     alignItems: "center",
     paddingLeft: 0,
     paddingRight: 0,
-    paddingBottom: "50px",
     "& h1, & h3": {
       textAlign: "center"
     }

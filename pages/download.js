@@ -16,7 +16,6 @@ function DownloadPage({ currentUser }) {
       backgroundPosition="50% 100%"
       currentUser={currentUser}
       meta={{ title: "Téléchargement" }}
-      svg={svg}
     >
       <DownloadSection />
       <ConnectSection />

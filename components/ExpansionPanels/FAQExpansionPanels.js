@@ -1,9 +1,4 @@
 import React from "react";
-import Link from "next/link";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
-// nodejs library that concatenates classes
-import classNames from "classnames";
 // @material-ui/core components
 import { withStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -14,7 +9,6 @@ import MuiExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import MuiExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-// contexts
 
 const useStyles = makeStyles(theme => ({
   root: {

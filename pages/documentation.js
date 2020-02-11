@@ -19,7 +19,6 @@ function DocumentationPage({ currentUser }) {
       backgroundPosition="0 100%"
       currentUser={currentUser}
       meta={{ title: "Documentation" }}
-      svg={svg}
     >
       <HowWorks />
       <TopDownSection />

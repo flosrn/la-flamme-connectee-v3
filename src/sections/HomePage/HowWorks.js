@@ -1,21 +1,19 @@
-/* eslint-disable import/first */
 import React from "react";
 import Link from "next/link";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 // @material-ui/icons
-import { Wifi, Category, PhonelinkRing, Whatshot, Build } from "@material-ui/icons";
+import { Wifi, Category, PhonelinkRing, Whatshot } from "@material-ui/icons";
 // @material-ui/core
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 // core components
-import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import Timeline from "components/Timeline/Timeline";
 // style for this page
 import { useStyles } from "public/jss/la-flamme-connectee/views/homePageSections/howWorksStyle";
 import { scroller } from "react-scroll";
-import Title from "../../../components/Typography/Title";
+import LayoutSection from "../../../components/Page/LayoutSection";
 
 function HowWorks() {
   const classes = useStyles();
@@ -105,24 +103,11 @@ function HowWorks() {
   ];
 
   return (
-    <div className={classes.section} id="howWorks">
-      <GridContainer className={classes.gridContainer}>
-        <GridItem xs={12} className={classes.gridItem}>
-          <Title variant="h2" className={classes.title}>
-            Comment ça marche ?
-          </Title>
-        </GridItem>
-        <GridContainer justify="center" className={classes.gridContainer}>
-          {/* <GridItem xs={12} sm={12} md={4} lg={4} className={classes.gridItem}>
-            <img src={Stove} alt="stove" className={classes.stove}/>
-          </GridItem> */}
-          <GridItem xs={10} sm={10} md={7} lg={6} className={classNames(classes.gridItem, classes.gridLeft)}>
-            {/* <VerticalLinearStepper /> */}
-            <Timeline simple stories={widgetStories} />
-          </GridItem>
-        </GridContainer>
-      </GridContainer>
-    </div>
+    <LayoutSection title="Comment ça marche ?" id="howWorks">
+      <GridItem xs={10} sm={10} md={7} lg={6} className={classNames(classes.gridItem, classes.gridLeft)}>
+        <Timeline simple stories={widgetStories} />
+      </GridItem>
+    </LayoutSection>
   );
 }
 

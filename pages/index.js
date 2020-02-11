@@ -1,4 +1,5 @@
 import React from "react";
+import { NextSeo } from "next-seo";
 // nodejs library that concatenates classes
 import clsx from "clsx";
 // @material-ui core
@@ -22,7 +23,6 @@ import { withAuthSync } from "api/withAuth";
 // styles for this page
 import { useTheme } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
-import { NextSeo } from "next-seo";
 import { main, mainRaised } from "../public/jss/la-flamme-connectee";
 import TalkAboutUsSection from "../src/sections/HomePage/TalkAboutUsSection";
 
@@ -41,7 +41,8 @@ function HomePage({ currentUser }) {
   return (
     <>
       <NextSeo
-        title="Accueil"
+        title="La Flamme Connectée"
+        titleTemplate="%s | Allumez votre poêle à distance &#x1F525;"
         description="Le Flam'connect est un objet connecté qui permet d'allumer à distance son poêle ou insert à l'aide de son smartphone. Innovation concours Lépine."
       />
       <HeaderSection currentUser={currentUser} />

@@ -9,9 +9,11 @@ import Divider from "@material-ui/core/Divider";
 import { PayPalButton } from "react-paypal-button-v2";
 import stripe from "public/img/logo/payments/stripe.png";
 import axios from "axios";
+import { CardHeader } from "@material-ui/core";
 import getApiUrl from "../../utils/getApiUrl";
 import { getPaypalTransaction } from "../../api/apiRequests";
 import scrollToTop from "../../utils/scrollToTop";
+import GridItem from "../Grid/GridItem";
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -48,7 +50,8 @@ const useStyles = makeStyles(theme => ({
   },
   buttonOrder: {
     width: "100%",
-    height: 45
+    height: 45,
+    marginBottom: 14
   }
 }));
 
@@ -73,7 +76,6 @@ export default function CheckoutStepper({
   components,
   submitHandler,
   storeHandler,
-  paymentMethod,
   items,
   total,
   currentUser,
@@ -82,8 +84,13 @@ export default function CheckoutStepper({
   checked
 }) {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [clicked, setClicked] = React.useState(false);
   const classes = useStyles();
   const steps = getSteps();
+
+  React.useEffect(() => {
+    checked && setClicked(false);
+  }, [checked]);
 
   function handleNext() {
     if (activeStep === steps.length - 1) {
@@ -105,6 +112,12 @@ export default function CheckoutStepper({
     scrollToTop();
   }
 
+  function notAllowedHandler() {
+    if (!checked) {
+      setClicked(true);
+    }
+  }
+
   return (
     <div className={classes.root}>
       <Stepper activeStep={activeStep} alternativeLabel>
@@ -124,38 +137,33 @@ export default function CheckoutStepper({
         ) : (
           <div>
             <div className={classes.instructions}>{getStepContent(activeStep, components)}</div>
+            {activeStep === steps.length - 1 && (
+              <CardHeader title="Sélectionnez une méthode de paiment :" className={classes.cardHeader} />
+            )}
             <Divider />
             <div className={classes.bottom}>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.backButton}>
                 Retour
               </Button>
-              {activeStep === steps.length - 1 && paymentMethod === "stripe" ? (
-                <div className={classes.paymentContainer}>
-                  <div style={{ cursor: !checked && "not-allowed" }}>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={handleNext}
-                      className={classes.buttonOrder}
-                      disabled={
-                        isError ||
-                        !checked ||
-                        (activeStep !== 0 &&
-                          address &&
-                          (address.firstName === "" ||
-                            address.lastName === "" ||
-                            address.zip === "" ||
-                            address.city === ""))
-                      }
-                    >
-                      Confirmer et payer
-                    </Button>
-                  </div>
-                  <img src={stripe} alt="stripe" className={classes.stripe} />
-                </div>
-              ) : activeStep === steps.length - 1 && paymentMethod === "paypal" ? (
-                <div className={classes.paymentContainer} style={{ cursor: !checked && "not-allowed" }}>
+              {activeStep === steps.length - 1 ? (
+                <div
+                  className={classes.paymentContainer}
+                  style={{ cursor: !checked && "not-allowed" }}
+                  onClick={notAllowedHandler}
+                >
                   <div style={{ pointerEvents: !checked && "none" }}>
+                    <div className={classes.paymentContainer}>
+                      <div style={{ cursor: !checked && "not-allowed" }}>
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={handleNext}
+                          className={classes.buttonOrder}
+                        >
+                          Procéder au paiement
+                        </Button>
+                      </div>
+                    </div>
                     <PayPalButton
                       shippingPreference="GET_FROM_FILE" // default is "GET_FROM_FILE"
                       createOrder={() => {
@@ -185,6 +193,11 @@ export default function CheckoutStepper({
                       }}
                     />
                   </div>
+                  {clicked && (
+                    <Typography variant="body1" color="error">
+                      Veuillez accepter les CGU / CGV
+                    </Typography>
+                  )}
                 </div>
               ) : (
                 <Button

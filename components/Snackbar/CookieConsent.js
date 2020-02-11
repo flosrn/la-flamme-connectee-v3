@@ -21,19 +21,17 @@ export default function CookieConsent() {
 
   const handleScroll = () => {
     const acceptOnScrollPercentage = 1;
-    if (document) {
-      const rootNode = document.documentElement || document.body;
-      if (rootNode) {
-        // (top / (height - height)) * 100
-        const percentage = (rootNode.scrollTop / (rootNode.scrollHeight - rootNode.clientHeight)) * 100;
+    const rootNode = document.documentElement || document.body;
+    if (rootNode) {
+      // (top / (height - height)) * 100
+      const percentage = (rootNode.scrollTop / (rootNode.scrollHeight - rootNode.clientHeight)) * 100;
 
-        if (percentage > acceptOnScrollPercentage) {
-          if (isOpen) {
-            Cookies.set("consent", "true");
-            process.env.NODE_ENV === "production" && initGoogleAnalytics();
-          }
-          setOpen(false);
+      if (percentage > acceptOnScrollPercentage) {
+        if (isOpen) {
+          Cookies.set("consent", "true");
+          process.env.NODE_ENV === "production" && initGoogleAnalytics();
         }
+        setOpen(false);
       }
     }
   };

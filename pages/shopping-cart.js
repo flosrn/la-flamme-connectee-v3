@@ -169,6 +169,7 @@ const useStyles = makeStyles(theme => ({
   },
   payments: {
     width: "94%",
+    height: "100%",
     marginTop: 20
   }
 }));

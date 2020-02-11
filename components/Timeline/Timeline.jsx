@@ -1,6 +1,5 @@
 import React from "react";
 import cx from "classnames";
-import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
@@ -350,11 +349,5 @@ function Timeline({ ...props }) {
     </ul>
   );
 }
-
-Timeline.propTypes = {
-  // classes: PropTypes.object.isRequired,
-  // stories: PropTypes.arrayOf(PropTypes.object).isRequired,
-  // simple: PropTypes.bool
-};
 
 export default Timeline;

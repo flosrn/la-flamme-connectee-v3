@@ -63,7 +63,7 @@ export default function LayoutSection(props) {
       )}
       {desc && (
         <GridContainer justify="center">
-          <GridItem xs={10} sm={8} md={4} center>
+          <GridItem xs={10} sm={8} md={8} lg={7} center>
             <Typography variant="body1" className={classes.description}>
               {desc[0].text}
             </Typography>

@@ -1,8 +1,7 @@
 import React from "react";
-import LayoutPage from "../components/Page/LayoutPage";
-import MediaSvg from "../components/Media/MediaSvg";
-import svg1 from "../public/img/svg/undraw_terms_lso0.svg";
-import TermsOfSalesSection from "../src/sections/HomePage/TermsOfSalesSection";
+import LayoutPage from "components/Page/LayoutPage";
+import TermsOfSalesSection from "src/sections/HomePage/TermsOfSalesSection";
+import svg from "public/img/svg/undraw_terms_lso0.svg";
 
 import { withAuthSync } from "../api/withAuth";
 
@@ -13,9 +12,8 @@ function TermsOfSalesPage({ currentUser }) {
       sectionId="terms-of-sales"
       backgroundPosition="0% 100%"
       currentUser={currentUser}
-      meta={{ title: "Condition générales", noindex: true }}
+      meta={{ title: "Condition générales", noindex: true, nofollow: true }}
     >
-      <MediaSvg src={svg1} alt="contact-us" size="extrasmall" mt={30} mb={30} />
       <TermsOfSalesSection />
     </LayoutPage>
   );

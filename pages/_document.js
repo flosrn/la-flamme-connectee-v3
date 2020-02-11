@@ -12,9 +12,13 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
-          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+            key="viewport"
+          />
           {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta name="theme-color" content={theme.palette.secondary.main} />
           {/* Favicon */}
           <link
             rel="shortcut icon"
@@ -22,12 +26,12 @@ class MyDocument extends Document {
             href="https://drive.google.com/uc?export=view&id=1_ttsx9f8zx95Xk1HJOaNkwbUi-_qInE9"
           />
           {/* Fonts */}
-          <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet" />
           <link
             href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,900&display=swap"
             rel="stylesheet"
           />
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+          <link href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" rel="stylesheet" />
           {/* Animations */}
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css" />
@@ -37,7 +41,6 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          {/* <script dangerouslySetInnerHTML={{ __html: getUserScript(currentUser) }} /> */}
           <NextScript />
         </body>
       </html>

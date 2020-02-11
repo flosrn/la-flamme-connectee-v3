@@ -1,10 +1,8 @@
 import React from "react";
-import LayoutPage from "../components/Page/LayoutPage";
-import MediaSvg from "../components/Media/MediaSvg";
-import svg1 from "../public/img/svg/undraw_observations_mejb.svg";
-
-import { withAuthSync } from "../api/withAuth";
-import LegalNoticeSection from "../src/sections/HomePage/LegalNoticeSection";
+import LayoutPage from "components/Page/LayoutPage";
+import LegalNoticeSection from "src/sections/HomePage/LegalNoticeSection";
+import svg from "public/img/svg/undraw_observations_mejb.svg";
+import { withAuthSync } from "api/withAuth";
 
 function LegalNoticePage({ currentUser }) {
   return (
@@ -13,9 +11,8 @@ function LegalNoticePage({ currentUser }) {
       sectionId="legal-notice"
       backgroundPosition="30% 85%"
       currentUser={currentUser}
-      meta={{ title: "Mentions légales", noindex: true }}
+      meta={{ title: "Mentions légales", noindex: true, nofollow: true }}
     >
-      <MediaSvg src={svg1} alt="contact-us" size="small" mt={30} mb={30} />
       <LegalNoticeSection />
     </LayoutPage>
   );

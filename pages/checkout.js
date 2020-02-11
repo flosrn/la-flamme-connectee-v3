@@ -141,7 +141,7 @@ function Address({ values, value, changeHandler, submitHandler, hasError, errors
 }
 
 // SUMMARY COMPONENT
-function Summary({ checked, changeHandler, paymentMethod, changePaymentHandler }) {
+function Summary({ checked, changeHandler }) {
   const classes = useStyles();
   const user = useSelector(state => state.user);
   const { items, total } = useContext(ShoppingCartContext);
@@ -183,24 +183,6 @@ function Summary({ checked, changeHandler, paymentMethod, changePaymentHandler }
         </CardContent>
       </GridItem>
       <GridItem md={6}>
-        <CardHeader title="Sélectionnez une méthode de paiment :" className={classes.cardHeader} />
-        <Divider />
-        <CardContent className={classes.cardContent}>
-          <FormControl component="fieldset">
-            {/* <FormLabel component="legend">Sélectionnez une méthode de paiment</FormLabel> */}
-            <RadioGroup
-              aria-label="paymentMethod"
-              name="paymentMethod"
-              value={paymentMethod}
-              onChange={changePaymentHandler}
-            >
-              <FormControlLabel value="stripe" control={<GreyRadio />} label="Carte bancaire" />
-              <FormControlLabel value="paypal" control={<GreyRadio />} label="Paypal" />
-            </RadioGroup>
-          </FormControl>
-        </CardContent>
-      </GridItem>
-      <GridItem md={6}>
         <CardHeader title="Acceptez les conditions générales d'utilisation :" className={classes.cardHeader} />
         <Divider />
         <CardContent className={classes.cardContent}>
@@ -234,7 +216,6 @@ function CheckoutPage({ currentUser }) {
   const [isError, setError] = useState(false);
   const [checked, setChecked] = useState(false);
   const [deliveryMethod, setDeliveryMethod] = useState("home");
-  const [paymentMethod, setPaymentMethod] = useState("paypal");
   const { items, total } = useContext(ShoppingCartContext);
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -311,7 +292,6 @@ function CheckoutPage({ currentUser }) {
             <CheckoutStepper
               submitHandler={handleSubmit}
               storeHandler={handleStore}
-              paymentMethod={paymentMethod}
               items={items}
               total={total}
               currentUser={currentUser}
@@ -331,12 +311,7 @@ function CheckoutPage({ currentUser }) {
                   hasError={hasError}
                   errors={errors}
                 />,
-                <Summary
-                  checked={checked}
-                  changeHandler={() => setChecked(!checked)}
-                  paymentMethod={paymentMethod}
-                  changePaymentHandler={e => setPaymentMethod(e.target.value)}
-                />
+                <Summary checked={checked} changeHandler={() => setChecked(!checked)} />
               ]}
             />
           </Card>

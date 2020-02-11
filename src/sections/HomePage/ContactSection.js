@@ -1,29 +1,22 @@
 import React, { useState } from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import constants style
 import { title } from "public/jss/la-flamme-connectee";
 // @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
 import PinDrop from "@material-ui/icons/PinDrop";
 import Phone from "@material-ui/icons/Phone";
-import BusinessCenter from "@material-ui/icons/BusinessCenter";
 import Mail from "@material-ui/icons/Mail";
 // core components
 import GridContainer from "components/Grid/GridContainer";
 import GridItem from "components/Grid/GridItem";
 import CustomInput from "components/CustomInput/CustomInput";
-import Button from "components/CustomButtons/Button";
-import { Typography } from "@material-ui/core";
 import axios from "axios";
 import Swal from "sweetalert2";
 import InfoArea from "components/InfoArea/InfoArea";
 import getApiUrl from "utils/getApiUrl";
-import MediaSvg from "../../../components/Media/MediaSvg";
-import Title from "../../../components/Typography/Title";
 import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
+import LayoutSection from "../../../components/Page/LayoutSection";
 
 // styles for this page
 const useStyles = makeStyles(theme => ({
@@ -61,7 +54,8 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: theme.spacing(0, 5)
+    padding: theme.spacing(0, 5),
+    marginTop: 50
   },
   gridItem: {
     display: "flex",
@@ -108,116 +102,111 @@ function ContactSection({ ...props }) {
   };
 
   return (
-    <div className={classes.section} id="contact">
-      <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={6} className={classes.gridItemRight}>
-          <Title variant="h2" className={classes.title}>
-            Nous contacter
-          </Title>
-        </GridItem>
-      </GridContainer>
-      <GridContainer justify="center">
-        <GridItem xs={12} sm={12} md={6} className={classes.gridItemRight}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={10}>
-              <h4 className={classes.description}>
-                Une question ? Une demande spécifique ? Besoin de précisions ? Vous pouvez nous envoyer un message en
-                remplissant ce formulaire, nous vous répondrons dans les plus brefs délais.
-              </h4>
-            </GridItem>
-          </GridContainer>
-          <form onSubmit={handleSubmit}>
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Votre nom"
-                  id="name"
-                  value={name}
-                  changeHandler={e => setName(e.target.value)}
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
-                <CustomInput
-                  labelText="Votre adresse mail"
-                  id="email"
-                  value={email}
-                  changeHandler={e => setEmail(e.target.value)}
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                />
-              </GridItem>
-              <GridItem>
-                <CustomInput
-                  labelText="Votre message"
-                  id="message"
-                  formControlProps={{
-                    fullWidth: true,
-                    className: classes.textArea
-                  }}
-                  value={content}
-                  changeHandler={e => setContent(e.target.value)}
-                  inputProps={{
-                    multiline: true,
-                    rows: 7
-                  }}
-                />
-              </GridItem>
-              <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
-                  <ButtonCustom color="secondary" type="submit" disabled={isLoading} animateButton>
-                    Envoyer
-                  </ButtonCustom>
+    <LayoutSection title="Nous contacter" id="contact">
+      <GridItem xs={12} sm={9} lg={7} className={classes.gridItemRight}>
+        <GridContainer justify="center">
+          <GridItem xs={12} sm={10}>
+            <h4 className={classes.description}>
+              Une question ? Une demande spécifique ? Besoin de précisions ? Vous pouvez nous envoyer un message en
+              remplissant ce formulaire, nous vous répondrons dans les plus brefs délais.
+            </h4>
+          </GridItem>
+        </GridContainer>
+        <GridContainer justify="center">
+          <GridItem lg={10}>
+            <form onSubmit={handleSubmit}>
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Votre nom"
+                    id="name"
+                    value={name}
+                    changeHandler={e => setName(e.target.value)}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
                 </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Votre adresse mail"
+                    id="email"
+                    value={email}
+                    changeHandler={e => setEmail(e.target.value)}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem>
+                  <CustomInput
+                    labelText="Votre message"
+                    id="message"
+                    formControlProps={{
+                      fullWidth: true,
+                      className: classes.textArea
+                    }}
+                    value={content}
+                    changeHandler={e => setContent(e.target.value)}
+                    inputProps={{
+                      multiline: true,
+                      rows: 7
+                    }}
+                  />
+                </GridItem>
+                <GridContainer justify="center">
+                  <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
+                    <ButtonCustom color="secondary" type="submit" disabled={isLoading} animateButton>
+                      Envoyer
+                    </ButtonCustom>
+                  </GridItem>
+                </GridContainer>
               </GridContainer>
-            </GridContainer>
-          </form>
-        </GridItem>
-        <GridItem sm={12} md={4} className={classes.contactGrid}>
-          <InfoArea
-            className={classes.info}
-            title="Rencontrez nous sur place"
-            description={
-              <>
-                Lieu dit Nagut, <br /> 31370 Poucharramet, <br /> France
-              </>
-            }
-            icon={PinDrop}
-            iconColor="primary"
-          />
-          <InfoArea
-            className={classes.info}
-            title="Contactez nous par téléphone"
-            description={
-              <>
-                <a href="tel:+33 6 10 44 03 73">+33 6 10 44 03 73</a>
-                <p> Lun - Dim, 8:00-20:00</p>
-              </>
-            }
-            icon={Phone}
-            iconColor="primary"
-          />
-          <InfoArea
-            className={classes.info}
-            title="Contactez nous par mail"
-            description={
-              <a
-                href="mailto:contact@laflammeconnectee.fr?subject=Demande de renseignement"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                contact@laflammeconnectee.fr
-              </a>
-            }
-            icon={Mail}
-            iconColor="primary"
-          />
-        </GridItem>
-      </GridContainer>
-    </div>
+            </form>
+          </GridItem>
+        </GridContainer>
+      </GridItem>
+      <GridItem sm={10} lg={5} className={classes.contactGrid}>
+        <InfoArea
+          className={classes.info}
+          title="Rencontrez nous sur place"
+          description={
+            <>
+              Lieu dit Nagut, <br /> 31370 Poucharramet, <br /> France
+            </>
+          }
+          icon={PinDrop}
+          iconColor="primary"
+        />
+        <InfoArea
+          className={classes.info}
+          title="Contactez nous par téléphone"
+          description={
+            <>
+              <a href="tel:+33 6 10 44 03 73">+33 6 10 44 03 73</a>
+              <p> Lun - Dim, 8:00-20:00</p>
+            </>
+          }
+          icon={Phone}
+          iconColor="primary"
+        />
+        <InfoArea
+          className={classes.info}
+          title="Contactez nous par mail"
+          description={
+            <a
+              href="mailto:contact@laflammeconnectee.fr?subject=Demande de renseignement"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              contact@laflammeconnectee.fr
+            </a>
+          }
+          icon={Mail}
+          iconColor="primary"
+        />
+      </GridItem>
+    </LayoutSection>
   );
 }
 

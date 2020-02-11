@@ -1,10 +1,9 @@
 import React from "react";
-import LayoutPage from "../components/Page/LayoutPage";
-import MediaSvg from "../components/Media/MediaSvg";
-import svg1 from "../public/img/svg/undraw_gdpr_3xfb.svg";
+import LayoutPage from "components/Page/LayoutPage";
+import PrivacySection from "src/sections/HomePage/PrivacySection";
+import svg from "public/img/svg/undraw_gdpr_3xfb.svg";
 
 import { withAuthSync } from "../api/withAuth";
-import PrivacySection from "../src/sections/HomePage/PrivacySection";
 
 function LegalNoticePage({ currentUser }) {
   return (
@@ -13,9 +12,9 @@ function LegalNoticePage({ currentUser }) {
       sectionId="privacy"
       backgroundPosition="30% 85%"
       currentUser={currentUser}
-      meta={{ title: "Traitement des données", noindex: true }}
+      meta={{ title: "Traitement des données", noindex: true, nofollow: true }}
+      svg={{ url: svg, name: "gdpr", size: "extrasmall" }}
     >
-      <MediaSvg src={svg1} alt="contact-us" size="small" mt={30} mb={30} />
       <PrivacySection />
     </LayoutPage>
   );

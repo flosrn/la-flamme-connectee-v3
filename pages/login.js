@@ -98,7 +98,7 @@ function LoginPage({ children, currentUser }) {
 
   return (
     <div className={classes.root}>
-      <NextSeo title="Connexion" noindex />
+      <NextSeo title="Connexion" noindex nofollow />
       <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
       <GridContainer className={classes.container}>
         <GridItem sm={8} md={6} lg={5} xl={4}>
