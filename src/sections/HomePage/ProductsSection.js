@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import Link from "next/link";
 import ImageGallery from "react-image-gallery";
 // core components
 import Button from "components/CustomButtons/Button";
@@ -20,6 +21,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import DoneIcon from "@material-ui/icons/Done";
 import { getProducts } from "api/apiRequests";
+import ReactGA from "react-ga";
+import Typography from "@material-ui/core/Typography";
 import ButtonCustom from "../../../components/CustomButtons/ButtonCustom";
 import Title from "../../../components/Typography/Title";
 import CustomSnackBar from "../../../components/Snackbar/CustomSnackBar";
@@ -39,6 +42,12 @@ export default function ProductSection() {
   const handleClick = item => {
     addItem(item);
     setOpen(true);
+    ReactGA.event({
+      action: "add_to_cart",
+      category: "ecommerce",
+      label: "Ajout d'un produit au panier",
+      value: item.price
+    });
   };
 
   const handleChange = (event, item) => {
@@ -76,7 +85,11 @@ export default function ProductSection() {
               <ImageGallery showFullscreenButton={false} showPlayButton={false} startIndex={0} items={item.images} />
             </GridItem>
             <GridItem sm={6} md={6}>
-              <h3 className={classes.title}>{item.name}</h3>
+              <Link href={`/products/${item.id}`}>
+                <a>
+                  <h3 className={classes.title}>{item.name}</h3>
+                </a>
+              </Link>
               <p className={classes.subtitle}>{item.caption}</p>
               <h3 className={classes.mainPrice}>{item.price} €</h3>
               <Accordion
@@ -85,7 +98,7 @@ export default function ProductSection() {
                 collapses={[
                   {
                     title: "Description",
-                    content: <p>{item.description}</p>
+                    content: <Typography variant="body2">{item.description}</Typography>
                   },
                   {
                     title: "Caractéristiques",

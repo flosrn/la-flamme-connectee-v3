@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "center",
     zIndex: 3,
-    "@media (max-height: 530px)": {
+    "@media (max-height: 542px)": {
       display: "none !important"
     },
     "& .hidden": {

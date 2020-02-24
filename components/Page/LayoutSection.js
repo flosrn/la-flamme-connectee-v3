@@ -55,7 +55,7 @@ export default function LayoutSection(props) {
       {title && (
         <GridContainer justify="center" className={classes.titleContainer}>
           <GridItem xs={12} sm={12} md={8} center>
-            <Title variant="h2" color={!image ? "initial" : "textSecondary"}>
+            <Title variant="h1" color={!image ? "initial" : "textSecondary"}>
               {title}
             </Title>
           </GridItem>
@@ -63,7 +63,7 @@ export default function LayoutSection(props) {
       )}
       {desc && (
         <GridContainer justify="center">
-          <GridItem xs={10} sm={8} md={8} lg={7} center>
+          <GridItem xs={10} sm={8} md={6} lg={5} center>
             <Typography variant="body1" className={classes.description}>
               {desc[0].text}
             </Typography>

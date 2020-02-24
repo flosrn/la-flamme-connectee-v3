@@ -135,7 +135,7 @@ export const useStyles = makeStyles(theme => ({
   },
   expansionPanelDetails: {
     display: "block",
-    padding: "15px 0px 5px",
-    fontSize: ".875rem"
+    padding: "15px 0px 5px"
+    // fontSize: ".875rem"
   }
 }));

@@ -2,16 +2,17 @@ import palette from "./palette";
 
 export default {
   h1: {
-    color: "#fff",
-    fontWeight: 900,
-    fontSize: "50px",
+    color: palette.title.primary,
+    fontWeight: 700,
+    fontSize: "35px",
     lineHeight: "1.2",
+    marginTop: "10px",
     fontFamily: "'Nunito', sans-serif"
   },
   h2: {
     color: palette.title.primary,
     fontWeight: 700,
-    fontSize: "35px",
+    fontSize: "30px",
     lineHeight: "1.2",
     marginTop: "10px",
     fontFamily: "'Nunito', sans-serif"
@@ -65,8 +66,8 @@ export default {
     fontFamily: "'Nunito', sans-serif"
   },
   body2: {
-    color: palette.text.secondary,
-    fontSize: "12px",
+    color: palette.text.primary,
+    fontSize: "14px",
     lineHeight: "18px",
     fontFamily: "'Nunito', sans-serif"
   },

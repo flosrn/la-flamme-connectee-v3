@@ -31,10 +31,14 @@ module.exports = withPlugins(
       {
         optimizeImagesInDev: false,
         mozjpeg: {
-          quality: 70
+          quality: 75
         },
         optipng: {
-          optimizationLevel: 4
+          optimizationLevel: 3
+        },
+        webp: {
+          preset: "default",
+          quality: 75
         }
       }
     ]

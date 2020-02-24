@@ -43,7 +43,7 @@ function HomePage({ currentUser }) {
       <NextSeo
         title="La Flamme Connectée"
         titleTemplate="%s | Allumez votre poêle à distance &#x1F525;"
-        description="Le Flam'connect est un objet connecté qui permet d'allumer à distance son poêle ou insert à l'aide de son smartphone. Innovation concours Lépine."
+        description="Le Flam'connect est un objet connecté qui permet d'allumer à distance son poêle ou insert à l'aide de son smartphone &#x1F525; Innovation concours Lépine."
       />
       <HeaderSection currentUser={currentUser} />
       <HeroSection />

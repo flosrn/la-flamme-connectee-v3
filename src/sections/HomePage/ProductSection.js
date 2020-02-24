@@ -24,7 +24,7 @@ const useStyles = makeStyles(projectsStyle);
 export default function ProductSection({ isDesktop }) {
   const classes = useStyles();
   return (
-    <LayoutSection>
+    <LayoutSection id="house">
       <GridItem xs={12} sm={12} md={8} lg={6}>
         {/* <Fade spy={isDesktop} bottom cascade ssrFadeout> */}
         <Card

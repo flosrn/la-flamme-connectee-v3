@@ -1,5 +1,6 @@
 import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
+import { GtagNoscript, GtagScript } from "utils/gtag";
 import { ServerStyleSheets } from "@material-ui/styles";
 import theme from "theme";
 
@@ -8,21 +9,21 @@ const paypalClientId = process.env.NODE_ENV === "development" ? "sb" : process.e
 class MyDocument extends Document {
   render() {
     return (
-      <html lang="en">
+      <html lang="fr">
         <Head>
-          <meta charSet="utf-8" />
-          {/* Use minimum-scale=1 to enable GPU rasterization */}
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-            key="viewport"
-          />
+          {/* Google Tag Manager */}
+          <GtagScript />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.secondary.main} />
           {/* Favicon */}
           <link
             rel="shortcut icon"
             type="image/x-icon"
+            href="https://drive.google.com/uc?export=view&id=1_ttsx9f8zx95Xk1HJOaNkwbUi-_qInE9"
+          />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
             href="https://drive.google.com/uc?export=view&id=1_ttsx9f8zx95Xk1HJOaNkwbUi-_qInE9"
           />
           {/* Fonts */}
@@ -40,6 +41,7 @@ class MyDocument extends Document {
           <script src={`https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=EUR`} />
         </Head>
         <body>
+          <GtagNoscript />
           <Main />
           <NextScript />
         </body>

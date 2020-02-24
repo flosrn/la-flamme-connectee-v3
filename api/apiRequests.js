@@ -145,6 +145,18 @@ export function getProducts({ setProducts }) {
     });
 }
 
+// GET PRODUCT
+export function getProduct({ id, setProduct }) {
+  axios
+    .get(`${getApiUrl()}/products/getProduct/${id}`)
+    .then(response => {
+      setProduct(response.data.data.product);
+    })
+    .catch(error => {
+      console.log("error : ", error);
+    });
+}
+
 // GET ORDERS
 export function getOrders({ userId, setOrders }) {
   axios

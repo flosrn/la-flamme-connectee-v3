@@ -33,6 +33,7 @@ export default function CustomDropdown(props) {
       setAnchorEl(event.currentTarget);
     }
   };
+
   const handleClose = event => {
     if (anchorEl.contains(event.target)) {
       return;
@@ -74,7 +75,7 @@ export default function CustomDropdown(props) {
     [classes.dropdownItemRTL]: rtlActive
   });
   const dropDownMenu = (
-    <MenuList role="menu" className={classes.menuList}>
+    <MenuList role="menu" className={classes.menuList} onMouseLeave={handleClose}>
       {dropdownHeader !== undefined ? (
         <MenuItem onClick={() => handleCloseMenu(dropdownHeader)} className={classes.dropdownHeader}>
           {dropdownHeader}
@@ -110,7 +111,7 @@ export default function CustomDropdown(props) {
           aria-haspopup="true"
           {...buttonProps}
           onClick={handleClick}
-          onMouseEnter={isDesktop ? handleClick : undefined}
+          // onMouseEnter={isDesktop ? handleClick : undefined}
         >
           {buttonIcon !== undefined ? <props.buttonIcon className={classes.buttonIcon} /> : null}
           {buttonText !== undefined ? buttonText : null}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { initGA, logPageView } from "utils/analytics";
+import Link from "next/link";
 import Router from "next/router";
 import Cookies from "js-cookie";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -8,15 +9,15 @@ import Alert from "@material-ui/lab/Alert";
 import IconButton from "@material-ui/core/IconButton";
 import PolicyIcon from "@material-ui/icons/Policy";
 import CloseIcon from "@material-ui/icons/Close";
-import Link from "next/link";
 
 export default function CookieConsent() {
   const [isOpen, setOpen] = useState(false);
 
   const initGoogleAnalytics = () => {
+    // if (process.env.NODE_ENV === "production") {
     initGA();
-    logPageView();
     Router.events.on("routeChangeComplete", logPageView);
+    // }
   };
 
   const handleScroll = () => {
@@ -29,7 +30,7 @@ export default function CookieConsent() {
       if (percentage > acceptOnScrollPercentage) {
         if (isOpen) {
           Cookies.set("consent", "true");
-          process.env.NODE_ENV === "production" && initGoogleAnalytics();
+          initGoogleAnalytics();
         }
         setOpen(false);
       }
@@ -39,7 +40,7 @@ export default function CookieConsent() {
   useEffect(() => {
     const cookieconsent = Cookies.get("consent");
     if (cookieconsent) {
-      process.env.NODE_ENV === "production" && initGoogleAnalytics();
+      initGoogleAnalytics();
     } else {
       setTimeout(() => {
         setOpen(true);
@@ -61,7 +62,7 @@ export default function CookieConsent() {
   });
 
   const handleClose = () => {
-    process.env.NODE_ENV === "production" && initGoogleAnalytics();
+    initGoogleAnalytics();
     Cookies.set("consent", "true");
     setOpen(false);
   };

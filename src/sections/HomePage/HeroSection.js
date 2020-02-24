@@ -72,6 +72,7 @@ const useStyles = makeStyles(theme => ({
     marginTop: "20px",
     minHeight: "32px",
     color: "#FFFFFF",
+    fontSize: "50px",
     textDecoration: "none",
     "@media (max-width: 400px)": {
       fontSize: "40px"
