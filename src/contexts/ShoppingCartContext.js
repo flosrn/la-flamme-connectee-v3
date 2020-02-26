@@ -49,6 +49,7 @@ export function ShoppingCartProvider({ children }) {
       setItems(itemsDestructured);
     }
     setTotal(total - product.price);
+    global.analytics.track(`${product.name} retiré du panier`);
   };
 
   const emptyCart = () => {

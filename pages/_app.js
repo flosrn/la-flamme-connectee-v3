@@ -1,5 +1,6 @@
 import React from "react";
 import App from "next/app";
+import Router from "next/router";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "@material-ui/styles";
 import { Preloader, Placeholder } from "react-preloading-screen";
@@ -20,6 +21,12 @@ class MyApp extends App {
     if (jssStyles) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+
+    // Track client-side page views with Segment
+    Router.events.on("routeChangeComplete", url => {
+      console.log("url : ", url);
+      window.analytics.page(url);
+    });
 
     const mainStyle =
       "font-size:34px; font-weight:600; letter-spacing:0.02em; line-height:1.4em; font-family:Nunito, sans-serif; color:#FF8A73";

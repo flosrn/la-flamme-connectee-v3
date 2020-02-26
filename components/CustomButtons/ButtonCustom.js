@@ -176,7 +176,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 const ButtonCustom = React.forwardRef((props, ref) => {
-  const { color, round, fullWidth, size, disabled, justIcon, animateButton, children, ...rest } = props;
+  const { color, round, fullWidth, size, disabled, justIcon, animateButton, children, className, ...rest } = props;
   const [btnClickEffectClass, setBtnClickEffectClass] = React.useState(null);
   const classes = useStyles(props);
   const btnClasses = clsx({
@@ -198,7 +198,7 @@ const ButtonCustom = React.forwardRef((props, ref) => {
     <Button
       {...rest}
       ref={ref}
-      className={clsx(btnClasses, classes[btnClickEffectClass])}
+      className={clsx(btnClasses, classes[btnClickEffectClass], className)}
       // onMouseUp={() => setBtnClickEffectClass("animationPulse")}
       // onAnimationEnd={() => handleAnimationEnd()}
     >

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import clsx from "clsx";
 import ImageGallery from "react-image-gallery";
 import Link from "next/link";
 import Typography from "@material-ui/core/Typography";
@@ -33,13 +34,13 @@ function ProductPage({ currentUser, id }) {
   const handleClick = item => {
     addItem(item);
     setOpen(true);
-    ReactGA.event({
-      action: "add_to_cart",
-      category: "ecommerce",
-      label: "Ajout d'un produit au panier",
+    global.analytics.track(`${item.name} ajouté au panier`, {
+      location: "single_product_page",
+      product_name: item.name,
       value: item.price
     });
   };
+
   return (
     <LayoutPage
       backgroundImage={require("/public/img/contura/background-contura-400.jpg")}
@@ -50,7 +51,7 @@ function ProductPage({ currentUser, id }) {
     >
       <div className={classes.productPage}>
         <GridContainer justify="center">
-          <Title variant="h2" className={classes.title}>
+          <Title variant="h2" className={clsx(classes.title, "productName")}>
             {product && product.name}
           </Title>
         </GridContainer>
@@ -85,7 +86,13 @@ function ProductPage({ currentUser, id }) {
                 ]}
               />
               <GridContainer className={classes.pullRight}>
-                <ButtonCustom round color="secondary" onClick={() => handleClick(product)} animateButton>
+                <ButtonCustom
+                  round
+                  color="secondary"
+                  onClick={() => handleClick(product)}
+                  animateButton
+                  className="addCartButton"
+                >
                   Ajouter au panier &nbsp; <ShoppingCart />
                 </ButtonCustom>
               </GridContainer>
@@ -100,7 +107,7 @@ function ProductPage({ currentUser, id }) {
         )}
         <Divider />
         <CustomSnackBar
-          message="Produit ajouté au panier !"
+          message={`${product} ajouté au panier !`}
           open={open}
           duration={5000}
           clickHandler={() => redirectTo("/shopping-cart")}

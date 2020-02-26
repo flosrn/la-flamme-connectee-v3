@@ -1,20 +1,21 @@
 import React from "react";
-import Router from "next/router";
 import nextCookie from "next-cookies";
 import axios from "axios";
 import getApiUrl from "utils/getApiUrl";
+import redirectTo from "utils/redirectTo";
 
 export const auth = (props, ctx) => {
   const { token } = nextCookie(ctx);
   const isProtectRoute = (props && props.isProtect) || null;
+  const isAdminRoute = (props && props.isAdmin) || null;
   // If there's no token, it means the user is not logged in
   // If is a protected route, redirect user to login page
-  if (!token && isProtectRoute) {
+  if (!token && (isProtectRoute || isAdminRoute)) {
     if (typeof window === "undefined") {
       ctx.res.writeHead(302, { Location: "/login?action=login" });
       ctx.res.end();
     } else {
-      Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
+      redirectTo("/login?action=login");
     }
   }
   return token;

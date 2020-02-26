@@ -15,8 +15,8 @@ export default function CookieConsent() {
 
   const initGoogleAnalytics = () => {
     // if (process.env.NODE_ENV === "production") {
-    initGA();
-    Router.events.on("routeChangeComplete", logPageView);
+    // initGA();
+    // Router.events.on("routeChangeComplete", logPageView);
     // }
   };
 
@@ -30,7 +30,7 @@ export default function CookieConsent() {
       if (percentage > acceptOnScrollPercentage) {
         if (isOpen) {
           Cookies.set("consent", "true");
-          initGoogleAnalytics();
+          // initGoogleAnalytics();
         }
         setOpen(false);
       }
@@ -40,7 +40,7 @@ export default function CookieConsent() {
   useEffect(() => {
     const cookieconsent = Cookies.get("consent");
     if (cookieconsent) {
-      initGoogleAnalytics();
+      // initGoogleAnalytics();
     } else {
       setTimeout(() => {
         setOpen(true);
@@ -62,7 +62,7 @@ export default function CookieConsent() {
   });
 
   const handleClose = () => {
-    initGoogleAnalytics();
+    // initGoogleAnalytics();
     Cookies.set("consent", "true");
     setOpen(false);
   };

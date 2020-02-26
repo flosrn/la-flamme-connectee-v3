@@ -18,6 +18,7 @@ import Menu from "@material-ui/icons/Menu";
 import Close from "@material-ui/icons/Close";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import PersonIcon from "@material-ui/icons/Person";
+import DashboardIcon from "@material-ui/icons/Dashboard";
 
 // core components
 import useStyles from "public/jss/la-flamme-connectee/components/headerStyle";
@@ -55,7 +56,8 @@ const StyledBadge = withStyles(theme => ({
 export default function Header(props) {
   const { user } = props;
   const isLoggedIn = Object.keys(user).length !== 0;
-
+  const isAdmin = user.role === "admin";
+  console.log("isAdmin : ", isAdmin);
   const { color, links, fixed, absolute, hiddenLogo } = props;
   const Router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -118,6 +120,11 @@ export default function Header(props) {
         </Button>
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
+          {isAdmin && (
+            <IconButton color="inherit" href="/admin" className={classes.cartIcon}>
+              <DashboardIcon className={classes.cartIcon} />
+            </IconButton>
+          )}
           <IconButton color="inherit" onClick={handleRedirect} className={classes.userIcon}>
             <PersonIcon className={classes.cartIcon} />
             <p>{isLoggedIn && `${user.firstName} ${user.lastName}`}</p>
@@ -130,6 +137,11 @@ export default function Header(props) {
         </Hidden>
         <Hidden mdUp>
           <div>
+            {isAdmin && (
+              <IconButton color="inherit" href="/admin" className={classes.cartIcon}>
+                <DashboardIcon className={classes.cartIcon} />
+              </IconButton>
+            )}
             <IconButton color="inherit" onClick={handleRedirect} className={classes.userIcon}>
               {isLoggedIn ? (
                 <StyledBadge variant="dot">

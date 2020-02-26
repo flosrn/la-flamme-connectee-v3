@@ -2,17 +2,34 @@ import React from "react";
 import Document, { Head, Main, NextScript } from "next/document";
 import { GtagNoscript, GtagScript } from "utils/gtag";
 import { ServerStyleSheets } from "@material-ui/styles";
+import * as snippet from "@segment/snippet";
 import theme from "theme";
 
 const paypalClientId = process.env.NODE_ENV === "development" ? "sb" : process.env.PAYPAL_CLIENT_ID;
 
 class MyDocument extends Document {
+  renderSnippet() {
+    const opts = {
+      apiKey: "1FmwOTto4Rl0jFYyAIflzdfVbqXw1mrN",
+      // note: the page option only covers SSR tracking.
+      // Page.js is used to track other events using `window.analytics.page()`
+      page: true
+    };
+
+    if (process.env.NODE_ENV === "development") {
+      return snippet.max(opts);
+    }
+
+    return snippet.min(opts);
+  }
+
   render() {
     return (
       <html lang="fr">
         <Head>
           {/* Google Tag Manager */}
-          <GtagScript />
+          {/* <GtagScript /> */}
+          <script dangerouslySetInnerHTML={{ __html: this.renderSnippet() }} />
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.secondary.main} />
           {/* Favicon */}
@@ -41,7 +58,7 @@ class MyDocument extends Document {
           <script src={`https://www.paypal.com/sdk/js?client-id=${paypalClientId}&currency=EUR`} />
         </Head>
         <body>
-          <GtagNoscript />
+          {/* <GtagNoscript /> */}
           <Main />
           <NextScript />
         </body>

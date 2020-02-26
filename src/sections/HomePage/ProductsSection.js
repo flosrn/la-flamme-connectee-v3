@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import Link from "next/link";
+import clsx from "clsx";
 import ImageGallery from "react-image-gallery";
 // core components
 import Button from "components/CustomButtons/Button";
@@ -30,6 +31,7 @@ import redirectTo from "../../../utils/redirectTo";
 
 export default function ProductSection() {
   const [products, setProducts] = useState([]);
+  const [productSelected, setProductSelected] = useState(null);
   const [sizeSelect, setSizeSelect] = React.useState("24");
   const [open, setOpen] = React.useState(false);
   const { addItem } = useContext(ShoppingCartContext);
@@ -42,10 +44,12 @@ export default function ProductSection() {
   const handleClick = item => {
     addItem(item);
     setOpen(true);
-    ReactGA.event({
+    setProductSelected(item.name);
+    global.analytics.track(`${item.name} ajouté au panier`, {
       action: "add_to_cart",
       category: "ecommerce",
-      label: "Ajout d'un produit au panier",
+      location: "all_products_page",
+      product_name: item.name,
       value: item.price
     });
   };
@@ -85,9 +89,9 @@ export default function ProductSection() {
               <ImageGallery showFullscreenButton={false} showPlayButton={false} startIndex={0} items={item.images} />
             </GridItem>
             <GridItem sm={6} md={6}>
-              <Link href={`/products/${item.id}`}>
+              <Link href="/products/[id]" as={`/products/${item.id}`}>
                 <a>
-                  <h3 className={classes.title}>{item.name}</h3>
+                  <h3 className={clsx(classes.title, "productName")}>{item.name}</h3>
                 </a>
               </Link>
               <p className={classes.subtitle}>{item.caption}</p>
@@ -155,7 +159,13 @@ export default function ProductSection() {
               {/*  </GridContainer> */}
               {/* )} */}
               <GridContainer className={classes.pullRight}>
-                <ButtonCustom round color="secondary" onClick={() => handleClick(item)} animateButton>
+                <ButtonCustom
+                  round
+                  color="secondary"
+                  onClick={() => handleClick(item)}
+                  animateButton
+                  className="addCartButton"
+                >
                   Ajouter au panier &nbsp; <ShoppingCart />
                 </ButtonCustom>
               </GridContainer>
@@ -171,11 +181,12 @@ export default function ProductSection() {
       )}
       <Divider />
       <CustomSnackBar
-        message="Produit ajouté au panier !"
+        message={`${productSelected} ajouté au panier !`}
         open={open}
         duration={5000}
         clickHandler={() => redirectTo("/shopping-cart")}
         closeHandler={() => setOpen(false)}
+        id="addToCartAlert"
       />
     </div>
   );
