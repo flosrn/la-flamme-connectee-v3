@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
+import Collapse from "@material-ui/core/Collapse";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import HomeIcon from "@material-ui/icons/Home";
+import PeopleIcon from "@material-ui/icons/People";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import DescriptionIcon from "@material-ui/icons/Description";
 import MailIcon from "@material-ui/icons/Mail";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import StarBorder from "@material-ui/icons/StarBorder";
+import TextFieldsIcon from "@material-ui/icons/TextFields";
+import CreateIcon from "@material-ui/icons/Create";
+import WebIcon from "@material-ui/icons/Web";
+import Header from "../Header/Header";
+import HeaderLinks from "../Header/HeaderLinks";
 
-const drawerWidth = 240;
+const drawerWidth = 185;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     })
   },
   menuButton: {
-    marginRight: 36
+    marginRight: 0
   },
   hide: {
     display: "none"
@@ -74,83 +83,139 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "flex-end",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar
+  },
+  list: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+    marginTop: theme.spacing(10),
+    "& span": {
+      visibility: openDrawer => (openDrawer ? "visible" : "hidden")
+    }
+  },
+  nested: {
+    paddingLeft: theme.spacing(4)
   }
 }));
 
-export default function MiniDrawer() {
-  const classes = useStyles();
+export default function MiniDrawer({ currentUser }) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [forceOpen, setForceOpen] = useState(false);
+  const [open, setOpen] = useState({ mail: false, blog: false });
+  const classes = useStyles(openDrawer);
+
+  useEffect(() => {
+    setOpen({ mail: false, blog: false });
+  }, [openDrawer]);
+
+  const handleDrawerToggle = () => {
+    setOpenDrawer(!openDrawer);
+    setForceOpen(!forceOpen);
+  };
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    !forceOpen && setOpenDrawer(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    !forceOpen && setOpenDrawer(false);
+  };
+
+  const handleClick = el => {
+    setOpen({
+      ...open,
+      [el]: !open[el]
+    });
   };
 
   return (
     <>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
+      <Header
+        color="dark"
+        brand="La Flamme Connectée"
+        links={<HeaderLinks user={currentUser} />}
+        fixed
+        user={currentUser}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, {
-              [classes.hide]: open
-            })}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Mini variant drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerToggle}
+          edge="start"
+          className={classes.menuButton}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Header>
       <Drawer
         variant="permanent"
+        onMouseEnter={handleDrawerOpen}
+        onMouseLeave={handleDrawerClose}
         className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open
+          [classes.drawerOpen]: openDrawer,
+          [classes.drawerClose]: !openDrawer
         })}
         classes={{
           paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open
+            [classes.drawerOpen]: openDrawer,
+            [classes.drawerClose]: !openDrawer
           })
         }}
       >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} style={{ visibility: open ? "visible" : "hidden" }} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} style={{ visibility: open ? "visible" : "hidden" }} />
-            </ListItem>
-          ))}
+        <List component="nav" aria-labelledby="nested-list-subheader" className={classes.list}>
+          <ListItem button>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <PeopleIcon />
+            </ListItemIcon>
+            <ListItemText primary="Clients" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <DescriptionIcon />
+            </ListItemIcon>
+            <ListItemText primary="Commandes" />
+          </ListItem>
+          <ListItem button onClick={() => handleClick("mail")}>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Mail" />
+            {openDrawer && <>{open.mail ? <ExpandLess /> : <ExpandMore />}</>}
+          </ListItem>
+          <Collapse in={open.mail} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <CreateIcon />
+                </ListItemIcon>
+                <ListItemText primary="Rédiger un mail" />
+              </ListItem>
+            </List>
+          </Collapse>
+          <ListItem button onClick={() => handleClick("blog")}>
+            <ListItemIcon>
+              <WebIcon />
+            </ListItemIcon>
+            <ListItemText primary="Blog" />
+            {openDrawer && <>{open.blog ? <ExpandLess /> : <ExpandMore />}</>}
+          </ListItem>
+          <Collapse in={open.blog} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <ListItem button className={classes.nested}>
+                <ListItemIcon>
+                  <TextFieldsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Écrire un blog" />
+              </ListItem>
+            </List>
+          </Collapse>
         </List>
       </Drawer>
     </>

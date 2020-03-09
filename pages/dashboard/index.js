@@ -7,7 +7,8 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    marginTop: theme.spacing(7)
   },
   content: {
     flexGrow: 1,
@@ -19,9 +20,8 @@ function AdminDashboard({ currentUser }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <MiniDrawer />
+      <MiniDrawer currentUser={currentUser} />
       <main className={classes.content}>
-        <div className={classes.toolbar} />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
           magna aliqua. Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus

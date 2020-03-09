@@ -54,10 +54,9 @@ const StyledBadge = withStyles(theme => ({
 }))(Badge);
 
 export default function Header(props) {
-  const { user } = props;
+  const { user, children } = props;
   const isLoggedIn = Object.keys(user).length !== 0;
   const isAdmin = user.role === "admin";
-  console.log("isAdmin : ", isAdmin);
   const { color, links, fixed, absolute, hiddenLogo } = props;
   const Router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -108,6 +107,7 @@ export default function Header(props) {
   return (
     <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
+        {children}
         <Button
           className={classNames(classes.brandLogo, hiddenLogo ? classes.hiddenBrandLogo : classes.fixedBrandLogo)}
           id="brandLogo"
@@ -121,7 +121,7 @@ export default function Header(props) {
         <Hidden smDown implementation="css" className={classes.hidden}>
           <div className={classes.collapse}>{links}</div>
           {isAdmin && (
-            <IconButton color="inherit" href="/admin" className={classes.cartIcon}>
+            <IconButton color="inherit" href="/dashboard" className={classes.cartIcon}>
               <DashboardIcon className={classes.cartIcon} />
             </IconButton>
           )}
@@ -138,7 +138,7 @@ export default function Header(props) {
         <Hidden mdUp>
           <div>
             {isAdmin && (
-              <IconButton color="inherit" href="/admin" className={classes.cartIcon}>
+              <IconButton color="inherit" href="/dashboard" className={classes.cartIcon}>
                 <DashboardIcon className={classes.cartIcon} />
               </IconButton>
             )}

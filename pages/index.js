@@ -25,6 +25,7 @@ import { useTheme } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery/useMediaQuery";
 import { main, mainRaised } from "../public/jss/la-flamme-connectee";
 import TalkAboutUsSection from "../src/sections/HomePage/TalkAboutUsSection";
+import StepsSection from "../src/sections/HomePage/StepsSection";
 
 const useStyles = makeStyles(theme => ({
   main,
@@ -51,11 +52,11 @@ function HomePage({ currentUser }) {
         <PresentationSection isDesktop={isDesktop} />
         <ProductSection isDesktop={isDesktop} />
         <BenefitsSection isDesktop={isDesktop} />
-        <BannerSection isDesktop={isDesktop} />
+        <StepsSection isDesktop={isDesktop} />
         <LearnMoreSection isDesktop={isDesktop} />
-        <TeamSection isDesktop={isDesktop} />
-        <ProjectSection isDesktop={isDesktop} />
         {/* <CarouselSection isDesktop={isDesktop} /> */}
+        <BannerSection isDesktop={isDesktop} />
+
         <TalkAboutUsSection isDesktop={isDesktop} />
         {/* <InstagramSection /> */}
       </div>

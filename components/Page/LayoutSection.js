@@ -9,7 +9,12 @@ import Title from "../Typography/Title";
 const useStyles = makeStyles(theme => ({
   section: {
     padding: "35px 0",
-    textAlign: "center"
+    textAlign: "center",
+    borderRadius: props => props.bgColor && "50px",
+    margin: props => props.bgColor && "35px 50px",
+    [theme.breakpoints.down("md")]: {
+      margin: props => props.bgColor && "35px 0"
+    }
   },
   titleContainer: {
     paddingTop: props => props.mt && `${props.mt}px`
@@ -18,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center",
     backgroundSize: "cover",
     backgroundPosition: "left bottom",
+    backgroundImage: props => props.bgImage && `url(${props.bgImage})`,
     // backgroundAttachment: "fixed",
     position: "relative",
     "&:after": {
@@ -36,26 +42,30 @@ const useStyles = makeStyles(theme => ({
       margin: "0 -15px"
     }
   },
+  sectionBgColor: {
+    background: props => props.bgColor && props.bgColor
+  },
   description: {
     paddingBottom: 30
   }
 }));
 
 export default function LayoutSection(props) {
-  const { title, id, desc, image, mt, children } = props;
+  const { title, id, desc, bgImage, bgColor, whiteTitle, mt, children } = props;
   const classes = useStyles(props);
 
   const sectionClasses = clsx({
     [classes.section]: true,
-    [classes.sectionCover]: image
+    [classes.sectionCover]: bgImage,
+    [classes.sectionBgColor]: bgColor
   });
 
   return (
-    <div className={sectionClasses} id={id} style={{ backgroundImage: `url(${image})` }}>
+    <div className={sectionClasses} id={id}>
       {title && (
         <GridContainer justify="center" className={classes.titleContainer}>
           <GridItem xs={12} sm={12} md={8} center>
-            <Title variant="h1" color={!image ? "initial" : "textSecondary"}>
+            <Title variant="h1" color={!whiteTitle ? "initial" : "textSecondary"}>
               {title}
             </Title>
           </GridItem>

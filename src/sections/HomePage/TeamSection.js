@@ -27,11 +27,11 @@ import Title from "../../../components/Typography/Title";
 import LayoutSection from "../../../components/Page/LayoutSection";
 import background from "/public/img/contura/background-contura-400.jpg";
 
-function TeamSection({ isDesktop }) {
+function TeamSection() {
   const classes = useStyles();
   const imageClasses = classNames(classes.imgRaised, classes.imgRoundedCircle, classes.imgFluid, classes.imgSize);
   return (
-    <LayoutSection title="L'équipe" id="teams" image={background}>
+    <LayoutSection title="L'équipe" id="teams" bgImage={background} whiteTitle>
       <GridContainer justify="center" className={classes.mainContainer}>
         <GridItem xs={12} sm={12} md={6} lg={6}>
           {/* <Fade spy={isDesktop} bottom cascade ssrFadeout> */}

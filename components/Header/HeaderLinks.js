@@ -12,6 +12,7 @@ import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
 import Home from "@material-ui/icons/Home";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import Description from "@material-ui/icons/Description";
 import Mail from "@material-ui/icons/Mail";
 import LiveHelpIcon from "@material-ui/icons/LiveHelp";
@@ -64,6 +65,11 @@ export default function HeaderLinks({ ...props }) {
             }}
             buttonIcon={HelpIcon}
             dropdownList={[
+              <Link href="/history">
+                <a className={classes.dropdownLink}>
+                  <EmojiPeopleIcon className={classes.dropdownIcons} /> Qui sommes-nous ?
+                </a>
+              </Link>,
               <Link href="/documentation">
                 <a className={classes.dropdownLink}>
                   <Description className={classes.dropdownIcons} /> Documentation

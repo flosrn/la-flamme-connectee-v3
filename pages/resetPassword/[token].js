@@ -15,6 +15,7 @@ import Card from "components/Card/Card";
 import GridItem from "components/Grid/GridItem";
 import ResetForm from "src/sections/ResetPage/components/ResetForm";
 import LoginPage from "../login";
+import { withAuthSync } from "../../api/withAuth";
 
 const useStyles = makeStyles(theme => ({
   content: {
@@ -48,11 +49,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ResetPassword({ token }) {
+function ResetPassword({ currentUser, token }) {
   const classes = useStyles();
 
   return (
-    <LoginPage>
+    <LoginPage currentUser={currentUser}>
       <CardBody className={classes.content}>
         <LockIcon className={classes.icon} />
 
@@ -72,4 +73,4 @@ ResetPassword.getInitialProps = ({ query: { token } }) => {
   return { token };
 };
 
-export default ResetPassword;
+export default withAuthSync(ResetPassword);
