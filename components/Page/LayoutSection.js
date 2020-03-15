@@ -8,7 +8,7 @@ import Title from "../Typography/Title";
 
 const useStyles = makeStyles(theme => ({
   section: {
-    padding: "35px 0",
+    padding: "35px 10px",
     textAlign: "center",
     borderRadius: props => props.bgColor && "50px",
     margin: props => props.bgColor && "35px 50px",

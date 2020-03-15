@@ -45,6 +45,7 @@ import Swal from "sweetalert2";
 import { Typography } from "@material-ui/core";
 import payment from "public/img/logo/payments/paiement-securise.png";
 import { NextSeo } from "next-seo";
+import axios from "axios";
 import svg1 from "../public/img/svg/undraw_add_to_cart_vkjp.svg";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 
@@ -52,6 +53,8 @@ import FooterDark from "../components/Footer/FooterDark";
 import ButtonCustom from "../components/CustomButtons/ButtonCustom";
 import { withAuthSync } from "../api/withAuth";
 import Title from "../components/Typography/Title";
+import redirectTo from "../utils/redirectTo";
+import getApiUrl from "../utils/getApiUrl";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -179,30 +182,44 @@ function ShoppingCartPage({ currentUser }) {
   const classes = useStyles();
   const Router = useRouter();
 
-  const login = () => {
-    if (Object.keys(currentUser).length !== 0) {
-      Router.push("/checkout").then(() => window.scrollTo(0, 0));
-    } else {
-      Swal.fire({
-        title: "Veuillez vous connecter pour effectuer cet achat",
-        text: "",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Se connecter",
-        cancelButtonText: "S'inscrire",
-        confirmButtonColor: "#ff7961",
-        reverseButtons: true
-      }).then(result => {
-        if (result.value) {
-          Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          Router.push("/login?action=register").then(() => window.scrollTo(0, 0));
-        }
+  // const login = () => {
+  //   if (Object.keys(currentUser).length !== 0) {
+  //     Router.push("/checkout").then(() => window.scrollTo(0, 0));
+  //   } else {
+  //     Swal.fire({
+  //       title: "Veuillez vous connecter pour effectuer cet achat",
+  //       text: "",
+  //       icon: "warning",
+  //       showCancelButton: true,
+  //       confirmButtonText: "Se connecter",
+  //       cancelButtonText: "S'inscrire",
+  //       confirmButtonColor: "#ff7961",
+  //       reverseButtons: true
+  //     }).then(result => {
+  //       if (result.value) {
+  //         Router.push("/login?action=login").then(() => window.scrollTo(0, 0));
+  //       } else if (
+  //         /* Read more about handling dismissals below */
+  //         result.dismiss === Swal.DismissReason.cancel
+  //       ) {
+  //         Router.push("/login?action=register").then(() => window.scrollTo(0, 0));
+  //       }
+  //     });
+  //   }
+  // };
+
+  const handleCheckout = async () => {
+    console.log("items : ", items);
+    await axios
+      .post(`${getApiUrl()}/checkout/createCheckoutSession`, { currentUser, items })
+      .then(response => {
+        console.log("response : ", response);
+        const { id } = response.data;
+        redirectTo(`/checkout/${id}?step=contact_informations`);
+      })
+      .catch(err => {
+        console.log("err : ", err);
       });
-    }
   };
 
   return (
@@ -283,12 +300,17 @@ function ShoppingCartPage({ currentUser }) {
                         <div className={classes.rowTotal}>
                           <div className={classes.rowName}>Total</div>
                           <div className={classes.rowContent}>
-                            <strong>{Math.floor(total) >= 0 ? Math.floor(total) : 0} €</strong>
+                            <strong>{Math.floor(total)} €</strong>
                           </div>
                         </div>
                         <div className={classes.rowPurchase}>
                           <div className={classes.purchaseButton}>
-                            <ButtonCustom color="secondary" disabled={items.length <= 0} onClick={login} animateButton>
+                            <ButtonCustom
+                              color="secondary"
+                              disabled={items.length <= 0}
+                              onClick={handleCheckout}
+                              animateButton
+                            >
                               Passer commande <KeyboardArrowRight />
                             </ButtonCustom>
                           </div>

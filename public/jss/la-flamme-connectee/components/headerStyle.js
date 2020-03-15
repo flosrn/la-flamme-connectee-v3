@@ -33,8 +33,8 @@ const headerStyle = makeStyles(theme => ({
     alignItems: "center",
     flexFlow: "row nowrap",
     justifyContent: "flex-start",
-    position: "relative",
-    zIndex: 3000
+    position: "relative"
+    // zIndex: 3000
   },
   absolute: {
     position: "absolute",

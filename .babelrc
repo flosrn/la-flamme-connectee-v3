@@ -1,4 +1,4 @@
 {
   "presets": ["next/babel"],
-  "plugins": [["module-resolver", { "root": ["./"] }]]
+  "plugins": [["module-resolver", { "root": ["./"] }, "@babel/runtime-corejs2"]]
 }

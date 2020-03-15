@@ -92,8 +92,8 @@ function ProjectSection() {
           système pour son usage strictement personnel durant plusieurs années.
         </p>
         <p>
-          En <strong>2018</strong>, son fils, Florian Séran, l’incite à acquérir une imprimante 3D. Cet achat a commencé
-          à faire germer l’idée de fabriquer le boîtier, d’envisager une petite production et pourquoi pas, à terme, une
+          En <strong>2018</strong>, son fils, Florian, l’incite à acquérir une imprimante 3D. Cet achat a commencé à
+          faire germer l’idée de fabriquer le boîtier, d’envisager une petite production et pourquoi pas, à terme, une
           commercialisation.
         </p>
         <p>

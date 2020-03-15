@@ -30,7 +30,7 @@ import { schema } from "../src/sections/SettingsPage/Address/components/AddressF
 import AddressForm from "../src/sections/Checkout/AddressForm";
 import { ShoppingCartContext } from "../src/contexts/ShoppingCartContext";
 import { withAuthSync } from "../api/withAuth";
-import SummaryItems from "../src/sections/Checkout/SummaryItems";
+import SummaryItems from "../src/sections/Checkout/CartItemSummary";
 import scrollToTop from "../utils/scrollToTop";
 
 const useStyles = makeStyles(theme => ({

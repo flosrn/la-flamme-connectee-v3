@@ -5,6 +5,7 @@ import { DefaultSeo } from "next-seo";
 import { ThemeProvider } from "@material-ui/styles";
 import { Preloader, Placeholder } from "react-preloading-screen";
 import { ShoppingCartProvider } from "src/contexts/ShoppingCartContext";
+import { CheckoutProvider } from "src/contexts/CheckoutContext";
 import { Provider } from "react-redux";
 import withReduxStore from "src/lib/with-redux-store";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +14,10 @@ import CookieConsent from "components/Snackbar/CookieConsent";
 import "public/scss/la-flamme-connectee.scss";
 import theme from "theme";
 import SEO from "utils/next-seo.config";
+
+console.log("process.env.PAYPAL_CLIENT_ID : ", process.env.PAYPAL_CLIENT_ID);
+console.log("process.env.STRIPE_PUBLIC_KEY : ", process.env.STRIPE_PUBLIC_KEY);
+
 
 class MyApp extends App {
   componentDidMount() {
@@ -24,7 +29,6 @@ class MyApp extends App {
 
     // Track client-side page views with Segment
     Router.events.on("routeChangeComplete", url => {
-      console.log("url : ", url);
       window.analytics.page(url);
     });
 
@@ -43,16 +47,18 @@ class MyApp extends App {
         <DefaultSeo {...SEO} />
         <ThemeProvider theme={theme}>
           <ShoppingCartProvider>
-            <Preloader>
-              <Provider store={reduxStore}>
-                <CssBaseline />
-                <Component {...pageProps} />
-                <CookieConsent />
-              </Provider>
-              <Placeholder>
-                <Loader />
-              </Placeholder>
-            </Preloader>
+            <CheckoutProvider>
+              <Preloader>
+                <Provider store={reduxStore}>
+                  <CssBaseline />
+                  <Component {...pageProps} />
+                  <CookieConsent />
+                </Provider>
+                <Placeholder>
+                  <Loader />
+                </Placeholder>
+              </Preloader>
+            </CheckoutProvider>
           </ShoppingCartProvider>
         </ThemeProvider>
       </>

@@ -7,6 +7,7 @@ import theme from "theme";
 
 const paypalClientId = process.env.NODE_ENV === "development" ? "sb" : process.env.PAYPAL_CLIENT_ID;
 
+
 class MyDocument extends Document {
   renderSnippet() {
     const opts = {

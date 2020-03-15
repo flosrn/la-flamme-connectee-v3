@@ -112,7 +112,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SummaryItems({ items, total }) {
+export default function CartItemSummary({ items, total }) {
   const classes = useStyles();
 
   return (

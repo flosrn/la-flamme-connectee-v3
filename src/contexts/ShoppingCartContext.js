@@ -10,16 +10,28 @@ export function ShoppingCartProvider({ children }) {
   useEffect(() => {
     const cart = manageLocalStorage("get", "cart");
     const cartTotal = manageLocalStorage("get", "cartTotal");
-    if (cart && cart.length > 0) {
-      setItems(cart);
-      setTotal(cartTotal);
-    }
+    cart && cart.length > 0 && setItems(cart);
+    cartTotal && setTotal(cartTotal);
+    console.log("total : ", total);
   }, []);
+
+  const totalCalculation = () => {
+    const price = [];
+    items.length > 0 &&
+      items.map(item => {
+        price.push(item.price * item.quantity);
+      });
+    return price.length > 0 ? price.reduce((a, b) => a + b, 0) : 0;
+  };
 
   useEffect(() => {
     manageLocalStorage("set", "cart", items);
-    manageLocalStorage("set", "cartTotal", total);
+    setTotal(totalCalculation());
   }, [items]);
+
+  useEffect(() => {
+    manageLocalStorage("set", "cartTotal", total);
+  }, [total]);
 
   const addItem = product => {
     const newItem = items.find(item => item.id === product.id);
@@ -33,7 +45,6 @@ export function ShoppingCartProvider({ children }) {
         items.map(item => (item.id === newItem.id ? Object.assign({}, item, { quantity: item.quantity + 1 }) : item))
       );
     }
-    setTotal(total + product.price);
   };
 
   const removeItem = product => {
@@ -48,17 +59,25 @@ export function ShoppingCartProvider({ children }) {
       itemsDestructured.splice(index, 1);
       setItems(itemsDestructured);
     }
-    setTotal(total - product.price);
     global.analytics.track(`${product.name} retiré du panier`);
   };
 
   const emptyCart = () => {
     setItems([]);
     setTotal(0);
+    manageLocalStorage("remove", "cart");
+    manageLocalStorage("remove", "cartTotal");
+    manageLocalStorage("remove", "delivery_method");
+  };
+
+  const addShippingFees = (method, cost) => {
+    const amount = totalCalculation();
+    method === "colissimo" && setTotal(amount + cost);
+    method === "relay" && setTotal(amount);
   };
 
   return (
-    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, emptyCart, total }}>
+    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, emptyCart, addShippingFees, total }}>
       {children}
     </ShoppingCartContext.Provider>
   );
