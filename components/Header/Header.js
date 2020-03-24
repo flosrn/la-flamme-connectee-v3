@@ -6,7 +6,7 @@ import classNames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
 // @material-ui/core components
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -24,7 +24,26 @@ import DashboardIcon from "@material-ui/icons/Dashboard";
 import useStyles from "public/jss/la-flamme-connectee/components/headerStyle";
 import { Badge } from "@material-ui/core";
 import logo from "public/img/logo/laflammeco.png";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import clsx from "clsx";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 import { ShoppingCartContext } from "../../src/contexts/ShoppingCartContext";
+import GridContainer from "../Grid/GridContainer";
+
+const SwipeableDrawerStyled = withStyles(theme => ({
+  root: {
+    width: "100%"
+  },
+  paper: {
+    width: "100%"
+  }
+}))(SwipeableDrawer);
 
 const StyledBadge = withStyles(theme => ({
   badge: {
@@ -60,8 +79,54 @@ export default function Header(props) {
   const { color, links, fixed, absolute, hiddenLogo } = props;
   const Router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const classes = useStyles();
   const { items } = useContext(ShoppingCartContext);
+  const classes = useStyles();
+
+  const [state, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false
+  });
+
+  const toggleDrawer = (anchor, open) => event => {
+    if (event && event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
+
+  const list = anchor => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "right" || anchor === "bottom"
+      })}
+      style={{ width: "100%" }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {["All mail", "Trash", "Spam"].map((text, index) => (
+          <ListItem button key={text}>
+            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        ))}
+      </List>
+    </div>
+  );
+
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener("scroll", headerColorChange);
@@ -151,7 +216,7 @@ export default function Header(props) {
                 <PersonIcon className={classes.cartIcon} />
               )}
             </IconButton>
-            <IconButton color="inherit" href="/shopping-cart" className={classes.cartIcon}>
+            <IconButton color="inherit" className={classes.cartIcon} onClick={toggleDrawer("right", true)}>
               <Badge badgeContent={items.length} color="secondary">
                 <ShoppingCartIcon className={classes.cartIcon} />
               </Badge>
@@ -163,7 +228,7 @@ export default function Header(props) {
         </Hidden>
       </Toolbar>
       <Hidden mdUp implementation="js">
-        <Drawer
+        <SwipeableDrawer
           variant="temporary"
           anchor="left"
           open={mobileOpen}
@@ -172,6 +237,7 @@ export default function Header(props) {
             paper: classes.drawerPaper
           }}
           onClose={handleDrawerToggle}
+          onOpen={handleDrawerToggle}
         >
           <IconButton
             color="inherit"
@@ -182,8 +248,28 @@ export default function Header(props) {
             <Close />
           </IconButton>
           <div className={classes.appResponsive}>{links}</div>
-        </Drawer>
+        </SwipeableDrawer>
       </Hidden>
+      <div>
+        <div className={classes.drawerCart}>
+          <SwipeableDrawerStyled
+            anchor="right"
+            open={state.right}
+            onClose={toggleDrawer("right", false)}
+            onOpen={toggleDrawer("right", true)}
+          >
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer("right", false)}
+              className={classes.closeButtonDrawer}
+            >
+              <Close />
+            </IconButton>
+            {list("right")}
+          </SwipeableDrawerStyled>
+        </div>
+      </div>
     </AppBar>
   );
 }

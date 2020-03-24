@@ -15,7 +15,10 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     "& .MuiExpansionPanelSummary-root": {
-      height: 70
+      height: 70,
+      [theme.breakpoints.up("sm")]: {
+        padding: "0 90px"
+      }
     },
     "& .MuiExpansionPanelSummary-root, .MuiCollapse-container": {
       background: "#fafafa",
@@ -41,11 +44,17 @@ const useStyles = makeStyles(theme => ({
   },
   gridItem: {
     display: "flex",
-    justifyContenr: "flex-start",
+    justifyContent: "flex-start",
     alignItems: "center",
     ".MuiSvgIcon-root": {
       marginLeft: -20
     }
+  },
+  gridItemRight: {
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingRight: 0
   }
 }));
 
@@ -70,21 +79,25 @@ export default function SimpleExpansionPanel({ total, deliveryMethod, step, chil
                 </Typography>
               )}
             </GridItem>
-            <GridItem xs={3} center>
-              {step === "contact_informations" ? (
-                <>
-                  {deliveryMethod && deliveryMethod.cost ? (
-                    <div className={classes.total}>{`${Number.parseFloat(total - deliveryMethod.cost).toFixed(
-                      2
-                    )} €`}</div>
-                  ) : (
-                    <div className={classes.total}>{total.toFixed(2)} €</div>
-                  )}
-                </>
-              ) : (
-                <div className={classes.total}>{total.toFixed(2)} €</div>
-              )}
-            </GridItem>
+            {!expanded ? (
+              <GridItem xs={3} className={classes.gridItemRight}>
+                {step === "contact_informations" ? (
+                  <>
+                    {deliveryMethod && deliveryMethod.cost ? (
+                      <div className={classes.total}>{`${Number.parseFloat(total - deliveryMethod.cost).toFixed(
+                        2
+                      )} €`}</div>
+                    ) : (
+                      <div className={classes.total}>{total.toFixed(2)} €</div>
+                    )}
+                  </>
+                ) : (
+                  <div className={classes.total}>{total.toFixed(2)} €</div>
+                )}
+              </GridItem>
+            ) : (
+              <GridItem xs={3} />
+            )}
           </GridContainer>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>{children}</ExpansionPanelDetails>

@@ -28,7 +28,7 @@ import { CheckoutContext } from "../../src/contexts/CheckoutContext";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: 100
+    marginTop: 0
   },
   cardContainer: {
     [theme.breakpoints.up("md")]: {
@@ -37,9 +37,6 @@ const useStyles = makeStyles(theme => ({
   },
   breadCrumbs: {
     margin: "20px 0 0 10px"
-  },
-  card: {
-    // padding: "0 15px"
   },
   cardContent: {
     padding: "5px 0",
@@ -158,10 +155,10 @@ function CheckoutPage({ currentUser, id }) {
   return (
     <div className={classes.root}>
       <NextSeo title="Paiement" noindex />
-      <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} />
+      {/* <Header color="dark" links={<HeaderLinks user={currentUser} />} fixed user={currentUser} /> */}
       {!noSession ? (
         <GridContainer justify="center" className={classes.cardContainer}>
-          <GridItem sm={10} md={5} lg={3} className={clsx(classes.card, classes.cardCart)}>
+          <GridItem sm={12} md={5} lg={3} className={clsx(classes.card, classes.cardCart)}>
             <div className={classes.card}>
               <CardContent className={classes.cardContent}>
                 {isDesktop ? (

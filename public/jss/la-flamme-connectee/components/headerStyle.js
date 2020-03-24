@@ -236,6 +236,11 @@ const headerStyle = makeStyles(theme => ({
   },
   fixedBrandLogo: {
     visibility: "visible"
+  },
+  drawerCart: {
+    "& .MuiDrawer-paper ": {
+      width: "100% !important"
+    }
   }
 }));
 

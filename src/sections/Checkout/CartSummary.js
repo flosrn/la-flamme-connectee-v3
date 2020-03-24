@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "0 10px"
   },
   cartItemLeft: {
     display: "flex",
