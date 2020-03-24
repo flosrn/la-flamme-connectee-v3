@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   breadCrumbs: {
-    margin: 10
+    margin: "20px 0 0 10px"
   },
   card: {
     // padding: "0 15px"
@@ -94,7 +94,7 @@ function CheckoutPage({ currentUser, id }) {
   const [component, setComponent] = useState(null);
   const [noSession, setNoSession] = useState(false);
   const [cart, setCart] = useState([]);
-  const { items, total } = useContext(ShoppingCartContext);
+  const { items, storeCart, total } = useContext(ShoppingCartContext);
   const { deliveryMethod } = useContext(CheckoutContext);
 
   const Router = useRouter();
@@ -103,6 +103,20 @@ function CheckoutPage({ currentUser, id }) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up("md"));
   const classes = useStyles();
+
+  // Load data from server
+  const loadDataFromServer = async () => {
+    const response = await axios.get(`${getApiUrl()}/checkout/getCheckoutSession/${id}`);
+    const { products } = response.data.data.checkoutSession;
+    // If products founded on server save it on local storage and context
+    if (products) {
+      storeCart(products);
+      setCart(products);
+      // Otherwise the session is lost
+    } else {
+      setNoSession(true);
+    }
+  };
 
   function setComponentStep(step) {
     switch (true) {
@@ -115,7 +129,7 @@ function CheckoutPage({ currentUser, id }) {
         Router.push("/checkout/[id]", `/checkout/${id}?step=shipping_method`);
         break;
       case step === "payment_method":
-        setComponent(<Payment id={id} nextStep={setComponentStep} />);
+        setComponent(<Payment id={id} />);
         Router.push("/checkout/[id]", `/checkout/${id}?step=payment_method`);
         break;
       default:
@@ -124,16 +138,19 @@ function CheckoutPage({ currentUser, id }) {
   }
 
   useEffect(() => {
+    // Determines which component to display
     setComponentStep(step);
+    // Get items cart from context
     if (items && items.length > 0) {
       setCart(items);
     } else {
+      // If not get items cart from local storage
       const cartLS = manageLocalStorage("get", "cart");
       if (cartLS && cartLS.length > 0) {
-        console.log("Items cart from local storage : ", cartLS);
         setCart(cartLS);
       } else {
-        setNoSession(true);
+        // If not get items cart from server checkout session
+        loadDataFromServer();
       }
     }
   }, [step]);
@@ -152,7 +169,7 @@ function CheckoutPage({ currentUser, id }) {
                     <CartSummary cart={cart} total={total} deliveryMethod={deliveryMethod} step={step} />
                   </div>
                 ) : (
-                  <SimpleExpansionPanel>
+                  <SimpleExpansionPanel total={total} deliveryMethod={deliveryMethod} step={step}>
                     <CartSummary cart={cart} total={total} deliveryMethod={deliveryMethod} step={step} />
                   </SimpleExpansionPanel>
                 )}
@@ -182,9 +199,9 @@ function CheckoutPage({ currentUser, id }) {
                 </StyledBreadcrumbs>
               </GridItem>
             </GridContainer>
-            <Card className={classes.card}>
+            <div className={classes.card}>
               <CardContent className={classes.cardContent}>{component}</CardContent>
-            </Card>
+            </div>
           </GridItem>
         </GridContainer>
       ) : (

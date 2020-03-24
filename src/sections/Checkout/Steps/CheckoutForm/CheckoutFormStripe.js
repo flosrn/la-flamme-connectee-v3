@@ -18,12 +18,20 @@ import { ShoppingCartContext } from "../../../../contexts/ShoppingCartContext";
 
 const useStyles = makeStyles(theme => ({
   root: {},
-  cardFooter: {
-    margin: "25px 0 5px 0"
-  },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff"
+  },
+  cardFooter: {
+    margin: "25px 0 5px 0",
+    [theme.breakpoints.up("sm")]: {
+      flexDirection: "row-reverse"
+    },
+    "& .MuiButtonBase-root": {
+      [theme.breakpoints.down("xs")]: {
+        marginBottom: 30
+      }
+    }
   }
 }));
 
@@ -68,6 +76,7 @@ export default function CheckoutForm({ id, clientSecret, address }) {
         country: "FR",
         postal_code: address && address.zip
       },
+      email: address && address.email,
       name: address && `${address.firstName} ${address.lastName}`,
       phone: address && address.phone
     };
@@ -108,8 +117,8 @@ export default function CheckoutForm({ id, clientSecret, address }) {
             text: "Merci pour votre achat",
             confirmButtonColor: "#ff7961"
           });
-          redirectTo("/");
-          emptyCart();
+          // redirectTo("/");
+          // emptyCart();
         }
       }
     }, 2000);
@@ -126,11 +135,6 @@ export default function CheckoutForm({ id, clientSecret, address }) {
 
       <GridContainer className={classes.cardFooter}>
         <GridItem sm={6} center>
-          <Link href="/checkout/[id]" as={`/checkout/${id}?step=shipping_method`}>
-            <a>{"< Retour à l'expédition"}</a>
-          </Link>
-        </GridItem>
-        <GridItem sm={6} center>
           <ButtonCustom
             color="secondary"
             size="large"
@@ -139,11 +143,16 @@ export default function CheckoutForm({ id, clientSecret, address }) {
             disabled={processing}
             loading={loading}
           >
-            {processing ? "Vérification en cours" : "Passer au paiement"}
+            {processing ? "Vérification en cours" : "Payer maintenant"}
           </ButtonCustom>
           <Backdrop className={classes.backdrop} open={loading}>
             <CircularProgress color="inherit" />
           </Backdrop>
+        </GridItem>
+        <GridItem sm={6} center>
+          <Link href="/checkout/[id]" as={`/checkout/${id}?step=shipping_method`}>
+            <a>{"< Retour à l'expédition"}</a>
+          </Link>
         </GridItem>
       </GridContainer>
     </form>

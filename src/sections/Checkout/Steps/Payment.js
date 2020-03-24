@@ -19,11 +19,14 @@ const pk = process.env.NODE_ENV === "development" ? process.env.STRIPE_PUBLIC_KE
 
 const useStyles = makeStyles(theme => ({
   root: {
+    padding: 10,
     "& .MuiAlert-root": {
       marginBottom: 20
     }
   },
-  cardContent: {},
+  cardContent: {
+    padding: 0
+  },
   cardSubTitle: {
     padding: 5,
     marginBottom: 10
@@ -38,14 +41,14 @@ export default function Payment({ id }) {
   const stripePromise = loadStripe(pk);
   const classes = useStyles();
 
-  const fetchData = () => {
-    console.log("address : ", address);
+  const fetchData = async () => {
+    console.log("total : ", total);
     // axios.get(`${getApiUrl()}/checkout/getCheckoutSession/${id}`).then(response => {
     //   const checkouSession = response.data.data.checkoutSession;
     //   console.log('checkouSession : ', checkouSession);
-    if (id) {
-      axios.patch(`${getApiUrl()}/checkout/createStripeSession/${id}`, { address, items, total }).then(res => {
-        const secret = res.data.data.checkoutSession.paymentIntent.client_secret;
+    if (id && total > 0) {
+      await axios.patch(`${getApiUrl()}/checkout/createStripeSession/${id}`, { address, items, total }).then(res => {
+        const { secret } = res.data.data;
         setClientSecret(secret);
       });
     }
@@ -54,7 +57,7 @@ export default function Payment({ id }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [total]);
 
   useEffect(() => {
     if (!address) {
@@ -73,7 +76,7 @@ export default function Payment({ id }) {
               <Typography variant="body1">Toutes les transactions sont sécurisées et cryptées.</Typography>
             </div>
             <Elements stripe={stripePromise}>
-              <CheckoutFormStripe id={id} clientSecret={clientSecret} address={address} />
+              <CheckoutFormStripe id={id} clientSecret={clientSecret} address={address} total={total} />
             </Elements>
           </CardContent>
         </GridItem>

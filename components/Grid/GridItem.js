@@ -10,8 +10,8 @@ const useStyles = makeStyles(theme => ({
     position: "relative",
     width: "100%",
     minHeight: "1px",
-    paddingRight: "15px",
-    paddingLeft: "15px"
+    paddingLeft: props => props.noPadding ? "auto" :  "15px",
+    paddingRight: props => props.noPadding ? "auto" : "15px"
   },
   center: {
     display: "flex",
@@ -21,8 +21,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function GridItem(props) {
-  const { children, className, center, ...rest } = props;
-  const classes = useStyles();
+  const { children, className, center, noPadding, ...rest } = props;
+  const classes = useStyles(props);
   return (
     <Grid item {...rest} className={`${classes.grid} ${center && classes.center} ${className}`}>
       {children}

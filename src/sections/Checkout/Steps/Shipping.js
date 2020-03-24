@@ -60,15 +60,19 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Shipping({ id, nextStep }) {
-  const [deliveryMtd, setDeliveryMtd] = useState("colissimo");
+  const [deliveryMtd, setDeliveryMtd] = useState("");
   const { address, deliveryMethod, storeDeliveryMethod } = useContext(CheckoutContext);
-  const { total, addShippingFees } = useContext(ShoppingCartContext);
+  const { addShippingFees } = useContext(ShoppingCartContext);
   const Router = useRouter();
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   addShippingFees("colissimo", total > 49 ? 0 : 4.9);
-  // }, []);
+  useEffect(() => {
+    if (deliveryMethod && deliveryMethod.value) {
+      setDeliveryMtd(deliveryMethod.value);
+    } else {
+      setDeliveryMtd("colissimo");
+    }
+  }, []);
 
   useEffect(() => {
     if (!address) {
@@ -80,21 +84,19 @@ export default function Shipping({ id, nextStep }) {
     if (deliveryMtd === "colissimo") {
       storeDeliveryMethod({
         label: "Colissimo 72h",
-        cost: "5 €"
+        value: "colissimo",
+        cost: 5
       });
     }
     if (deliveryMtd === "relay") {
       storeDeliveryMethod({
         label: "Point relais",
-        cost: "gratuit"
+        value: "relay",
+        cost: 0
       });
     }
     addShippingFees(deliveryMtd, 5);
   }, [deliveryMtd]);
-
-  const handleNext = () => {
-    nextStep("payment_method");
-  };
 
   const GreyRadio = withStyles({
     root: {
@@ -131,7 +133,7 @@ export default function Shipping({ id, nextStep }) {
                   </RadioGroup>
                 }
               />
-              <div className={classes.cost}>4,90 €</div>
+              <div className={classes.cost}>5,00 €</div>
             </ExpansionPanelSummary>
           </ExpansionPanel>
           <ExpansionPanel expanded={deliveryMtd === "relay"}>
@@ -165,8 +167,8 @@ export default function Shipping({ id, nextStep }) {
       </GridContainer>
       <GridContainer className={classes.cardFooter}>
         <GridItem sm={6} center>
-          <ButtonCustom color="secondary" size="large" animateButton onClick={handleNext}>
-            Passer au paeiment
+          <ButtonCustom color="secondary" size="large" animateButton onClick={() => nextStep("payment_method")}>
+            Continuer vers le paeiment
           </ButtonCustom>
         </GridItem>
         <GridItem sm={6} center>

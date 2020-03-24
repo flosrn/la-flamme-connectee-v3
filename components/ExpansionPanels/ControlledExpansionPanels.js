@@ -13,6 +13,7 @@ import cartLogo from "public/img/logo/payments/logo-checkout.png"
 
 const useStyles = makeStyles(theme => ({
   root: {
+  padding: 0,
     "& .MuiExpansionPanel-root.Mui-expanded": {
       margin: 0
     },

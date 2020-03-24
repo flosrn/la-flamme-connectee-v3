@@ -14,20 +14,14 @@ export function CheckoutProvider({ children }) {
     deliveryMethodLS && setDeliveryMethod(deliveryMethodLS);
   }, []);
 
-  useEffect(() => {
-    manageLocalStorage("set", "checkout_address", address);
-  }, [address]);
-
-  useEffect(() => {
-    manageLocalStorage("set", "delivery_method", deliveryMethod);
-  }, [deliveryMethod]);
-
   const storeAddress = data => {
     setAddress(data);
+    manageLocalStorage("set", "checkout_address", address);
   };
 
   const storeDeliveryMethod = data => {
     setDeliveryMethod(data);
+    manageLocalStorage("set", "delivery_method", data);
   };
 
   return (

@@ -15,10 +15,6 @@ import "public/scss/la-flamme-connectee.scss";
 import theme from "theme";
 import SEO from "utils/next-seo.config";
 
-console.log("process.env.PAYPAL_CLIENT_ID : ", process.env.PAYPAL_CLIENT_ID);
-console.log("process.env.STRIPE_PUBLIC_KEY : ", process.env.STRIPE_PUBLIC_KEY);
-
-
 class MyApp extends App {
   componentDidMount() {
     // Remove the server-side injected CSS.

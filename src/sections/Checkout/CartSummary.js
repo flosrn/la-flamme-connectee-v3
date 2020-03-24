@@ -117,6 +117,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function CartSummary({ cart, total, deliveryMethod, step }) {
   const classes = useStyles();
+
+  const totalCalculation = () => {
+    const price = [];
+    cart.length > 0 &&
+      cart.map(item => {
+        price.push(item.price * item.quantity);
+      });
+    return price.length > 0 ? price.reduce((a, b) => a + b, 0) : 0;
+  };
+
   return (
     <div className={classes.root}>
       <div>{cart && cart.length > 0 && cart.map(el => <CartItem item={el} key={el.id} />)}</div>
@@ -126,7 +136,7 @@ export default function CartSummary({ cart, total, deliveryMethod, step }) {
           <div className={classes.subTotal}>
             <div>Sous-total</div>
             <div>
-              <strong>{total} €</strong>
+              <strong>{totalCalculation().toFixed(2)} €</strong>
             </div>
           </div>
           <div className={classes.shipping}>
@@ -134,14 +144,28 @@ export default function CartSummary({ cart, total, deliveryMethod, step }) {
             {step === "contact_informations" ? (
               <div>Calculé à l'étape suivante</div>
             ) : (
-              <div>{deliveryMethod && deliveryMethod.cost}</div>
+              <div>
+                {deliveryMethod && deliveryMethod.cost !== 0
+                  ? `${Number.parseFloat(deliveryMethod.cost).toFixed(2)} €`
+                  : "Gratuit"}
+              </div>
             )}
           </div>
         </div>
         <Divider />
         <div className={classes.totalContainer}>
           <div className={classes.totalText}>Total</div>
-          <div className={classes.total}>{total} €</div>
+          {step === "contact_informations" ? (
+            <>
+              {deliveryMethod && deliveryMethod.cost ? (
+                <div className={classes.total}>{`${Number.parseFloat(total - deliveryMethod.cost).toFixed(2)} €`}</div>
+              ) : (
+                <div className={classes.total}>{total.toFixed(2)} €</div>
+              )}
+            </>
+          ) : (
+            <div className={classes.total}>{total.toFixed(2)} €</div>
+          )}
         </div>
       </div>
     </div>
@@ -155,7 +179,7 @@ function CartItem({ item }) {
       <div className={classes.cartItemLeft}>
         <div className={classes.cartItemImg}>
           <span className={classes.quantity}>{item.quantity}</span>
-          <img src={item.images[0].thumbnail} />
+          <img src={item.images[0].thumbnail} alt={`${item.title}-thumbnail`} />
         </div>
         <div className={classes.title}>
           <Typography variant="body1">
@@ -166,7 +190,7 @@ function CartItem({ item }) {
           </Typography>
         </div>
       </div>
-      <div className={classes.cartItemRight}>{item.price} €</div>
+      <div className={classes.cartItemRight}>{Number.parseFloat(item.price).toFixed(2)} €</div>
     </div>
   );
 }

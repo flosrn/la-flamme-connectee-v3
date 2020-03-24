@@ -6,7 +6,7 @@ const withOptimizedImages = require("next-optimized-images");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true"
 });
-// require("dotenv").config();
+require("dotenv").config();
 
 const nextConfig = {
   env: {

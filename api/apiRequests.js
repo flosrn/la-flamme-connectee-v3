@@ -136,7 +136,7 @@ export function updatePassword({ userId, values, setEditMode, setLoading, setVal
 // GET PRODUCTS
 export function getProducts({ setProducts }) {
   axios
-    .get(`${getApiUrl()}/products/getProducts`)
+    .get(`${getApiUrl()}/products/getProducts`, { credentials: "include" })
     .then(response => {
       setProducts(response.data.data.products);
     })
@@ -192,12 +192,13 @@ export function createCheckoutSession({ values, currentUser, items, stripe }) {
 }
 
 // GET PAYPAL TRANSACTION
-export function getPaypalTransaction({ data, items, currentUser }) {
+export function getPaypalTransaction({ data, items, id }) {
+  console.log("id : ", id);
   axios
     .post(`${getApiUrl()}/checkout/getPaypalTransaction`, {
       data,
       items,
-      currentUser
+      checkoutSessionId: id
     })
     .then(response => {
       Swal.fire({

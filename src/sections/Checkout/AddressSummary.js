@@ -104,7 +104,7 @@ export default function AddressSummary({ id, address, deliveryMethod }) {
                     Méthode
                   </GridItem>
                   <GridItem lg={8} className={classes.info}>
-                    {deliveryMethod.label} - {deliveryMethod.cost}
+                    {deliveryMethod.label} - {`${Number.parseFloat(deliveryMethod.cost).toFixed(2)} €`}
                   </GridItem>
                 </GridContainer>
               </GridItem>

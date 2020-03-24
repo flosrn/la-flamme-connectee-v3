@@ -19,10 +19,13 @@ import * as yup from "yup";
 import axios from "axios";
 import Link from "next/link";
 import Typography from "@material-ui/core/Typography";
+import { PayPalButton } from "react-paypal-button-v2";
 import getApiUrl from "../../../../utils/getApiUrl";
 import ButtonCustom from "../../../../components/CustomButtons/ButtonCustom";
 import manageLocalStorage from "../../../../utils/manageLocalStorage";
 import { CheckoutContext } from "../../../contexts/CheckoutContext";
+import { getPaypalTransaction } from "../../../../api/apiRequests";
+import { ShoppingCartContext } from "../../../contexts/ShoppingCartContext";
 
 const schema = yup.object().shape({
   email: yup
@@ -76,12 +79,79 @@ const useStyles = makeStyles(theme => ({
         marginBottom: 30
       }
     }
+  },
+  dynamicCheckout: {
+    marginTop: 5
+  },
+  dynamicCheckoutTitle: {
+    // color: "#737373",
+    fontWeight: "500",
+    display: "flex",
+    width: "100%",
+    justifyContent: "center",
+    "&::before, &::after": {
+      content: "''",
+      border: "1px #e6e6e6 solid",
+      borderBottom: "0",
+      WebkitBoxFlex: "1",
+      WebkitFlex: "1 0 2em",
+      MsFlex: "1 0 2em",
+      flex: "1 0 2em"
+    },
+    "&::before": {
+      borderRight: "0",
+      borderTopLeftRadius: "5px",
+      marginRight: "1em"
+    },
+    "&::after": {
+      borderLeft: "0",
+      borderTopRightRadius: "5px",
+      marginLeft: "1em"
+    },
+    "& span": {
+      position: "relative",
+      top: -11
+    }
+  },
+  dynamicCheckoutContent: {
+    border: "1px #e6e6e6 solid",
+    borderTop: "0",
+    borderBottomLeftRadius: "5px",
+    borderBottomRightRadius: "5px",
+    padding: "0 15px 11px 15px"
+  },
+  separator: {
+    marginTop: 35,
+    marginBottom: 30,
+    fontWeight: "500",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    "&::before, &::after": {
+      content: "''",
+      height: "1px",
+      backgroundColor: "#e6e6e6",
+      flexGrow: "1"
+    },
+    "&::before": {
+      marginRight: 15
+    },
+    "&::after": {
+      marginLeft: 15
+    }
+    // "&::after": {
+    //   borderLeft: "0",
+    //   borderTopRightRadius: "5px",
+    //   marginLeft: "1em"
+    // },
   }
 }));
 
 export default function AdressStep({ id, nextStep }) {
   const [data, setData] = useState(null);
   const { address, storeAddress } = useContext(CheckoutContext);
+  const { items, total } = useContext(ShoppingCartContext);
   const { register, handleSubmit, errors } = useForm({
     validationSchema: schema
   });
@@ -90,8 +160,22 @@ export default function AdressStep({ id, nextStep }) {
   const loadData = async mounted => {
     const response = await axios.get(`${getApiUrl()}/checkout/getCheckoutSession/${id}`);
     if (mounted) {
-      const checkoutAddress = response.data.data.checkoutSession.address;
-      setData(checkoutAddress);
+      const { checkoutAddress } = response.data.data;
+      if (checkoutAddress) {
+        setData(checkoutAddress);
+      } else {
+        setData({
+          email: "",
+          firstName: "",
+          lastName: "",
+          address_1: "",
+          address_2: "",
+          zip: "",
+          city: "",
+          country: "",
+          phone: ""
+        });
+      }
     }
   };
 
@@ -110,14 +194,61 @@ export default function AdressStep({ id, nextStep }) {
   const onSubmit = async formData => {
     nextStep("shipping_method");
     storeAddress(formData);
-    if (JSON.stringify(data) !== JSON.stringify(formData)) {
-      manageLocalStorage("set", "checkout_address", formData);
-      await axios.patch(`${getApiUrl()}/checkout/patchCheckoutSession/${id}`, { formData });
-    }
+    // if (JSON.stringify(data) !== JSON.stringify(formData)) {
+    manageLocalStorage("set", "checkout_address", formData);
+    await axios.patch(`${getApiUrl()}/checkout/patchCheckoutSession/${id}`, { formData, items });
+    // }
   };
+
+  const clientId = process.env.NODE_ENV === "development" ? "sb" : process.env.PAYPAL_CLIENT_ID;
 
   return (
     <div className={classes.root}>
+      <div className={classes.dynamicCheckout}>
+        <Typography className={classes.dynamicCheckoutTitle} variant="h5">
+          <span>Paiement express</span>
+        </Typography>
+        <div className={classes.dynamicCheckoutContent}>
+          <div className={classes.dynamicCheckoutButton}>
+            <GridContainer justify="center">
+              <GridItem sm={6}>
+                <PayPalButton
+                  shippingPreference="GET_FROM_FILE" // default is "GET_FROM_FILE"
+                  options={{ clientId, currency: "EUR", disableFunding: "card,credit" }}
+                  style={{ height: 45 }}
+                  createOrder={() => {
+                    // This function sets up the details of the transaction, including the amount and line item details.
+                    return fetch(`${getApiUrl()}/checkout/createPaypalTransaction`, {
+                      method: "post",
+                      headers: {
+                        "content-type": "application/json"
+                      },
+                      body: JSON.stringify({
+                        amount: {
+                          currency_code: "EUR",
+                          value: total
+                        }
+                      })
+                    })
+                      .then(res => {
+                        return res.json();
+                      })
+                      .then(data => {
+                        return data.orderID; // Use the same key name for order ID on the client and server
+                      });
+                  }}
+                  onApprove={data => {
+                    getPaypalTransaction({ data, items, id });
+                  }}
+                />
+              </GridItem>
+            </GridContainer>
+          </div>
+        </div>
+      </div>
+      <div className={classes.separator}>
+        <span>OU</span>
+      </div>
       {data && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={classes.cardSection}>

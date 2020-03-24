@@ -12,7 +12,6 @@ export function ShoppingCartProvider({ children }) {
     const cartTotal = manageLocalStorage("get", "cartTotal");
     cart && cart.length > 0 && setItems(cart);
     cartTotal && setTotal(cartTotal);
-    console.log("total : ", total);
   }, []);
 
   const totalCalculation = () => {
@@ -26,7 +25,11 @@ export function ShoppingCartProvider({ children }) {
 
   useEffect(() => {
     manageLocalStorage("set", "cart", items);
-    setTotal(totalCalculation());
+    const deliveryMethodLS = manageLocalStorage("get", "delivery_method");
+    const shippingCost = deliveryMethodLS ? deliveryMethodLS.cost : 0;
+    const amount = totalCalculation() + shippingCost;
+    // manageLocalStorage("set", "cartTotal", amount);
+    setTotal(amount);
   }, [items]);
 
   useEffect(() => {
@@ -70,6 +73,10 @@ export function ShoppingCartProvider({ children }) {
     manageLocalStorage("remove", "delivery_method");
   };
 
+  const storeCart = cart => {
+    setItems(cart);
+  };
+
   const addShippingFees = (method, cost) => {
     const amount = totalCalculation();
     method === "colissimo" && setTotal(amount + cost);
@@ -77,7 +84,7 @@ export function ShoppingCartProvider({ children }) {
   };
 
   return (
-    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, emptyCart, addShippingFees, total }}>
+    <ShoppingCartContext.Provider value={{ items, addItem, removeItem, emptyCart, storeCart, addShippingFees, total }}>
       {children}
     </ShoppingCartContext.Provider>
   );
